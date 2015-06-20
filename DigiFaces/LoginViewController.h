@@ -12,7 +12,7 @@
 
 @protocol MessageToViewMain;
 @protocol PopUpDelegate;
-@interface ViewController : UIViewController<UITextFieldDelegate,MessageToViewMain,PopUpDelegate>
+@interface LoginViewController : UIViewController<UITextFieldDelegate,MessageToViewMain,PopUpDelegate>
 
 @property(nonatomic,strong)CustomAertView * customAlert;
 @property (nonatomic,strong)IBOutlet UITextField * email;

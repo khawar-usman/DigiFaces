@@ -17,4 +17,5 @@
 @property (nonatomic,strong)IBOutlet UILabel * errorMessage;
 @property(nonatomic,retain)CustomAertView * customAlert;
 
+-(IBAction)cancelThis:(id)sender;
 @end

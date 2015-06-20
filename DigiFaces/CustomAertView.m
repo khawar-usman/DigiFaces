@@ -49,6 +49,15 @@
     [self.view removeFromSuperview];
     [self.delegate cacellButtonTapped];
 }
+
+
+-(void)showAlertWithMessage:(NSString *)msg inView:(UIView *)view
+{
+    _textstrg = msg;
+    [self.view setFrame:view.frame];
+    [view addSubview:self.view];
+}
+
 /*
 #pragma mark - Navigation
 

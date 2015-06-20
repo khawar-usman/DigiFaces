@@ -12,7 +12,5 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
--(void)addSpinner;
-    -(void)removeSpinner;
 @end
 

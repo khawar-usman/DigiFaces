@@ -6,20 +6,22 @@
 //  Copyright (c) 2015 Usasha studio. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "LoginViewController.h"
 #import "UserViewController.h"
 #import "MBProgressHUD.h"
-@interface ViewController ()
+@interface LoginViewController ()
 
 @end
 
-@implementation ViewController
+@implementation LoginViewController
 @synthesize email = _email;
 @synthesize password = _password;
 @synthesize errorMessage = _errorMessage;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    
     self.customAlert = [[CustomAertView alloc]initWithNibName:@"CustomAertView" bundle:nil];
     self.customAlert.delegate = self;
     _errorMessage.hidden = YES;
@@ -42,6 +44,25 @@
     
     
     // Do any additional setup after loading the view, typically from a nib.
+}
+
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+//    [self.navigationController setNavigationBarHidden:NO];
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO];
 }
 
 -(void)cacellButtonTapped{

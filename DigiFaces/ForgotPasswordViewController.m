@@ -9,7 +9,7 @@
 #import "ForgotPasswordViewController.h"
 #import "MBProgressHUD.h"
 
-@interface ForgotPasswordViewController ()
+@interface ForgotPasswordViewController () <PopUpDelegate>
 
 @end
 
@@ -19,17 +19,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIView *paddingView1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
     
     self.customAlert = [[CustomAertView alloc]initWithNibName:@"CustomAertView" bundle:nil];
     self.customAlert.delegate = self;
 
-        _errorMessage.hidden = YES;
-    _email.leftView = paddingView1;
-    _email.leftViewMode = UITextFieldViewModeAlways;
+    _errorMessage.hidden = YES;
+    
     
     [_email becomeFirstResponder];
     // Do any additional setup after loading the view.
+    
+    [self.navigationController.navigationBar setBarTintColor:[UIColor blackColor]];
+    
+    
+    
 }
 -(BOOL)prefersStatusBarHidden{
     return YES;
@@ -62,15 +65,14 @@
     if ([_email.text isEqualToString:@""] ) {
         
         _errorMessage.text = @"Fields can't be empty";
-        self.customAlert.textstrg = @"Fields can't be empty";
-        [self.view addSubview:self.customAlert.view];
+        [_customAlert showAlertWithMessage:@"Fields can't be empty" inView:self.view];
         
         return;
     }
     else if(![self validateEmailWithString:_email.text]){
+        
         _errorMessage.text = @"Enter a valid email address";
-        self.customAlert.textstrg = @"Enter a valid email address";
-        [self.view addSubview:self.customAlert.view];
+        [_customAlert showAlertWithMessage:@"Enter a valid email address" inView:self.view];
         
         return;
         
@@ -97,8 +99,7 @@
         _errorMessage.textColor = [UIColor greenColor];
         _errorMessage.text = @"Please check your inbox, password sent";
         
-        self.customAlert.textstrg = @"Please check your inbox, password sent";
-        [self.view addSubview:self.customAlert.view];
+        [_customAlert showAlertWithMessage:@"Please check your inbox, password sent" inView:self.view];
         
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         
@@ -109,8 +110,7 @@
         NSLog(@"Error: %@", error);
         _errorMessage.text = @"An error in request, verify that your email is correct";
         
-        self.customAlert.textstrg = @"An error in request, verify that your email is correct";
-        [self.view addSubview:self.customAlert.view];
+        [_customAlert showAlertWithMessage:@"An error in request, verify that your email is correct" inView:self.view];
         
         [MBProgressHUD hideHUDForView:self.view animated:YES];
 

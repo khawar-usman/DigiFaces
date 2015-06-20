@@ -22,4 +22,7 @@
 @property(nonatomic,retain) NSString * fromW;
 @property(nonatomic,retain)IBOutlet UILabel *textLabel;
 @property(nonatomic,retain)id<PopUpDelegate>delegate;
+
+-(void)showAlertWithMessage:(NSString*)msg inView:(UIView*)view;
+
 @end

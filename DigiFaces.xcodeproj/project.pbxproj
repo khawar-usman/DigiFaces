@@ -21,7 +21,7 @@
 		19328E0B1B31CD79008BFAA6 /* PhotoGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19328E0A1B31CD79008BFAA6 /* PhotoGalleryViewController.m */; };
 		19F0BD101B1DBC6400E4B048 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F0BD0F1B1DBC6400E4B048 /* main.m */; };
 		19F0BD131B1DBC6400E4B048 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F0BD121B1DBC6400E4B048 /* AppDelegate.m */; };
-		19F0BD161B1DBC6400E4B048 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F0BD151B1DBC6400E4B048 /* ViewController.m */; };
+		19F0BD161B1DBC6400E4B048 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F0BD151B1DBC6400E4B048 /* LoginViewController.m */; };
 		19F0BD191B1DBC6400E4B048 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19F0BD171B1DBC6400E4B048 /* Main.storyboard */; };
 		19F0BD1B1B1DBC6400E4B048 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19F0BD1A1B1DBC6400E4B048 /* Images.xcassets */; };
 		19F0BD2A1B1DBC6400E4B048 /* DigiFacesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F0BD291B1DBC6400E4B048 /* DigiFacesTests.m */; };
@@ -117,8 +117,8 @@
 		19F0BD0F1B1DBC6400E4B048 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		19F0BD111B1DBC6400E4B048 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		19F0BD121B1DBC6400E4B048 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		19F0BD141B1DBC6400E4B048 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		19F0BD151B1DBC6400E4B048 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		19F0BD141B1DBC6400E4B048 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		19F0BD151B1DBC6400E4B048 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		19F0BD181B1DBC6400E4B048 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		19F0BD1A1B1DBC6400E4B048 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		19F0BD231B1DBC6400E4B048 /* DigiFacesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DigiFacesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -264,8 +264,8 @@
 				19328DFD1B315B5F008BFAA6 /* SettingsViewController.m */,
 				19F0BD871B21EA8100E4B048 /* ForgotPasswordViewController.h */,
 				19F0BD881B21EA8100E4B048 /* ForgotPasswordViewController.m */,
-				19F0BD141B1DBC6400E4B048 /* ViewController.h */,
-				19F0BD151B1DBC6400E4B048 /* ViewController.m */,
+				19F0BD141B1DBC6400E4B048 /* LoginViewController.h */,
+				19F0BD151B1DBC6400E4B048 /* LoginViewController.m */,
 				19F0BE311B28BBE400E4B048 /* LaunchScreen.xib */,
 				19F0BD171B1DBC6400E4B048 /* Main.storyboard */,
 				19F0BD1A1B1DBC6400E4B048 /* Images.xcassets */,
@@ -476,7 +476,7 @@
 				19328DE91B3022F6008BFAA6 /* Company.m in Sources */,
 				19F0BD781B1F171F00E4B048 /* UIImageView+AFNetworking.m in Sources */,
 				19328DFE1B315B5F008BFAA6 /* SettingsViewController.m in Sources */,
-				19F0BD161B1DBC6400E4B048 /* ViewController.m in Sources */,
+				19F0BD161B1DBC6400E4B048 /* LoginViewController.m in Sources */,
 				19F0BD6C1B1F171F00E4B048 /* AFHTTPRequestOperationManager.m in Sources */,
 				19328DBC1B2F0353008BFAA6 /* ProjectViewController.m in Sources */,
 				19F0BD791B1F171F00E4B048 /* UIProgressView+AFNetworking.m in Sources */,
