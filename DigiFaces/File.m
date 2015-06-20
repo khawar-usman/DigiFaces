@@ -10,6 +10,19 @@
 
 @implementation File
 
+-(instancetype)initWithDictionary:(NSDictionary *)dict
+{
+    self = [super init];
+    if (self) {
+        self.fileType = [dict valueForKey:@"FileType"];
+        self.isCameraTag = [[dict valueForKey:@"IsCameraTagFile"] boolValue];
+        self.isAmazonFile = [[dict valueForKey:@"IsAmazonFile"] boolValue];
+        self.isViddlerFile = [[dict valueForKey:@"IsViddlerFile"] boolValue];
+        self.filePath = [[self returnFilePathFromFileObject:dict] stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    }
+    
+    return self;
+}
 
 -(NSString*)returnFilePathFromFileObject:(NSDictionary*)fileObject{
     NSString * fileKey;

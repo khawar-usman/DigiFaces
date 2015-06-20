@@ -13,6 +13,8 @@
 #import "UserManagerShared.h"
 #import "File.h"
 #import "ProfilePicCell.h"
+#import "SDConstants.h"
+#import "Utility.h"
 
 @interface HomeViewController ()
 {
@@ -113,10 +115,12 @@
         NSDictionary * avatarDic = [responseObject objectForKey:@"AvatarFile"];
         File * avatarFileObj = [[File alloc]init];
         NSString * imageUrl = [avatarFileObj returnFilePathFromFileObject:avatarDic];
-     
-        NSDictionary * currentProjDic = [responseObject objectForKey:@"CurrentProject"];
-        NSString * projectId = [currentProjDic objectForKey:@"ProjectId"];
-        NSArray * DailyDiaryList = [currentProjDic objectForKey:@"DailyDiaryList"];
+        NSString * currentProjectID = [responseObject valueForKey:kCurrentPorjectID];
+        [Utility saveString:currentProjectID forKey:kCurrentPorjectID];
+        
+//        NSDictionary * currentProjDic = [responseObject objectForKey:@"CurrentProject"];
+//        NSString * projectId = [currentProjDic objectForKey:@"ProjectId"];
+//        NSArray * DailyDiaryList = [currentProjDic objectForKey:@"DailyDiaryList"];
 
 
         
@@ -163,8 +167,10 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(indexPath.row == 0){
-            //[self performSegueWithIdentifier: @"ToProject" sender: self];
+    if(indexPath.row == 1){
+        // Project Introduction
+        
+        [self performSegueWithIdentifier:@"projectIntroSegue" sender:self];
     }
 }
 

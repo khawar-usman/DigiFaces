@@ -97,8 +97,7 @@
         [[NSUserDefaults standardUserDefaults]synchronize];
         
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-        [self.navigationController popToRootViewControllerAnimated:YES];
-        
+        [self performSegueWithIdentifier:@"logoutSegue" sender:self];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);

@@ -202,7 +202,7 @@
 
 -(void)moveToHomeScreen{
     
-    [self performSegueWithIdentifier: @"ToHomeViewController" sender: self];
+    [self performSegueWithIdentifier: @"loginSegue" sender: self];
 }
 
 

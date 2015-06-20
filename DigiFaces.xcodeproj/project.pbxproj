@@ -57,6 +57,11 @@
 		19F0BE301B2855F500E4B048 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F0BE2F1B2855F500E4B048 /* MBProgressHUD.m */; };
 		19F0BE331B28BBE500E4B048 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19F0BE311B28BBE400E4B048 /* LaunchScreen.xib */; };
 		4AD683E91B3560EB006C149C /* ProfilePicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD683E81B3560EB006C149C /* ProfilePicCell.m */; };
+		4AD683ED1B3588A8006C149C /* ProjectIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD683EC1B3588A8006C149C /* ProjectIntroViewController.m */; };
+		4AD683F21B358BDB006C149C /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD683F11B358BDB006C149C /* Utility.m */; };
+		4AD683F61B359396006C149C /* ImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD683F51B359396006C149C /* ImageCell.m */; };
+		4AD683F91B35B3DC006C149C /* LogoutSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD683F81B35B3DC006C149C /* LogoutSegue.m */; };
+		4AD683FC1B35B70B006C149C /* LoginSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD683FB1B35B70B006C149C /* LoginSegue.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -182,6 +187,17 @@
 		19F0BE321B28BBE400E4B048 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		4AD683E71B3560EB006C149C /* ProfilePicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfilePicCell.h; sourceTree = "<group>"; };
 		4AD683E81B3560EB006C149C /* ProfilePicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfilePicCell.m; sourceTree = "<group>"; };
+		4AD683EB1B3588A8006C149C /* ProjectIntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectIntroViewController.h; sourceTree = "<group>"; };
+		4AD683EC1B3588A8006C149C /* ProjectIntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectIntroViewController.m; sourceTree = "<group>"; };
+		4AD683EF1B3589E2006C149C /* SDConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDConstants.h; sourceTree = "<group>"; };
+		4AD683F01B358BDB006C149C /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
+		4AD683F11B358BDB006C149C /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
+		4AD683F41B359396006C149C /* ImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCell.h; sourceTree = "<group>"; };
+		4AD683F51B359396006C149C /* ImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCell.m; sourceTree = "<group>"; };
+		4AD683F71B35B3DC006C149C /* LogoutSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogoutSegue.h; sourceTree = "<group>"; };
+		4AD683F81B35B3DC006C149C /* LogoutSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogoutSegue.m; sourceTree = "<group>"; };
+		4AD683FA1B35B70B006C149C /* LoginSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginSegue.h; sourceTree = "<group>"; };
+		4AD683FB1B35B70B006C149C /* LoginSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginSegue.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,6 +247,9 @@
 		19F0BD0C1B1DBC6400E4B048 /* DigiFaces */ = {
 			isa = PBXGroup;
 			children = (
+				4AD683F31B3590C2006C149C /* Models */,
+				4AD683EE1B3589D1006C149C /* Utilities */,
+				4AD683EA1B35886A006C149C /* Controllers */,
 				4AD683E61B3560C7006C149C /* CustomCells */,
 				4ADF08251B333AD400BAF70F /* Frameworks */,
 				19F0BE2E1B2855F500E4B048 /* MBProgressHUD.h */,
@@ -359,8 +378,40 @@
 			children = (
 				4AD683E71B3560EB006C149C /* ProfilePicCell.h */,
 				4AD683E81B3560EB006C149C /* ProfilePicCell.m */,
+				4AD683F41B359396006C149C /* ImageCell.h */,
+				4AD683F51B359396006C149C /* ImageCell.m */,
+				4AD683F71B35B3DC006C149C /* LogoutSegue.h */,
+				4AD683F81B35B3DC006C149C /* LogoutSegue.m */,
+				4AD683FA1B35B70B006C149C /* LoginSegue.h */,
+				4AD683FB1B35B70B006C149C /* LoginSegue.m */,
 			);
 			path = CustomCells;
+			sourceTree = "<group>";
+		};
+		4AD683EA1B35886A006C149C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4AD683EB1B3588A8006C149C /* ProjectIntroViewController.h */,
+				4AD683EC1B3588A8006C149C /* ProjectIntroViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		4AD683EE1B3589D1006C149C /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				4AD683EF1B3589E2006C149C /* SDConstants.h */,
+				4AD683F01B358BDB006C149C /* Utility.h */,
+				4AD683F11B358BDB006C149C /* Utility.m */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		4AD683F31B3590C2006C149C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		4ADF08251B333AD400BAF70F /* Frameworks */ = {
@@ -492,14 +543,18 @@
 				19F0BD161B1DBC6400E4B048 /* LoginViewController.m in Sources */,
 				19F0BD6C1B1F171F00E4B048 /* AFHTTPRequestOperationManager.m in Sources */,
 				19328DBC1B2F0353008BFAA6 /* ProjectViewController.m in Sources */,
+				4AD683F21B358BDB006C149C /* Utility.m in Sources */,
 				4AD683E91B3560EB006C149C /* ProfilePicCell.m in Sources */,
+				4AD683F61B359396006C149C /* ImageCell.m in Sources */,
 				19F0BD791B1F171F00E4B048 /* UIProgressView+AFNetworking.m in Sources */,
 				19F0BD6E1B1F171F00E4B048 /* AFNetworkReachabilityManager.m in Sources */,
 				19328DE01B30222B008BFAA6 /* UserManagerShared.m in Sources */,
+				4AD683ED1B3588A8006C149C /* ProjectIntroViewController.m in Sources */,
 				19F0BD721B1F171F00E4B048 /* AFURLResponseSerialization.m in Sources */,
 				19F0BD851B205C4B00E4B048 /* UserViewController.m in Sources */,
 				19328DED1B303714008BFAA6 /* CustomAertView.m in Sources */,
 				19328DE61B3022D8008BFAA6 /* Diary.m in Sources */,
+				4AD683F91B35B3DC006C149C /* LogoutSegue.m in Sources */,
 				19F0BD701B1F171F00E4B048 /* AFURLConnectionOperation.m in Sources */,
 				19F0BE301B2855F500E4B048 /* MBProgressHUD.m in Sources */,
 				19F0BD811B1F575400E4B048 /* DigiFaceHTTPClient.m in Sources */,
@@ -514,6 +569,7 @@
 				19328E081B319273008BFAA6 /* File.m in Sources */,
 				19F0BD711B1F171F00E4B048 /* AFURLRequestSerialization.m in Sources */,
 				19F0BD891B21EA8100E4B048 /* ForgotPasswordViewController.m in Sources */,
+				4AD683FC1B35B70B006C149C /* LoginSegue.m in Sources */,
 				19F0BD741B1F171F00E4B048 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				19F0BD731B1F171F00E4B048 /* AFURLSessionManager.m in Sources */,
 				19F0BD131B1DBC6400E4B048 /* AppDelegate.m in Sources */,
