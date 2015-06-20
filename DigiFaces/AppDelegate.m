@@ -18,6 +18,23 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
 
+    
+    NSString * userNameSaved = [[NSUserDefaults standardUserDefaults]objectForKey:@"userName"]?[[NSUserDefaults standardUserDefaults]objectForKey:@"userName"]:@"";
+    
+    UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    
+    UIViewController * rootViewController = nil;
+    if (![userNameSaved isEqualToString:@""]) {
+        rootViewController = [storyBoard instantiateViewControllerWithIdentifier:@"homeController"];
+        
+    }
+    else{
+        rootViewController = [storyBoard instantiateViewControllerWithIdentifier:@"loginController"];
+    }
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
+    
+    [self.window setRootViewController:navController];
+    [self.window makeKeyAndVisible];
 
     return YES;
 }

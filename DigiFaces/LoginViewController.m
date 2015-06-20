@@ -35,14 +35,6 @@
     _password.leftView = paddingView2;
     _password.leftViewMode = UITextFieldViewModeAlways;
     
-    NSString * userNameSaved = [[NSUserDefaults standardUserDefaults]objectForKey:@"userName"]?[[NSUserDefaults standardUserDefaults]objectForKey:@"userName"]:@"";
-    
-    if (![userNameSaved isEqualToString:@""]) {
-        [self moveToHomeScreen];
-    }
-
-    
-    
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -97,8 +89,8 @@
         _errorMessage.text = @"Fields can't be empty";
         
         self.customAlert.fromW = @"login";
-        self.customAlert.textstrg =@"Fields can't be empty";
-        [self.view addSubview:self.customAlert.view];
+        
+        [self.customAlert showAlertWithMessage:@"Fields can't be empty" inView:self.view];
         
         
         return;
@@ -106,8 +98,7 @@
     else if(![self validateEmailWithString:_email.text]){
         _errorMessage.text = @"Enter a valid email address";
         self.customAlert.fromW = @"login";
-        self.customAlert.textstrg =@"Enter a valid email address";
-        [self.view addSubview:self.customAlert.view];
+        [self.customAlert showAlertWithMessage:@"Enter a valid email address" inView:self.view];
         
         return;
 
@@ -142,10 +133,7 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
 
         self.customAlert.fromW = @"login";
-
-        self.customAlert.textstrg = @"Login failed, please enter correct credentials";
-
-        [self.view addSubview:self.customAlert.view];
+        [self.customAlert showAlertWithMessage:@"Login failed, please enter correct credentials" inView:self.view];
 
         _errorMessage.text = @"Login failed, please enter correct credentials";
 

@@ -56,6 +56,7 @@
 		19F0BE2D1B28519B00E4B048 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F0BE2C1B28519B00E4B048 /* QuartzCore.framework */; };
 		19F0BE301B2855F500E4B048 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F0BE2F1B2855F500E4B048 /* MBProgressHUD.m */; };
 		19F0BE331B28BBE500E4B048 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19F0BE311B28BBE400E4B048 /* LaunchScreen.xib */; };
+		4AD683E91B3560EB006C149C /* ProfilePicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD683E81B3560EB006C149C /* ProfilePicCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -179,6 +180,8 @@
 		19F0BE2E1B2855F500E4B048 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		19F0BE2F1B2855F500E4B048 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		19F0BE321B28BBE400E4B048 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		4AD683E71B3560EB006C149C /* ProfilePicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfilePicCell.h; sourceTree = "<group>"; };
+		4AD683E81B3560EB006C149C /* ProfilePicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfilePicCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,6 +231,7 @@
 		19F0BD0C1B1DBC6400E4B048 /* DigiFaces */ = {
 			isa = PBXGroup;
 			children = (
+				4AD683E61B3560C7006C149C /* CustomCells */,
 				4ADF08251B333AD400BAF70F /* Frameworks */,
 				19F0BE2E1B2855F500E4B048 /* MBProgressHUD.h */,
 				19F0BE2F1B2855F500E4B048 /* MBProgressHUD.m */,
@@ -348,6 +352,15 @@
 				19F0BD6A1B1F171F00E4B048 /* UIWebView+AFNetworking.m */,
 			);
 			path = "UIKit+AFNetworking";
+			sourceTree = "<group>";
+		};
+		4AD683E61B3560C7006C149C /* CustomCells */ = {
+			isa = PBXGroup;
+			children = (
+				4AD683E71B3560EB006C149C /* ProfilePicCell.h */,
+				4AD683E81B3560EB006C149C /* ProfilePicCell.m */,
+			);
+			path = CustomCells;
 			sourceTree = "<group>";
 		};
 		4ADF08251B333AD400BAF70F /* Frameworks */ = {
@@ -479,6 +492,7 @@
 				19F0BD161B1DBC6400E4B048 /* LoginViewController.m in Sources */,
 				19F0BD6C1B1F171F00E4B048 /* AFHTTPRequestOperationManager.m in Sources */,
 				19328DBC1B2F0353008BFAA6 /* ProjectViewController.m in Sources */,
+				4AD683E91B3560EB006C149C /* ProfilePicCell.m in Sources */,
 				19F0BD791B1F171F00E4B048 /* UIProgressView+AFNetworking.m in Sources */,
 				19F0BD6E1B1F171F00E4B048 /* AFNetworkReachabilityManager.m in Sources */,
 				19328DE01B30222B008BFAA6 /* UserManagerShared.m in Sources */,

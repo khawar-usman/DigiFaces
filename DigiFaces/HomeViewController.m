@@ -12,22 +12,23 @@
 #import "UIImageView+AFNetworking.h"
 #import "UserManagerShared.h"
 #import "File.h"
+#import "ProfilePicCell.h"
 
 @interface HomeViewController ()
-
+{
+    ProfilePicCell * picCell;
+}
 @end
 
 @implementation HomeViewController
-@synthesize usernameLabel = _usernameLabel;
-@synthesize userPicture = _userPicture;
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    NSString * userNameSaved = [[NSUserDefaults standardUserDefaults]objectForKey:@"userName"]?[[NSUserDefaults standardUserDefaults]objectForKey:@"userName"]:@"";
-    _usernameLabel.text =  userNameSaved;
-    _userPicture.contentMode = UIViewContentModeScaleToFill;
-    _userPicture.clipsToBounds = YES;
-    _userPicture.frame = CGRectMake(_userPicture.frame.origin.x, _userPicture.frame.origin.y, 70, 70);
+    [self.navigationController.navigationBar setBarTintColor:[UIColor blackColor]];
+    [self.navigationController.navigationBar
+     setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithRed:38/255.0f green:218/255.0f blue:1 alpha:1]}];
    
 
     _imageNames = [[NSArray alloc]initWithObjects:@"home.png",@"diary.png",@"chat.png",@"friedship.png",@"talking.png",@"chat.png", nil];
@@ -122,7 +123,7 @@
         __weak typeof(self)weakSelf = self;
         
         NSURLRequest * requestN = [NSURLRequest requestWithURL:[NSURL URLWithString:imageUrl]];
-        [_userPicture setImageWithURLRequest:requestN placeholderImage:[UIImage imageNamed:@"dummy_avatar.png"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        [picCell.profileImage setImageWithURLRequest:requestN placeholderImage:[UIImage imageNamed:@"dummy_avatar.png"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
             [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
             [[UserManagerShared sharedManager] setProfilePic:[weakSelf resizeImage:image imageSize:CGSizeMake(100, 120)]];
 
@@ -144,12 +145,21 @@
     }];
 }
 
-
+-(void)configurePicCell
+{
+    NSString * userNameSaved = [[NSUserDefaults standardUserDefaults]objectForKey:@"userName"]?[[NSUserDefaults standardUserDefaults]objectForKey:@"userName"]:@"";
+    
+    picCell.lblUserName.text =  userNameSaved;
+    picCell.profileImage.contentMode = UIViewContentModeScaleToFill;
+    picCell.profileImage.clipsToBounds = YES;
+    picCell.profileImage.layer.cornerRadius = 47.0;
+//    _userPicture.frame = CGRectMake(_userPicture.frame.origin.x, _userPicture.frame.origin.y, 70, 70);
+}
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
 
-    return 6;
+    return 7;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -158,32 +168,48 @@
     }
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 0) {
+        return 166;
+    }
+    else{
+        return 44;
+    }
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    UITableViewCell * cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-
-    cell.imageView.image = [UIImage imageNamed:[_imageNames objectAtIndex:indexPath.row]];
     if (indexPath.row == 0) {
+        picCell = [tableView dequeueReusableCellWithIdentifier:@"picCell"];
+        [self configurePicCell];
+        return picCell;
+    }
+    
+    UITableViewCell * cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+    //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
+    cell.imageView.image = [UIImage imageNamed:[_imageNames objectAtIndex:indexPath.row-1]];
+    if (indexPath.row == 1) {
          cell.textLabel.text = NSLocalizedString(@"home cell", @"Home") ;
     }
-    else if(indexPath.row ==1){
+    else if(indexPath.row ==2){
         cell.textLabel.text = NSLocalizedString(@"diary cell", @"Diary") ;
 
     }
-    else if(indexPath.row ==2){
+    else if(indexPath.row ==3){
         cell.textLabel.text =NSLocalizedString(@"woman cell", @"Being a woman online") ;
         
     }
-    else if(indexPath.row ==3){
+    else if(indexPath.row ==4){
         cell.textLabel.text = NSLocalizedString(@"friend cell", @"Friendship and web") ;
         
     }
-    else if(indexPath.row ==4){
+    else if(indexPath.row ==5){
         cell.textLabel.text =NSLocalizedString(@"talking cell", @"Talking about brands") ;
         
     }
-    else if(indexPath.row ==5){
+    else if(indexPath.row ==6){
         cell.textLabel.text = NSLocalizedString(@"brand cell", @"Brands and social media") ;
         
     }

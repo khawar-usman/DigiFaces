@@ -13,16 +13,16 @@
 
 -(NSString*)returnFilePathFromFileObject:(NSDictionary*)fileObject{
     NSString * fileKey;
-    Boolean fileType = (Boolean) [fileObject objectForKey:@"IsAmazonFile"];
+    BOOL fileType = [[fileObject objectForKey:@"IsAmazonFile"] boolValue];
     if (fileType) {
         fileKey = @"AmazonKey";
     }
-    fileType = (Boolean)[fileObject objectForKey:@"IsCameraTagFile"];
+    fileType = [[fileObject objectForKey:@"IsCameraTagFile"] boolValue];
     
     if (fileType) {
         fileKey = @"CameraTagKey";
     }
-    fileType = (Boolean)[fileObject objectForKey:@"IsViddlerFile"];
+    fileType = [[fileObject objectForKey:@"IsViddlerFile"] boolValue];
     
     if (fileType) {
         fileKey = @"ViddlerKey";

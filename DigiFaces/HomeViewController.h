@@ -10,10 +10,10 @@
 #import "CustomAertView.h"
 @protocol MessageToViewMain;
 
-@interface HomeViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
+@interface HomeViewController : UITableViewController<UITableViewDelegate,UITableViewDataSource>
 
-@property (nonatomic,strong)IBOutlet UILabel * usernameLabel;
-@property (nonatomic,strong)IBOutlet UIImageView * userPicture;
+//@property (nonatomic,strong)IBOutlet UILabel * usernameLabel;
+//@property (nonatomic,strong)IBOutlet UIImageView * userPicture;
 @property (nonatomic,strong)NSArray * imageNames;
 @property(nonatomic,retain)CustomAertView * customAlert;
 
