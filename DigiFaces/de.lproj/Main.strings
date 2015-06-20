@@ -1,0 +1,42 @@
+
+/* Class = "UITextField"; placeholder = " Password"; ObjectID = "1xv-xq-8mw"; */
+"1xv-xq-8mw.placeholder" = " Password";
+
+/* Class = "UIButton"; normalTitle = "Logout"; ObjectID = "21E-gX-BfQ"; */
+"21E-gX-BfQ.normalTitle" = "Logout";
+
+/* Class = "UIButton"; normalTitle = "Forgot Password ?"; ObjectID = "63L-HD-OMQ"; */
+"63L-HD-OMQ.normalTitle" = "Forgot Password ?";
+
+/* Class = "UILabel"; text = "HOME"; ObjectID = "OPe-EV-YPj"; */
+"OPe-EV-YPj.text" = "HOME";
+
+/* Class = "UILabel"; text = "SIGN IN"; ObjectID = "cFw-ve-SaT"; */
+"cFw-ve-SaT.text" = "SIGN IN";
+
+/* Class = "UILabel"; text = "Please chose a username, its necessory to enter a unique username."; ObjectID = "dKO-4t-z5r"; */
+"dKO-4t-z5r.text" = "Please chose a username, its necessory to enter a unique username.";
+
+/* Class = "UITextField"; placeholder = " Email"; ObjectID = "f7i-5S-a9i"; */
+"f7i-5S-a9i.placeholder" = " Email";
+
+/* Class = "UILabel"; text = "SELECT USERNAME"; ObjectID = "ktr-hT-uXz"; */
+"ktr-hT-uXz.text" = "SELECT USERNAME";
+
+/* Class = "UILabel"; text = "Please enter your email address, we will send you your password via email."; ObjectID = "pnS-P6-qZ1"; */
+"pnS-P6-qZ1.text" = "Please enter your email address, we will send you your password via email.";
+
+/* Class = "UILabel"; text = "Please enter your username and password to begin"; ObjectID = "rP4-de-Z81"; */
+"rP4-de-Z81.text" = "Please enter your username and password to begin";
+
+/* Class = "UITextField"; placeholder = " Email"; ObjectID = "tuT-7U-iiZ"; */
+"tuT-7U-iiZ.placeholder" = " Email";
+
+/* Class = "UITextField"; placeholder = " Username"; ObjectID = "wMN-Wt-lNi"; */
+"wMN-Wt-lNi.placeholder" = " Username";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "xAR-Ae-pQD"; */
+"xAR-Ae-pQD.text" = "Label";
+
+/* Class = "UILabel"; text = "RECOVER PASSWORD"; ObjectID = "yQ3-9l-bq5"; */
+"yQ3-9l-bq5.text" = "RECOVER PASSWORD";

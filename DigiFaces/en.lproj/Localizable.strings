@@ -1,0 +1,20 @@
+/* 
+  Localizable.strings
+  DigiFaces
+
+  Created by Apple on 16/06/2015.
+  Copyright (c) 2015 Usasha studio. All rights reserved.
+*/
+
+
+"home cell" = "Home";
+"diary cell" = "Diary";
+"woman cell" = "Being a woman online";
+"friend cell" = "Friendship and web";
+"talking cell" = "Talking about brands";
+"brand cell" = "Brands and social media";
+
+"MY cell" = "MY PROFILE";
+"ABOUT cell" = "ABOUT DIGIFACES";
+"GET cell" = "GET HELP";
+"VERSION cell" = "VERSION 1.0";

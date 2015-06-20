@@ -7,9 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AFNetworking/AFNetworking.h"
+#import "CustomAertView.h"
 
-@interface ViewController : UIViewController
+@protocol MessageToViewMain;
+@protocol PopUpDelegate;
+@interface ViewController : UIViewController<UITextFieldDelegate,MessageToViewMain,PopUpDelegate>
 
+@property(nonatomic,strong)CustomAertView * customAlert;
+@property (nonatomic,strong)IBOutlet UITextField * email;
+@property (nonatomic,strong)IBOutlet UITextField * password;
+@property (nonatomic,strong)IBOutlet UILabel * errorMessage;
 
 @end
 
