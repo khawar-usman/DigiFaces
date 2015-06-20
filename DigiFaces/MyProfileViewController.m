@@ -11,9 +11,14 @@
 #import "AFNetworking/AFNetworking.h"
 #import "UIImageView+AFNetworking.h"
 #import "UserManagerShared.h"
+#import "Utility.h"
+#import "SDConstants.h"
+#import "CustomAertView.h"
 
-@interface MyProfileViewController ()
-
+@interface MyProfileViewController () <PopUpDelegate>
+{
+    CustomAertView * alertview;
+}
 @end
 
 @implementation MyProfileViewController
@@ -28,6 +33,7 @@
     self.profilePicView.layer.masksToBounds = YES;
     self.profilePicView.layer.borderWidth = 0;
     
+    [self.aboutMe setText:[Utility getStringForKey:kAboutMeText]];
     [self.aboutMe becomeFirstResponder];
     
     // Do any additional setup after loading the view.
@@ -39,10 +45,21 @@
 }
 
 -(IBAction)cancelThis:(id)sender{
-    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    if (![_aboutMe.text isEqualToString:@""]) {
+        [_aboutMe resignFirstResponder];
+        alertview = [[CustomAertView alloc]initWithNibName:@"CustomAertView" bundle:nil];
+        alertview.delegate = self;
+        [alertview showAlertWithMessage:@"Your changes will be discarded. Do you want to descard changes?" inView:self.navigationController.view];
+    }
+    else{
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 -(IBAction)postpressed:(id)sender{
+    NSLog(@"Posted");
+    
     
 }
 
@@ -70,5 +87,15 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - Popup Delegate
+-(void)okayButtonTapped
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+-(void)cacellButtonTapped
+{
+    
+}
 
 @end

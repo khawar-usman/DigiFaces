@@ -10,7 +10,7 @@
 #define DigiFaces_SDConstants_h
 
 #define kCurrentPorjectID       @"CurrentProjectId"
-
+#define kAboutMeText            @"AboutMeText"
 
 #define kBaseURL @"http://digifacesservices.focusforums.com/"
 

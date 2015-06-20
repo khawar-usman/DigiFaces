@@ -42,12 +42,16 @@
 }
 -(IBAction)cancel:(id)sender{
     [self.view removeFromSuperview];
-    [self.delegate okayButtonTapped];
+    if ([_delegate respondsToSelector:@selector(cacellButtonTapped)]) {
+        [_delegate cacellButtonTapped];
+    }
 }
 
 -(IBAction)okay:(id)sender{
     [self.view removeFromSuperview];
-    [self.delegate cacellButtonTapped];
+    if ([_delegate respondsToSelector:@selector(okayButtonTapped)]) {
+        [_delegate okayButtonTapped];
+    }
 }
 
 

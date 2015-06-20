@@ -30,7 +30,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 4;
+    return 5;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -47,15 +47,18 @@
     if (indexPath.row == 0) {
         cell.textLabel.text = NSLocalizedString(@"MY cell", @"MY PROFILE") ;
     }
-    else if(indexPath.row ==1){
+    else if (indexPath.row == 1){
+        cell.textLabel.text = NSLocalizedString(@"EmailTech cell", @"EMAIL TECH SUPPORT") ;
+    }
+    else if (indexPath.row == 2){
+        cell.textLabel.text = NSLocalizedString(@"Email cell", @"EMAIL THE MODERATOR");
+    }
+    else if(indexPath.row ==3){
         cell.textLabel.text = NSLocalizedString(@"ABOUT cell", @"ABOUT DIGIFACES") ;
         
     }
-    else if(indexPath.row ==2){
-        cell.textLabel.text =NSLocalizedString(@"GET cell", @"GET HELP") ;
-        
-    }
-    else if(indexPath.row ==3){
+    
+    else if(indexPath.row ==4){
         cell.textLabel.text = NSLocalizedString(@"VERSION cell", @"VERSION 1.0") ;
         
     }

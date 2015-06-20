@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol PopUpDelegate
+
+
+@protocol PopUpDelegate <NSObject>
 
 -(void)cacellButtonTapped;
 -(void)okayButtonTapped;
@@ -21,7 +23,7 @@
 @property(nonatomic,retain) NSString * textstrg;
 @property(nonatomic,retain) NSString * fromW;
 @property(nonatomic,retain)IBOutlet UILabel *textLabel;
-@property(nonatomic,retain)id<PopUpDelegate>delegate;
+@property(nonatomic,assign)id<PopUpDelegate> delegate;
 
 -(void)showAlertWithMessage:(NSString*)msg inView:(UIView*)view;
 

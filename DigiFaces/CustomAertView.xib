@@ -35,7 +35,7 @@
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                             <state key="normal" title="Cancel" backgroundImage="cancel"/>
                             <connections>
-                                <action selector="cancel:" destination="-1" eventType="touchUpInside" id="WHL-nL-mdS"/>
+                                <action selector="cancel:" destination="-1" eventType="touchUpInside" id="TAr-0s-45k"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9se-zg-qdG">
@@ -44,7 +44,7 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="okay:" destination="-1" eventType="touchUpInside" id="1zo-Sl-4R4"/>
+                                <action selector="okay:" destination="-1" eventType="touchUpInside" id="oqt-VZ-kfd"/>
                             </connections>
                         </button>
                     </subviews>

@@ -21,7 +21,11 @@
 +(NSString *)getStringForKey:(NSString *)key
 {
     NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-    return [[defaults valueForKey:key] stringValue];
+    id value = [defaults valueForKey:key];
+    if (value != nil && ![value isKindOfClass:[NSString class]]) {
+        return [value stringValue];
+    }
+    return value;
 }
 
 +(NSString *)getAuthToken

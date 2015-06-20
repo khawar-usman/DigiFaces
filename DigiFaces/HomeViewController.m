@@ -1,4 +1,4 @@
-//
+ //
 //  HomeViewController.m
 //  DigiFaces
 //
@@ -117,6 +117,7 @@
         NSString * imageUrl = [avatarFileObj returnFilePathFromFileObject:avatarDic];
         NSString * currentProjectID = [responseObject valueForKey:kCurrentPorjectID];
         [Utility saveString:currentProjectID forKey:kCurrentPorjectID];
+        [Utility saveString:[responseObject valueForKey:kAboutMeText] forKey:kAboutMeText];
         
 //        NSDictionary * currentProjDic = [responseObject objectForKey:@"CurrentProject"];
 //        NSString * projectId = [currentProjDic objectForKey:@"ProjectId"];

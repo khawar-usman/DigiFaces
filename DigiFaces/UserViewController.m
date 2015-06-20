@@ -46,32 +46,24 @@
     
     NSCharacterSet *alphaSet = [NSCharacterSet alphanumericCharacterSet];
     BOOL valid = [[_username.text stringByTrimmingCharactersInSet:alphaSet] isEqualToString:@""];
-
-
     
-        
     if ([_username.text isEqualToString:@""] ) {
         
         _errorMessage.text = @"Fields can't be empty";
 
-        self.customAlert.textstrg = @"Fields can't be empty";
-        [self.view addSubview:self.customAlert.view];
-       
+        [self.customAlert showAlertWithMessage:@"Fields can't be empty" inView:self.view];
         
         return;
     }
     else if([_username.text length]<6){
-        self.customAlert.textstrg = @"Username should be atleast 6 characters long";
-        [self.view addSubview:self.customAlert.view];
-        
+        [self.customAlert showAlertWithMessage:@"Username should be atleast 6 characters long" inView:self.view];
         _errorMessage.text = @"Username should be atleast 6 characters long";
         return;
 
     }
     if (!valid) // found bad characters
     {
-        self.customAlert.textstrg =@"Special characters are not allowed";
-        [self.view addSubview:self.customAlert.view];
+        [self.customAlert showAlertWithMessage:@"Special characters are not allowed" inView:self.view];
         
         _errorMessage.text = @"Special characters are not allowed";
         return;
@@ -100,11 +92,8 @@
 -(void)cancelandpush{
     [self dismissViewControllerAnimated:YES completion:^{
         [self moveToHomeScreen];
-        
     }];
- 
 }
-
 
 -(void)moveToHomeScreen{
     
