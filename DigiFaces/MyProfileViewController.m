@@ -14,12 +14,15 @@
 #import "Utility.h"
 #import "SDConstants.h"
 #import "CustomAertView.h"
+#import "ProfilePicutreCollectionViewController.h"
 
 #define kTagDiscardChanges  100
 
-@interface MyProfileViewController () <PopUpDelegate>
+@interface MyProfileViewController () <PopUpDelegate, ProfilePictureViewControllerDelegate>
 {
     CustomAertView * alertview;
+    NSDictionary * selctedProfile;
+    BOOL isTextChanged;
 }
 @end
 
@@ -50,8 +53,9 @@
 }
 
 -(IBAction)cancelThis:(id)sender{
+    NSString * aboutMe = [Utility getStringForKey:kAboutMeText];
     
-    if (![_aboutMe.text isEqualToString:@""]) {
+    if (![_aboutMe.text isEqualToString:@""] || ![_aboutMe.text isEqualToString:aboutMe]) {
         [_aboutMe resignFirstResponder];
         [alertview showAlertWithMessage:@"Your changes will be discarded. Do you want to descard changes?" inView:self.navigationController.view withTag:kTagDiscardChanges];
     }
@@ -84,7 +88,7 @@
     [manager POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
         
-        
+        [Utility saveString:_aboutMe.text forKey:kAboutMeText];
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
@@ -110,18 +114,64 @@
     return YES;
 }
 
+-(void)updateProfilePicture:(NSDictionary*)profilePicture
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    
+    [requestSerializer setValue:[Utility getAuthToken] forHTTPHeaderField:@"Authorization"];
+    
+    [requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    //NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:@"0", @"AboutMeId", [Utility getStringForKey:kCurrentPorjectID], @"ProjectId", @"", @"UserId", _aboutMe.text, @"AboutMeText", nil];
+    
+    manager.requestSerializer = requestSerializer;
+    
+    NSString * url = [NSString stringWithFormat:@"%@%@", kBaseURL, kUpdateAvagar];
+    
+    [manager POST:url parameters:profilePicture success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            File * file = [[File alloc] init];
+            NSString * url = [file returnFilePathFromFileObject:profilePicture];
+            [self.profilePicView setImageWithURL:[NSURL URLWithString:url]];
+        });
+        
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        
+        
+        [alertview showAlertWithMessage:@"An error in request, verify that your email is correct" inView:self.view withTag:0];
+        
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+        
+    }];
+    [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+}
 
 
-
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"profilePictureSegue"]) {
+        UINavigationController * navController = segue.destinationViewController;
+        
+        ProfilePicutreCollectionViewController * profileController = (ProfilePicutreCollectionViewController*)[navController topViewController];
+        profileController.delegate = self;
+    }
 }
-*/
+
+#pragma mark - ProfilePictureDelegate
+-(void)profilePicutreDidSelect:(NSDictionary *)selectedProfile
+{
+    selectedProfile = selectedProfile;
+    [self updateProfilePicture:selectedProfile];
+}
 
 #pragma mark - Popup Delegate
 -(void)okayButtonTappedWithTag:(NSInteger)tag

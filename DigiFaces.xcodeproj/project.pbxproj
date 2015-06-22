@@ -56,6 +56,8 @@
 		19F0BE2D1B28519B00E4B048 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F0BE2C1B28519B00E4B048 /* QuartzCore.framework */; };
 		19F0BE301B2855F500E4B048 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F0BE2F1B2855F500E4B048 /* MBProgressHUD.m */; };
 		19F0BE331B28BBE500E4B048 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19F0BE311B28BBE400E4B048 /* LaunchScreen.xib */; };
+		4AC9A61F1B385E4D00564FF0 /* ProfilePicutreCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9A61E1B385E4D00564FF0 /* ProfilePicutreCollectionViewController.m */; };
+		4AC9A6221B3860FD00564FF0 /* ImageCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9A6211B3860FD00564FF0 /* ImageCollectionCell.m */; };
 		4AD411EB1B3706B1007074D1 /* AboutDigifacesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD411EA1B3706B1007074D1 /* AboutDigifacesController.m */; };
 		4AD411EE1B3707DA007074D1 /* VersionViewContrller.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD411ED1B3707DA007074D1 /* VersionViewContrller.m */; };
 		4AD411F11B37094F007074D1 /* EmailModeratorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD411F01B37094F007074D1 /* EmailModeratorController.m */; };
@@ -189,6 +191,10 @@
 		19F0BE2E1B2855F500E4B048 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		19F0BE2F1B2855F500E4B048 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		19F0BE321B28BBE400E4B048 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		4AC9A61D1B385E4D00564FF0 /* ProfilePicutreCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfilePicutreCollectionViewController.h; sourceTree = "<group>"; };
+		4AC9A61E1B385E4D00564FF0 /* ProfilePicutreCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfilePicutreCollectionViewController.m; sourceTree = "<group>"; };
+		4AC9A6201B3860FD00564FF0 /* ImageCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCollectionCell.h; sourceTree = "<group>"; };
+		4AC9A6211B3860FD00564FF0 /* ImageCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCollectionCell.m; sourceTree = "<group>"; };
 		4AD411E91B3706B1007074D1 /* AboutDigifacesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutDigifacesController.h; sourceTree = "<group>"; };
 		4AD411EA1B3706B1007074D1 /* AboutDigifacesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutDigifacesController.m; sourceTree = "<group>"; };
 		4AD411EC1B3707DA007074D1 /* VersionViewContrller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionViewContrller.h; sourceTree = "<group>"; };
@@ -396,6 +402,8 @@
 				4AD683F81B35B3DC006C149C /* LogoutSegue.m */,
 				4AD683FA1B35B70B006C149C /* LoginSegue.h */,
 				4AD683FB1B35B70B006C149C /* LoginSegue.m */,
+				4AC9A6201B3860FD00564FF0 /* ImageCollectionCell.h */,
+				4AC9A6211B3860FD00564FF0 /* ImageCollectionCell.m */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -413,6 +421,8 @@
 				4AD411F01B37094F007074D1 /* EmailModeratorController.m */,
 				4AD411F21B370F34007074D1 /* TechSupportController.h */,
 				4AD411F31B370F34007074D1 /* TechSupportController.m */,
+				4AC9A61D1B385E4D00564FF0 /* ProfilePicutreCollectionViewController.h */,
+				4AC9A61E1B385E4D00564FF0 /* ProfilePicutreCollectionViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -598,6 +608,8 @@
 				19F0BD731B1F171F00E4B048 /* AFURLSessionManager.m in Sources */,
 				19F0BD131B1DBC6400E4B048 /* AppDelegate.m in Sources */,
 				19F0BD101B1DBC6400E4B048 /* main.m in Sources */,
+				4AC9A6221B3860FD00564FF0 /* ImageCollectionCell.m in Sources */,
+				4AC9A61F1B385E4D00564FF0 /* ProfilePicutreCollectionViewController.m in Sources */,
 				19328E051B3163A3008BFAA6 /* MyProfileViewController.m in Sources */,
 				19F0BD8C1B27384F00E4B048 /* HomeViewController.m in Sources */,
 			);

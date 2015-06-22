@@ -25,7 +25,7 @@
 }
 
 - (IBAction)cancelThis:(id)sender {
-    if (![_textArea.text isEqualToString:@""] || ![_txtSubject.text isEqualToString:@""]) {
+    if (![_textArea.text isEqualToString:@""] && ![_textArea.text isEqualToString:@"Some Text to Post"]) {
         [self resignAllResponder];
         [alertView showAlertWithMessage:@"Your changes will be discarded. Do you want to cancel it?" inView:self.navigationController.view withTag:kDiscardTag];
     }

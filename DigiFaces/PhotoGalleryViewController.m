@@ -113,12 +113,16 @@
                 x=x+20+imageHeight;
             if(decrement>=1)
                 {
-            UIImageView * imageView = [[UIImageView alloc] initWithFrame: CGRectMake(x, y, imageWidth, imageHeight)];
+                  
+                    UIButton * imageView = [[UIButton alloc] initWithFrame:CGRectMake(x, y, imageWidth, imageHeight)];
+                    
+            //UIImageView * imageView = [[UIImageView alloc] initWithFrame: CGRectMake(x, y, imageWidth, imageHeight)];
             
             //set image to each imageview
             __weak typeof(self) weakSelf =self;
+                    __weak typeof (imageView) weekImageView = imageView;
             NSURLRequest * requestN = [NSURLRequest requestWithURL:[NSURL URLWithString:[avatarsArray objectAtIndex:counter]]];
-            [imageView setImageWithURLRequest:requestN placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+            [imageView.imageView setImageWithURLRequest:requestN placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
                 [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
                 [[UserManagerShared sharedManager] setProfilePic:[weakSelf resizeImage:image imageSize:CGSizeMake(100, 120)]];
                 
@@ -135,14 +139,15 @@
             imageView.tag=counter;
             NSLog(@"%d",imageView.tag);
             
+                    [imageView addTarget:self action:@selector(handleSingleTap:) forControlEvents:UIControlEventTouchUpInside];
             //add tap gesture to each image view in grid
             
-            UITapGestureRecognizer *tapRecognizer =
-            [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                    action:@selector(handleSingleTap:)];
-            [tapRecognizer setNumberOfTouchesRequired:1];
-            
-            [imageView addGestureRecognizer:tapRecognizer];
+//            UITapGestureRecognizer *tapRecognizer =
+//            [[UITapGestureRecognizer alloc] initWithTarget:self
+//                                                    action:@selector(handleSingleTap:)];
+//            [tapRecognizer setNumberOfTouchesRequired:1];
+//            
+//            [imageView addGestureRecognizer:tapRecognizer];
             
             //add each imageview to grid  scrollview
             

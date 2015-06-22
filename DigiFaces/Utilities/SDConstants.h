@@ -20,5 +20,6 @@
 #define kAboutMeUpdate          @"api/Account/UpdateAboutMe"
 #define kSendHelpMessage        @"api/System/SendHelpMessage"
 #define kModeratorMessage       @"api/Account/SendMessageToModerator/{projectId}/{parentMessageId}"
+#define kUpdateAvagar           @"api/Account/UploadUserCustomAvatar"
 
 #endif
