@@ -51,19 +51,19 @@
         
         _errorMessage.text = @"Fields can't be empty";
 
-        [self.customAlert showAlertWithMessage:@"Fields can't be empty" inView:self.view];
+        [self.customAlert showAlertWithMessage:@"Fields can't be empty" inView:self.view withTag:0];
         
         return;
     }
     else if([_username.text length]<6){
-        [self.customAlert showAlertWithMessage:@"Username should be atleast 6 characters long" inView:self.view];
+        [self.customAlert showAlertWithMessage:@"Username should be atleast 6 characters long" inView:self.view withTag:0];
         _errorMessage.text = @"Username should be atleast 6 characters long";
         return;
 
     }
     if (!valid) // found bad characters
     {
-        [self.customAlert showAlertWithMessage:@"Special characters are not allowed" inView:self.view];
+        [self.customAlert showAlertWithMessage:@"Special characters are not allowed" inView:self.view withTag:0];
         
         _errorMessage.text = @"Special characters are not allowed";
         return;

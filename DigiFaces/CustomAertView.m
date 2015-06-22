@@ -9,7 +9,9 @@
 #import "CustomAertView.h"
 
 @interface CustomAertView ()
-
+{
+    NSInteger _tag;
+}
 @end
 
 @implementation CustomAertView
@@ -42,21 +44,22 @@
 }
 -(IBAction)cancel:(id)sender{
     [self.view removeFromSuperview];
-    if ([_delegate respondsToSelector:@selector(cacellButtonTapped)]) {
-        [_delegate cacellButtonTapped];
+    if ([_delegate respondsToSelector:@selector(cacellButtonTappedWithTag:)]) {
+        [_delegate cacellButtonTappedWithTag:_tag];
     }
 }
 
 -(IBAction)okay:(id)sender{
     [self.view removeFromSuperview];
-    if ([_delegate respondsToSelector:@selector(okayButtonTapped)]) {
-        [_delegate okayButtonTapped];
+    if ([_delegate respondsToSelector:@selector(okayButtonTappedWithTag:)]) {
+        [_delegate okayButtonTappedWithTag:_tag];
     }
 }
 
 
--(void)showAlertWithMessage:(NSString *)msg inView:(UIView *)view
+-(void)showAlertWithMessage:(NSString *)msg inView:(UIView *)view withTag:(NSInteger)tag
 {
+    _tag = tag;
     _textstrg = msg;
     [self.view setFrame:view.frame];
     [view addSubview:self.view];

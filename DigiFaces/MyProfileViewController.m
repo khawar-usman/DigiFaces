@@ -15,6 +15,8 @@
 #import "SDConstants.h"
 #import "CustomAertView.h"
 
+#define kTagDiscardChanges  100
+
 @interface MyProfileViewController () <PopUpDelegate>
 {
     CustomAertView * alertview;
@@ -36,6 +38,9 @@
     [self.aboutMe setText:[Utility getStringForKey:kAboutMeText]];
     [self.aboutMe becomeFirstResponder];
     
+    alertview = [[CustomAertView alloc]initWithNibName:@"CustomAertView" bundle:nil];
+    alertview.delegate = self;
+    
     // Do any additional setup after loading the view.
 }
 
@@ -48,9 +53,7 @@
     
     if (![_aboutMe.text isEqualToString:@""]) {
         [_aboutMe resignFirstResponder];
-        alertview = [[CustomAertView alloc]initWithNibName:@"CustomAertView" bundle:nil];
-        alertview.delegate = self;
-        [alertview showAlertWithMessage:@"Your changes will be discarded. Do you want to descard changes?" inView:self.navigationController.view];
+        [alertview showAlertWithMessage:@"Your changes will be discarded. Do you want to descard changes?" inView:self.navigationController.view withTag:kTagDiscardChanges];
     }
     else{
         [self dismissViewControllerAnimated:YES completion:nil];
@@ -59,8 +62,40 @@
 
 -(IBAction)postpressed:(id)sender{
     NSLog(@"Posted");
+    [_aboutMe resignFirstResponder];
+    if ([_aboutMe.text isEqualToString:@""]) {
+        [alertview showAlertWithMessage:@"Text is required." inView:self.navigationController.view withTag:0];
+        return;
+    }
     
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
     
+     [requestSerializer setValue:[Utility getAuthToken] forHTTPHeaderField:@"Authorization"];
+
+    [requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:@"0", @"AboutMeId", [Utility getStringForKey:kCurrentPorjectID], @"ProjectId", @"", @"UserId", _aboutMe.text, @"AboutMeText", nil];
+    
+    manager.requestSerializer = requestSerializer;
+    
+    NSString * url = [NSString stringWithFormat:@"%@%@", kBaseURL, kAboutMeUpdate];
+    
+    [manager POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+        
+        
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        
+        
+        [alertview showAlertWithMessage:@"An error in request, verify that your email is correct" inView:self.view withTag:0];
+        
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+        
+    }];
+    [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
 }
 
 -(IBAction)changePicture:(id)sender{
@@ -89,11 +124,13 @@
 */
 
 #pragma mark - Popup Delegate
--(void)okayButtonTapped
+-(void)okayButtonTappedWithTag:(NSInteger)tag
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (tag == kTagDiscardChanges) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
--(void)cacellButtonTapped
+-(void)cacellButtonTappedWithTag:(NSInteger)tag
 {
     
 }

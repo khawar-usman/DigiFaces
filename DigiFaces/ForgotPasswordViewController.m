@@ -65,14 +65,14 @@
     if ([_email.text isEqualToString:@""] ) {
         
         _errorMessage.text = @"Fields can't be empty";
-        [_customAlert showAlertWithMessage:@"Fields can't be empty" inView:self.view];
+        [_customAlert showAlertWithMessage:@"Fields can't be empty" inView:self.view withTag:0];
         
         return;
     }
     else if(![self validateEmailWithString:_email.text]){
         
         _errorMessage.text = @"Enter a valid email address";
-        [_customAlert showAlertWithMessage:@"Enter a valid email address" inView:self.view];
+        [_customAlert showAlertWithMessage:@"Enter a valid email address" inView:self.view withTag:0];
         
         return;
         
@@ -99,7 +99,7 @@
         _errorMessage.textColor = [UIColor greenColor];
         _errorMessage.text = @"Please check your inbox, password sent";
         
-        [_customAlert showAlertWithMessage:@"Please check your inbox, password sent" inView:self.view];
+        [_customAlert showAlertWithMessage:@"Please check your inbox, password sent" inView:self.view withTag:0];
         
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         
@@ -110,7 +110,7 @@
         NSLog(@"Error: %@", error);
         _errorMessage.text = @"An error in request, verify that your email is correct";
         
-        [_customAlert showAlertWithMessage:@"An error in request, verify that your email is correct" inView:self.view];
+        [_customAlert showAlertWithMessage:@"An error in request, verify that your email is correct" inView:self.view withTag:0];
         
         [MBProgressHUD hideHUDForView:self.view animated:YES];
 

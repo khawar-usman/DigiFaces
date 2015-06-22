@@ -37,6 +37,18 @@
     if(indexPath.row == 0){
         [self performSegueWithIdentifier: @"ToProfile" sender: self];
     }
+    else if (indexPath.row == 1){
+        [self performSegueWithIdentifier:@"emailTecSupportSegue" sender:self];
+    }
+    else if (indexPath.row == 2){
+        [self performSegueWithIdentifier:@"emailModeratorSegue" sender:self];
+    }
+    else if (indexPath.row == 3){
+        [self performSegueWithIdentifier:@"aboutDigiFacesSegue" sender:self];
+    }
+    else if (indexPath.row == 4){
+        [self performSegueWithIdentifier:@"versionSegue" sender:self];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{

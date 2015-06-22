@@ -90,7 +90,7 @@
         
         self.customAlert.fromW = @"login";
         
-        [self.customAlert showAlertWithMessage:@"Fields can't be empty" inView:self.view];
+        [self.customAlert showAlertWithMessage:@"Fields can't be empty" inView:self.view withTag:0];
         
         
         return;
@@ -98,7 +98,7 @@
     else if(![self validateEmailWithString:_email.text]){
         _errorMessage.text = @"Enter a valid email address";
         self.customAlert.fromW = @"login";
-        [self.customAlert showAlertWithMessage:@"Enter a valid email address" inView:self.view];
+        [self.customAlert showAlertWithMessage:@"Enter a valid email address" inView:self.view withTag:0];
         
         return;
 
@@ -133,7 +133,7 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
 
         self.customAlert.fromW = @"login";
-        [self.customAlert showAlertWithMessage:@"Login failed, please enter correct credentials" inView:self.view];
+        [self.customAlert showAlertWithMessage:@"Login failed, please enter correct credentials" inView:self.view withTag:0];
 
         _errorMessage.text = @"Login failed, please enter correct credentials";
 

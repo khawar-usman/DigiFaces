@@ -11,10 +11,14 @@
 
 #define kCurrentPorjectID       @"CurrentProjectId"
 #define kAboutMeText            @"AboutMeText"
+#define kEmail                  @"Email"
 
 #define kBaseURL @"http://digifacesservices.focusforums.com/"
 
 
-#define kGetHomeAnnouncements @"api/Project/GetHomeAnnouncement/{projectId}"
+#define kGetHomeAnnouncements   @"api/Project/GetHomeAnnouncement/{projectId}"
+#define kAboutMeUpdate          @"api/Account/UpdateAboutMe"
+#define kSendHelpMessage        @"api/System/SendHelpMessage"
+#define kModeratorMessage       @"api/Account/SendMessageToModerator/{projectId}/{parentMessageId}"
 
 #endif

@@ -12,8 +12,8 @@
 
 @protocol PopUpDelegate <NSObject>
 
--(void)cacellButtonTapped;
--(void)okayButtonTapped;
+-(void)cacellButtonTappedWithTag:(NSInteger)tag;
+-(void)okayButtonTappedWithTag:(NSInteger)tag;
 
 @end
 
@@ -25,6 +25,6 @@
 @property(nonatomic,retain)IBOutlet UILabel *textLabel;
 @property(nonatomic,assign)id<PopUpDelegate> delegate;
 
--(void)showAlertWithMessage:(NSString*)msg inView:(UIView*)view;
+-(void)showAlertWithMessage:(NSString*)msg inView:(UIView*)view withTag:(NSInteger)tag;
 
 @end

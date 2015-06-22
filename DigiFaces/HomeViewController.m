@@ -116,8 +116,10 @@
         File * avatarFileObj = [[File alloc]init];
         NSString * imageUrl = [avatarFileObj returnFilePathFromFileObject:avatarDic];
         NSString * currentProjectID = [responseObject valueForKey:kCurrentPorjectID];
+        NSString * email = [responseObject valueForKey:kEmail];
         [Utility saveString:currentProjectID forKey:kCurrentPorjectID];
         [Utility saveString:[responseObject valueForKey:kAboutMeText] forKey:kAboutMeText];
+        [Utility saveString:email forKey:kEmail];
         
 //        NSDictionary * currentProjDic = [responseObject objectForKey:@"CurrentProject"];
 //        NSString * projectId = [currentProjDic objectForKey:@"ProjectId"];
