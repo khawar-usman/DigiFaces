@@ -115,6 +115,7 @@
         NSDictionary * avatarDic = [responseObject objectForKey:@"AvatarFile"];
         File * avatarFileObj = [[File alloc]init];
         NSString * imageUrl = [avatarFileObj returnFilePathFromFileObject:avatarDic];
+        [Utility saveString:imageUrl forKey:kImageURL];
         NSString * currentProjectID = [responseObject valueForKey:kCurrentPorjectID];
         NSString * email = [responseObject valueForKey:kEmail];
         [Utility saveString:currentProjectID forKey:kCurrentPorjectID];
@@ -125,18 +126,17 @@
 //        NSString * projectId = [currentProjDic objectForKey:@"ProjectId"];
 //        NSArray * DailyDiaryList = [currentProjDic objectForKey:@"DailyDiaryList"];
 
-
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         
         __weak typeof(self)weakSelf = self;
         
         NSURLRequest * requestN = [NSURLRequest requestWithURL:[NSURL URLWithString:imageUrl]];
         [picCell.profileImage setImageWithURLRequest:requestN placeholderImage:[UIImage imageNamed:@"dummy_avatar.png"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-            [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+            
             [[UserManagerShared sharedManager] setProfilePic:[weakSelf resizeImage:image imageSize:CGSizeMake(100, 120)]];
 
-
         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-            
+            [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
         }];
         
         [[UserManagerShared sharedManager] setFirstName:[responseObject objectForKey:@"FirstName"]];

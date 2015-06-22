@@ -25,22 +25,23 @@
 }
 
 -(NSString*)returnFilePathFromFileObject:(NSDictionary*)fileObject{
-    NSString * fileKey;
-    BOOL fileType = [[fileObject objectForKey:@"IsAmazonFile"] boolValue];
-    if (fileType) {
-        fileKey = @"AmazonKey";
-    }
-    fileType = [[fileObject objectForKey:@"IsCameraTagFile"] boolValue];
     
-    if (fileType) {
-        fileKey = @"CameraTagKey";
-    }
-    fileType = [[fileObject objectForKey:@"IsViddlerFile"] boolValue];
+    NSString * imageUrl = @"";
     
-    if (fileType) {
-        fileKey = @"ViddlerKey";
+    if ([[fileObject objectForKey:@"IsAmazonFile"] boolValue]) {
+        imageUrl = [fileObject valueForKey:@"AmazonKey"];
     }
-    NSString * imageUrl = [fileObject objectForKey:fileKey];
+    else if ([[fileObject objectForKey:@"IsCameraTagFile"] boolValue])
+    {
+        imageUrl = [fileObject valueForKey:@"CameraTagKey"];
+    }
+    else if ([[fileObject objectForKey:@"IsViddlerFile"] boolValue])
+    {
+        NSString * key = [fileObject valueForKey:@"ViddlerKey"];
+        NSString * fileName = [fileObject valueForKey:@"FileName"];
+        
+        imageUrl = [NSString stringWithFormat:@"http://www.viddler.com/file/%@/html5mobile", key];
+    }
     
     return imageUrl;
 }

@@ -12,14 +12,15 @@
 #define kCurrentPorjectID       @"CurrentProjectId"
 #define kAboutMeText            @"AboutMeText"
 #define kEmail                  @"Email"
+#define kImageURL               @"ImageURL"
 
 #define kBaseURL @"http://digifacesservices.focusforums.com/"
-
 
 #define kGetHomeAnnouncements   @"api/Project/GetHomeAnnouncement/{projectId}"
 #define kAboutMeUpdate          @"api/Account/UpdateAboutMe"
 #define kSendHelpMessage        @"api/System/SendHelpMessage"
 #define kModeratorMessage       @"api/Account/SendMessageToModerator/{projectId}/{parentMessageId}"
 #define kUpdateAvagar           @"api/Account/UploadUserCustomAvatar"
+#define kAboutDigifaces         @"api/System/GetAbout/{languageCode}"
 
 #endif

@@ -57,7 +57,6 @@
         
         NSArray * avatars = (NSArray*)responseObject;
         for(NSDictionary * temp in avatars){
-            File * f = [[File alloc]init];
             [_avatarsArray addObject:temp];
         }
         

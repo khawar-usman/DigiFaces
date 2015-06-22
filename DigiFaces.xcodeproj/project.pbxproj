@@ -58,6 +58,16 @@
 		19F0BE331B28BBE500E4B048 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19F0BE311B28BBE400E4B048 /* LaunchScreen.xib */; };
 		4AC9A61F1B385E4D00564FF0 /* ProfilePicutreCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9A61E1B385E4D00564FF0 /* ProfilePicutreCollectionViewController.m */; };
 		4AC9A6221B3860FD00564FF0 /* ImageCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9A6211B3860FD00564FF0 /* ImageCollectionCell.m */; };
+		4AC9A63C1B38734900564FF0 /* DetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9A6281B38734900564FF0 /* DetailTableViewController.m */; };
+		4AC9A63D1B38734900564FF0 /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9A62A1B38734900564FF0 /* GTMNSString+HTML.m */; };
+		4AC9A63E1B38734900564FF0 /* MWFeedInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9A62C1B38734900564FF0 /* MWFeedInfo.m */; };
+		4AC9A63F1B38734900564FF0 /* MWFeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9A62E1B38734900564FF0 /* MWFeedItem.m */; };
+		4AC9A6401B38734900564FF0 /* MWFeedParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9A6301B38734900564FF0 /* MWFeedParser.m */; };
+		4AC9A6411B38734900564FF0 /* MWFeedParserAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9A6331B38734900564FF0 /* MWFeedParserAppDelegate.m */; };
+		4AC9A6421B38734900564FF0 /* NSDate+InternetDateTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9A6351B38734900564FF0 /* NSDate+InternetDateTime.m */; };
+		4AC9A6431B38734900564FF0 /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9A6371B38734900564FF0 /* NSString+HTML.m */; };
+		4AC9A6441B38734900564FF0 /* NSString+XMLEntities.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9A6391B38734900564FF0 /* NSString+XMLEntities.m */; };
+		4AC9A6451B38734900564FF0 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9A63B1B38734900564FF0 /* RootViewController.m */; };
 		4AD411EB1B3706B1007074D1 /* AboutDigifacesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD411EA1B3706B1007074D1 /* AboutDigifacesController.m */; };
 		4AD411EE1B3707DA007074D1 /* VersionViewContrller.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD411ED1B3707DA007074D1 /* VersionViewContrller.m */; };
 		4AD411F11B37094F007074D1 /* EmailModeratorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD411F01B37094F007074D1 /* EmailModeratorController.m */; };
@@ -195,6 +205,27 @@
 		4AC9A61E1B385E4D00564FF0 /* ProfilePicutreCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfilePicutreCollectionViewController.m; sourceTree = "<group>"; };
 		4AC9A6201B3860FD00564FF0 /* ImageCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCollectionCell.h; sourceTree = "<group>"; };
 		4AC9A6211B3860FD00564FF0 /* ImageCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCollectionCell.m; sourceTree = "<group>"; };
+		4AC9A6271B38734900564FF0 /* DetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailTableViewController.h; sourceTree = "<group>"; };
+		4AC9A6281B38734900564FF0 /* DetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailTableViewController.m; sourceTree = "<group>"; };
+		4AC9A6291B38734900564FF0 /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
+		4AC9A62A1B38734900564FF0 /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
+		4AC9A62B1B38734900564FF0 /* MWFeedInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWFeedInfo.h; sourceTree = "<group>"; };
+		4AC9A62C1B38734900564FF0 /* MWFeedInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWFeedInfo.m; sourceTree = "<group>"; };
+		4AC9A62D1B38734900564FF0 /* MWFeedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWFeedItem.h; sourceTree = "<group>"; };
+		4AC9A62E1B38734900564FF0 /* MWFeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWFeedItem.m; sourceTree = "<group>"; };
+		4AC9A62F1B38734900564FF0 /* MWFeedParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWFeedParser.h; sourceTree = "<group>"; };
+		4AC9A6301B38734900564FF0 /* MWFeedParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWFeedParser.m; sourceTree = "<group>"; };
+		4AC9A6311B38734900564FF0 /* MWFeedParser_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWFeedParser_Private.h; sourceTree = "<group>"; };
+		4AC9A6321B38734900564FF0 /* MWFeedParserAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWFeedParserAppDelegate.h; sourceTree = "<group>"; };
+		4AC9A6331B38734900564FF0 /* MWFeedParserAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWFeedParserAppDelegate.m; sourceTree = "<group>"; };
+		4AC9A6341B38734900564FF0 /* NSDate+InternetDateTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+InternetDateTime.h"; sourceTree = "<group>"; };
+		4AC9A6351B38734900564FF0 /* NSDate+InternetDateTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+InternetDateTime.m"; sourceTree = "<group>"; };
+		4AC9A6361B38734900564FF0 /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTML.h"; sourceTree = "<group>"; };
+		4AC9A6371B38734900564FF0 /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTML.m"; sourceTree = "<group>"; };
+		4AC9A6381B38734900564FF0 /* NSString+XMLEntities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+XMLEntities.h"; sourceTree = "<group>"; };
+		4AC9A6391B38734900564FF0 /* NSString+XMLEntities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+XMLEntities.m"; sourceTree = "<group>"; };
+		4AC9A63A1B38734900564FF0 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		4AC9A63B1B38734900564FF0 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		4AD411E91B3706B1007074D1 /* AboutDigifacesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutDigifacesController.h; sourceTree = "<group>"; };
 		4AD411EA1B3706B1007074D1 /* AboutDigifacesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutDigifacesController.m; sourceTree = "<group>"; };
 		4AD411EC1B3707DA007074D1 /* VersionViewContrller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionViewContrller.h; sourceTree = "<group>"; };
@@ -391,6 +422,34 @@
 			path = "UIKit+AFNetworking";
 			sourceTree = "<group>";
 		};
+		4AC9A6261B38734900564FF0 /* MWFeedParser */ = {
+			isa = PBXGroup;
+			children = (
+				4AC9A6271B38734900564FF0 /* DetailTableViewController.h */,
+				4AC9A6281B38734900564FF0 /* DetailTableViewController.m */,
+				4AC9A6291B38734900564FF0 /* GTMNSString+HTML.h */,
+				4AC9A62A1B38734900564FF0 /* GTMNSString+HTML.m */,
+				4AC9A62B1B38734900564FF0 /* MWFeedInfo.h */,
+				4AC9A62C1B38734900564FF0 /* MWFeedInfo.m */,
+				4AC9A62D1B38734900564FF0 /* MWFeedItem.h */,
+				4AC9A62E1B38734900564FF0 /* MWFeedItem.m */,
+				4AC9A62F1B38734900564FF0 /* MWFeedParser.h */,
+				4AC9A6301B38734900564FF0 /* MWFeedParser.m */,
+				4AC9A6311B38734900564FF0 /* MWFeedParser_Private.h */,
+				4AC9A6321B38734900564FF0 /* MWFeedParserAppDelegate.h */,
+				4AC9A6331B38734900564FF0 /* MWFeedParserAppDelegate.m */,
+				4AC9A6341B38734900564FF0 /* NSDate+InternetDateTime.h */,
+				4AC9A6351B38734900564FF0 /* NSDate+InternetDateTime.m */,
+				4AC9A6361B38734900564FF0 /* NSString+HTML.h */,
+				4AC9A6371B38734900564FF0 /* NSString+HTML.m */,
+				4AC9A6381B38734900564FF0 /* NSString+XMLEntities.h */,
+				4AC9A6391B38734900564FF0 /* NSString+XMLEntities.m */,
+				4AC9A63A1B38734900564FF0 /* RootViewController.h */,
+				4AC9A63B1B38734900564FF0 /* RootViewController.m */,
+			);
+			path = MWFeedParser;
+			sourceTree = "<group>";
+		};
 		4AD683E61B3560C7006C149C /* CustomCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -430,6 +489,7 @@
 		4AD683EE1B3589D1006C149C /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				4AC9A6261B38734900564FF0 /* MWFeedParser */,
 				4AD683EF1B3589E2006C149C /* SDConstants.h */,
 				4AD683F01B358BDB006C149C /* Utility.h */,
 				4AD683F11B358BDB006C149C /* Utility.m */,
@@ -565,6 +625,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AC9A63C1B38734900564FF0 /* DetailTableViewController.m in Sources */,
 				19F0BD6B1B1F171F00E4B048 /* AFHTTPRequestOperation.m in Sources */,
 				19328E0B1B31CD79008BFAA6 /* PhotoGalleryViewController.m in Sources */,
 				4AD411EE1B3707DA007074D1 /* VersionViewContrller.m in Sources */,
@@ -583,6 +644,8 @@
 				19F0BD6E1B1F171F00E4B048 /* AFNetworkReachabilityManager.m in Sources */,
 				19328DE01B30222B008BFAA6 /* UserManagerShared.m in Sources */,
 				4AD683ED1B3588A8006C149C /* ProjectIntroViewController.m in Sources */,
+				4AC9A63E1B38734900564FF0 /* MWFeedInfo.m in Sources */,
+				4AC9A6451B38734900564FF0 /* RootViewController.m in Sources */,
 				19F0BD721B1F171F00E4B048 /* AFURLResponseSerialization.m in Sources */,
 				19F0BD851B205C4B00E4B048 /* UserViewController.m in Sources */,
 				19328DED1B303714008BFAA6 /* CustomAertView.m in Sources */,
@@ -593,20 +656,27 @@
 				19F0BD811B1F575400E4B048 /* DigiFaceHTTPClient.m in Sources */,
 				19F0BD771B1F171F00E4B048 /* UIButton+AFNetworking.m in Sources */,
 				19F0BD751B1F171F00E4B048 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				4AC9A6401B38734900564FF0 /* MWFeedParser.m in Sources */,
 				19F0BD6F1B1F171F00E4B048 /* AFSecurityPolicy.m in Sources */,
 				19F0BD7A1B1F171F00E4B048 /* UIRefreshControl+AFNetworking.m in Sources */,
 				19F0BD7B1B1F171F00E4B048 /* UIWebView+AFNetworking.m in Sources */,
+				4AC9A6421B38734900564FF0 /* NSDate+InternetDateTime.m in Sources */,
 				19F0BD6D1B1F171F00E4B048 /* AFHTTPSessionManager.m in Sources */,
 				19328DE31B3022CA008BFAA6 /* Project.m in Sources */,
 				19F0BD761B1F171F00E4B048 /* UIAlertView+AFNetworking.m in Sources */,
 				4AD411EB1B3706B1007074D1 /* AboutDigifacesController.m in Sources */,
+				4AC9A6411B38734900564FF0 /* MWFeedParserAppDelegate.m in Sources */,
 				19328E081B319273008BFAA6 /* File.m in Sources */,
 				19F0BD711B1F171F00E4B048 /* AFURLRequestSerialization.m in Sources */,
+				4AC9A6441B38734900564FF0 /* NSString+XMLEntities.m in Sources */,
 				19F0BD891B21EA8100E4B048 /* ForgotPasswordViewController.m in Sources */,
 				4AD683FC1B35B70B006C149C /* LoginSegue.m in Sources */,
 				19F0BD741B1F171F00E4B048 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				4AC9A63D1B38734900564FF0 /* GTMNSString+HTML.m in Sources */,
 				19F0BD731B1F171F00E4B048 /* AFURLSessionManager.m in Sources */,
+				4AC9A6431B38734900564FF0 /* NSString+HTML.m in Sources */,
 				19F0BD131B1DBC6400E4B048 /* AppDelegate.m in Sources */,
+				4AC9A63F1B38734900564FF0 /* MWFeedItem.m in Sources */,
 				19F0BD101B1DBC6400E4B048 /* main.m in Sources */,
 				4AC9A6221B3860FD00564FF0 /* ImageCollectionCell.m in Sources */,
 				4AC9A61F1B385E4D00564FF0 /* ProfilePicutreCollectionViewController.m in Sources */,

@@ -14,6 +14,7 @@
 #import "File.h"
 #import "ImageCell.h"
 #import "UIImageView+AFNetworking.h"
+#import "NSString+HTML.h"
 
 @interface ProjectIntroViewController ()
 {
@@ -59,8 +60,8 @@
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
         
         attachment = [[File alloc] initWithDictionary:[responseObject valueForKey:@"File"]];
-        text = [responseObject valueForKey:@"Text"];
-        title = [responseObject valueForKey:@"Title"];
+        text = [[responseObject valueForKey:@"Text"] stringByConvertingHTMLToPlainText];
+        title = [responseObject valueForKey:@"Title"] ;
         
         [_dataAray removeAllObjects];
         [_dataAray addObject:attachment];
