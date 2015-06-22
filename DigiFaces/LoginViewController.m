@@ -126,7 +126,6 @@
         [[NSUserDefaults standardUserDefaults]synchronize];
 
         [self check_username_existence];
-      
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);

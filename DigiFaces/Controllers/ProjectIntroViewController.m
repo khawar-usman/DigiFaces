@@ -15,6 +15,7 @@
 #import "ImageCell.h"
 #import "UIImageView+AFNetworking.h"
 #import "NSString+HTML.h"
+#import "WebViewController.h"
 
 @interface ProjectIntroViewController ()
 {
@@ -123,14 +124,21 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     if (indexPath.row == 0) {
-        ImageCell * cell = [tableView dequeueReusableCellWithIdentifier:@"imageCell"];
-        NSURL * url = [NSURL URLWithString:attachment.filePath];
-        [cell.image setImageWithURL:url];
-        return cell;
+        
+        if ([attachment.fileType isEqualToString:@"Image"]) {
+            ImageCell * cell = [tableView dequeueReusableCellWithIdentifier:@"imageCell"];
+            NSURL * url = [NSURL URLWithString:attachment.filePath];
+            [cell.image setImageWithURL:url];
+            return cell;
+        }
+        else if([attachment.fileType isEqualToString:@"Video"]){
+            UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"videoCell"];
+            
+            return cell;
+        }
     }
-    
-    
     
     if (indexPath.row == 1) {
         // Title
@@ -142,6 +150,13 @@
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"textCell" forIndexPath:indexPath];
         [cell.textLabel setText:text];
         return cell;
+    }
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 0) {
+        [self performSegueWithIdentifier:@"webViewSegue" sender:self];
     }
 }
 
@@ -180,17 +195,20 @@
 }
 */
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"webViewSegue"]) {
+        WebViewController * webController = [segue destinationViewController];
+        webController.url = attachment.filePath;
+    }
 }
-*/
 
 - (IBAction)goBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 @end

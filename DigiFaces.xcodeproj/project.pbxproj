@@ -68,6 +68,7 @@
 		4AC9A6431B38734900564FF0 /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9A6371B38734900564FF0 /* NSString+HTML.m */; };
 		4AC9A6441B38734900564FF0 /* NSString+XMLEntities.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9A6391B38734900564FF0 /* NSString+XMLEntities.m */; };
 		4AC9A6451B38734900564FF0 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9A63B1B38734900564FF0 /* RootViewController.m */; };
+		4AC9A6481B38840A00564FF0 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9A6471B38840A00564FF0 /* WebViewController.m */; };
 		4AD411EB1B3706B1007074D1 /* AboutDigifacesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD411EA1B3706B1007074D1 /* AboutDigifacesController.m */; };
 		4AD411EE1B3707DA007074D1 /* VersionViewContrller.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD411ED1B3707DA007074D1 /* VersionViewContrller.m */; };
 		4AD411F11B37094F007074D1 /* EmailModeratorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD411F01B37094F007074D1 /* EmailModeratorController.m */; };
@@ -226,6 +227,8 @@
 		4AC9A6391B38734900564FF0 /* NSString+XMLEntities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+XMLEntities.m"; sourceTree = "<group>"; };
 		4AC9A63A1B38734900564FF0 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		4AC9A63B1B38734900564FF0 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		4AC9A6461B38840A00564FF0 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		4AC9A6471B38840A00564FF0 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		4AD411E91B3706B1007074D1 /* AboutDigifacesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutDigifacesController.h; sourceTree = "<group>"; };
 		4AD411EA1B3706B1007074D1 /* AboutDigifacesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutDigifacesController.m; sourceTree = "<group>"; };
 		4AD411EC1B3707DA007074D1 /* VersionViewContrller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionViewContrller.h; sourceTree = "<group>"; };
@@ -482,6 +485,8 @@
 				4AD411F31B370F34007074D1 /* TechSupportController.m */,
 				4AC9A61D1B385E4D00564FF0 /* ProfilePicutreCollectionViewController.h */,
 				4AC9A61E1B385E4D00564FF0 /* ProfilePicutreCollectionViewController.m */,
+				4AC9A6461B38840A00564FF0 /* WebViewController.h */,
+				4AC9A6471B38840A00564FF0 /* WebViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -628,6 +633,7 @@
 				4AC9A63C1B38734900564FF0 /* DetailTableViewController.m in Sources */,
 				19F0BD6B1B1F171F00E4B048 /* AFHTTPRequestOperation.m in Sources */,
 				19328E0B1B31CD79008BFAA6 /* PhotoGalleryViewController.m in Sources */,
+				4AC9A6481B38840A00564FF0 /* WebViewController.m in Sources */,
 				4AD411EE1B3707DA007074D1 /* VersionViewContrller.m in Sources */,
 				4AD411F41B370F34007074D1 /* TechSupportController.m in Sources */,
 				19328DE91B3022F6008BFAA6 /* Company.m in Sources */,

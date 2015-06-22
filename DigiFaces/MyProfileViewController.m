@@ -90,6 +90,8 @@
         
         [Utility saveString:_aboutMe.text forKey:kAboutMeText];
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+        
+        [alertview showAlertWithMessage:@"Your about me text is updated successfully." inView:self.navigationController.view withTag:0];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         
