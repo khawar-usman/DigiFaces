@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -103,12 +103,12 @@
                             <constraint firstItem="pvj-3j-h3a" firstAttribute="leading" secondItem="mSj-HS-Xn2" secondAttribute="leading" id="CYa-nC-2wk"/>
                             <constraint firstItem="pvj-3j-h3a" firstAttribute="leading" secondItem="f7i-5S-a9i" secondAttribute="leading" id="I0h-Fn-qkU"/>
                             <constraint firstItem="f7i-5S-a9i" firstAttribute="top" secondItem="rP4-de-Z81" secondAttribute="bottom" constant="42" id="I6Q-nI-5ui"/>
+                            <constraint firstItem="1xv-xq-8mw" firstAttribute="top" secondItem="f7i-5S-a9i" secondAttribute="bottom" constant="8" id="J80-OI-mpr"/>
                             <constraint firstAttribute="centerX" secondItem="63L-HD-OMQ" secondAttribute="centerX" id="JTT-Ue-zHp"/>
                             <constraint firstItem="rP4-de-Z81" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="146" id="KUa-Yz-nuF"/>
                             <constraint firstItem="rP4-de-Z81" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="45" id="Qn4-mK-GDn"/>
                             <constraint firstAttribute="centerX" secondItem="f7i-5S-a9i" secondAttribute="centerX" constant="-0.5" id="RyE-eg-Fgb"/>
                             <constraint firstItem="63L-HD-OMQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="89" id="SgM-oI-GO2"/>
-                            <constraint firstItem="pvj-3j-h3a" firstAttribute="top" secondItem="1xv-xq-8mw" secondAttribute="bottom" constant="8" symbolic="YES" id="XoT-T1-A8j"/>
                             <constraint firstAttribute="centerX" secondItem="pvj-3j-h3a" secondAttribute="centerX" constant="-0.5" id="aPW-Js-WA4"/>
                             <constraint firstItem="mSj-HS-Xn2" firstAttribute="top" secondItem="pvj-3j-h3a" secondAttribute="bottom" constant="16" id="bmt-jg-2xB"/>
                             <constraint firstAttribute="centerX" secondItem="mSj-HS-Xn2" secondAttribute="centerX" constant="-0.5" id="cqW-Pg-ezl"/>
