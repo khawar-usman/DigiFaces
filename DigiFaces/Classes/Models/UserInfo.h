@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "File.h"
 
 @interface UserInfo : NSObject
 
@@ -24,6 +25,8 @@
 @property (nonatomic, assign) NSInteger currentProjectID;
 @property (nonatomic, retain) NSString * aboutMeText;
 @property (nonatomic, assign) BOOL hasRegistered;
+
+@property (nonatomic, retain) File * avatarFile;
 
 -(instancetype) initWithDictioanry:(NSDictionary*)dict;
 

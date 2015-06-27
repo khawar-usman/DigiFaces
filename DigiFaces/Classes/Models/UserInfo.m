@@ -26,6 +26,10 @@
         self.lastName = [dict valueForKey:@"AboutMeText"];
         self.hasRegistered = [[dict valueForKey:@"HasRegistered"] boolValue];
         
+        if ([dict valueForKey:@"AvatarFile"]) {
+            _avatarFile = [[File alloc] initWithDictionary:[dict valueForKey:@"AvatarFile"]];
+        }
+        
     }
     return self;
 }

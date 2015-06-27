@@ -29,5 +29,6 @@
 #define kAboutDigifaces         @"api/System/GetAbout/{languageCode}"
 #define kUploadCustomAvatar     @"api/Account/UploadUserCustomAvatar"
 #define kDailyDiaryInfo         @"api/Project/GetDailyDiary/{diaryId}"
+#define kGetNotifications       @"api/Account/GetNotifications/{projectId}"
 
 #endif

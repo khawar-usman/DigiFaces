@@ -85,6 +85,9 @@
 		4ACDB9F01B3E84B8009EFB91 /* DailyDiaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB9EF1B3E84B8009EFB91 /* DailyDiaryViewController.m */; };
 		4ACDB9F31B3E8816009EFB91 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB9F21B3E8816009EFB91 /* UserInfo.m */; };
 		4ACDB9F61B3E9A14009EFB91 /* DailyDiary.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB9F51B3E9A14009EFB91 /* DailyDiary.m */; };
+		4ACDB9F91B3EB6AE009EFB91 /* NotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB9F81B3EB6AE009EFB91 /* NotificationsViewController.m */; };
+		4ACDB9FC1B3EB9D3009EFB91 /* Notification.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB9FB1B3EB9D3009EFB91 /* Notification.m */; };
+		4ACDB9FF1B3EC155009EFB91 /* NotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB9FE1B3EC155009EFB91 /* NotificationCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -266,6 +269,12 @@
 		4ACDB9F21B3E8816009EFB91 /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
 		4ACDB9F41B3E9A14009EFB91 /* DailyDiary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyDiary.h; sourceTree = "<group>"; };
 		4ACDB9F51B3E9A14009EFB91 /* DailyDiary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyDiary.m; sourceTree = "<group>"; };
+		4ACDB9F71B3EB6AE009EFB91 /* NotificationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationsViewController.h; sourceTree = "<group>"; };
+		4ACDB9F81B3EB6AE009EFB91 /* NotificationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationsViewController.m; sourceTree = "<group>"; };
+		4ACDB9FA1B3EB9D3009EFB91 /* Notification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notification.h; sourceTree = "<group>"; };
+		4ACDB9FB1B3EB9D3009EFB91 /* Notification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Notification.m; sourceTree = "<group>"; };
+		4ACDB9FD1B3EC155009EFB91 /* NotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationCell.h; sourceTree = "<group>"; };
+		4ACDB9FE1B3EC155009EFB91 /* NotificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -405,6 +414,8 @@
 				4ACDB9EC1B3E8366009EFB91 /* DiaryInfoViewController.m */,
 				4ACDB9EE1B3E84B8009EFB91 /* DailyDiaryViewController.h */,
 				4ACDB9EF1B3E84B8009EFB91 /* DailyDiaryViewController.m */,
+				4ACDB9F71B3EB6AE009EFB91 /* NotificationsViewController.h */,
+				4ACDB9F81B3EB6AE009EFB91 /* NotificationsViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -425,6 +436,8 @@
 				4ACDB9561B3E7E66009EFB91 /* LogoutSegue.m */,
 				4ACDB9571B3E7E66009EFB91 /* ProfilePicCell.h */,
 				4ACDB9581B3E7E66009EFB91 /* ProfilePicCell.m */,
+				4ACDB9FD1B3EC155009EFB91 /* NotificationCell.h */,
+				4ACDB9FE1B3EC155009EFB91 /* NotificationCell.m */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -455,6 +468,8 @@
 				4ACDB9F21B3E8816009EFB91 /* UserInfo.m */,
 				4ACDB9F41B3E9A14009EFB91 /* DailyDiary.h */,
 				4ACDB9F51B3E9A14009EFB91 /* DailyDiary.m */,
+				4ACDB9FA1B3EB9D3009EFB91 /* Notification.h */,
+				4ACDB9FB1B3EB9D3009EFB91 /* Notification.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -698,7 +713,9 @@
 				4ACDB9B61B3E7E66009EFB91 /* ProjectViewController.m in Sources */,
 				4ACDB9AE1B3E7E66009EFB91 /* EmailModeratorController.m in Sources */,
 				4ACDB9E01B3E7E66009EFB91 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				4ACDB9FC1B3EB9D3009EFB91 /* Notification.m in Sources */,
 				4ACDB9D91B3E7E66009EFB91 /* MWFeedParser.m in Sources */,
+				4ACDB9F91B3EB6AE009EFB91 /* NotificationsViewController.m in Sources */,
 				4ACDB9D21B3E7E66009EFB91 /* AFURLResponseSerialization.m in Sources */,
 				4ACDB9C91B3E7E66009EFB91 /* UserManagerShared.m in Sources */,
 				4ACDB9B91B3E7E66009EFB91 /* UserViewController.m in Sources */,
@@ -726,6 +743,7 @@
 				4ACDB9D41B3E7E66009EFB91 /* MBProgressHUD.m in Sources */,
 				4ACDB9CC1B3E7E66009EFB91 /* AFHTTPRequestOperationManager.m in Sources */,
 				19F0BD101B1DBC6400E4B048 /* main.m in Sources */,
+				4ACDB9FF1B3EC155009EFB91 /* NotificationCell.m in Sources */,
 				4ACDB9B01B3E7E66009EFB91 /* HomeViewController.m in Sources */,
 				4ACDB9CD1B3E7E66009EFB91 /* AFHTTPSessionManager.m in Sources */,
 				4ACDB9BF1B3E7E66009EFB91 /* ImageCollectionCell.m in Sources */,

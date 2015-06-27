@@ -1,50 +1,36 @@
 //
-//  DailyDiaryViewController.m
+//  NotificationsViewController.m
 //  DigiFaces
 //
 //  Created by confiz on 27/06/2015.
 //  Copyright (c) 2015 Usasha studio. All rights reserved.
 //
 
-#import "DailyDiaryViewController.h"
+#import "NotificationsViewController.h"
 #import "MBProgressHUD.h"
 #import "AFNetworking.h"
-#import "SDConstants.h"
 #import "Utility.h"
+#import "SDConstants.h"
 #import "UserManagerShared.h"
-#import "DailyDiary.h"
-#import "DiaryInfoViewController.h"
+#import "Notification.h"
+#import "NotificationCell.h"
+#import "UIImageView+AFNetworking.h"
 
-@interface DailyDiaryViewController ()
-{
-    UIButton * btnEdit;
-}
-@property (nonatomic, retain) DailyDiary * dailyDiary;
+@interface NotificationsViewController ()
+
+@property (nonatomic, retain) NSMutableArray * arrNotifications;;
 
 @end
 
-@implementation DailyDiaryViewController
+@implementation NotificationsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    NSInteger diaryID = [[[[[UserManagerShared sharedManager] currentProject] dailyDiaryList] objectAtIndex:0] integerValue];
-    [self fetchDailyDiaryWithDiaryID:diaryID];
-    [self addEditButton];
+    _arrNotifications = [[NSMutableArray alloc] init];
+    [self getNotifications];
 }
-
--(void)addEditButton
-{
-    btnEdit = [[UIButton alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 100, 50, 50)];
-    [btnEdit setBackgroundImage:[UIImage imageNamed:@"pencil"] forState:UIControlStateNormal];
-    [btnEdit addTarget:self action:@selector(editClicked:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.view addSubview:btnEdit];
-}
-
--(void)editClicked:(id)sender
-{
-    NSLog(@"Edit clicked");
+- (IBAction)closeThis:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -53,12 +39,12 @@
 }
 
 #pragma mark - API Methods
--(void)fetchDailyDiaryWithDiaryID:(NSInteger)diaryID
+-(void)getNotifications
 {
     [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     
-    NSString * url = [NSString stringWithFormat:@"%@%@", kBaseURL, kDailyDiaryInfo];
-    url = [url stringByReplacingOccurrencesOfString:@"{diaryId}" withString:[NSString stringWithFormat:@"%d", diaryID]];
+    NSString * url = [NSString stringWithFormat:@"%@%@", kBaseURL, kGetNotifications];
+    url = [url stringByReplacingOccurrencesOfString:@"{projectId}" withString:[NSString stringWithFormat:@"%d", [[UserManagerShared sharedManager] info].currentProjectID]];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -69,8 +55,14 @@
     manager.requestSerializer = requestSerializer;
     
     
-    [manager POST:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        _dailyDiary = [[DailyDiary alloc] initWithDictionary:responseObject];
+    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"Response : %@", responseObject);
+        for (NSDictionary * notification in responseObject) {
+            Notification * not = [[Notification alloc] initWithDictionary:notification];
+            [_arrNotifications addObject:not];
+        }
+        
         [self.tableView reloadData];
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -88,45 +80,23 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    if (!_dailyDiary) {
-        return 0;
-    }
-    return 2;
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{    
-    if (indexPath.row == 0) {
-        return 90;
-    }
-    else if (indexPath.row == 1){
-        return 40;
-    }
-    return 90;//size.height;
+    return _arrNotifications.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    UITableViewCell *cell;
-    
-    if (indexPath.row == 0) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"textCell" forIndexPath:indexPath];
-        
-        [cell.textLabel setText:_dailyDiary.diaryQuestion];
-    }
-    else if (indexPath.row == 1){
-        cell = [tableView dequeueReusableCellWithIdentifier:@"noResponseHeaderCell" forIndexPath:indexPath];
-        [cell.textLabel setText:[NSString stringWithFormat:@"%lu Responses", (unsigned long)[_dailyDiary.userDiaries count]]];
+    NotificationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"notificationCell" forIndexPath:indexPath];
+
+    Notification * notification = [_arrNotifications objectAtIndex:indexPath.row];
+    [cell.userImage setImageWithURL:[NSURL URLWithString:notification.commenterUserInfo.avatarFile.filePath]];
+    [cell.lblUserName setText:notification.commenterUserInfo.appUserName];
+    [cell.lblDate setText:notification.dateCreatedFormated];
+    // Configure the cell...
+    [cell makeImageCircular];
+    if (notification.isRead) {
+        [cell setBackgroundColor:[UIColor whiteColor]];
     }
     
     return cell;
-}
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.row == 0) {
-        [self performSegueWithIdentifier:@"diaryInfoSegue" sender:self];
-    }
 }
 
 /*
@@ -163,30 +133,14 @@
 }
 */
 
+/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    if ([segue.identifier isEqualToString:@"diaryInfoSegue"]) {
-        DiaryInfoViewController * diaryInfoController = (DiaryInfoViewController*)[(UINavigationController*)segue.destinationViewController topViewController];
-        diaryInfoController.dailyDiary = self.dailyDiary;
-    }
 }
-
-- (IBAction)closeThis:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    CGRect frame = btnEdit.frame;
-    frame.origin.y = scrollView.contentOffset.y + self.tableView.frame.size.height - btnEdit.frame.size.height - 10;
-    frame.origin.x = self.view.frame.size.width - frame.size.width - 10;
-    btnEdit.frame = frame;
-    
-    [self.view bringSubviewToFront:btnEdit];
-}
+*/
 
 @end
