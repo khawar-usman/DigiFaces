@@ -1,36 +1,41 @@
 //
-//  NotificationsViewController.m
+//  ResponseViewController.m
 //  DigiFaces
 //
 //  Created by confiz on 27/06/2015.
 //  Copyright (c) 2015 Usasha studio. All rights reserved.
 //
 
-#import "NotificationsViewController.h"
+#import "ResponseViewController.h"
 #import "MBProgressHUD.h"
 #import "AFNetworking.h"
 #import "Utility.h"
 #import "SDConstants.h"
-#import "UserManagerShared.h"
-#import "Notification.h"
+#import "Response.h"
+#import "UserCell.h"
+#import "ImagesCell.h"
 #import "NotificationCell.h"
+#import "Comment.h"
 #import "UIImageView+AFNetworking.h"
-#import "ResponseViewController.h"
+#import "TextAreaResponse.h"
 
-@interface NotificationsViewController ()
+@interface ResponseViewController ()
 
-@property (nonatomic, retain) NSMutableArray * arrNotifications;;
+@property (nonatomic, retain) NSMutableArray * arrResponses;
+@property (nonatomic ,retain) Response * response;
 
 @end
 
-@implementation NotificationsViewController
+@implementation ResponseViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _arrNotifications = [[NSMutableArray alloc] init];
-    [self getNotifications];
+    
+    _arrResponses = [[NSMutableArray alloc] init];
+    
+    [self getResponses];
 }
-- (IBAction)closeThis:(id)sender {
+- (IBAction)cancelThis:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -40,12 +45,12 @@
 }
 
 #pragma mark - API Methods
--(void)getNotifications
+-(void)getResponses
 {
     [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     
-    NSString * url = [NSString stringWithFormat:@"%@%@", kBaseURL, kGetNotifications];
-    url = [url stringByReplacingOccurrencesOfString:@"{projectId}" withString:[NSString stringWithFormat:@"%d", [[UserManagerShared sharedManager] info].currentProjectID]];
+    NSString * url = [NSString stringWithFormat:@"%@%@", kBaseURL, kGetResponses];
+    url = [url stringByReplacingOccurrencesOfString:@"{activityId}" withString:[NSString stringWithFormat:@"%d", _currentNotification.activityID]];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -56,13 +61,11 @@
     manager.requestSerializer = requestSerializer;
     
     
-    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"Response : %@", responseObject);
-        for (NSDictionary * notification in responseObject) {
-            Notification * not = [[Notification alloc] initWithDictionary:notification];
-            [_arrNotifications addObject:not];
-        }
+        
+        _response = [[Response alloc] initWithDictionary:[responseObject firstObject]];
         
         [self.tableView reloadData];
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
@@ -79,30 +82,79 @@
     return 1;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 0) {
+        return 75;
+    }
+    else if (indexPath.row == 1){
+        return 90;
+    }
+    else if (_response.files.count>0 && indexPath.row == 2){
+        return 85;
+    }
+    else if ((_response.files.count==0 && indexPath.row == 2) || (_response.files.count>0 && indexPath.row == 3)){
+        return 44;
+    }
+    else{
+        return 110;
+    }
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    int count = 0;
+    if (_response) {
+        count += 2;
+        if (_response.files.count > 0) {
+            count++;
+        }
+        count++;
+        count+= _response.comments.count;
+    }
     // Return the number of rows in the section.
-    return _arrNotifications.count;
+    return count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NotificationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"notificationCell" forIndexPath:indexPath];
-
-    Notification * notification = [_arrNotifications objectAtIndex:indexPath.row];
-    [cell.userImage setImageWithURL:[NSURL URLWithString:notification.commenterUserInfo.avatarFile.filePath]];
-    [cell.lblUserName setText:notification.commenterUserInfo.appUserName];
-    [cell.lblDate setText:notification.dateCreatedFormated];
-    // Configure the cell...
-    [cell makeImageCircular];
-    if (notification.isRead) {
-        [cell setBackgroundColor:[UIColor whiteColor]];
+    if (indexPath.row == 0) {
+        UserCell * cell = [tableView dequeueReusableCellWithIdentifier:@"userCell" forIndexPath:indexPath];
+        [cell.lblTime setText:_response.dateCreatedFormated];
+        [cell.userImage setImageWithURL:[NSURL URLWithString:_response.userInfo.avatarFile.filePath]];
+        [cell.lblUsername setText:_response.userInfo.appUserName];
+        [cell makeImageCircular];
+        return cell;
+    }
+    else if (indexPath.row == 1){
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"textCell" forIndexPath:indexPath];
+        TextAreaResponse * t = [_response.textAreaResponse objectAtIndex:0];
+        [cell.textLabel setText:t.response];
+        return cell;
     }
     
+    if (_response.files.count>0 && indexPath.row == 2) {
+        ImagesCell * cell = [tableView dequeueReusableCellWithIdentifier:@"imagesScrollCell"];
+        return cell;
+    }
+    else if ((_response.files.count==0 && indexPath.row == 2) || (_response.files.count>0 && indexPath.row == 3)){
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"noResponseHeaderCell" forIndexPath:indexPath];
+        [cell.textLabel setText:[NSString stringWithFormat:@"%d Responses", _response.comments.count]];
+        return cell;
+    }
+    
+    int count = 3;
+    if (_response.files.count>0) {
+        count++;
+    }
+    
+    Comment * comment = [_response.comments objectAtIndex:indexPath.row - count];
+    
+    NotificationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"userCommentCell" forIndexPath:indexPath];
+    [cell.lblDate setText:comment.dateCreatedFormated];
+    [cell.lblUserName setText:comment.userInfo.appUserName];
+    [cell.userImage setImageWithURL:[NSURL URLWithString:comment.userInfo.avatarFile.filePath]];
+    [cell.lblInfo setText:comment.response];
+    [cell makeImageCircular];
     return cell;
-}
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [self performSegueWithIdentifier:@"responseSegue" sender:self];
 }
 
 /*
@@ -139,17 +191,14 @@
 }
 */
 
+/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    if ([segue.identifier isEqualToString:@"responseSegue"]) {
-        ResponseViewController * responseController = [segue destinationViewController];
-        Notification * notification = [_arrNotifications objectAtIndex:[self.tableView indexPathForSelectedRow].row];
-        responseController.currentNotification = notification;
-    }
 }
+*/
 
 @end

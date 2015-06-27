@@ -30,5 +30,6 @@
 #define kUploadCustomAvatar     @"api/Account/UploadUserCustomAvatar"
 #define kDailyDiaryInfo         @"api/Project/GetDailyDiary/{diaryId}"
 #define kGetNotifications       @"api/Account/GetNotifications/{projectId}"
+#define kGetResponses           @"api/Activity/GetResponses/{activityId}"
 
 #endif
