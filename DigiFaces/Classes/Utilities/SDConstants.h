@@ -28,5 +28,6 @@
 #define kUpdateAvagar           @"api/Account/UploadUserCustomAvatar"
 #define kAboutDigifaces         @"api/System/GetAbout/{languageCode}"
 #define kUploadCustomAvatar     @"api/Account/UploadUserCustomAvatar"
+#define kDailyDiaryInfo         @"api/Project/GetDailyDiary/{diaryId}"
 
 #endif

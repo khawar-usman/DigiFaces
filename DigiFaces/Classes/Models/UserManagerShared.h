@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "Project.h"
+#import "UserInfo.h"
+#import "File.h"
+#import "Project.h"
 @interface UserManagerShared : NSObject{
     
     NSArray * projectsArray;
@@ -21,6 +24,11 @@
 }
 + (id)sharedManager;
 
+@property(nonatomic, retain) UserInfo * info;
+
+@property (nonatomic, retain) File * avatarFile;
+@property (nonatomic, retain) Project * currentProject;
+
 @property(nonatomic,retain)NSArray * projectsArray;
 @property(nonatomic,retain)NSString * FirstName;
 @property(nonatomic,retain)NSString *   LastName;
@@ -28,4 +36,7 @@
 @property(nonatomic,retain)UIImage * profilePic;
 @property(nonatomic,retain)NSString * aboutMeText;
 @property(nonatomic,retain)NSString * currentProjectID;
+
+-(void)setUserInfoDictionary:(NSDictionary*)dict;
+
 @end

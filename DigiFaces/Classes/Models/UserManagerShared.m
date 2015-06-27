@@ -26,4 +26,12 @@
     return self;
 }
 
+-(void)setUserInfoDictionary:(NSDictionary*)dict
+{   
+    _info = [[UserInfo alloc] initWithDictioanry:dict];
+    _avatarFile = [[File alloc] initWithDictionary:[dict valueForKey:@"AvatarFile"]];
+    
+    _currentProject = [[Project alloc] initWithDictionary:[dict valueForKey:@"CurrentProject"]];
+}
+
 @end

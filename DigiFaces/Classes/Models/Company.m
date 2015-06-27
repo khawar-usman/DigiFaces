@@ -10,4 +10,16 @@
 
 @implementation Company
 
+-(instancetype)initWithDictioanry:(NSDictionary *)dict
+{
+    self = [super init];
+    if (self) {
+        self.companyID = [[dict valueForKey:@"CompanyId"] integerValue];
+        self.companyName = [dict valueForKey:@"CompanyName"];
+        self.logoURL = [dict valueForKey:@"LogoUrl"];
+        self.baseColor = [dict valueForKey:@"BaseColor"];
+    }
+    return self;
+}
+
 @end

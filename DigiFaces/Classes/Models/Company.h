@@ -10,4 +10,13 @@
 
 @interface Company : NSObject
 
+@property (nonatomic, assign) NSInteger companyID;
+@property (nonatomic, retain) NSString * companyName;
+@property (nonatomic, retain) NSString * logoURL;
+@property (nonatomic, retain) NSString * baseColor;
+
+-(instancetype) initWithDictioanry:(NSDictionary*)dict;
+
+
+
 @end

@@ -122,6 +122,8 @@
         [Utility saveString:[responseObject valueForKey:kAboutMeText] forKey:kAboutMeText];
         [Utility saveString:email forKey:kEmail];
         
+        [[UserManagerShared sharedManager] setUserInfoDictionary:responseObject];
+        
 //        NSDictionary * currentProjDic = [responseObject objectForKey:@"CurrentProject"];
 //        NSString * projectId = [currentProjDic objectForKey:@"ProjectId"];
 //        NSArray * DailyDiaryList = [currentProjDic objectForKey:@"DailyDiaryList"];
@@ -172,8 +174,10 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.row == 1){
         // Project Introduction
-        
         [self performSegueWithIdentifier:@"projectIntroSegue" sender:self];
+    }
+    else if (indexPath.row == 2){
+        [self performSegueWithIdentifier:@"dailyDiarySegue" sender:self];
     }
 }
 

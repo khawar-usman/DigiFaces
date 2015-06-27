@@ -81,6 +81,10 @@
 		4ACDB9E51B3E7E66009EFB91 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB9A71B3E7E66009EFB91 /* UIRefreshControl+AFNetworking.m */; };
 		4ACDB9E61B3E7E66009EFB91 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB9A91B3E7E66009EFB91 /* UIWebView+AFNetworking.m */; };
 		4ACDB9E71B3E7E66009EFB91 /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB9AB1B3E7E66009EFB91 /* Utility.m */; };
+		4ACDB9ED1B3E8366009EFB91 /* DiaryInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB9EC1B3E8366009EFB91 /* DiaryInfoViewController.m */; };
+		4ACDB9F01B3E84B8009EFB91 /* DailyDiaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB9EF1B3E84B8009EFB91 /* DailyDiaryViewController.m */; };
+		4ACDB9F31B3E8816009EFB91 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB9F21B3E8816009EFB91 /* UserInfo.m */; };
+		4ACDB9F61B3E9A14009EFB91 /* DailyDiary.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB9F51B3E9A14009EFB91 /* DailyDiary.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -254,6 +258,14 @@
 		4ACDB9A91B3E7E66009EFB91 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
 		4ACDB9AA1B3E7E66009EFB91 /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
 		4ACDB9AB1B3E7E66009EFB91 /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
+		4ACDB9EB1B3E8366009EFB91 /* DiaryInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiaryInfoViewController.h; sourceTree = "<group>"; };
+		4ACDB9EC1B3E8366009EFB91 /* DiaryInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiaryInfoViewController.m; sourceTree = "<group>"; };
+		4ACDB9EE1B3E84B8009EFB91 /* DailyDiaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyDiaryViewController.h; sourceTree = "<group>"; };
+		4ACDB9EF1B3E84B8009EFB91 /* DailyDiaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyDiaryViewController.m; sourceTree = "<group>"; };
+		4ACDB9F11B3E8816009EFB91 /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
+		4ACDB9F21B3E8816009EFB91 /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
+		4ACDB9F41B3E9A14009EFB91 /* DailyDiary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyDiary.h; sourceTree = "<group>"; };
+		4ACDB9F51B3E9A14009EFB91 /* DailyDiary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyDiary.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -389,6 +401,10 @@
 				4ACDB9481B3E7E66009EFB91 /* VersionViewContrller.m */,
 				4ACDB9491B3E7E66009EFB91 /* WebViewController.h */,
 				4ACDB94A1B3E7E66009EFB91 /* WebViewController.m */,
+				4ACDB9EB1B3E8366009EFB91 /* DiaryInfoViewController.h */,
+				4ACDB9EC1B3E8366009EFB91 /* DiaryInfoViewController.m */,
+				4ACDB9EE1B3E84B8009EFB91 /* DailyDiaryViewController.h */,
+				4ACDB9EF1B3E84B8009EFB91 /* DailyDiaryViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -435,6 +451,10 @@
 				4ACDB9641B3E7E66009EFB91 /* Project.m */,
 				4ACDB9651B3E7E66009EFB91 /* UserManagerShared.h */,
 				4ACDB9661B3E7E66009EFB91 /* UserManagerShared.m */,
+				4ACDB9F11B3E8816009EFB91 /* UserInfo.h */,
+				4ACDB9F21B3E8816009EFB91 /* UserInfo.m */,
+				4ACDB9F41B3E9A14009EFB91 /* DailyDiary.h */,
+				4ACDB9F51B3E9A14009EFB91 /* DailyDiary.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -673,6 +693,7 @@
 				4ACDB9B21B3E7E66009EFB91 /* MyProfileViewController.m in Sources */,
 				4ACDB9DE1B3E7E66009EFB91 /* RootViewController.m in Sources */,
 				4ACDB9B41B3E7E66009EFB91 /* ProfilePicutreCollectionViewController.m in Sources */,
+				4ACDB9ED1B3E8366009EFB91 /* DiaryInfoViewController.m in Sources */,
 				4ACDB9E21B3E7E66009EFB91 /* UIButton+AFNetworking.m in Sources */,
 				4ACDB9B61B3E7E66009EFB91 /* ProjectViewController.m in Sources */,
 				4ACDB9AE1B3E7E66009EFB91 /* EmailModeratorController.m in Sources */,
@@ -684,7 +705,9 @@
 				4ACDB9BA1B3E7E66009EFB91 /* VersionViewContrller.m in Sources */,
 				4ACDB9BB1B3E7E66009EFB91 /* WebViewController.m in Sources */,
 				4ACDB9CB1B3E7E66009EFB91 /* AFHTTPRequestOperation.m in Sources */,
+				4ACDB9F31B3E8816009EFB91 /* UserInfo.m in Sources */,
 				4ACDB9D81B3E7E66009EFB91 /* MWFeedItem.m in Sources */,
+				4ACDB9F01B3E84B8009EFB91 /* DailyDiaryViewController.m in Sources */,
 				4ACDB9C01B3E7E66009EFB91 /* LoginSegue.m in Sources */,
 				4ACDB9D01B3E7E66009EFB91 /* AFURLConnectionOperation.m in Sources */,
 				4ACDB9E41B3E7E66009EFB91 /* UIProgressView+AFNetworking.m in Sources */,
@@ -696,6 +719,7 @@
 				4ACDB9E11B3E7E66009EFB91 /* UIAlertView+AFNetworking.m in Sources */,
 				4ACDB9C71B3E7E66009EFB91 /* File.m in Sources */,
 				4ACDB9DA1B3E7E66009EFB91 /* MWFeedParserAppDelegate.m in Sources */,
+				4ACDB9F61B3E9A14009EFB91 /* DailyDiary.m in Sources */,
 				4ACDB9DC1B3E7E66009EFB91 /* NSString+HTML.m in Sources */,
 				4ACDB9C11B3E7E66009EFB91 /* LogoutSegue.m in Sources */,
 				4ACDB9B11B3E7E66009EFB91 /* LoginViewController.m in Sources */,
