@@ -9,6 +9,11 @@
 #ifndef DigiFaces_SDConstants_h
 #define DigiFaces_SDConstants_h
 
+
+#define kS3AccessKey            @"AKIAIG2CIAZWZIA6L7YA"
+#define kS3AccessSecret         @"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"
+#define kS3Bucket               @"media.digifaces.com"
+
 #define kCurrentPorjectID       @"CurrentProjectId"
 #define kAboutMeText            @"AboutMeText"
 #define kEmail                  @"Email"
@@ -22,5 +27,6 @@
 #define kModeratorMessage       @"api/Account/SendMessageToModerator/{projectId}/{parentMessageId}"
 #define kUpdateAvagar           @"api/Account/UploadUserCustomAvatar"
 #define kAboutDigifaces         @"api/System/GetAbout/{languageCode}"
+#define kUploadCustomAvatar     @"api/Account/UploadUserCustomAvatar"
 
 #endif

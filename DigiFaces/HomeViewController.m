@@ -62,7 +62,7 @@
 
 -(void)fetchUserHomeAnnouncements{
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
 
     NSString * onlinekey = [[NSUserDefaults standardUserDefaults]objectForKey:@"access_token"];
     
@@ -85,14 +85,14 @@
        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
         
     }];
 }
 
 -(void)fetchUserInfo{
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     
     NSString * onlinekey = [[NSUserDefaults standardUserDefaults]objectForKey:@"access_token"];
     
@@ -126,7 +126,7 @@
 //        NSString * projectId = [currentProjDic objectForKey:@"ProjectId"];
 //        NSArray * DailyDiaryList = [currentProjDic objectForKey:@"DailyDiaryList"];
 
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
         
         __weak typeof(self)weakSelf = self;
         
@@ -136,7 +136,7 @@
             [[UserManagerShared sharedManager] setProfilePic:[weakSelf resizeImage:image imageSize:CGSizeMake(100, 120)]];
 
         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-            [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+            [MBProgressHUD hideHUDForView:weakSelf.navigationController.view animated:YES];
         }];
         
         [[UserManagerShared sharedManager] setFirstName:[responseObject objectForKey:@"FirstName"]];
@@ -147,7 +147,7 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
         
     }];
 }

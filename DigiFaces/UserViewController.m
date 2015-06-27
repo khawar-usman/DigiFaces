@@ -69,8 +69,6 @@
         return;
         
     }
-//    DigiFaceHTTPClient * dig = [DigiFaceHTTPClient sharedDigiFaceHTTPClient];
-   // [dig check_username_availability:_username.text];
     [self check_username_availability:_username.text];
 }
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -288,7 +288,7 @@
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ePf-fK-G1B">
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="arrow" id="h5I-Tq-X7u">
@@ -348,6 +348,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <segue destination="NIu-n6-dsh" kind="push" identifier="projectIntroSegue" id="v7h-oQ-d3S"/>
+                        <segue destination="zNc-EN-tgW" kind="push" id="EOt-oH-8wp"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6ml-nm-cvY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -392,7 +393,7 @@
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="P3r-zQ-RN6">
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -407,7 +408,7 @@
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2Iu-v9-JBn">
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -466,7 +467,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mBO-TJ-oUW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2646" y="299"/>
+            <point key="canvasLocation" x="2780" y="249"/>
         </scene>
         <!--Web View Controller-->
         <scene sceneID="C7Q-RB-23n">
@@ -768,6 +769,59 @@
             </objects>
             <point key="canvasLocation" x="344" y="2342"/>
         </scene>
+        <!--Diary Theme-->
+        <scene sceneID="Sg7-xZ-msw">
+            <objects>
+                <tableViewController id="zNc-EN-tgW" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="150" sectionHeaderHeight="22" sectionFooterHeight="22" id="oHM-wL-4Ux">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="150" id="RYn-Iv-DXh">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RYn-Iv-DXh" id="CzX-31-pHA">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="playIcon" translatesAutoresizingMaskIntoConstraints="NO" id="mbh-V0-RF1">
+                                            <rect key="frame" x="128" y="42" width="65" height="65"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="65" id="2ZB-Pj-SE2"/>
+                                                <constraint firstAttribute="height" constant="65" id="gZk-aC-4WT"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="centerY" secondItem="mbh-V0-RF1" secondAttribute="centerY" id="rlR-yt-8gI"/>
+                                        <constraint firstAttribute="centerX" secondItem="mbh-V0-RF1" secondAttribute="centerX" id="yZb-2R-j8i"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="76" id="pd4-Cz-5Bp">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pd4-Cz-5Bp" id="qOz-Cv-xAn">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="zNc-EN-tgW" id="2di-Ec-7nF"/>
+                            <outlet property="delegate" destination="zNc-EN-tgW" id="NxP-Sm-VQu"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Diary Theme" id="lcs-yV-iz8">
+                        <barButtonItem key="leftBarButtonItem" image="top_bar_back_arrow" id="xQu-RZ-6nZ">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vd5-6G-DWY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2780" y="948"/>
+        </scene>
         <!--MY PROFILE-->
         <scene sceneID="IeD-Ma-4te">
             <objects>
@@ -866,7 +920,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f9i-e9-cdv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2764" y="1147"/>
+            <point key="canvasLocation" x="2759" y="1287"/>
         </scene>
         <!--PROFILE PICTURE-->
         <scene sceneID="G5l-qg-sC0">
@@ -928,6 +982,29 @@
                                     <outlet property="imgPicture" destination="USg-FA-pc1" id="uyt-N7-C2K"/>
                                     <outlet property="selectionView" destination="aju-b2-9Uc" id="tiJ-tu-P4l"/>
                                 </connections>
+                            </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cameraCell" id="WVs-qs-t8C">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera" translatesAutoresizingMaskIntoConstraints="NO" id="nyM-Ld-SNA">
+                                            <rect key="frame" x="23" y="28" width="45" height="34"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="34" id="kC9-B4-JlH"/>
+                                                <constraint firstAttribute="width" constant="45" id="nzg-aj-kXV"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="centerX" secondItem="nyM-Ld-SNA" secondAttribute="centerX" id="fbr-ci-UrS"/>
+                                    <constraint firstAttribute="centerY" secondItem="nyM-Ld-SNA" secondAttribute="centerY" id="ogB-Tq-hYd"/>
+                                </constraints>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -1158,7 +1235,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kjq-MB-tSY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2268" y="1147"/>
+            <point key="canvasLocation" x="2248" y="1281"/>
         </scene>
         <!--EMAIL MODERATOR-->
         <scene sceneID="8rC-SD-8Sd">
@@ -1371,7 +1448,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CBw-Qt-OOC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3253" y="1147"/>
+            <point key="canvasLocation" x="3287" y="1301"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0X2-Cj-nbN">
@@ -1390,7 +1467,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uod-2Q-KKu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2268" y="1798"/>
+            <point key="canvasLocation" x="2248" y="1946"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="G53-XG-oAG">
@@ -1417,6 +1494,7 @@
         <image name="alarm_alert" width="26" height="29"/>
         <image name="arrow" width="8" height="12"/>
         <image name="bluebar" width="285" height="48"/>
+        <image name="camera" width="29" height="23"/>
         <image name="dummy_avatar" width="75" height="85"/>
         <image name="email_input" width="285" height="37"/>
         <image name="email_input.png" width="285" height="37"/>

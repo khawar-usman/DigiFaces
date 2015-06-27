@@ -13,11 +13,18 @@
 #import "UIImageView+AFNetworking.h"
 #import "ImageCollectionCell.h"
 #import "CustomAertView.h"
+#import <AWSRuntime/AWSRuntime.h>
+#import <AWSS3/AWSS3.h>
+#import "SDConstants.h"
+#import "Utility.h"
 
-@interface ProfilePicutreCollectionViewController()
+@interface ProfilePicutreCollectionViewController() <UIImagePickerControllerDelegate,  UINavigationControllerDelegate, UIActionSheetDelegate, AmazonServiceRequestDelegate>
 {
     CustomAertView * alertView;
+    UIImagePickerController * imagePicker;
+    BOOL requestFailed;
 }
+@property (nonatomic, retain) NSString * amazonFileURL;
 @property (nonatomic, retain) NSDictionary * selectedImage;
 @property (nonatomic, retain) NSMutableArray *avatarsArray;
 
@@ -29,6 +36,7 @@
 {
     [super viewDidLoad];
     _avatarsArray = [[NSMutableArray alloc] init];
+    [_avatarsArray addObject:@""];
     alertView = [[CustomAertView alloc] init];
     [self fetchAvatarFiles];
 }
@@ -71,6 +79,39 @@
     
 }
 
+-(void)uploadImage:(UIImage*)image
+{
+    NSString * imageKey = [NSString stringWithFormat:@"Avatars/%@-%@.png", [Utility getStringForKey:kEmail], [Utility getUniqueId]];
+    NSData * imageData = UIImagePNGRepresentation(image);
+    AmazonS3Client *s3 = [[AmazonS3Client alloc] initWithAccessKey:kS3AccessKey
+                                                     withSecretKey:kS3AccessSecret];
+    
+    S3PutObjectRequest *por = [[S3PutObjectRequest alloc] initWithKey:imageKey inBucket:kS3Bucket];
+    por.contentType = @"image/png";
+    por.cannedACL   = [S3CannedACL publicRead];
+    por.data        = imageData;
+    
+    self.amazonFileURL = [NSString stringWithFormat:@"http://s3.amazonaws.com/media.digifaces.com/%@", imageKey];
+    
+    S3TransferManager *transferManager = [S3TransferManager new];
+    transferManager.s3 = s3;
+    transferManager.delegate = self;
+    
+    [transferManager upload:por];
+    
+    [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+}
+
+-(void)initializeImagePickerWithSourceType:(UIImagePickerControllerSourceType)type
+{
+    imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.delegate = self;
+    imagePicker.sourceType = type;
+    imagePicker.allowsEditing = YES;
+    
+    [self presentViewController:imagePicker animated:YES completion:nil];
+}
+
 #pragma mark - UICollectionViewDataSource
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -79,6 +120,11 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.row == 0) {
+        UICollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cameraCell" forIndexPath:indexPath];
+        return cell;
+    }
+
     ImageCollectionCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"collectionCell" forIndexPath:indexPath];
     
     NSDictionary * file = [_avatarsArray objectAtIndex:indexPath.row];
@@ -103,7 +149,13 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.selectedImage = [_avatarsArray objectAtIndex:indexPath.row];
+    if (indexPath.row == 0) {
+        UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:@"Select Image" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera",@"Photo Library", nil];
+        [actionSheet showInView:self.view];
+    }
+    else{
+        self.selectedImage = [_avatarsArray objectAtIndex:indexPath.row];
+    }
 }
 
 - (IBAction)cancelThis:(id)sender {
@@ -121,5 +173,73 @@
     }
 }
 
+#pragma mark - UIImagePickerControllerDelegate
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    UIImage * image = [info valueForKey:UIImagePickerControllerEditedImage];
+    [self uploadImage:image];
+    
+}
+
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - UIActionSheetDelegate
+-(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    UIImagePickerControllerSourceType type;
+    if (buttonIndex == 0) {
+        // Camera
+        type = UIImagePickerControllerSourceTypeCamera;
+    }
+    else if (buttonIndex == 1){
+        // Library
+        type = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    else{
+        return;
+    }
+    [self initializeImagePickerWithSourceType:type];
+}
+
+#pragma mark - S3Delegate
+-(void)request:(AmazonServiceRequest *)request didCompleteWithResponse:(AmazonServiceResponse *)response
+{
+    [MBProgressHUD hideAllHUDsForView:self.navigationController.view animated:YES];
+    if (requestFailed) {
+        [alertView showAlertWithMessage:@"Error uploading image. Please try again." inView:self.navigationController.view withTag:0];
+    }
+    else{
+        NSDictionary * parameters = @{@"FileId" : @"",
+                                      @"FileName" : @"",
+                                      @"FileTypeId" : @"",
+                                      @"FileType" : @"Image",
+                                      @"Extension" : @"png",
+                                      @"IsAmazonFile" : @"1",
+                                      @"AmazonKey" : self.amazonFileURL,
+                                      @"IsViddlerFile" : @"0",
+                                      @"ViddlerKey" : @"",
+                                      @"IsCameraTagFile" : @"0",
+                                      @"CameraTagKey" : @"",
+                                      @"PositionId" : @"0",
+                                      @"Position" : @"",
+                                      @"PublicFileUrl" : @""
+                                      };
+        
+        if ([_delegate respondsToSelector:@selector(profilePicutreDidSelect:)]) {
+            [_delegate profilePicutreDidSelect:parameters];
+        }
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+
+-(void)request:(AmazonServiceRequest *)request didFailWithError:(NSError *)error
+{
+    requestFailed = YES;
+}
 
 @end

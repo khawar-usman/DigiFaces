@@ -14,4 +14,6 @@
 
 +(NSString*)getStringForKey:(NSString*)key;
 +(NSString*)getAuthToken;
++(NSString *)getUniqueId;
+
 @end

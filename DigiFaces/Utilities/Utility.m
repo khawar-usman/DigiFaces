@@ -36,4 +36,15 @@
     return finalyToken;
 }
 
++(NSString *)getUniqueId
+{
+    NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
+    
+    [outputFormatter setDateFormat:@"yyyyMMdd-HHmmssSSS"];
+    
+    NSString *strFilename = [outputFormatter stringFromDate:[NSDate date]];
+    
+    return strFilename;
+}
+
 @end
