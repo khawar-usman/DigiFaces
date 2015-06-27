@@ -8,7 +8,7 @@
 
 #import "SettingsViewController.h"
 #import "MBProgressHUD.h"
-#import "AFNetworking/AFNetworking.h"
+#import "AFNetworking.h"
 #import "UIImageView+AFNetworking.h"
 
 

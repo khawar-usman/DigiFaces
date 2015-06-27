@@ -161,38 +161,6 @@
             endingLineNumber = "123"
             landmarkName = "-signInPressed:"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[LoginViewController signInPressed:]"
-                  moduleName = "DigiFaces"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/confiz-2348/Projects/DigiFaces/DigiFaces-2/DigiFaces/LoginViewController.m"
-                  timestampString = "456909945.82485"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "123"
-                  endingLineNumber = "123"
-                  offsetFromSymbolStart = "1840">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__37-[LoginViewController signInPressed:]_block_invoke"
-                  moduleName = "DigiFaces"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/confiz-2348/Projects/DigiFaces/DigiFaces-2/DigiFaces/LoginViewController.m"
-                  timestampString = "456909945.825044"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "123"
-                  endingLineNumber = "123"
-                  offsetFromSymbolStart = "91">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AFNetworking/AFNetworking.h"
+#import "AFNetworking.h"
 #import "CustomAertView.h"
 
 @protocol PopUpDelegate;

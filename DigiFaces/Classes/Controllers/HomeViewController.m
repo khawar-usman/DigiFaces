@@ -8,7 +8,7 @@
 
 #import "HomeViewController.h"
 #import "MBProgressHUD.h"
-#import "AFNetworking/AFNetworking.h"
+#import "AFNetworking.h"
 #import "UIImageView+AFNetworking.h"
 #import "UserManagerShared.h"
 #import "File.h"
