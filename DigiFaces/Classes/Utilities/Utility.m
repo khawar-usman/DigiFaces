@@ -47,4 +47,20 @@
     return strFilename;
 }
 
++(NSString *)getMonDayYearDateFromString:(NSString *)date
+{
+    NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
+    
+    [inputFormatter setDateFormat:@"yyyy-MM-dd"];
+    
+    NSDate * d = [inputFormatter dateFromString:date];
+    
+    NSDateFormatter * outputFormater = [[NSDateFormatter alloc] init];
+    [outputFormater setDateFormat:@"MMMM dd, yyy"];
+    
+    NSString *finalDate = [outputFormater stringFromDate:d];
+    
+    return finalDate;
+}
+
 @end

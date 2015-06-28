@@ -7,6 +7,9 @@
 //
 
 #import "DiaryInfoViewController.h"
+#import "ImageCell.h"
+#import "UIImageView+AFNetworking.h"
+#import "WebViewController.h"
 
 @interface DiaryInfoViewController ()
 {
@@ -34,6 +37,7 @@
 -(void)editClicked:(id)sender
 {
     NSLog(@"Edit clicked");
+    [self performSegueWithIdentifier:@"addResponseSegue" sender:self];
 }
 
 
@@ -51,30 +55,57 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 1;
+    return 2;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSAttributedString *attributedText =
-    [[NSAttributedString alloc] initWithString:_dailyDiary.diaryQuestion attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17.0f]}];
-    
-    CGRect rect = [attributedText boundingRectWithSize:(CGSize){self.view.frame.size.width, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin context:nil];
-    
-    CGSize size = rect.size;
-    
-    return size.height;
+    if (indexPath.row == 0) {
+        return 160;
+    }
+    if (indexPath.row == 1) {
+        NSAttributedString *attributedText =
+        [[NSAttributedString alloc] initWithString:_dailyDiary.diaryQuestion attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17.0f]}];
+        
+        CGRect rect = [attributedText boundingRectWithSize:(CGSize){self.view.frame.size.width, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+        
+        CGSize size = rect.size;
+        
+        return size.height;
+    }
+    return 0;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"textCell" forIndexPath:indexPath];
     
-    // Configure the cell...
+    UITableViewCell *cell;
     
-    [cell.textLabel setText:_dailyDiary.diaryQuestion];
+    if (indexPath.row == 0) {
+        if (_dailyDiary.file && [_dailyDiary.file.fileType isEqualToString:@"Image"]) {
+            ImageCell * imgCell = [tableView dequeueReusableCellWithIdentifier:@"imageCell"];
+            [imgCell.image setImageWithURL:[NSURL URLWithString:_dailyDiary.file.filePath]];
+            cell = imgCell;
+        }
+        else{
+            cell = [tableView dequeueReusableCellWithIdentifier:@"videoCell"];
+        }
+    }
+    else if (indexPath.row == 1) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"textCell" forIndexPath:indexPath];
+        
+        [cell.textLabel setText:_dailyDiary.diaryQuestion];
+    }
+    
     
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 0 && _dailyDiary.file) {
+        [self performSegueWithIdentifier:@"webViewSegue" sender:self];
+    }
 }
 
 /*
@@ -111,15 +142,17 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"webViewSegue"]){
+        WebViewController * webController = [segue destinationViewController];
+        webController.url = [_dailyDiary.file filePath];
+    }
 }
-*/
+
 
 - (IBAction)closeThis:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];

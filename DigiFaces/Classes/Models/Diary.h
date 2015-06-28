@@ -7,7 +7,24 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Comment.h"
 
 @interface Diary : NSObject
+
+@property (nonatomic, retain) NSString * dateCreated;
+@property (nonatomic, retain) NSString * dateCreatedFormatted;
+@property (nonatomic, assign) BOOL isRead;
+@property (nonatomic, retain) NSString * response;
+@property (nonatomic, assign) NSInteger responseID;
+@property (nonatomic, retain) NSString * title;
+@property (nonatomic, retain) NSString * useID;
+
+
+@property (nonatomic, retain) UserInfo * userInfo;
+
+@property (nonatomic, retain) NSMutableArray * files;
+@property (nonatomic, retain) NSMutableArray * comments;
+
+-(instancetype) initWithDictionary:(NSDictionary*)dict;
 
 @end

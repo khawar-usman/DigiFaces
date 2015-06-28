@@ -14,6 +14,11 @@
 #import "UserManagerShared.h"
 #import "DailyDiary.h"
 #import "DiaryInfoViewController.h"
+#import "Diary.h"
+#import "ImageCell.h"
+#import "UIImageView+AFNetworking.h"
+#import "WebViewController.h"
+#import "DefaultCell.h"
 
 @interface DailyDiaryViewController ()
 {
@@ -45,6 +50,7 @@
 -(void)editClicked:(id)sender
 {
     NSLog(@"Edit clicked");
+    [self performSegueWithIdentifier:@"addResponseSegue" sender:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -70,6 +76,7 @@
     
     
     [manager POST:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Data : %@", responseObject);
         _dailyDiary = [[DailyDiary alloc] initWithDictionary:responseObject];
         [self.tableView reloadData];
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
@@ -83,7 +90,10 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 1;
+    if (!_dailyDiary) {
+        return 0;
+    }
+    return 1 + _dailyDiary.diariesDate.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -91,77 +101,122 @@
     if (!_dailyDiary) {
         return 0;
     }
-    return 2;
+    if (section == 0) {
+        if (_dailyDiary.diariesDate.count == 0) {
+            return 2;
+        }
+        return 3;
+    }
+    else{
+        NSString * date = [_dailyDiary.diariesDate objectAtIndex:section - 1];
+        NSArray * arr =[_dailyDiary.diariesDict valueForKey:date];
+        return arr.count;
+    }
+    return 0;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{    
-    if (indexPath.row == 0) {
-        return 90;
+{
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            return 160;
+        }
+        else if (indexPath.row == 1) {
+            if (_dailyDiary.diariesDate.count==0) {
+                NSAttributedString *attributedText =
+                [[NSAttributedString alloc] initWithString:_dailyDiary.diaryQuestion attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17.0f]}];
+                
+                CGRect rect = [attributedText boundingRectWithSize:(CGSize){self.view.frame.size.width, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+                
+                CGSize size = rect.size;
+                
+                return size.height;
+            }
+            
+            return 90;
+        }
+        else if (indexPath.row == 2){
+            return 40;
+        }
     }
-    else if (indexPath.row == 1){
-        return 40;
+    else{
+        return 60;
     }
-    return 90;//size.height;
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell *cell;
-    
-    if (indexPath.row == 0) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"textCell" forIndexPath:indexPath];
-        
-        [cell.textLabel setText:_dailyDiary.diaryQuestion];
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            if (_dailyDiary.file && [_dailyDiary.file.fileType isEqualToString:@"Image"]) {
+                ImageCell * imgCell = [tableView dequeueReusableCellWithIdentifier:@"imageCell"];
+                [imgCell.image setImageWithURL:[NSURL URLWithString:_dailyDiary.file.filePath]];
+                cell = imgCell;
+            }
+            else{
+                cell = [tableView dequeueReusableCellWithIdentifier:@"videoCell"];
+            }
+        }
+        else if (indexPath.row == 1) {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"textCell" forIndexPath:indexPath];
+            
+            [cell.textLabel setText:_dailyDiary.diaryQuestion];
+        }
+        else if (indexPath.row == 2){
+             DefaultCell * headerCell = [tableView dequeueReusableCellWithIdentifier:@"noResponseHeaderCell" forIndexPath:indexPath];
+            [headerCell.label setText:[NSString stringWithFormat:@"%lu Entries", (unsigned long)[_dailyDiary.userDiaries count]]];
+            cell = headerCell;
+        }
     }
-    else if (indexPath.row == 1){
-        cell = [tableView dequeueReusableCellWithIdentifier:@"noResponseHeaderCell" forIndexPath:indexPath];
-        [cell.textLabel setText:[NSString stringWithFormat:@"%lu Responses", (unsigned long)[_dailyDiary.userDiaries count]]];
+    else{
+        cell = [tableView dequeueReusableCellWithIdentifier:@"diaryCell" forIndexPath:indexPath];
+        NSString * date = [_dailyDiary.diariesDate objectAtIndex:indexPath.section - 1];
+        NSArray * arrDiary = [_dailyDiary.diariesDict valueForKey:date];
+        Diary * diary = [arrDiary objectAtIndex:indexPath.row];
+        [cell.textLabel setText:[diary title]];
+        [cell.detailTextLabel setText:[NSString stringWithFormat:@"By %@",[diary userInfo].appUserName]];
     }
     
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    if (indexPath.row == 0) {
-        [self performSegueWithIdentifier:@"diaryInfoSegue" sender:self];
+    if (section > 0) {
+        DefaultCell * headerCell = [tableView dequeueReusableCellWithIdentifier:@"dateHeaderCell"];
+        NSString * date = [_dailyDiary.diariesDate objectAtIndex:section-1];
+        [headerCell.label setText:[Utility getMonDayYearDateFromString:date]];
+        return headerCell;
+    }
+    else{
+        return nil;
     }
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section>0) {
+        return 40;
+    }
+    return 0;
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            [self performSegueWithIdentifier:@"webViewSegue" sender:self];
+        }
+        else if (indexPath.row == 1  && _dailyDiary.diariesDate.count>0) {
+            [self performSegueWithIdentifier:@"diaryInfoSegue" sender:self];
+        }
+    }
+    
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Navigation
 
@@ -172,6 +227,10 @@
     if ([segue.identifier isEqualToString:@"diaryInfoSegue"]) {
         DiaryInfoViewController * diaryInfoController = (DiaryInfoViewController*)[(UINavigationController*)segue.destinationViewController topViewController];
         diaryInfoController.dailyDiary = self.dailyDiary;
+    }
+    else if ([segue.identifier isEqualToString:@"webViewSegue"]){
+        WebViewController * webController = [segue destinationViewController];
+        webController.url = [_dailyDiary.file filePath];
     }
 }
 

@@ -21,6 +21,7 @@
 		19F0BD441B1F14DF00E4B048 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F0BD431B1F14DF00E4B048 /* SystemConfiguration.framework */; };
 		19F0BE2D1B28519B00E4B048 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F0BE2C1B28519B00E4B048 /* QuartzCore.framework */; };
 		19F0BE331B28BBE500E4B048 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19F0BE311B28BBE400E4B048 /* LaunchScreen.xib */; };
+		4ABC3D351B3FEC110090A619 /* DefaultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC3D341B3FEC110090A619 /* DefaultCell.m */; };
 		4ACDB9AC1B3E7E66009EFB91 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB92B1B3E7E66009EFB91 /* AppDelegate.m */; };
 		4ACDB9AD1B3E7E66009EFB91 /* AboutDigifacesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB92E1B3E7E66009EFB91 /* AboutDigifacesController.m */; };
 		4ACDB9AE1B3E7E66009EFB91 /* EmailModeratorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB9301B3E7E66009EFB91 /* EmailModeratorController.m */; };
@@ -94,6 +95,7 @@
 		4ACDBA0B1B3ED216009EFB91 /* TextAreaResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDBA0A1B3ED216009EFB91 /* TextAreaResponse.m */; };
 		4ACDBA0E1B3ED814009EFB91 /* UserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDBA0D1B3ED814009EFB91 /* UserCell.m */; };
 		4ACDBA111B3EDF75009EFB91 /* ImagesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDBA101B3EDF75009EFB91 /* ImagesCell.m */; };
+		4ACDBA141B3EF9DC009EFB91 /* AddResponseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDBA131B3EF9DC009EFB91 /* AddResponseViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,6 +148,8 @@
 		19F0BD431B1F14DF00E4B048 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		19F0BE2C1B28519B00E4B048 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		19F0BE321B28BBE400E4B048 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		4ABC3D331B3FEC110090A619 /* DefaultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultCell.h; sourceTree = "<group>"; };
+		4ABC3D341B3FEC110090A619 /* DefaultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultCell.m; sourceTree = "<group>"; };
 		4ACDB92A1B3E7E66009EFB91 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4ACDB92B1B3E7E66009EFB91 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		4ACDB92D1B3E7E66009EFB91 /* AboutDigifacesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutDigifacesController.h; sourceTree = "<group>"; };
@@ -283,16 +287,18 @@
 		4ACDB9FE1B3EC155009EFB91 /* NotificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationCell.m; sourceTree = "<group>"; };
 		4ACDBA001B3EC7EA009EFB91 /* ResponseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResponseViewController.h; sourceTree = "<group>"; };
 		4ACDBA011B3EC7EA009EFB91 /* ResponseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResponseViewController.m; sourceTree = "<group>"; };
-		4ACDBA031B3ECD7D009EFB91 /* Response.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Response.h; sourceTree = "<group>"; };
-		4ACDBA041B3ECD7D009EFB91 /* Response.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Response.m; sourceTree = "<group>"; };
-		4ACDBA061B3ECDB5009EFB91 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
-		4ACDBA071B3ECDB5009EFB91 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
-		4ACDBA091B3ED216009EFB91 /* TextAreaResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextAreaResponse.h; sourceTree = "<group>"; };
-		4ACDBA0A1B3ED216009EFB91 /* TextAreaResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextAreaResponse.m; sourceTree = "<group>"; };
+		4ACDBA031B3ECD7D009EFB91 /* Response.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Response.h; path = ../CustomCells/Response.h; sourceTree = "<group>"; };
+		4ACDBA041B3ECD7D009EFB91 /* Response.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Response.m; path = ../CustomCells/Response.m; sourceTree = "<group>"; };
+		4ACDBA061B3ECDB5009EFB91 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Comment.h; path = ../CustomCells/Comment.h; sourceTree = "<group>"; };
+		4ACDBA071B3ECDB5009EFB91 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Comment.m; path = ../CustomCells/Comment.m; sourceTree = "<group>"; };
+		4ACDBA091B3ED216009EFB91 /* TextAreaResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextAreaResponse.h; path = ../CustomCells/TextAreaResponse.h; sourceTree = "<group>"; };
+		4ACDBA0A1B3ED216009EFB91 /* TextAreaResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TextAreaResponse.m; path = ../CustomCells/TextAreaResponse.m; sourceTree = "<group>"; };
 		4ACDBA0C1B3ED814009EFB91 /* UserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCell.h; sourceTree = "<group>"; };
 		4ACDBA0D1B3ED814009EFB91 /* UserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCell.m; sourceTree = "<group>"; };
 		4ACDBA0F1B3EDF75009EFB91 /* ImagesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagesCell.h; sourceTree = "<group>"; };
 		4ACDBA101B3EDF75009EFB91 /* ImagesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagesCell.m; sourceTree = "<group>"; };
+		4ACDBA121B3EF9DC009EFB91 /* AddResponseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddResponseViewController.h; sourceTree = "<group>"; };
+		4ACDBA131B3EF9DC009EFB91 /* AddResponseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddResponseViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -436,6 +442,8 @@
 				4ACDB9F81B3EB6AE009EFB91 /* NotificationsViewController.m */,
 				4ACDBA001B3EC7EA009EFB91 /* ResponseViewController.h */,
 				4ACDBA011B3EC7EA009EFB91 /* ResponseViewController.m */,
+				4ACDBA121B3EF9DC009EFB91 /* AddResponseViewController.h */,
+				4ACDBA131B3EF9DC009EFB91 /* AddResponseViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -458,16 +466,12 @@
 				4ACDB9581B3E7E66009EFB91 /* ProfilePicCell.m */,
 				4ACDB9FD1B3EC155009EFB91 /* NotificationCell.h */,
 				4ACDB9FE1B3EC155009EFB91 /* NotificationCell.m */,
-				4ACDBA031B3ECD7D009EFB91 /* Response.h */,
-				4ACDBA041B3ECD7D009EFB91 /* Response.m */,
-				4ACDBA061B3ECDB5009EFB91 /* Comment.h */,
-				4ACDBA071B3ECDB5009EFB91 /* Comment.m */,
-				4ACDBA091B3ED216009EFB91 /* TextAreaResponse.h */,
-				4ACDBA0A1B3ED216009EFB91 /* TextAreaResponse.m */,
 				4ACDBA0C1B3ED814009EFB91 /* UserCell.h */,
 				4ACDBA0D1B3ED814009EFB91 /* UserCell.m */,
 				4ACDBA0F1B3EDF75009EFB91 /* ImagesCell.h */,
 				4ACDBA101B3EDF75009EFB91 /* ImagesCell.m */,
+				4ABC3D331B3FEC110090A619 /* DefaultCell.h */,
+				4ABC3D341B3FEC110090A619 /* DefaultCell.m */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -484,6 +488,12 @@
 		4ACDB95C1B3E7E66009EFB91 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				4ACDBA091B3ED216009EFB91 /* TextAreaResponse.h */,
+				4ACDBA0A1B3ED216009EFB91 /* TextAreaResponse.m */,
+				4ACDBA031B3ECD7D009EFB91 /* Response.h */,
+				4ACDBA041B3ECD7D009EFB91 /* Response.m */,
+				4ACDBA061B3ECDB5009EFB91 /* Comment.h */,
+				4ACDBA071B3ECDB5009EFB91 /* Comment.m */,
 				4ACDB95D1B3E7E66009EFB91 /* Company.h */,
 				4ACDB95E1B3E7E66009EFB91 /* Company.m */,
 				4ACDB95F1B3E7E66009EFB91 /* Diary.h */,
@@ -772,6 +782,7 @@
 				4ACDB9DA1B3E7E66009EFB91 /* MWFeedParserAppDelegate.m in Sources */,
 				4ACDB9F61B3E9A14009EFB91 /* DailyDiary.m in Sources */,
 				4ACDB9DC1B3E7E66009EFB91 /* NSString+HTML.m in Sources */,
+				4ACDBA141B3EF9DC009EFB91 /* AddResponseViewController.m in Sources */,
 				4ACDB9C11B3E7E66009EFB91 /* LogoutSegue.m in Sources */,
 				4ACDB9B11B3E7E66009EFB91 /* LoginViewController.m in Sources */,
 				4ACDB9D41B3E7E66009EFB91 /* MBProgressHUD.m in Sources */,
@@ -788,6 +799,7 @@
 				4ACDB9D31B3E7E66009EFB91 /* AFURLSessionManager.m in Sources */,
 				4ACDB9CF1B3E7E66009EFB91 /* AFSecurityPolicy.m in Sources */,
 				4ACDB9C51B3E7E66009EFB91 /* Company.m in Sources */,
+				4ABC3D351B3FEC110090A619 /* DefaultCell.m in Sources */,
 				4ACDB9B71B3E7E66009EFB91 /* SettingsViewController.m in Sources */,
 				4ACDB9DD1B3E7E66009EFB91 /* NSString+XMLEntities.m in Sources */,
 				4ACDB9E51B3E7E66009EFB91 /* UIRefreshControl+AFNetworking.m in Sources */,
