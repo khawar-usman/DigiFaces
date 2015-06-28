@@ -22,6 +22,9 @@
 		19F0BE2D1B28519B00E4B048 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F0BE2C1B28519B00E4B048 /* QuartzCore.framework */; };
 		19F0BE331B28BBE500E4B048 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19F0BE311B28BBE400E4B048 /* LaunchScreen.xib */; };
 		4ABC3D351B3FEC110090A619 /* DefaultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC3D341B3FEC110090A619 /* DefaultCell.m */; };
+		4ABC3D381B3FF8E30090A619 /* DiaryThemeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC3D371B3FF8E30090A619 /* DiaryThemeViewController.m */; };
+		4ABC3D3B1B4001460090A619 /* ResponseViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC3D3A1B4001460090A619 /* ResponseViewCell.m */; };
+		4ABC3D3E1B4048BF0090A619 /* ImagesScrollviewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC3D3D1B4048BF0090A619 /* ImagesScrollviewer.m */; };
 		4ACDB9AC1B3E7E66009EFB91 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB92B1B3E7E66009EFB91 /* AppDelegate.m */; };
 		4ACDB9AD1B3E7E66009EFB91 /* AboutDigifacesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB92E1B3E7E66009EFB91 /* AboutDigifacesController.m */; };
 		4ACDB9AE1B3E7E66009EFB91 /* EmailModeratorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB9301B3E7E66009EFB91 /* EmailModeratorController.m */; };
@@ -150,6 +153,12 @@
 		19F0BE321B28BBE400E4B048 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		4ABC3D331B3FEC110090A619 /* DefaultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultCell.h; sourceTree = "<group>"; };
 		4ABC3D341B3FEC110090A619 /* DefaultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultCell.m; sourceTree = "<group>"; };
+		4ABC3D361B3FF8E30090A619 /* DiaryThemeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiaryThemeViewController.h; sourceTree = "<group>"; };
+		4ABC3D371B3FF8E30090A619 /* DiaryThemeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiaryThemeViewController.m; sourceTree = "<group>"; };
+		4ABC3D391B4001460090A619 /* ResponseViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResponseViewCell.h; sourceTree = "<group>"; };
+		4ABC3D3A1B4001460090A619 /* ResponseViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResponseViewCell.m; sourceTree = "<group>"; };
+		4ABC3D3C1B4048BF0090A619 /* ImagesScrollviewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagesScrollviewer.h; sourceTree = "<group>"; };
+		4ABC3D3D1B4048BF0090A619 /* ImagesScrollviewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagesScrollviewer.m; sourceTree = "<group>"; };
 		4ACDB92A1B3E7E66009EFB91 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4ACDB92B1B3E7E66009EFB91 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		4ACDB92D1B3E7E66009EFB91 /* AboutDigifacesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutDigifacesController.h; sourceTree = "<group>"; };
@@ -444,6 +453,8 @@
 				4ACDBA011B3EC7EA009EFB91 /* ResponseViewController.m */,
 				4ACDBA121B3EF9DC009EFB91 /* AddResponseViewController.h */,
 				4ACDBA131B3EF9DC009EFB91 /* AddResponseViewController.m */,
+				4ABC3D361B3FF8E30090A619 /* DiaryThemeViewController.h */,
+				4ABC3D371B3FF8E30090A619 /* DiaryThemeViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -472,6 +483,10 @@
 				4ACDBA101B3EDF75009EFB91 /* ImagesCell.m */,
 				4ABC3D331B3FEC110090A619 /* DefaultCell.h */,
 				4ABC3D341B3FEC110090A619 /* DefaultCell.m */,
+				4ABC3D391B4001460090A619 /* ResponseViewCell.h */,
+				4ABC3D3A1B4001460090A619 /* ResponseViewCell.m */,
+				4ABC3D3C1B4048BF0090A619 /* ImagesScrollviewer.h */,
+				4ABC3D3D1B4048BF0090A619 /* ImagesScrollviewer.m */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -761,6 +776,7 @@
 				4ACDB9D21B3E7E66009EFB91 /* AFURLResponseSerialization.m in Sources */,
 				4ACDBA0B1B3ED216009EFB91 /* TextAreaResponse.m in Sources */,
 				4ACDB9C91B3E7E66009EFB91 /* UserManagerShared.m in Sources */,
+				4ABC3D381B3FF8E30090A619 /* DiaryThemeViewController.m in Sources */,
 				4ACDB9B91B3E7E66009EFB91 /* UserViewController.m in Sources */,
 				4ACDB9BA1B3E7E66009EFB91 /* VersionViewContrller.m in Sources */,
 				4ACDB9BB1B3E7E66009EFB91 /* WebViewController.m in Sources */,
@@ -791,6 +807,7 @@
 				4ACDB9FF1B3EC155009EFB91 /* NotificationCell.m in Sources */,
 				4ACDB9B01B3E7E66009EFB91 /* HomeViewController.m in Sources */,
 				4ACDB9CD1B3E7E66009EFB91 /* AFHTTPSessionManager.m in Sources */,
+				4ABC3D3B1B4001460090A619 /* ResponseViewCell.m in Sources */,
 				4ACDB9BF1B3E7E66009EFB91 /* ImageCollectionCell.m in Sources */,
 				4ACDB9B31B3E7E66009EFB91 /* PhotoGalleryViewController.m in Sources */,
 				4ACDB9D11B3E7E66009EFB91 /* AFURLRequestSerialization.m in Sources */,
@@ -805,6 +822,7 @@
 				4ACDB9E51B3E7E66009EFB91 /* UIRefreshControl+AFNetworking.m in Sources */,
 				4ACDB9C21B3E7E66009EFB91 /* ProfilePicCell.m in Sources */,
 				4ACDB9B81B3E7E66009EFB91 /* TechSupportController.m in Sources */,
+				4ABC3D3E1B4048BF0090A619 /* ImagesScrollviewer.m in Sources */,
 				4ACDB9E61B3E7E66009EFB91 /* UIWebView+AFNetworking.m in Sources */,
 				4ACDB9BC1B3E7E66009EFB91 /* CustomAertView.m in Sources */,
 				4ACDB9CE1B3E7E66009EFB91 /* AFNetworkReachabilityManager.m in Sources */,

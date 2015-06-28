@@ -19,6 +19,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "WebViewController.h"
 #import "DefaultCell.h"
+#import "DiaryThemeViewController.h"
 
 @interface DailyDiaryViewController ()
 {
@@ -214,6 +215,9 @@
             [self performSegueWithIdentifier:@"diaryInfoSegue" sender:self];
         }
     }
+    else{
+        [self performSegueWithIdentifier:@"themeSegue" sender:self];
+    }
     
 }
 
@@ -231,6 +235,10 @@
     else if ([segue.identifier isEqualToString:@"webViewSegue"]){
         WebViewController * webController = [segue destinationViewController];
         webController.url = [_dailyDiary.file filePath];
+    }
+    else if ([segue.identifier isEqualToString:@"themeSegue"]){
+        DiaryThemeViewController * themeController = [segue destinationViewController];
+        themeController.dailyDiary = self.dailyDiary;
     }
 }
 
