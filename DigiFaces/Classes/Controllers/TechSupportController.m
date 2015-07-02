@@ -21,12 +21,15 @@
 {
     [super viewDidLoad];
     alertView = [[CustomAertView alloc] initWithNibName:@"CustomAertView" bundle:nil];
+    [alertView setSingleButton:YES];
     alertView.delegate = self;
+    [_textArea becomeFirstResponder];
 }
 
 - (IBAction)cancelThis:(id)sender {
     if (![_textArea.text isEqualToString:@""] && ![_textArea.text isEqualToString:@"Some Text to Post"]) {
         [self resignAllResponder];
+        [alertView setSingleButton:NO];
         [alertView showAlertWithMessage:@"Your changes will be discarded. Do you want to cancel it?" inView:self.navigationController.view withTag:kDiscardTag];
     }
     else{
@@ -43,11 +46,13 @@
     
     if ([_textArea.text isEqualToString:@""] || [_textArea.text isEqualToString:@"Some Text to Post"]) {
         [self resignAllResponder];
+        [alertView setSingleButton:YES];
         [alertView showAlertWithMessage:@"Please enter some text to send" inView:self.navigationController.view withTag:0];
         return;
     }
     else if ([_txtSubject.text isEqualToString:@""]){
         [self resignAllResponder];
+        [alertView setSingleButton:YES];
         [alertView showAlertWithMessage:@"Subject is required." inView:self.navigationController.view withTag:0];
         return;
     }
@@ -67,7 +72,9 @@
     
     [manager POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+        [alertView setSingleButton:YES];
         [alertView showAlertWithMessage:@"Your message posted successfully" inView:self.navigationController.view withTag:kSuccessTag];
+        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);

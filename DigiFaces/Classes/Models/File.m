@@ -18,10 +18,20 @@
         self.isCameraTag = [[dict valueForKey:@"IsCameraTagFile"] boolValue];
         self.isAmazonFile = [[dict valueForKey:@"IsAmazonFile"] boolValue];
         self.isViddlerFile = [[dict valueForKey:@"IsViddlerFile"] boolValue];
+        self.viddleKey = [dict valueForKey:@"ViddlerKey"];
         self.filePath = [[self returnFilePathFromFileObject:dict] stringByReplacingOccurrencesOfString:@"\n" withString:@""];
     }
     
     return self;
+}
+
+-(NSString *)getVideoThumbURL
+{
+    NSString * url;
+    if (self.isViddlerFile) {
+        url = [NSString stringWithFormat:@"http://cdn-thumbs.viddler.com/thumbnail_2_%@.jpg", self.viddleKey];
+    }
+    return url;
 }
 
 -(NSString*)returnFilePathFromFileObject:(NSDictionary*)fileObject{

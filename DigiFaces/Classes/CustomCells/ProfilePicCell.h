@@ -8,8 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol ProfilePicCellDelegate <NSObject>
+
+@optional
+-(void)cameraClicked;
+
+@end
+
 @interface ProfilePicCell : UITableViewCell
+@property (nonatomic, assign) id<ProfilePicCellDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
 
 @property (weak, nonatomic) IBOutlet UILabel *lblUserName;
+
+- (IBAction)cameraClicked:(id)sender;
 @end

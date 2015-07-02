@@ -40,14 +40,6 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     self.textLabel.text = _textstrg;
-    if (_singleButton) {
-        [_okView setHidden:NO];
-        [_okCancelView setHidden:YES];
-    }
-    else{
-        [_okView setHidden:YES];
-        [_okCancelView setHidden:NO];
-    }
 }
 -(IBAction)cancel:(id)sender{
     [self.view removeFromSuperview];
@@ -76,6 +68,15 @@
     _textstrg = msg;
     [self.view setFrame:view.frame];
     [view addSubview:self.view];
+    
+    if (_singleButton) {
+        [_okView setHidden:NO];
+        [_okCancelView setHidden:YES];
+    }
+    else{
+        [_okView setHidden:YES];
+        [_okCancelView setHidden:NO];
+    }
 }
 
 /*

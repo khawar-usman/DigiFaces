@@ -20,4 +20,9 @@
     // Configure the view for the selected state
 }
 
+- (IBAction)cameraClicked:(id)sender {
+    if ([_delegate respondsToSelector:@selector(cameraClicked)]) {
+        [_delegate cameraClicked];
+    }
+}
 @end

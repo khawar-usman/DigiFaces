@@ -14,7 +14,10 @@
 @property (nonatomic) BOOL isAmazonFile;
 @property (nonatomic) BOOL isCameraTag;
 @property (nonatomic) BOOL isViddlerFile;
+@property (nonatomic, retain) NSString * viddleKey;
 @property (nonatomic, retain) NSString * filePath;
+
+-(NSString*)getVideoThumbURL;
 
 -(instancetype)initWithDictionary:(NSDictionary*)dict;
 -(NSString*)returnFilePathFromFileObject:(NSDictionary*)fileObject;

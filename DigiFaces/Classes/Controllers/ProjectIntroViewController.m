@@ -16,6 +16,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "NSString+HTML.h"
 #import "WebViewController.h"
+#import "VideoCell.h"
 
 @interface ProjectIntroViewController ()
 {
@@ -134,8 +135,9 @@
             return cell;
         }
         else if([attachment.fileType isEqualToString:@"Video"]){
-            UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"videoCell"];
+            VideoCell * cell = [tableView dequeueReusableCellWithIdentifier:@"videoCell"];
             
+            [cell.imageView setImageWithURL:[NSURL URLWithString:[attachment getVideoThumbURL]]];
             return cell;
         }
     }

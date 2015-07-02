@@ -15,8 +15,9 @@
 #import "ProfilePicCell.h"
 #import "SDConstants.h"
 #import "Utility.h"
+#import "ProfilePicutreCollectionViewController.h"
 
-@interface HomeViewController ()
+@interface HomeViewController ()<ProfilePicCellDelegate, ProfilePictureViewControllerDelegate>
 {
     ProfilePicCell * picCell;
 }
@@ -154,10 +155,45 @@
     }];
 }
 
+-(void)updateProfilePicture:(NSDictionary*)profilePicture
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    
+    [requestSerializer setValue:[Utility getAuthToken] forHTTPHeaderField:@"Authorization"];
+    
+    [requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    //NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:@"0", @"AboutMeId", [Utility getStringForKey:kCurrentPorjectID], @"ProjectId", @"", @"UserId", _aboutMe.text, @"AboutMeText", nil];
+    
+    manager.requestSerializer = requestSerializer;
+    
+    NSString * url = [NSString stringWithFormat:@"%@%@", kBaseURL, kUpdateAvagar];
+    
+    [manager POST:url parameters:profilePicture success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            File * file = [[File alloc] init];
+            NSString * url = [file returnFilePathFromFileObject:profilePicture];
+            [picCell.profileImage setImageWithURL:[NSURL URLWithString:url]];
+        });
+        
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+        
+    }];
+    [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+}
+
 -(void)configurePicCell
 {
     NSString * userNameSaved = [[NSUserDefaults standardUserDefaults]objectForKey:@"userName"]?[[NSUserDefaults standardUserDefaults]objectForKey:@"userName"]:@"";
     
+    picCell.delegate = self;
     picCell.lblUserName.text =  userNameSaved;
     picCell.profileImage.contentMode = UIViewContentModeScaleToFill;
     picCell.profileImage.clipsToBounds = YES;
@@ -231,14 +267,30 @@
 }
 
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"profilePicSegue"]) {
+        UINavigationController * navController = [segue destinationViewController];
+        ProfilePicutreCollectionViewController * profileController = (ProfilePicutreCollectionViewController*)[navController topViewController];
+        profileController.delegate = self;
+    }
 }
-*/
+
+#pragma mark - ProfilePictureCellDelegate
+-(void)cameraClicked
+{
+    [self performSegueWithIdentifier:@"profilePicSegue" sender:self];
+}
+
+#pragma mark - ProfilePictureCollectionViewControllerDelegate
+-(void)profilePicutreDidSelect:(NSDictionary *)selectedProfile
+{
+    [self updateProfilePicture:selectedProfile];
+    
+}
 
 @end
