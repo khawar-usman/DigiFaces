@@ -22,6 +22,7 @@
     
         _errorMessage.hidden = YES;
     self.customAlert = [[CustomAertView alloc]initWithNibName:@"CustomAertView" bundle:nil];
+    [self.customAlert setSingleButton:YES];
     self.customAlert.delegate = self;
     
     _username.leftView = paddingView1;

@@ -38,7 +38,6 @@
     self.profilePicView.layer.masksToBounds = YES;
     self.profilePicView.layer.borderWidth = 0;
     
-    [self.aboutMe setText:[Utility getStringForKey:kAboutMeText]];
     [self.aboutMe becomeFirstResponder];
     
     alertview = [[CustomAertView alloc]initWithNibName:@"CustomAertView" bundle:nil];
@@ -53,9 +52,9 @@
 }
 
 -(IBAction)cancelThis:(id)sender{
-    NSString * aboutMe = [Utility getStringForKey:kAboutMeText];
+    NSString * aboutMe = [[UserManagerShared sharedManager] aboutMeText];
     
-    if (![_aboutMe.text isEqualToString:@""] || ![_aboutMe.text isEqualToString:aboutMe]) {
+    if (![_aboutMe.text isEqualToString:@""] && ![_aboutMe.text isEqualToString:aboutMe]) {
         [_aboutMe resignFirstResponder];
         [alertview showAlertWithMessage:@"Your changes will be discarded. Do you want to descard changes?" inView:self.navigationController.view withTag:kTagDiscardChanges];
     }
@@ -91,7 +90,9 @@
         [Utility saveString:_aboutMe.text forKey:kAboutMeText];
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
         
-        [alertview showAlertWithMessage:@"Your about me text is updated successfully." inView:self.navigationController.view withTag:0];
+        //[alertview showAlertWithMessage:@"Your about me text is updated successfully." inView:self.navigationController.view withTag:0];
+        [[UserManagerShared sharedManager] setAboutMeText:_aboutMe.text];
+        [self dismissViewControllerAnimated:YES completion:nil];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         

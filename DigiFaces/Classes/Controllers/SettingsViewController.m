@@ -83,10 +83,6 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(BOOL)prefersStatusBarHidden{
-    return YES;
-}
-
 -(IBAction)logout:(id)sender{
     
     

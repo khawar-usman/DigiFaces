@@ -1978,11 +1978,12 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <segue destination="G6a-51-0WT" kind="presentation" identifier="ToProfile" id="F1A-G7-9Ui"/>
-                        <segue destination="BYZ-38-t0r" kind="custom" identifier="logoutSegue" customClass="LogoutSegue" id="LVa-vg-uc4"/>
+                        <segue destination="BYZ-38-t0r" kind="custom" identifier="" customClass="LogoutSegue" id="LVa-vg-uc4"/>
                         <segue destination="ZtB-sA-XQx" kind="push" identifier="aboutDigiFacesSegue" id="sAo-OF-q8I"/>
                         <segue destination="izl-Pu-hBs" kind="push" identifier="versionSegue" id="KZN-8q-lsM"/>
                         <segue destination="K3y-nF-92D" kind="presentation" identifier="emailModeratorSegue" id="bJH-Qo-FZl"/>
                         <segue destination="tp7-qq-PeS" kind="presentation" identifier="emailTecSupportSegue" id="PYj-m4-rzD"/>
+                        <segue destination="k8K-Xn-cg1" kind="custom" identifier="logoutSegue" customClass="LogoutSegue" id="sw5-fw-ulw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Li4-lu-V0w" userLabel="First Responder" sceneMemberID="firstResponder"/>

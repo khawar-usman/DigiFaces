@@ -20,7 +20,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    
     self.customAlert = [[CustomAertView alloc]initWithNibName:@"CustomAertView" bundle:nil];
+    [self.customAlert setSingleButton:YES];
     self.customAlert.delegate = self;
 
     _errorMessage.hidden = YES;
@@ -30,9 +33,6 @@
     // Do any additional setup after loading the view.
     
     [self.navigationController.navigationBar setBarTintColor:[UIColor blackColor]];
-    
-    
-    
 }
 -(BOOL)prefersStatusBarHidden{
     return YES;
