@@ -12,6 +12,7 @@
 
 @protocol PopUpDelegate <NSObject>
 
+@optional
 -(void)cacellButtonTappedWithTag:(NSInteger)tag;
 -(void)okayButtonTappedWithTag:(NSInteger)tag;
 
@@ -20,10 +21,13 @@
 @interface CustomAertView : UIViewController{
     
 }
+@property (nonatomic, assign) BOOL singleButton;
 @property(nonatomic,retain) NSString * textstrg;
 @property(nonatomic,retain) NSString * fromW;
 @property(nonatomic,retain)IBOutlet UILabel *textLabel;
 @property(nonatomic,assign)id<PopUpDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UIView *okView;
+@property (weak, nonatomic) IBOutlet UIView *okCancelView;
 
 -(void)showAlertWithMessage:(NSString*)msg inView:(UIView*)view withTag:(NSInteger)tag;
 

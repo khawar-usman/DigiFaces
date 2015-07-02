@@ -99,6 +99,7 @@
 		4ACDBA0E1B3ED814009EFB91 /* UserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDBA0D1B3ED814009EFB91 /* UserCell.m */; };
 		4ACDBA111B3EDF75009EFB91 /* ImagesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDBA101B3EDF75009EFB91 /* ImagesCell.m */; };
 		4ACDBA141B3EF9DC009EFB91 /* AddResponseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDBA131B3EF9DC009EFB91 /* AddResponseViewController.m */; };
+		4AD850151B4584CD0059A457 /* LoginTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD850141B4584CD0059A457 /* LoginTableController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -308,6 +309,8 @@
 		4ACDBA101B3EDF75009EFB91 /* ImagesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagesCell.m; sourceTree = "<group>"; };
 		4ACDBA121B3EF9DC009EFB91 /* AddResponseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddResponseViewController.h; sourceTree = "<group>"; };
 		4ACDBA131B3EF9DC009EFB91 /* AddResponseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddResponseViewController.m; sourceTree = "<group>"; };
+		4AD850131B4584CD0059A457 /* LoginTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginTableController.h; sourceTree = "<group>"; };
+		4AD850141B4584CD0059A457 /* LoginTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginTableController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -455,6 +458,8 @@
 				4ACDBA131B3EF9DC009EFB91 /* AddResponseViewController.m */,
 				4ABC3D361B3FF8E30090A619 /* DiaryThemeViewController.h */,
 				4ABC3D371B3FF8E30090A619 /* DiaryThemeViewController.m */,
+				4AD850131B4584CD0059A457 /* LoginTableController.h */,
+				4AD850141B4584CD0059A457 /* LoginTableController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -755,6 +760,7 @@
 				4ACDB9DB1B3E7E66009EFB91 /* NSDate+InternetDateTime.m in Sources */,
 				4ACDB9D51B3E7E66009EFB91 /* DetailTableViewController.m in Sources */,
 				4ACDB9BE1B3E7E66009EFB91 /* ImageCell.m in Sources */,
+				4AD850151B4584CD0059A457 /* LoginTableController.m in Sources */,
 				4ACDB9AC1B3E7E66009EFB91 /* AppDelegate.m in Sources */,
 				4ACDB9E71B3E7E66009EFB91 /* Utility.m in Sources */,
 				4ACDB9AD1B3E7E66009EFB91 /* AboutDigifacesController.m in Sources */,

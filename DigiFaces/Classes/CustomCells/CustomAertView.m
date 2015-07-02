@@ -40,7 +40,14 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     self.textLabel.text = _textstrg;
-
+    if (_singleButton) {
+        [_okView setHidden:NO];
+        [_okCancelView setHidden:YES];
+    }
+    else{
+        [_okView setHidden:YES];
+        [_okCancelView setHidden:NO];
+    }
 }
 -(IBAction)cancel:(id)sender{
     [self.view removeFromSuperview];
@@ -50,6 +57,12 @@
 }
 
 -(IBAction)okay:(id)sender{
+    [self.view removeFromSuperview];
+    if ([_delegate respondsToSelector:@selector(okayButtonTappedWithTag:)]) {
+        [_delegate okayButtonTappedWithTag:_tag];
+    }
+}
+- (IBAction)singleOk:(id)sender {
     [self.view removeFromSuperview];
     if ([_delegate respondsToSelector:@selector(okayButtonTappedWithTag:)]) {
         [_delegate okayButtonTappedWithTag:_tag];
