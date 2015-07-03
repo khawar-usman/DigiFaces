@@ -45,16 +45,17 @@
     if ([_textview.text isEqualToString:@""] || [_textview.text isEqualToString:@"Some Text to Post"]) {
         [self resignAllResponder];
         [alertView setSingleButton:YES];
-        [alertView showAlertWithMessage:@"Please enter some text to send" inView:self.navigationController.view withTag:0];
+        [alertView showAlertWithMessage:@"Subject and message are required." inView:self.navigationController.view withTag:0];
         return;
     }
     else if ([_txtSubject.text isEqualToString:@""]){
         [self resignAllResponder];
         [alertView setSingleButton:YES];
-        [alertView showAlertWithMessage:@"Subject is required." inView:self.navigationController.view withTag:0];
+        [alertView showAlertWithMessage:@"Subject and message are required." inView:self.navigationController.view withTag:0];
         return;
     }
     
+    [self resignAllResponder];
     NSString * url = [NSString stringWithFormat:@"%@%@", kBaseURL, kModeratorMessage];
     url = [url stringByReplacingOccurrencesOfString:@"{projectId}" withString:[Utility getStringForKey:kCurrentPorjectID]];
     url = [url stringByReplacingOccurrencesOfString:@"{parentMessageId}" withString:@"0"];
@@ -91,7 +92,9 @@
 
 -(void)okayButtonTappedWithTag:(NSInteger)tag
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (tag == kSuccessTag) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 @end

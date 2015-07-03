@@ -7,9 +7,14 @@
 //
 
 #import "AppDelegate.h"
+#import "Reachability.h"
+#import "NointernetController.h"
 
 @interface AppDelegate ()
-
+{
+    Reachability * internetReachable;
+    NointernetController * noInternetContrller;
+}
 @end
 
 @implementation AppDelegate
@@ -18,6 +23,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkNetworkStatus:) name:kReachabilityChangedNotification object:nil];
+    
+    internetReachable = [Reachability reachabilityForInternetConnection];
+    [internetReachable startNotifier];
+    
+    
+    
     [[UINavigationBar appearance] setBarTintColor:[UIColor blackColor]];
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithRed:38/255.0f green:218/255.0f blue:1 alpha:1]}];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
@@ -41,6 +53,35 @@
     [self.window makeKeyAndVisible];
 
     return YES;
+}
+
+-(void)showNetworkError
+{
+    if (!noInternetContrller) {
+        UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+        noInternetContrller = [storyBoard instantiateViewControllerWithIdentifier:@"noInternetController"];
+        
+    }
+    
+    [noInternetContrller.view setFrame:self.window.rootViewController.view.frame];
+    [self.window.rootViewController.view addSubview:noInternetContrller.view];
+}
+
+-(void)hideNetworkError
+{
+    [noInternetContrller.view removeFromSuperview];
+}
+
+- (void)checkNetworkStatus:(NSNotification *)notice {
+    NetworkStatus internetStatus = [internetReachable currentReachabilityStatus];
+    NSLog(@"Network status: %i", internetStatus);
+    
+    if (internetStatus == NotReachable) {
+        [self showNetworkError];
+    }
+    else{
+        [self hideNetworkError];
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

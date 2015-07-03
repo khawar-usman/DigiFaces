@@ -34,6 +34,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if(indexPath.row == 0){
         [self performSegueWithIdentifier: @"ToProfile" sender: self];
     }
@@ -47,7 +48,7 @@
         [self performSegueWithIdentifier:@"aboutDigiFacesSegue" sender:self];
     }
     else if (indexPath.row == 4){
-        [self performSegueWithIdentifier:@"versionSegue" sender:self];
+        //[self performSegueWithIdentifier:@"versionSegue" sender:self];
     }
 }
 

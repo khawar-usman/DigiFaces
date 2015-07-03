@@ -66,6 +66,7 @@
 {
     _tag = tag;
     _textstrg = msg;
+    self.textLabel.text = _textstrg;
     [self.view setFrame:view.frame];
     [view addSubview:self.view];
     

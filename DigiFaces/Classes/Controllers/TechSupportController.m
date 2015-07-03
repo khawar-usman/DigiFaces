@@ -47,16 +47,18 @@
     if ([_textArea.text isEqualToString:@""] || [_textArea.text isEqualToString:@"Some Text to Post"]) {
         [self resignAllResponder];
         [alertView setSingleButton:YES];
-        [alertView showAlertWithMessage:@"Please enter some text to send" inView:self.navigationController.view withTag:0];
+        [alertView showAlertWithMessage:@"Subject and message are required." inView:self.navigationController.view withTag:0];
         return;
     }
     else if ([_txtSubject.text isEqualToString:@""]){
         [self resignAllResponder];
         [alertView setSingleButton:YES];
-        [alertView showAlertWithMessage:@"Subject is required." inView:self.navigationController.view withTag:0];
+        [alertView showAlertWithMessage:@"Subject and message are required." inView:self.navigationController.view withTag:0];
         return;
     }
     
+    [_textArea resignFirstResponder];
+    [_txtSubject resignFirstResponder];
     NSString * url = [NSString stringWithFormat:@"%@%@", kBaseURL, kSendHelpMessage];
     
     

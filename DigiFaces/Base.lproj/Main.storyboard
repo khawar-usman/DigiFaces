@@ -5,6 +5,42 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--Nointernet Controller-->
+        <scene sceneID="XcR-L5-Mos">
+            <objects>
+                <viewController storyboardIdentifier="noInternetController" id="kpB-P4-FxS" customClass="NointernetController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kfL-nW-fcL"/>
+                        <viewControllerLayoutGuide type="bottom" id="J2c-nM-beh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ay4-qz-gb0">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No network connection found. " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sTC-Hs-fKm">
+                                <rect key="frame" x="16" y="255" width="288" height="57"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="57" id="gnJ-GE-9hG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="sTC-Hs-fKm" secondAttribute="centerX" id="1PA-7K-iOT"/>
+                            <constraint firstAttribute="centerY" secondItem="sTC-Hs-fKm" secondAttribute="centerY" id="3ck-nk-Ayc"/>
+                            <constraint firstItem="sTC-Hs-fKm" firstAttribute="trailing" secondItem="ay4-qz-gb0" secondAttribute="trailingMargin" id="CBd-XA-sgt"/>
+                            <constraint firstItem="sTC-Hs-fKm" firstAttribute="leading" secondItem="ay4-qz-gb0" secondAttribute="leadingMargin" id="RUg-l6-prx"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nXN-3U-53Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1057" y="-706"/>
+        </scene>
         <!--Login Table Controller-->
         <scene sceneID="1We-qv-Uzo">
             <objects>
