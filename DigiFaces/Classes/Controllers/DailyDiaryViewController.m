@@ -16,6 +16,7 @@
 #import "DiaryInfoViewController.h"
 #import "Diary.h"
 #import "ImageCell.h"
+#import "VideoCell.h"
 #import "UIImageView+AFNetworking.h"
 #import "WebViewController.h"
 #import "DefaultCell.h"
@@ -123,18 +124,14 @@
             return 160;
         }
         else if (indexPath.row == 1) {
-            if (_dailyDiary.diariesDate.count==0) {
-                NSAttributedString *attributedText =
-                [[NSAttributedString alloc] initWithString:_dailyDiary.diaryQuestion attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17.0f]}];
-                
-                CGRect rect = [attributedText boundingRectWithSize:(CGSize){self.view.frame.size.width, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin context:nil];
-                
-                CGSize size = rect.size;
-                
-                return size.height;
-            }
+            NSAttributedString *attributedText =
+            [[NSAttributedString alloc] initWithString:_dailyDiary.diaryQuestion attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17.0f]}];
             
-            return 90;
+            CGRect rect = [attributedText boundingRectWithSize:(CGSize){self.view.frame.size.width, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+            
+            CGSize size = rect.size;
+            
+            return size.height + 20;
         }
         else if (indexPath.row == 2){
             return 40;
@@ -157,7 +154,9 @@
                 cell = imgCell;
             }
             else{
-                cell = [tableView dequeueReusableCellWithIdentifier:@"videoCell"];
+                VideoCell * vidCell = [tableView dequeueReusableCellWithIdentifier:@"videoCell"];
+                [vidCell.imageView setImageWithURL:[NSURL URLWithString:_dailyDiary.file.getVideoThumbURL]];
+                cell = vidCell;
             }
         }
         else if (indexPath.row == 1) {

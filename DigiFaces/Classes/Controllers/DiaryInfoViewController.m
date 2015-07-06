@@ -10,6 +10,7 @@
 #import "ImageCell.h"
 #import "UIImageView+AFNetworking.h"
 #import "WebViewController.h"
+#import "VideoCell.h"
 
 @interface DiaryInfoViewController ()
 {
@@ -71,7 +72,7 @@
         
         CGSize size = rect.size;
         
-        return size.height;
+        return size.height + 20;
     }
     return 0;
 }
@@ -88,7 +89,9 @@
             cell = imgCell;
         }
         else{
-            cell = [tableView dequeueReusableCellWithIdentifier:@"videoCell"];
+            VideoCell * vidCell = [tableView dequeueReusableCellWithIdentifier:@"videoCell"];
+            [vidCell.imageView setImageWithURL:[NSURL URLWithString:_dailyDiary.file.getVideoThumbURL]];
+            cell = vidCell;
         }
     }
     else if (indexPath.row == 1) {
