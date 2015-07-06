@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface AddResponseViewController : UITableViewController
+@property (weak, nonatomic) IBOutlet UITextView *txtResponse;
 
 @end
