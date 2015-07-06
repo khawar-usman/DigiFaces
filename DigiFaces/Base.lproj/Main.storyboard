@@ -1356,7 +1356,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nZB-DS-KNd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3251" y="1068"/>
+            <point key="canvasLocation" x="3258" y="1248"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="tqr-Nb-Xy4">
@@ -2392,7 +2392,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="videoCell" rowHeight="55" id="hKO-x2-bNt">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="videoCell" rowHeight="55" id="hKO-x2-bNt" customClass="VideoCell">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hKO-x2-bNt" id="fCN-JL-zhB">
@@ -2400,7 +2400,18 @@
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mew-hx-0SC">
                                             <rect key="frame" x="8" y="8" width="304" height="38"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hTn-0m-PNq">
+                                                    <rect key="frame" x="0.0" y="0.0" width="304" height="38"/>
+                                                </imageView>
+                                            </subviews>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="hTn-0m-PNq" secondAttribute="trailing" id="Cyg-kB-Pyb"/>
+                                                <constraint firstItem="hTn-0m-PNq" firstAttribute="leading" secondItem="Mew-hx-0SC" secondAttribute="leading" id="LJJ-GK-Rw8"/>
+                                                <constraint firstAttribute="bottom" secondItem="hTn-0m-PNq" secondAttribute="bottom" id="f23-kM-ReD"/>
+                                                <constraint firstItem="hTn-0m-PNq" firstAttribute="top" secondItem="Mew-hx-0SC" secondAttribute="top" id="uvm-fO-Lxa"/>
+                                            </constraints>
                                         </view>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="playIcon" translatesAutoresizingMaskIntoConstraints="NO" id="UoU-Q5-AQ2">
                                             <rect key="frame" x="135" y="2" width="50" height="50"/>
@@ -2419,6 +2430,9 @@
                                         <constraint firstItem="Mew-hx-0SC" firstAttribute="trailing" secondItem="fCN-JL-zhB" secondAttribute="trailingMargin" id="wSI-0Q-azM"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="imageView" destination="hTn-0m-PNq" id="czV-Ff-GFf"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="responseCell" rowHeight="210" id="Wvy-hd-HrO" customClass="ResponseViewCell">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -2473,7 +2487,7 @@
                                                 <action selector="commentClicked:" destination="Wvy-hd-HrO" eventType="touchUpInside" id="SCC-Ax-2UE"/>
                                             </connections>
                                         </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LGj-Gl-zNW">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LGj-Gl-zNW">
                                             <rect key="frame" x="8" y="61" width="304" height="49"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="49" id="AfV-S2-T3l"/>
@@ -2533,10 +2547,14 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <segue destination="THO-t6-uQc" kind="presentation" identifier="diaryInfoSegue" id="3r5-SJ-zjd"/>
+                        <segue destination="Re9-sw-T8y" kind="push" identifier="webViewSegue" id="XNZ-ng-ebc"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RVS-Nq-qXv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3380" y="312"/>
+            <point key="canvasLocation" x="3258" y="376"/>
         </scene>
     </scenes>
     <resources>
@@ -2564,7 +2582,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="xm7-nE-fcs"/>
-        <segue reference="YVH-jF-Mn7"/>
-        <segue reference="GNd-Wo-Hrw"/>
+        <segue reference="veF-sC-LAA"/>
+        <segue reference="XNZ-ng-ebc"/>
+        <segue reference="3r5-SJ-zjd"/>
     </inferredMetricsTieBreakers>
 </document>

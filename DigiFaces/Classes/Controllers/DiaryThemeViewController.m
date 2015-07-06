@@ -12,6 +12,9 @@
 #import "DefaultCell.h"
 #import "ResponseViewCell.h"
 #import "Diary.h"
+#import "DiaryInfoViewController.h"
+#import "VideoCell.h"
+#import "WebViewController.h"
 
 @interface DiaryThemeViewController ()
 
@@ -46,6 +49,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
+    if (_dailyDiary.userDiaries.count==0) {
+        return 2;
+    }
     return 3 + _dailyDiary.userDiaries.count;
 }
 
@@ -59,7 +65,9 @@
             cell = imgCell;
         }
         else{
-            cell = [tableView dequeueReusableCellWithIdentifier:@"videoCell"];
+            VideoCell * vidCell = [tableView dequeueReusableCellWithIdentifier:@"videoCell"];
+            [vidCell.imageView setImageWithURL:[NSURL URLWithString:_dailyDiary.file.getVideoThumbURL]];
+            cell = vidCell;
         }
     }
     else if (indexPath.row == 1) {
@@ -103,7 +111,19 @@
         return 160;
     }
     else if (indexPath.row == 1){
-        return 90;
+        NSAttributedString *attributedText =
+        [[NSAttributedString alloc] initWithString:_dailyDiary.diaryQuestion attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17.0f]}];
+        
+        CGRect rect = [attributedText boundingRectWithSize:(CGSize){self.view.frame.size.width, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+        
+        CGSize size = rect.size;
+        
+        size.height = size.height + 20;
+        if (_dailyDiary.userDiaries.count == 0) {
+            return size.height;
+        }
+        else
+            return MIN(size.height, 90);
     }
     else if (indexPath.row == 2){
         return 40;
@@ -121,6 +141,16 @@
     }
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 0) {
+        [self performSegueWithIdentifier:@"webViewSegue" sender:self];
+    }
+    else if (indexPath.row == 1) {
+        [self performSegueWithIdentifier:@"diaryInfoSegue" sender:self];
+    }
+}
+
 -(CGFloat)heightForComment:(NSString*)comment
 {
     NSAttributedString *attributedText =
@@ -130,7 +160,20 @@
     
     CGSize size = rect.size;
     
-    return size.height + 10;
+    return size.height + 20;
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"diaryInfoSegue"]) {
+        DiaryInfoViewController * diaryInfoController = (DiaryInfoViewController*)[(UINavigationController*)[segue destinationViewController] topViewController];
+        diaryInfoController.dailyDiary = _dailyDiary;
+    }
+    else if ([segue.identifier isEqualToString:@"webViewSegue"]){
+        WebViewController * webController = [segue destinationViewController];
+        webController.url = [_dailyDiary.file filePath];
+
+    }
 }
 
 /*
