@@ -21,6 +21,7 @@
         self.responseID = [[dict valueForKey:@"ResponseId"] integerValue];
         self.title = [dict valueForKey:@"Title"];
         self.useID = [dict valueForKey:@"UserId"];
+        self.threadId = [dict valueForKey:@"ThreadId"];
         
         _userInfo = [[UserInfo alloc] initWithDictioanry:[dict valueForKey:@"UserInfo"]];
         

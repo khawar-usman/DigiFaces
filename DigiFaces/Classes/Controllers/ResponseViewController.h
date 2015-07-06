@@ -8,9 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "Notification.h"
+#import "DailyDiary.h"
+#import "Diary.h"
+
+typedef enum {
+    ResponseControllerTypeNotification,
+    ResponseControllerTypeDiaryResponse
+}ResponseControllerType;
 
 @interface ResponseViewController : UITableViewController
 
 @property (nonatomic ,retain) Notification * currentNotification;
+@property (nonatomic, assign) ResponseControllerType responseType;
+@property (nonatomic, retain) Diary * diary;
 
 @end

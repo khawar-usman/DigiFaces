@@ -18,8 +18,9 @@
 #import "Comment.h"
 #import "UIImageView+AFNetworking.h"
 #import "TextAreaResponse.h"
+#import "CommentCell.h"
 
-@interface ResponseViewController ()
+@interface ResponseViewController () <CommentCellDelegate>
 
 @property (nonatomic, retain) NSMutableArray * arrResponses;
 @property (nonatomic ,retain) Response * response;
@@ -32,8 +33,9 @@
     [super viewDidLoad];
     
     _arrResponses = [[NSMutableArray alloc] init];
-    
-    [self getResponses];
+    if (_responseType == ResponseControllerTypeNotification) {
+        [self getResponses];
+    }
 }
 - (IBAction)cancelThis:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
@@ -75,6 +77,46 @@
     }];
 }
 
+-(void)addComment:(NSString*)comment
+{
+    NSString * url = [NSString stringWithFormat:@"%@%@", kBaseURL, kUpdateComments];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    
+    [requestSerializer setValue:[Utility getAuthToken] forHTTPHeaderField:@"Authorization"];
+    [requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    manager.requestSerializer = requestSerializer;
+    
+    NSDictionary * params = @{@"CommentId" : @"0",
+                              @"ThreadId" : _diary.threadId,
+                              @"UserId" : _diary.useID,
+                              @"UserInfo" : _diary.userInfo,
+                              @"DateCreated" : [NSDate date],
+                              @"Response" : comment,
+                              @"IsActive" : @"1",
+                              @"IsRead" : @"0"};
+    
+    
+    [manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+        
+        
+        
+        
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+        
+        [self.tableView reloadData];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+    }];
+    [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+}
+
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -88,7 +130,25 @@
         return 75;
     }
     else if (indexPath.row == 1){
-        return 90;
+        
+        NSString * response = nil;
+        if (_responseType == ResponseControllerTypeNotification) {
+            TextAreaResponse * t = [_response.textAreaResponse objectAtIndex:0];
+            response = t.response;
+        }
+        else{
+            response = _diary.response;
+        }
+        NSAttributedString *attributedText =
+        [[NSAttributedString alloc] initWithString:response attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17.0f]}];
+        
+        CGRect rect = [attributedText boundingRectWithSize:(CGSize){self.view.frame.size.width, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+        
+        CGSize size = rect.size;
+        
+        return size.height + 20;
+        
+        return MIN(90, size.height);
     }
     else if (_response.files.count>0 && indexPath.row == 2){
         return 85;
@@ -103,7 +163,8 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"addComentCell"];
+    CommentCell * cell = [tableView dequeueReusableCellWithIdentifier:@"addComentCell"];
+    cell.delegate = self;
     return cell;
 }
 
@@ -122,23 +183,49 @@
         count++;
         count+= _response.comments.count;
     }
+    else if (_diary){
+        count+=2;
+        if (_diary.files.count>0) {
+            count++;
+        }
+        count+= _diary.comments.count;
+    }
     // Return the number of rows in the section.
     return count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
-        UserCell * cell = [tableView dequeueReusableCellWithIdentifier:@"userCell" forIndexPath:indexPath];
+-(void)configureUserCell:(UserCell*)cell
+{
+    if (_responseType == ResponseControllerTypeNotification) {
         [cell.lblTime setText:_response.dateCreatedFormated];
         [cell.userImage setImageWithURL:[NSURL URLWithString:_response.userInfo.avatarFile.filePath]];
         [cell.lblUsername setText:_response.userInfo.appUserName];
         [cell makeImageCircular];
+    }
+    else{
+        [cell.lblTime setText:_diary.dateCreatedFormatted];
+        [cell.userImage setImageWithURL:[NSURL URLWithString:_diary.userInfo.avatarFile.filePath]];
+        [cell.lblUsername setText:_diary.userInfo.appUserName];
+        [cell makeImageCircular];
+    }
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 0) {
+        UserCell * cell = [tableView dequeueReusableCellWithIdentifier:@"userCell" forIndexPath:indexPath];
+        [self configureUserCell:cell];
         return cell;
     }
     else if (indexPath.row == 1){
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"textCell" forIndexPath:indexPath];
-        TextAreaResponse * t = [_response.textAreaResponse objectAtIndex:0];
-        [cell.textLabel setText:t.response];
+        if (_responseType == ResponseControllerTypeNotification) {
+            TextAreaResponse * t = [_response.textAreaResponse objectAtIndex:0];
+            [cell.textLabel setText:t.response];
+        }
+        else{
+            [cell.textLabel setText:_diary.response];
+        }
         return cell;
     }
     
@@ -146,18 +233,42 @@
         ImagesCell * cell = [tableView dequeueReusableCellWithIdentifier:@"imagesScrollCell"];
         return cell;
     }
-    else if ((_response.files.count==0 && indexPath.row == 2) || (_response.files.count>0 && indexPath.row == 3)){
+    else if (_responseType == ResponseControllerTypeNotification && ((_response.files.count==0 && indexPath.row == 2) || (_response.files.count>0 && indexPath.row == 3))){
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"noResponseHeaderCell" forIndexPath:indexPath];
-        [cell.textLabel setText:[NSString stringWithFormat:@"%d Responses", _response.comments.count]];
+        NSInteger counts = 0;
+        if (_responseType == ResponseControllerTypeNotification) {
+            counts = _response.comments.count;
+        }
+        else{
+            counts = _diary.comments.count;
+        }
+        [cell.textLabel setText:[NSString stringWithFormat:@"%d Responses", counts]];
         return cell;
     }
+    else if ( indexPath.row == 2){
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"noResponseHeaderCell" forIndexPath:indexPath];
+        NSInteger counts = 0;
+        counts = _diary.comments.count;
+        [cell.textLabel setText:[NSString stringWithFormat:@"%d Comments", counts]];
+        return cell;
+    }
+
     
-    int count = 3;
-    if (_response.files.count>0) {
+    int count = 2;
+    if (_responseType == ResponseControllerTypeNotification && _response.files.count>0) {
+        count++;
+    }
+    else if(_responseType == ResponseControllerTypeDiaryResponse && _diary.files.count>0){
         count++;
     }
     
-    Comment * comment = [_response.comments objectAtIndex:indexPath.row - count];
+    Comment * comment = nil;
+    if (_responseType == ResponseControllerTypeNotification) {
+        comment = [_response.comments objectAtIndex:indexPath.row - count];
+    }
+    else{
+        comment = [_diary.comments objectAtIndex:indexPath.row - count];
+    }
     
     NotificationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"userCommentCell" forIndexPath:indexPath];
     [cell.lblDate setText:comment.dateCreatedFormated];
@@ -168,48 +279,12 @@
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+#pragma mark - CommentCellDelegate
+-(void)commentCell:(id)cell didSendText:(NSString *)text
+{
+    [self addComment:text];
+    
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

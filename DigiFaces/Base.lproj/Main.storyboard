@@ -827,7 +827,7 @@
                                     <outlet property="userImage" destination="X41-qb-fBA" id="i25-GD-0fP"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="addComentCell" rowHeight="44" id="Nfp-gU-vih">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="addComentCell" rowHeight="44" id="Nfp-gU-vih" customClass="CommentCell">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Nfp-gU-vih" id="M0k-Sf-31e">
@@ -840,6 +840,9 @@
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
+                                            <connections>
+                                                <action selector="exitOnEnd:" destination="Nfp-gU-vih" eventType="editingDidEndOnExit" id="bCK-97-vQk"/>
+                                            </connections>
                                         </textField>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BW5-J1-eNR">
                                             <rect key="frame" x="269" y="7" width="51" height="30"/>
@@ -850,6 +853,9 @@
                                             <state key="normal" title="Send">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <connections>
+                                                <action selector="addComment:" destination="Nfp-gU-vih" eventType="touchUpInside" id="Kbg-b4-2Hg"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
@@ -861,6 +867,9 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.89411764705882346" green="0.89411764705882346" blue="0.89411764705882346" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="txtComment" destination="IAe-1n-Ovf" id="hiK-Zk-Mb8"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -2550,6 +2559,7 @@
                     <connections>
                         <segue destination="THO-t6-uQc" kind="presentation" identifier="diaryInfoSegue" id="3r5-SJ-zjd"/>
                         <segue destination="Re9-sw-T8y" kind="push" identifier="webViewSegue" id="XNZ-ng-ebc"/>
+                        <segue destination="5sf-oi-XPi" kind="push" identifier="responseSegue" id="KwN-O9-kZw"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RVS-Nq-qXv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2585,5 +2595,6 @@
         <segue reference="veF-sC-LAA"/>
         <segue reference="XNZ-ng-ebc"/>
         <segue reference="3r5-SJ-zjd"/>
+        <segue reference="KwN-O9-kZw"/>
     </inferredMetricsTieBreakers>
 </document>

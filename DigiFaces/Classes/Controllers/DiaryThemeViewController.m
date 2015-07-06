@@ -15,6 +15,7 @@
 #import "DiaryInfoViewController.h"
 #import "VideoCell.h"
 #import "WebViewController.h"
+#import "ResponseViewController.h"
 
 @interface DiaryThemeViewController ()
 
@@ -149,6 +150,9 @@
     else if (indexPath.row == 1) {
         [self performSegueWithIdentifier:@"diaryInfoSegue" sender:self];
     }
+    else if (indexPath.row > 2){
+        [self performSegueWithIdentifier:@"responseSegue" sender:self];
+    }
 }
 
 -(CGFloat)heightForComment:(NSString*)comment
@@ -173,6 +177,13 @@
         WebViewController * webController = [segue destinationViewController];
         webController.url = [_dailyDiary.file filePath];
 
+    }
+    else if ([segue.identifier isEqualToString:@"responseSegue"]){
+        NSInteger index = [self.tableView indexPathForSelectedRow].row;
+        Diary * diary = [_dailyDiary.userDiaries objectAtIndex:index - 3];
+        ResponseViewController * responseController = [segue destinationViewController];
+        responseController.responseType = ResponseControllerTypeDiaryResponse;
+        responseController.diary = diary;
     }
 }
 

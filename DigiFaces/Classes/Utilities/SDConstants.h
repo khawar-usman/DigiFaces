@@ -31,5 +31,6 @@
 #define kDailyDiaryInfo         @"api/Project/GetDailyDiary/{diaryId}"
 #define kGetNotifications       @"api/Account/GetNotifications/{projectId}"
 #define kGetResponses           @"api/Activity/GetResponses/{activityId}"
+#define kUpdateComments         @"api/Activity/UpdateComment"
 
 #endif

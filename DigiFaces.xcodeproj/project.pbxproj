@@ -25,6 +25,7 @@
 		4ABC3D381B3FF8E30090A619 /* DiaryThemeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC3D371B3FF8E30090A619 /* DiaryThemeViewController.m */; };
 		4ABC3D3B1B4001460090A619 /* ResponseViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC3D3A1B4001460090A619 /* ResponseViewCell.m */; };
 		4ABC3D3E1B4048BF0090A619 /* ImagesScrollviewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC3D3D1B4048BF0090A619 /* ImagesScrollviewer.m */; };
+		4AC49FE11B4AEEBB003CE06E /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC49FE01B4AEEBB003CE06E /* CommentCell.m */; };
 		4ACDB9AC1B3E7E66009EFB91 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB92B1B3E7E66009EFB91 /* AppDelegate.m */; };
 		4ACDB9AD1B3E7E66009EFB91 /* AboutDigifacesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB92E1B3E7E66009EFB91 /* AboutDigifacesController.m */; };
 		4ACDB9AE1B3E7E66009EFB91 /* EmailModeratorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB9301B3E7E66009EFB91 /* EmailModeratorController.m */; };
@@ -163,6 +164,8 @@
 		4ABC3D3A1B4001460090A619 /* ResponseViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResponseViewCell.m; sourceTree = "<group>"; };
 		4ABC3D3C1B4048BF0090A619 /* ImagesScrollviewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagesScrollviewer.h; sourceTree = "<group>"; };
 		4ABC3D3D1B4048BF0090A619 /* ImagesScrollviewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagesScrollviewer.m; sourceTree = "<group>"; };
+		4AC49FDF1B4AEEBB003CE06E /* CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCell.h; sourceTree = "<group>"; };
+		4AC49FE01B4AEEBB003CE06E /* CommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentCell.m; sourceTree = "<group>"; };
 		4ACDB92A1B3E7E66009EFB91 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4ACDB92B1B3E7E66009EFB91 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		4ACDB92D1B3E7E66009EFB91 /* AboutDigifacesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutDigifacesController.h; sourceTree = "<group>"; };
@@ -505,6 +508,8 @@
 				4ABC3D3D1B4048BF0090A619 /* ImagesScrollviewer.m */,
 				4AD850161B45A12B0059A457 /* VideoCell.h */,
 				4AD850171B45A12B0059A457 /* VideoCell.m */,
+				4AC49FDF1B4AEEBB003CE06E /* CommentCell.h */,
+				4AC49FE01B4AEEBB003CE06E /* CommentCell.m */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -845,6 +850,7 @@
 				4ACDB9E51B3E7E66009EFB91 /* UIRefreshControl+AFNetworking.m in Sources */,
 				4ACDB9C21B3E7E66009EFB91 /* ProfilePicCell.m in Sources */,
 				4ACDB9B81B3E7E66009EFB91 /* TechSupportController.m in Sources */,
+				4AC49FE11B4AEEBB003CE06E /* CommentCell.m in Sources */,
 				4ABC3D3E1B4048BF0090A619 /* ImagesScrollviewer.m in Sources */,
 				4AD8501E1B45ABB40059A457 /* Reachability.m in Sources */,
 				4ACDB9E61B3E7E66009EFB91 /* UIWebView+AFNetworking.m in Sources */,

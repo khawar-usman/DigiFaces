@@ -18,6 +18,7 @@
 @property (nonatomic, assign) NSInteger responseID;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * useID;
+@property (nonatomic, retain) NSString * threadId;
 
 
 @property (nonatomic, retain) UserInfo * userInfo;
