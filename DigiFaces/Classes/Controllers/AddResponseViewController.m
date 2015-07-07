@@ -34,6 +34,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [_txtResponse becomeFirstResponder];
     _dataArray = [[NSMutableArray alloc] initWithCapacity:4];
+    [_btnDate setTitle:[Utility stringFromDate:[NSDate date]] forState:UIControlStateNormal];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

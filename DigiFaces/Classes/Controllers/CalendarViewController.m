@@ -15,7 +15,7 @@
 
 @interface CalendarViewController()
 {
-    NSInteger month, year;
+    NSInteger month, year, day;
     UIButton * selectedDay;
 }
 
@@ -57,6 +57,7 @@
     NSDateComponents * component = [_calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:[NSDate date]];
     year = component.year;
     month = component.month;
+    day = component.day;
 }
 
 -(NSDate*)dateFromComponents:(NSInteger)d month:(NSInteger)m year:(NSInteger)y
