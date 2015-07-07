@@ -21,6 +21,7 @@
 #import "WebViewController.h"
 #import "DefaultCell.h"
 #import "DiaryThemeViewController.h"
+#import "AddResponseViewController.h"
 
 @interface DailyDiaryViewController ()
 {
@@ -238,6 +239,10 @@
     else if ([segue.identifier isEqualToString:@"themeSegue"]){
         DiaryThemeViewController * themeController = [segue destinationViewController];
         themeController.dailyDiary = self.dailyDiary;
+    }
+    else if ([segue.identifier isEqualToString:@"addResponseSegue"]){
+        AddResponseViewController * responseController = (AddResponseViewController*)[(UINavigationController*)[segue destinationViewController] topViewController];
+        responseController.dailyDiary = self.dailyDiary;
     }
 }
 

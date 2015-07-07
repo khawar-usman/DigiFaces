@@ -21,6 +21,8 @@
 		19F0BD441B1F14DF00E4B048 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F0BD431B1F14DF00E4B048 /* SystemConfiguration.framework */; };
 		19F0BE2D1B28519B00E4B048 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F0BE2C1B28519B00E4B048 /* QuartzCore.framework */; };
 		19F0BE331B28BBE500E4B048 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19F0BE311B28BBE400E4B048 /* LaunchScreen.xib */; };
+		4A00E83D1B4BD060000F6A6B /* TextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A00E83C1B4BD060000F6A6B /* TextFieldCell.m */; };
+		4A00E8401B4BD07A000F6A6B /* TextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A00E83F1B4BD07A000F6A6B /* TextViewCell.m */; };
 		4ABC3D351B3FEC110090A619 /* DefaultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC3D341B3FEC110090A619 /* DefaultCell.m */; };
 		4ABC3D381B3FF8E30090A619 /* DiaryThemeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC3D371B3FF8E30090A619 /* DiaryThemeViewController.m */; };
 		4ABC3D3B1B4001460090A619 /* ResponseViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ABC3D3A1B4001460090A619 /* ResponseViewCell.m */; };
@@ -156,6 +158,10 @@
 		19F0BD431B1F14DF00E4B048 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		19F0BE2C1B28519B00E4B048 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		19F0BE321B28BBE400E4B048 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		4A00E83B1B4BD060000F6A6B /* TextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldCell.h; sourceTree = "<group>"; };
+		4A00E83C1B4BD060000F6A6B /* TextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldCell.m; sourceTree = "<group>"; };
+		4A00E83E1B4BD07A000F6A6B /* TextViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextViewCell.h; sourceTree = "<group>"; };
+		4A00E83F1B4BD07A000F6A6B /* TextViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextViewCell.m; sourceTree = "<group>"; };
 		4ABC3D331B3FEC110090A619 /* DefaultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultCell.h; sourceTree = "<group>"; };
 		4ABC3D341B3FEC110090A619 /* DefaultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultCell.m; sourceTree = "<group>"; };
 		4ABC3D361B3FF8E30090A619 /* DiaryThemeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiaryThemeViewController.h; sourceTree = "<group>"; };
@@ -510,6 +516,10 @@
 				4AD850171B45A12B0059A457 /* VideoCell.m */,
 				4AC49FDF1B4AEEBB003CE06E /* CommentCell.h */,
 				4AC49FE01B4AEEBB003CE06E /* CommentCell.m */,
+				4A00E83B1B4BD060000F6A6B /* TextFieldCell.h */,
+				4A00E83C1B4BD060000F6A6B /* TextFieldCell.m */,
+				4A00E83E1B4BD07A000F6A6B /* TextViewCell.h */,
+				4A00E83F1B4BD07A000F6A6B /* TextViewCell.m */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -852,11 +862,13 @@
 				4ACDB9B81B3E7E66009EFB91 /* TechSupportController.m in Sources */,
 				4AC49FE11B4AEEBB003CE06E /* CommentCell.m in Sources */,
 				4ABC3D3E1B4048BF0090A619 /* ImagesScrollviewer.m in Sources */,
+				4A00E83D1B4BD060000F6A6B /* TextFieldCell.m in Sources */,
 				4AD8501E1B45ABB40059A457 /* Reachability.m in Sources */,
 				4ACDB9E61B3E7E66009EFB91 /* UIWebView+AFNetworking.m in Sources */,
 				4ACDB9BC1B3E7E66009EFB91 /* CustomAertView.m in Sources */,
 				4ACDB9CE1B3E7E66009EFB91 /* AFNetworkReachabilityManager.m in Sources */,
 				4ACDBA0E1B3ED814009EFB91 /* UserCell.m in Sources */,
+				4A00E8401B4BD07A000F6A6B /* TextViewCell.m in Sources */,
 				4ACDB9C61B3E7E66009EFB91 /* Diary.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

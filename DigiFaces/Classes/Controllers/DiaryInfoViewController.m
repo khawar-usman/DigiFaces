@@ -11,6 +11,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "WebViewController.h"
 #import "VideoCell.h"
+#import "AddResponseViewController.h"
 
 @interface DiaryInfoViewController ()
 {
@@ -153,6 +154,10 @@
     if ([segue.identifier isEqualToString:@"webViewSegue"]){
         WebViewController * webController = [segue destinationViewController];
         webController.url = [_dailyDiary.file filePath];
+    }
+    else if ([segue.identifier isEqualToString:@"addResponseSegue"]){
+        AddResponseViewController * responseController = (AddResponseViewController*)[(UINavigationController*)[segue destinationViewController] topViewController];
+        responseController.dailyDiary = self.dailyDiary;
     }
 }
 
