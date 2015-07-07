@@ -7,10 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface Utility : NSObject
 
 +(BOOL)saveString:(NSString*)value forKey:(NSString*)key;
+
++(void)addPadding:(NSInteger)padding toTextField:(UITextField*)textfield;
 
 +(NSString*)getStringForKey:(NSString*)key;
 +(NSString*)getAuthToken;

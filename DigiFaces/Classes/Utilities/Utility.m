@@ -63,4 +63,17 @@
     return finalDate;
 }
 
++(void)addPadding:(NSInteger)padding toTextField:(UITextField*)textfield
+{
+    UIView * leftView = [[UIView alloc] initWithFrame:CGRectMake(0,0, padding, textfield.frame.size.height)];
+    UIView * rightView = [[UIView alloc] initWithFrame:CGRectMake(0,0, padding, textfield.frame.size.height)];
+    
+    textfield.leftView = leftView;
+    textfield.leftViewMode = UITextFieldViewModeAlways;
+    
+    textfield.rightView = rightView;
+    textfield.rightViewMode = UITextFieldViewModeAlways;
+    
+}
+
 @end

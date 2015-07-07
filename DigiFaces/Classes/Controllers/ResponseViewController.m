@@ -19,9 +19,15 @@
 #import "UIImageView+AFNetworking.h"
 #import "TextAreaResponse.h"
 #import "CommentCell.h"
+#import "Utility.h"
+#import "CustomAertView.h"
 
 @interface ResponseViewController () <CommentCellDelegate>
+{
+    NSInteger contentHeight;
+}
 
+@property (nonatomic, retain) CustomAertView * customAlert;
 @property (nonatomic, retain) NSMutableArray * arrResponses;
 @property (nonatomic ,retain) Response * response;
 
@@ -32,10 +38,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    self.customAlert = [[CustomAertView alloc]initWithNibName:@"CustomAertView" bundle:nil];
+    [self.customAlert setSingleButton:YES];
+    
     _arrResponses = [[NSMutableArray alloc] init];
     if (_responseType == ResponseControllerTypeNotification) {
         [self getResponses];
     }
+    [Utility addPadding:5 toTextField:_txtResposne];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    
+    contentHeight = self.contentView.frame.size.height;
 }
 - (IBAction)cancelThis:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
@@ -44,6 +60,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - API Methods
@@ -103,7 +124,7 @@
         NSLog(@"JSON: %@", responseObject);
         
         
-        
+        [self.customAlert showAlertWithMessage:@"Comment Added Successfully" inView:self.navigationController.view withTag:0];
         
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
         
@@ -116,6 +137,36 @@
     [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
 }
 
+
+-(void)keyboardWillShow:(NSNotification*)notification
+{
+    NSDictionary* keyboardInfo = [notification userInfo];
+    NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardBoundsUserInfoKey];
+    CGSize keyboardSize = [keyboardFrameBegin CGRectValue].size;
+    
+    float duration = [[keyboardInfo valueForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    self.constBottomSpace.constant = 0;
+    self.constBottomSpace.constant = keyboardSize.height;
+    [UIView animateWithDuration:duration
+                     animations:^{
+                         [self.view layoutIfNeeded];
+                     }];
+}
+
+-(void)keyboardWillHide:(NSNotification*)notification
+{
+    NSDictionary* keyboardInfo = [notification userInfo];
+    NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
+    
+    float duration = [[keyboardInfo valueForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    
+    
+    self.constBottomSpace.constant = 0;
+    [UIView animateWithDuration:duration
+                     animations:^{
+                         [self.view layoutIfNeeded];
+                     }];
+}
 
 #pragma mark - Table view data source
 
@@ -161,17 +212,6 @@
     }
 }
 
--(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-{
-    CommentCell * cell = [tableView dequeueReusableCellWithIdentifier:@"addComentCell"];
-    cell.delegate = self;
-    return cell;
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-    return 44;
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     int count = 0;
@@ -287,4 +327,15 @@
 }
 
 
+- (IBAction)sendComment:(id)sender {
+    if ([_txtResposne.text isEqualToString:@""]) {
+        return;
+    }
+    [_txtResposne resignFirstResponder];
+    [self addComment:_txtResposne.text];
+    _txtResposne.text = @"";
+}
+- (IBAction)exitOnend:(id)sender {
+    [sender resignFirstResponder];
+}
 @end

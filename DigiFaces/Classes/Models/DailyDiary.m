@@ -43,7 +43,7 @@
     
     for (Diary* d in _userDiaries) {
         NSString * dDate = [[d.dateCreated componentsSeparatedByString:@"T"] firstObject];
-        if ([_diariesDict valueForKey:d.dateCreated]) {
+        if ([_diariesDict valueForKey:dDate]) {
             NSMutableArray * arrDiary = [_diariesDict objectForKey:dDate]
             ;
             [arrDiary addObject:d];
