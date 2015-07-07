@@ -11,11 +11,14 @@
 #import "TextViewCell.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "Utility.h"
+#import "DiaryInfoViewController.h"
+#import "CalendarViewController.h"
 
-@interface AddResponseViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface AddResponseViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, CalendarViewControlerDelegate>
 {
     NSInteger selectedTag;
     UIImagePickerController * imagePicker;
+    CalendarViewController * calendarView;
 }
 
 @property (nonatomic, retain) NSMutableArray * dataArray;
@@ -33,7 +36,14 @@
     _dataArray = [[NSMutableArray alloc] initWithCapacity:4];
 }
 
-
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"diaryInfoSegue"]) {
+        DiaryInfoViewController * diaryInfoController = (DiaryInfoViewController*)[(UINavigationController*)segue.destinationViewController topViewController];
+        diaryInfoController.isViewOnly = YES;
+        diaryInfoController.dailyDiary = self.dailyDiary;
+    }
+}
 
 -(void)keyboardWillShow:(NSNotification*)notification
 {
@@ -85,7 +95,7 @@
 
 - (IBAction)viewQuestion:(id)sender {
     
-    
+    [self performSegueWithIdentifier:@"diaryInfoSegue" sender:self];
 }
 
 - (IBAction)cameraSwitched:(id)sender {
@@ -95,6 +105,13 @@
 }
 
 - (IBAction)selectDate:(id)sender {
+    
+    [_txtResponse resignFirstResponder];
+    [_txtTitle resignFirstResponder];
+    
+    calendarView = [self.storyboard instantiateViewControllerWithIdentifier:@"calendarController"];
+    calendarView.delegate = self;
+    [self.navigationController.view addSubview:calendarView.view];
     
 }
 
@@ -172,6 +189,15 @@
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+#pragma mark - CalendarViewDelegate
+-(void)calendarController:(id)controller didSelectDate:(NSDate *)date
+{
+    NSString * strDate = [Utility stringFromDate:date];
+    [_btnDate setTitle:strDate forState:UIControlStateNormal];
+    [calendarView.view removeFromSuperview];
 }
 
 @end

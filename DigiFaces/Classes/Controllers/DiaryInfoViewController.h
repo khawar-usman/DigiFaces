@@ -12,6 +12,7 @@
 @interface DiaryInfoViewController : UITableViewController
 
 @property (nonatomic, retain) DailyDiary * dailyDiary;
+@property (nonatomic, assign) BOOL isViewOnly;
 
 - (IBAction)closeThis:(id)sender;
 

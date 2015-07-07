@@ -18,6 +18,7 @@
 +(NSString*)getStringForKey:(NSString*)key;
 +(NSString*)getAuthToken;
 +(NSString *)getUniqueId;
++(NSString*)stringFromDate:(NSDate*)date;
 
 +(NSString*)getMonDayYearDateFromString:(NSString*)date;
 

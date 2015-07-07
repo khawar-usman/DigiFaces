@@ -23,8 +23,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self addEditButton];
+    if (!_isViewOnly) {
+        [self addEditButton];
+    }
 }
 
 -(void)addEditButton
