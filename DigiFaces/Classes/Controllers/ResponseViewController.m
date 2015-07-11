@@ -32,6 +32,7 @@
 @property (nonatomic, retain) CustomAertView * customAlert;
 @property (nonatomic, retain) NSMutableArray * arrResponses;
 @property (nonatomic ,retain) Response * response;
+@property (nonatomic, retain) NSMutableArray * heightArray;
 
 @end
 
@@ -40,6 +41,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _heightArray = [[NSMutableArray alloc] init];
     
     self.customAlert = [[CustomAertView alloc]initWithNibName:@"CustomAertView" bundle:nil];
     [self.customAlert setSingleButton:YES];
@@ -192,6 +194,7 @@
         return 44;
     }
     else{
+        //NotificationCell * cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
         return 110;
     }
 }
@@ -299,7 +302,8 @@
     [cell.lblDate setText:comment.dateCreatedFormated];
     [cell.lblUserName setText:comment.userInfo.appUserName];
     [cell.userImage setImageWithURL:[NSURL URLWithString:comment.userInfo.avatarFile.filePath]];
-    [cell.lblInfo setText:comment.response];
+    [cell.infoLabel setText:comment.response];
+    
     [cell makeImageCircular];
     return cell;
 }
