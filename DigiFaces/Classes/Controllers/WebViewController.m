@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setTitle:_url];
+    [self setTitle:@"Video"];
     // Do any additional setup after loading the view.
     NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL URLWithString:_url]];
     [_webview loadRequest:request];
@@ -39,6 +39,6 @@
 */
 
 - (IBAction)goBack:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 @end

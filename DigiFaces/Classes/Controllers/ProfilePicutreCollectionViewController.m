@@ -218,7 +218,7 @@
                                       @"FileTypeId" : @"",
                                       @"FileType" : @"Image",
                                       @"Extension" : @"png",
-                                      @"IsAmazonFile" : @"1",
+                                      @"IsAmazonFile" : @YES,
                                       @"AmazonKey" : self.amazonFileURL,
                                       @"IsViddlerFile" : @"0",
                                       @"ViddlerKey" : @"",

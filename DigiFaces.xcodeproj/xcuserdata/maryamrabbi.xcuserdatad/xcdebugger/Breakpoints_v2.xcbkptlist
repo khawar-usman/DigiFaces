@@ -141,53 +141,6 @@
             endingLineNumber = "134"
             landmarkName = "-check_username_availability:"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__50-[UserViewController check_username_availability:]_block_invoke"
-                  moduleName = "DigiFaces"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/maryamrabbi/Documents/Current%20work/Shamsu%20Work/DigiFaces-2/DigiFaces/UserViewController.m"
-                  timestampString = "456753289.228071"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "134"
-                  endingLineNumber = "134"
-                  offsetFromSymbolStart = "337">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__50-[UserViewController check_username_availability:]_block_invoke"
-                  moduleName = "DigiFaces"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/maryamrabbi/Documents/Current%20work/Shamsu%20Work/DigiFaces-2/DigiFaces/UserViewController.m"
-                  timestampString = "456753289.228248"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "134"
-                  endingLineNumber = "134"
-                  offsetFromSymbolStart = "353">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__50-[UserViewController check_username_availability:]_block_invoke117"
-                  moduleName = "DigiFaces"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/maryamrabbi/Documents/Current%20work/Shamsu%20Work/DigiFaces-2/DigiFaces/UserViewController.m"
-                  timestampString = "456753289.228409"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "134"
-                  endingLineNumber = "134"
-                  offsetFromSymbolStart = "74">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -204,38 +157,6 @@
             endingLineNumber = "121"
             landmarkName = "-check_username_availability:"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[UserViewController check_username_availability:]"
-                  moduleName = "DigiFaces"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/maryamrabbi/Documents/Current%20work/Shamsu%20Work/DigiFaces-2/DigiFaces/UserViewController.m"
-                  timestampString = "456753289.229568"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "122"
-                  endingLineNumber = "122"
-                  offsetFromSymbolStart = "615">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__50-[UserViewController check_username_availability:]_block_invoke"
-                  moduleName = "DigiFaces"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/maryamrabbi/Documents/Current%20work/Shamsu%20Work/DigiFaces-2/DigiFaces/UserViewController.m"
-                  timestampString = "456753289.22975"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "122"
-                  endingLineNumber = "122"
-                  offsetFromSymbolStart = "68">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -332,38 +253,6 @@
             endingLineNumber = "46"
             landmarkName = "-check_user_projects"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[ProjectViewController check_user_projects]"
-                  moduleName = "DigiFaces"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/maryamrabbi/Documents/Current%20work/Shamsu%20Work/DigiFaces-2/DigiFaces/ProjectViewController.m"
-                  timestampString = "456753289.23264"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "46"
-                  endingLineNumber = "46"
-                  offsetFromSymbolStart = "376">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__44-[ProjectViewController check_user_projects]_block_invoke"
-                  moduleName = "DigiFaces"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/maryamrabbi/Documents/Current%20work/Shamsu%20Work/DigiFaces-2/DigiFaces/ProjectViewController.m"
-                  timestampString = "456753289.232829"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "46"
-                  endingLineNumber = "46"
-                  offsetFromSymbolStart = "68">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
