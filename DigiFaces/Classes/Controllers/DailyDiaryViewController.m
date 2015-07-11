@@ -23,10 +23,12 @@
 #import "DiaryThemeViewController.h"
 #import "AddResponseViewController.h"
 #import "ResponseViewController.h"
+#import "RTCell.h"
 
 @interface DailyDiaryViewController ()
 {
     UIButton * btnEdit;
+    RTCell * infoCel;
 }
 @property (nonatomic, retain) DailyDiary * dailyDiary;
 
@@ -126,14 +128,14 @@
             return 160;
         }
         else if (indexPath.row == 1) {
-            NSAttributedString *attributedText =
-            [[NSAttributedString alloc] initWithString:_dailyDiary.diaryQuestion attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17.0f]}];
-            
-            CGRect rect = [attributedText boundingRectWithSize:(CGSize){self.view.frame.size.width, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin context:nil];
-            
-            CGSize size = rect.size;
-            
-            return size.height + 20;
+//            NSAttributedString *attributedText =
+//            [[NSAttributedString alloc] initWithString:_dailyDiary.diaryQuestion attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17.0f]}];
+//            
+//            CGRect rect = [attributedText boundingRectWithSize:(CGSize){self.view.frame.size.width, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+//            
+//            CGSize size = rect.size;
+//            
+            return infoCel.titleLabel.optimumSize.height + 20;
         }
         else if (indexPath.row == 2){
             return 40;
@@ -162,9 +164,10 @@
             }
         }
         else if (indexPath.row == 1) {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"textCell" forIndexPath:indexPath];
+            infoCel = [tableView dequeueReusableCellWithIdentifier:@"textCell" forIndexPath:indexPath];
             
-            [cell.textLabel setText:_dailyDiary.diaryQuestion];
+            [infoCel.titleLabel setText:_dailyDiary.diaryQuestion];
+            cell = infoCel;
         }
         else if (indexPath.row == 2){
              DefaultCell * headerCell = [tableView dequeueReusableCellWithIdentifier:@"noResponseHeaderCell" forIndexPath:indexPath];

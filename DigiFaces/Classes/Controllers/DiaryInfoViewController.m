@@ -12,10 +12,12 @@
 #import "WebViewController.h"
 #import "VideoCell.h"
 #import "AddResponseViewController.h"
+#import "RTCell.h"
 
 @interface DiaryInfoViewController ()
 {
     UIButton * btnEdit;
+    RTCell * infoCell;
 }
 @end
 
@@ -67,14 +69,14 @@
         return 160;
     }
     if (indexPath.row == 1) {
-        NSAttributedString *attributedText =
-        [[NSAttributedString alloc] initWithString:_dailyDiary.diaryQuestion attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17.0f]}];
+//        NSAttributedString *attributedText =
+//        [[NSAttributedString alloc] initWithString:_dailyDiary.diaryQuestion attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17.0f]}];
+//        
+//        CGRect rect = [attributedText boundingRectWithSize:(CGSize){self.view.frame.size.width, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+//        
+//        CGSize size = rect.size;
         
-        CGRect rect = [attributedText boundingRectWithSize:(CGSize){self.view.frame.size.width, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin context:nil];
-        
-        CGSize size = rect.size;
-        
-        return size.height + 20;
+        return infoCell.titleLabel.optimumSize.height + 20;
     }
     return 0;
 }
@@ -97,9 +99,10 @@
         }
     }
     else if (indexPath.row == 1) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"textCell" forIndexPath:indexPath];
+        infoCell = [tableView dequeueReusableCellWithIdentifier:@"textCell" forIndexPath:indexPath];
         
-        [cell.textLabel setText:_dailyDiary.diaryQuestion];
+        [infoCell.titleLabel setText:_dailyDiary.diaryQuestion];
+        cell = infoCell;
     }
     
     
