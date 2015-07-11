@@ -40,7 +40,10 @@
     [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
-        _textView.text = [[[responseObject valueForKey:@"AboutText"] stringByDecodingHTMLEntities] stringByConvertingHTMLToPlainText];
+        [_aboutLabel setText:[responseObject valueForKey:@"AboutText"]];
+        
+        [_scrollView setContentSize:_aboutLabel.optimumSize];
+        //_textView.text = [[[responseObject valueForKey:@"AboutText"] stringByDecodingHTMLEntities] stringByConvertingHTMLToPlainText];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);

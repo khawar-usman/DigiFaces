@@ -52,6 +52,7 @@
 }
 
 -(IBAction)cancelThis:(id)sender{
+    
     NSString * aboutMe = [[UserManagerShared sharedManager] aboutMeText];
     
     if (![_aboutMe.text isEqualToString:@""] && ![_aboutMe.text isEqualToString:aboutMe]) {
@@ -59,6 +60,7 @@
         [alertview showAlertWithMessage:@"Your changes will be discarded. Do you want to descard changes?" inView:self.navigationController.view withTag:kTagDiscardChanges];
     }
     else{
+        [_aboutMe resignFirstResponder];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }

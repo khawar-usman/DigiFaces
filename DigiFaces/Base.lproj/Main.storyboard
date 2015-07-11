@@ -2235,24 +2235,34 @@
                         <viewControllerLayoutGuide type="bottom" id="uRY-zB-GhK"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="C3r-mc-XvS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TYc-2D-R6f">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3BT-Vz-qBt">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TLC-Mx-ylr" customClass="RTLabel">
+                                        <rect key="frame" x="8" y="0.0" width="304" height="504"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="TLC-Mx-ylr" firstAttribute="leading" secondItem="3BT-Vz-qBt" secondAttribute="leading" constant="8" id="BM8-1X-RC7"/>
+                                    <constraint firstAttribute="trailing" secondItem="TLC-Mx-ylr" secondAttribute="trailing" constant="8" id="VGC-gA-RYs"/>
+                                    <constraint firstAttribute="bottom" secondItem="TLC-Mx-ylr" secondAttribute="bottom" id="XCA-7m-gi8"/>
+                                    <constraint firstItem="TLC-Mx-ylr" firstAttribute="top" secondItem="3BT-Vz-qBt" secondAttribute="top" id="y98-s3-Xkp"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="uRY-zB-GhK" firstAttribute="top" secondItem="TYc-2D-R6f" secondAttribute="bottom" id="28W-h6-RpF"/>
-                            <constraint firstAttribute="trailing" secondItem="TYc-2D-R6f" secondAttribute="trailing" id="Fh9-cG-oTH"/>
-                            <constraint firstItem="TYc-2D-R6f" firstAttribute="top" secondItem="prh-Mr-U2m" secondAttribute="bottom" id="KRZ-8I-4hP"/>
-                            <constraint firstItem="TYc-2D-R6f" firstAttribute="leading" secondItem="C3r-mc-XvS" secondAttribute="leading" id="vvh-N2-RpP"/>
+                            <constraint firstItem="3BT-Vz-qBt" firstAttribute="top" secondItem="prh-Mr-U2m" secondAttribute="bottom" id="K7s-UF-M6o"/>
+                            <constraint firstItem="uRY-zB-GhK" firstAttribute="top" secondItem="3BT-Vz-qBt" secondAttribute="bottom" id="Rgd-21-1CB"/>
+                            <constraint firstItem="3BT-Vz-qBt" firstAttribute="leading" secondItem="C3r-mc-XvS" secondAttribute="leadingMargin" constant="-16" id="WWm-nn-RCZ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3BT-Vz-qBt" secondAttribute="trailing" constant="-16" id="puI-9u-Y4e"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="ABOUT DIGIFACES" id="f10-jU-lIo">
                         <barButtonItem key="leftBarButtonItem" image="top_bar_back_arrow" id="u6P-Nb-mQU">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2263,7 +2273,8 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="textView" destination="TYc-2D-R6f" id="3HD-3b-RHn"/>
+                        <outlet property="aboutLabel" destination="TLC-Mx-ylr" id="xOg-5z-zEi"/>
+                        <outlet property="scrollView" destination="3BT-Vz-qBt" id="ILZ-up-C9b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qO8-V4-Fkc" userLabel="First Responder" sceneMemberID="firstResponder"/>

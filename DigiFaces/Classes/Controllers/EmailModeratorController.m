@@ -32,6 +32,8 @@
         [alertView showAlertWithMessage:@"Your changes will be discarded. Do you want to cancel it?" inView:self.navigationController.view withTag:0];
     }
     else{
+        [_txtSubject resignFirstResponder];
+        [_textview resignFirstResponder];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
