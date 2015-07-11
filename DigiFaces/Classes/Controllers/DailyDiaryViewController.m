@@ -139,7 +139,7 @@
         }
     }
     else{
-        return 60;
+        return 44;
     }
     return 0;
 }
