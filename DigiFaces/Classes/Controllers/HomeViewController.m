@@ -16,6 +16,8 @@
 #import "SDConstants.h"
 #import "Utility.h"
 #import "ProfilePicutreCollectionViewController.h"
+#import "Reachability.h"
+#import "AppDelegate.h"
 
 @interface HomeViewController ()<ProfilePicCellDelegate, ProfilePictureViewControllerDelegate>
 {
@@ -37,6 +39,11 @@
     _imageNames = [[NSArray alloc]initWithObjects:@"home.png",@"diary.png",@"chat.png",@"friedship.png",@"talking.png",@"chat.png", nil];
     [self fetchUserInfo];
     // Do any additional setup after loading the view.
+    
+    if (![[Reachability reachabilityForInternetConnection] isReachable]) {
+        AppDelegate * app = [UIApplication sharedApplication].delegate;
+        [app showNetworkError];
+    }
 }
 
 -(void)viewDidAppear:(BOOL)animated

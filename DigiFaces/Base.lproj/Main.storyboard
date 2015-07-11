@@ -1491,20 +1491,27 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="textCell" textLabel="2Iu-v9-JBn" rowHeight="44" style="IBUITableViewCellStyleDefault" id="5ss-gG-GpJ">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="textCell" rowHeight="44" id="5ss-gG-GpJ" customClass="RTCell">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5ss-gG-GpJ" id="vjz-3h-VId">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2Iu-v9-JBn">
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xdb-Np-b0b" customClass="RTLabel">
+                                            <rect key="frame" x="8" y="8" width="304" height="28"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </view>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Xdb-Np-b0b" firstAttribute="bottom" secondItem="vjz-3h-VId" secondAttribute="bottomMargin" id="BoF-Xo-2SU"/>
+                                        <constraint firstItem="Xdb-Np-b0b" firstAttribute="top" secondItem="vjz-3h-VId" secondAttribute="topMargin" id="C7L-bD-BIP"/>
+                                        <constraint firstItem="Xdb-Np-b0b" firstAttribute="leading" secondItem="vjz-3h-VId" secondAttribute="leadingMargin" id="CJw-Hx-xrC"/>
+                                        <constraint firstItem="Xdb-Np-b0b" firstAttribute="trailing" secondItem="vjz-3h-VId" secondAttribute="trailingMargin" id="Rdb-jr-MaJ"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="titleLabel" destination="Xdb-Np-b0b" id="Jta-H4-P2G"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="videoCell" id="o52-rV-ZdH" customClass="VideoCell">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1944,17 +1951,6 @@
                                     <constraint firstAttribute="width" constant="68" id="LXk-bV-TuE"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0NA-Qh-yyF">
-                                <rect key="frame" x="92" y="121" width="212" height="27"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <state key="normal" title="CHANGE PICTURE">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="nyh-Nl-Kz1" kind="presentation" identifier="profilePictureSegue" id="qEB-vZ-fPy"/>
-                                </connections>
-                            </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="73L-HL-w8M">
                                 <rect key="frame" x="16" y="159" width="288" height="253"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1963,7 +1959,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="omK-fU-vGG">
-                                <rect key="frame" x="92" y="83" width="212" height="30"/>
+                                <rect key="frame" x="92" y="102" width="212" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Pg9-eA-K28"/>
                                 </constraints>
@@ -1975,28 +1971,21 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="n3C-hM-PSf" firstAttribute="top" secondItem="wKG-Md-xwR" secondAttribute="bottom" constant="19" id="0eg-3k-GVH"/>
+                            <constraint firstItem="73L-HL-w8M" firstAttribute="top" secondItem="n3C-hM-PSf" secondAttribute="bottom" constant="8" symbolic="YES" id="1JB-QM-o45"/>
                             <constraint firstItem="n3C-hM-PSf" firstAttribute="leading" secondItem="BjS-Vr-NRO" secondAttribute="leadingMargin" id="CnT-TF-dkS"/>
                             <constraint firstItem="CoN-ki-aNy" firstAttribute="top" secondItem="73L-HL-w8M" secondAttribute="bottom" constant="156" id="HnX-DS-SiP"/>
-                            <constraint firstItem="0NA-Qh-yyF" firstAttribute="top" secondItem="omK-fU-vGG" secondAttribute="bottom" constant="8" id="JgG-AB-rnq"/>
-                            <constraint firstItem="0NA-Qh-yyF" firstAttribute="trailing" secondItem="BjS-Vr-NRO" secondAttribute="trailingMargin" id="N7X-IN-6lq"/>
                             <constraint firstItem="n3C-hM-PSf" firstAttribute="leading" secondItem="BjS-Vr-NRO" secondAttribute="leading" constant="16" id="NYx-cK-nBr"/>
                             <constraint firstItem="omK-fU-vGG" firstAttribute="trailing" secondItem="BjS-Vr-NRO" secondAttribute="trailingMargin" id="P1E-gq-5kW"/>
-                            <constraint firstItem="omK-fU-vGG" firstAttribute="top" secondItem="wKG-Md-xwR" secondAttribute="bottom" constant="19" id="Q3m-5C-sHS"/>
+                            <constraint firstItem="omK-fU-vGG" firstAttribute="top" secondItem="wKG-Md-xwR" secondAttribute="bottom" constant="38" id="Q3m-5C-sHS"/>
                             <constraint firstItem="73L-HL-w8M" firstAttribute="leading" secondItem="BjS-Vr-NRO" secondAttribute="leadingMargin" id="Udj-gN-nQF"/>
-                            <constraint firstItem="73L-HL-w8M" firstAttribute="top" secondItem="0NA-Qh-yyF" secondAttribute="bottom" constant="11" id="WfQ-LV-A6T"/>
                             <constraint firstItem="omK-fU-vGG" firstAttribute="leading" secondItem="n3C-hM-PSf" secondAttribute="trailing" constant="8" id="cEP-Eb-VKw"/>
-                            <constraint firstItem="0NA-Qh-yyF" firstAttribute="top" secondItem="omK-fU-vGG" secondAttribute="bottom" constant="8" id="e3X-JH-ziX"/>
-                            <constraint firstItem="0NA-Qh-yyF" firstAttribute="leading" secondItem="n3C-hM-PSf" secondAttribute="trailing" constant="8" id="eMs-5o-dfh"/>
                             <constraint firstItem="73L-HL-w8M" firstAttribute="trailing" secondItem="BjS-Vr-NRO" secondAttribute="trailingMargin" id="g9I-vp-cg2"/>
-                            <constraint firstItem="0NA-Qh-yyF" firstAttribute="leading" secondItem="n3C-hM-PSf" secondAttribute="trailing" constant="22" id="ozy-hx-3a1"/>
                             <constraint firstItem="omK-fU-vGG" firstAttribute="leading" secondItem="n3C-hM-PSf" secondAttribute="trailing" constant="24" id="xZl-Ec-5VQ"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="NYx-cK-nBr"/>
                                 <exclude reference="xZl-Ec-5VQ"/>
-                                <exclude reference="JgG-AB-rnq"/>
-                                <exclude reference="ozy-hx-3a1"/>
                             </mask>
                         </variation>
                     </view>
@@ -3098,10 +3087,9 @@
         <image name="top_bar_back_arrow" width="13" height="23"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="xm7-nE-fcs"/>
-        <segue reference="Sf2-TU-VcE"/>
         <segue reference="veF-sC-LAA"/>
+        <segue reference="rh1-KO-Byx"/>
+        <segue reference="Sf2-TU-VcE"/>
         <segue reference="EYx-dI-yCG"/>
-        <segue reference="YVH-jF-Mn7"/>
     </inferredMetricsTieBreakers>
 </document>

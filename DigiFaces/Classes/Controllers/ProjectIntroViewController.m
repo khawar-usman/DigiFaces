@@ -17,12 +17,14 @@
 #import "NSString+HTML.h"
 #import "WebViewController.h"
 #import "VideoCell.h"
+#import "RTCell.h"
 
 @interface ProjectIntroViewController ()
 {
     File * attachment;
     NSString * text;
     NSString * title;
+    RTCell * introCell;
 }
 @property (nonatomic, retain) NSMutableArray * dataAray;
 @end
@@ -113,7 +115,7 @@
         CGSize size = rect.size;
         
         
-        return size.height;
+        return introCell.titleLabel.optimumSize.height + 50;
     }
     
     return 0;
@@ -149,9 +151,9 @@
         return cell;
     }
     else{
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"textCell" forIndexPath:indexPath];
-        [cell.textLabel setText:text];
-        return cell;
+        introCell = [tableView dequeueReusableCellWithIdentifier:@"textCell" forIndexPath:indexPath];
+        [introCell.titleLabel setText:text];
+        return introCell;
     }
 }
 
