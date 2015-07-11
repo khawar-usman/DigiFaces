@@ -188,4 +188,10 @@
 }
 
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [_email resignFirstResponder];
+    [_password resignFirstResponder];
+}
+
 @end
