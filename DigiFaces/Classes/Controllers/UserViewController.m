@@ -71,6 +71,7 @@
         
     }
     [self check_username_availability:_username.text];
+    
 }
 
 
@@ -125,6 +126,7 @@
             [self set_username:username];
         }else{
             _errorMessage.text = @"User name already exists";
+            [self.customAlert showAlertWithMessage:@"User name already exists" inView:self.view withTag:0];
             [MBProgressHUD hideHUDForView:self.view animated:YES];
 
         }

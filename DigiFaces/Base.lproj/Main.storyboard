@@ -286,8 +286,11 @@
                                     <action selector="check_user_validation:" destination="Pr2-88-lms" eventType="touchUpInside" id="3Kd-tt-V9W"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jl1-E8-NVJ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jl1-E8-NVJ">
                                 <rect key="frame" x="11" y="232" width="298" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="dk3-RH-4an"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="1" green="0.024698974379999999" blue="0.1050961213" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -370,19 +373,6 @@
                                                 <constraint firstAttribute="height" constant="110" id="PEf-8E-z7D"/>
                                             </constraints>
                                         </imageView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BWn-Cu-LG5">
-                                            <rect key="frame" x="201" y="14" width="29" height="23"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="23" id="DLe-Y7-Ok1"/>
-                                                <constraint firstAttribute="width" constant="29" id="fUN-k5-b27"/>
-                                            </constraints>
-                                            <state key="normal" image="camera-white">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="cameraClicked:" destination="O2r-eu-gtJ" eventType="touchUpInside" id="TOb-We-mLO"/>
-                                            </connections>
-                                        </button>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dummy_avatar" translatesAutoresizingMaskIntoConstraints="NO" id="MrM-Cm-mnp">
                                             <rect key="frame" x="112" y="21" width="95" height="95"/>
                                             <constraints>
@@ -396,12 +386,36 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BWn-Cu-LG5">
+                                            <rect key="frame" x="188" y="80" width="44" height="44"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="23" id="DLe-Y7-Ok1"/>
+                                                <constraint firstAttribute="width" constant="44" id="VzH-h5-njv"/>
+                                                <constraint firstAttribute="height" constant="44" id="bLE-wH-TkK"/>
+                                                <constraint firstAttribute="width" constant="29" id="fUN-k5-b27"/>
+                                            </constraints>
+                                            <inset key="imageEdgeInsets" minX="12" minY="14" maxX="12" maxY="14"/>
+                                            <state key="normal" image="camera-white">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="DLe-Y7-Ok1"/>
+                                                    <exclude reference="fUN-k5-b27"/>
+                                                </mask>
+                                            </variation>
+                                            <connections>
+                                                <action selector="cameraClicked:" destination="O2r-eu-gtJ" eventType="touchUpInside" id="TOb-We-mLO"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="centerX" secondItem="m8U-A7-paa" secondAttribute="centerX" id="6uD-Va-Gtn"/>
                                         <constraint firstItem="BWn-Cu-LG5" firstAttribute="top" secondItem="f8m-4S-5pA" secondAttribute="topMargin" constant="6" id="FXc-Ok-YaJ"/>
                                         <constraint firstItem="qds-ra-TML" firstAttribute="trailing" secondItem="f8m-4S-5pA" secondAttribute="trailingMargin" id="Fc7-sA-z71"/>
+                                        <constraint firstAttribute="centerX" secondItem="BWn-Cu-LG5" secondAttribute="centerX" constant="-50" id="Ihg-Qk-3em"/>
                                         <constraint firstAttribute="centerX" secondItem="MrM-Cm-mnp" secondAttribute="centerX" id="Jgu-j1-h29"/>
+                                        <constraint firstItem="qds-ra-TML" firstAttribute="top" secondItem="BWn-Cu-LG5" secondAttribute="bottom" constant="5" id="Nby-Hy-iPG"/>
                                         <constraint firstItem="m8U-A7-paa" firstAttribute="top" secondItem="f8m-4S-5pA" secondAttribute="topMargin" constant="6" id="Nxb-2D-X7v"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="qds-ra-TML" secondAttribute="bottom" constant="7" id="eUP-1d-DnZ"/>
                                         <constraint firstItem="qds-ra-TML" firstAttribute="top" secondItem="MrM-Cm-mnp" secondAttribute="bottom" constant="13" id="hEd-3o-Iis"/>
@@ -409,6 +423,12 @@
                                         <constraint firstItem="MrM-Cm-mnp" firstAttribute="top" secondItem="f8m-4S-5pA" secondAttribute="topMargin" constant="13" id="jtP-jG-pwz"/>
                                         <constraint firstItem="qds-ra-TML" firstAttribute="leading" secondItem="f8m-4S-5pA" secondAttribute="leadingMargin" id="v34-qh-pbO"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="FXc-Ok-YaJ"/>
+                                            <exclude reference="hrm-6p-nv4"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.15294117647058825" green="0.6705882352941176" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
@@ -1250,8 +1270,8 @@
                                                 </state>
                                                 <variation key="default">
                                                     <mask key="constraints">
-                                                        <exclude reference="sCn-hb-fBF"/>
                                                         <exclude reference="6lm-Ks-VIX"/>
+                                                        <exclude reference="sCn-hb-fBF"/>
                                                     </mask>
                                                 </variation>
                                                 <connections>

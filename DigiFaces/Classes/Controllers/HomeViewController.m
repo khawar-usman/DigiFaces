@@ -39,16 +39,12 @@
     // Do any additional setup after loading the view.
 }
 
--(UIImage*)resizeImage:(UIImage *)image imageSize:(CGSize)size
+-(void)viewDidAppear:(BOOL)animated
 {
-    UIGraphicsBeginImageContext(size);
-    [image drawInRect:CGRectMake(0,0,size.width,size.height)];
-    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
-    //here is the scaled image which has been changed to the size specified
-    UIGraphicsEndImageContext();
-    return newImage;
-    
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -125,22 +121,10 @@
         
         [[UserManagerShared sharedManager] setUserInfoDictionary:responseObject];
         
-//        NSDictionary * currentProjDic = [responseObject objectForKey:@"CurrentProject"];
-//        NSString * projectId = [currentProjDic objectForKey:@"ProjectId"];
-//        NSArray * DailyDiaryList = [currentProjDic objectForKey:@"DailyDiaryList"];
 
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
         
-        __weak typeof(self)weakSelf = self;
-        
-        NSURLRequest * requestN = [NSURLRequest requestWithURL:[NSURL URLWithString:imageUrl]];
-        [picCell.profileImage setImageWithURLRequest:requestN placeholderImage:[UIImage imageNamed:@"dummy_avatar.png"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-            
-            [[UserManagerShared sharedManager] setProfilePic:[weakSelf resizeImage:image imageSize:CGSizeMake(100, 120)]];
-
-        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-            [MBProgressHUD hideHUDForView:weakSelf.navigationController.view animated:YES];
-        }];
+        [self setProfilePicuture:[[UserManagerShared sharedManager] avatarFile].filePath];
         
         [[UserManagerShared sharedManager] setFirstName:[responseObject objectForKey:@"FirstName"]];
         [[UserManagerShared sharedManager] setLastName:[responseObject objectForKey:@"LastName"]];
@@ -155,6 +139,20 @@
     }];
 }
 
+
+-(void)setProfilePicuture:(NSString*)imageUrl
+{
+    
+    NSURLRequest * requestN = [NSURLRequest requestWithURL:[NSURL URLWithString:imageUrl]];
+    [picCell.profileImage setImageWithURLRequest:requestN placeholderImage:[UIImage imageNamed:@"dummy_avatar.png"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        
+        [[UserManagerShared sharedManager] setProfilePic:[Utility resizeImage:image imageSize:CGSizeMake(100, 120)]];
+        
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+        NSLog(@"Image download failed");
+    }];
+}
+
 -(void)updateProfilePicture:(NSDictionary*)profilePicture
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -164,8 +162,6 @@
     
     [requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     
-    //NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:@"0", @"AboutMeId", [Utility getStringForKey:kCurrentPorjectID], @"ProjectId", @"", @"UserId", _aboutMe.text, @"AboutMeText", nil];
-    
     manager.requestSerializer = requestSerializer;
     
     NSString * url = [NSString stringWithFormat:@"%@%@", kBaseURL, kUpdateAvagar];
@@ -173,11 +169,9 @@
     [manager POST:url parameters:profilePicture success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            File * file = [[File alloc] init];
-            NSString * url = [file returnFilePathFromFileObject:profilePicture];
-            [picCell.profileImage setImageWithURL:[NSURL URLWithString:url]];
-        });
+        [[UserManagerShared sharedManager] setProfilePicDict:profilePicture];
+        
+        [self setProfilePicuture:[[UserManagerShared sharedManager] avatarFile].filePath];
         
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -198,6 +192,11 @@
     picCell.profileImage.contentMode = UIViewContentModeScaleToFill;
     picCell.profileImage.clipsToBounds = YES;
     picCell.profileImage.layer.cornerRadius = 47.0;
+    
+    if ([[UserManagerShared sharedManager] profilePic]) {
+        [picCell.profileImage setImage:[[UserManagerShared sharedManager] profilePic]];
+    }
+    
 //    _userPicture.frame = CGRectMake(_userPicture.frame.origin.x, _userPicture.frame.origin.y, 70, 70);
 }
 

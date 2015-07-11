@@ -20,7 +20,6 @@
     BOOL IsModerator;
     UIImage * profilePic;
     NSString * aboutMe;
-    NSString * currentProjectID;
 }
 + (id)sharedManager;
 
@@ -29,14 +28,19 @@
 @property (nonatomic, retain) File * avatarFile;
 @property (nonatomic, retain) Project * currentProject;
 
+@property (nonatomic ,retain) NSString * ID;
+
 @property(nonatomic,retain)NSArray * projectsArray;
 @property(nonatomic,retain)NSString * FirstName;
-@property(nonatomic,retain)NSString *   LastName;
+@property(nonatomic,retain)NSString * LastName;
 @property(nonatomic,assign)BOOL IsModerator;
 @property(nonatomic,retain)UIImage * profilePic;
 @property(nonatomic,retain)NSString * aboutMeText;
-@property(nonatomic,retain)NSString * currentProjectID;
+@property(nonatomic,assign)NSInteger currentProjectID;
+@property (nonatomic, retain) NSString * appUserName;
+@property (nonatomic ,retain) NSString * email;
 
 -(void)setUserInfoDictionary:(NSDictionary*)dict;
+-(void)setProfilePicDict:(NSDictionary*)profile;
 
 @end

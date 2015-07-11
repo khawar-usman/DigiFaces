@@ -21,13 +21,26 @@
 - (id)init {
     if (self = [super init]) {
         self.projectsArray = [[NSArray alloc]init];
-        self.profilePic = [[UIImage alloc]init];
+        self.profilePic = [UIImage imageNamed:@"dummy_avatar.png"];
     }
     return self;
 }
 
+-(void)setProfilePicDict:(NSDictionary*)profile
+{
+    _avatarFile = [[File alloc] initWithDictionary:profile];
+}
+
 -(void)setUserInfoDictionary:(NSDictionary*)dict
-{   
+{
+    self.aboutMeText = [dict valueForKey:@"AboutMeText"];
+    self.appUserName = [dict valueForKey:@"AppUserName"];
+    self.ID = [dict valueForKey:@"Id"];
+    self.email = [dict valueForKey:@"Email"];
+    self.currentProjectID = [[dict valueForKey:@"CurrentProjectId"] integerValue];
+    self.FirstName = [dict valueForKey:@"FirstName"];
+    self.LastName = [dict valueForKey:@"LastName"];
+    self.IsModerator = [[dict valueForKey:@"IsModerator"] boolValue];
     _info = [[UserInfo alloc] initWithDictioanry:dict];
     _avatarFile = [[File alloc] initWithDictionary:[dict valueForKey:@"AvatarFile"]];
     

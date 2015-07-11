@@ -78,7 +78,7 @@
 
     [requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     
-    NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:@"0", @"AboutMeId", [Utility getStringForKey:kCurrentPorjectID], @"ProjectId", @"", @"UserId", _aboutMe.text, @"AboutMeText", nil];
+    NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:@"0", @"AboutMeId", [Utility getStringForKey:kCurrentPorjectID], @"ProjectId", [[UserManagerShared sharedManager] ID], @"UserId", _aboutMe.text, @"AboutMeText", nil];
     
     manager.requestSerializer = requestSerializer;
     
@@ -86,11 +86,10 @@
     
     [manager POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
-        
+                
         [Utility saveString:_aboutMe.text forKey:kAboutMeText];
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
         
-        //[alertview showAlertWithMessage:@"Your about me text is updated successfully." inView:self.navigationController.view withTag:0];
         [[UserManagerShared sharedManager] setAboutMeText:_aboutMe.text];
         [self dismissViewControllerAnimated:YES completion:nil];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -126,7 +125,6 @@
     
     [requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     
-    //NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:@"0", @"AboutMeId", [Utility getStringForKey:kCurrentPorjectID], @"ProjectId", @"", @"UserId", _aboutMe.text, @"AboutMeText", nil];
     
     manager.requestSerializer = requestSerializer;
     
@@ -135,10 +133,10 @@
     [manager POST:url parameters:profilePicture success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
         
+        [[UserManagerShared sharedManager] setProfilePicDict:profilePicture];
+        
         dispatch_async(dispatch_get_main_queue(), ^{
-            File * file = [[File alloc] init];
-            NSString * url = [file returnFilePathFromFileObject:profilePicture];
-            [self.profilePicView setImageWithURL:[NSURL URLWithString:url]];
+            [self setProfilePicuture:[[UserManagerShared sharedManager] avatarFile].filePath];
         });
         
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
@@ -152,6 +150,20 @@
         
     }];
     [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+}
+
+-(void)setProfilePicuture:(NSString*)imageUrl
+{
+    __weak typeof(self)weakSelf = self;
+    
+    NSURLRequest * requestN = [NSURLRequest requestWithURL:[NSURL URLWithString:imageUrl]];
+    [self.profilePicView setImageWithURLRequest:requestN placeholderImage:[UIImage imageNamed:@"dummy_avatar.png"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        [self.profilePicView setImage:image];
+        [[UserManagerShared sharedManager] setProfilePic:[Utility resizeImage:image imageSize:CGSizeMake(100, 120)]];
+        
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+        [MBProgressHUD hideHUDForView:weakSelf.navigationController.view animated:YES];
+    }];
 }
 
 

@@ -21,5 +21,6 @@
 +(NSString*)stringFromDate:(NSDate*)date;
 
 +(NSString*)getMonDayYearDateFromString:(NSString*)date;
++(UIImage*)resizeImage:(UIImage *)image imageSize:(CGSize)size;
 
 @end
