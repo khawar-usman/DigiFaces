@@ -21,10 +21,12 @@
 #import "CommentCell.h"
 #import "Utility.h"
 #import "CustomAertView.h"
+#import "RTCell.h"
 
 @interface ResponseViewController () <CommentCellDelegate>
 {
     NSInteger contentHeight;
+    RTCell *infoCell;
 }
 
 @property (nonatomic, retain) CustomAertView * customAlert;
@@ -181,24 +183,7 @@
     }
     else if (indexPath.row == 1){
         
-        NSString * response = nil;
-        if (_responseType == ResponseControllerTypeNotification) {
-            TextAreaResponse * t = [_response.textAreaResponse objectAtIndex:0];
-            response = t.response;
-        }
-        else{
-            response = _diary.response;
-        }
-        NSAttributedString *attributedText =
-        [[NSAttributedString alloc] initWithString:response attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17.0f]}];
-        
-        CGRect rect = [attributedText boundingRectWithSize:(CGSize){self.view.frame.size.width, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin context:nil];
-        
-        CGSize size = rect.size;
-        
-        return size.height + 20;
-        
-        return MIN(90, size.height);
+        return MIN(90, infoCell.titleLabel.optimumSize.height + 20);
     }
     else if (_response.files.count>0 && indexPath.row == 2){
         return 85;
@@ -257,15 +242,16 @@
         return cell;
     }
     else if (indexPath.row == 1){
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"textCell" forIndexPath:indexPath];
+        infoCell = [tableView dequeueReusableCellWithIdentifier:@"textCell" forIndexPath:indexPath];
+        
         if (_responseType == ResponseControllerTypeNotification) {
             TextAreaResponse * t = [_response.textAreaResponse objectAtIndex:0];
-            [cell.textLabel setText:t.response];
+            [infoCell.titleLabel setText:t.response];
         }
         else{
-            [cell.textLabel setText:_diary.response];
+            [infoCell.titleLabel setText:_diary.response];
         }
-        return cell;
+        return infoCell;
     }
     
     if (_response.files.count>0 && indexPath.row == 2) {

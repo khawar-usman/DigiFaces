@@ -703,20 +703,27 @@
                                                     <outlet property="userImage" destination="Py2-Fv-Nvc" id="BCN-Hf-A64"/>
                                                 </connections>
                                             </tableViewCell>
-                                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="textCell" textLabel="WT7-Yo-Jf1" rowHeight="44" style="IBUITableViewCellStyleDefault" id="TAn-qU-uOf">
+                                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="textCell" rowHeight="44" id="TAn-qU-uOf" customClass="RTCell">
                                                 <rect key="frame" x="0.0" y="230" width="320" height="44"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TAn-qU-uOf" id="CIR-wm-VcD">
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WT7-Yo-Jf1">
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
-                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P2Y-0Y-ibr" customClass="RTLabel">
+                                                            <rect key="frame" x="8" y="8" width="304" height="27"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </view>
                                                     </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="P2Y-0Y-ibr" firstAttribute="bottom" secondItem="CIR-wm-VcD" secondAttribute="bottomMargin" id="1Iq-fy-AJB"/>
+                                                        <constraint firstItem="P2Y-0Y-ibr" firstAttribute="leading" secondItem="CIR-wm-VcD" secondAttribute="leadingMargin" id="Kck-If-FNt"/>
+                                                        <constraint firstItem="P2Y-0Y-ibr" firstAttribute="trailing" secondItem="CIR-wm-VcD" secondAttribute="trailingMargin" id="ffk-VJ-dy6"/>
+                                                        <constraint firstItem="P2Y-0Y-ibr" firstAttribute="top" secondItem="CIR-wm-VcD" secondAttribute="topMargin" id="tZh-Gp-fNn"/>
+                                                    </constraints>
                                                 </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="titleLabel" destination="P2Y-0Y-ibr" id="OJI-uE-92N"/>
+                                                </connections>
                                             </tableViewCell>
                                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="imagesScrollCell" rowHeight="85" id="FDe-el-bnR" customClass="ImagesCell">
                                                 <rect key="frame" x="0.0" y="210" width="320" height="85"/>
@@ -1097,7 +1104,7 @@
                         <segue destination="THO-t6-uQc" kind="modal" identifier="diaryInfoSegue" id="Taj-qP-dlL"/>
                         <segue destination="Mvx-4s-GvE" kind="presentation" identifier="addResponseSegue" id="veF-sC-LAA"/>
                         <segue destination="Re9-sw-T8y" kind="push" identifier="webViewSegue" id="PJM-GU-RyY"/>
-                        <segue destination="w0Z-FY-oBT" kind="push" identifier="themeSegue" id="6Xp-y3-cFx"/>
+                        <segue destination="Llw-KH-PDU" kind="push" identifier="diaryEntryDetailSegue" id="Z1a-cS-acW"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jqe-W6-ntj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2605,7 +2612,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P40-CZ-Zf9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3307" y="-423"/>
+            <point key="canvasLocation" x="3705" y="-429"/>
         </scene>
         <!--DIARY-->
         <scene sceneID="fWO-re-VFZ">
@@ -3124,9 +3131,9 @@
         <image name="top_bar_back_arrow" width="13" height="23"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="GNd-Wo-Hrw"/>
-        <segue reference="3r5-SJ-zjd"/>
-        <segue reference="XNZ-ng-ebc"/>
-        <segue reference="kgY-B9-zM2"/>
+        <segue reference="veF-sC-LAA"/>
+        <segue reference="PJM-GU-RyY"/>
+        <segue reference="Taj-qP-dlL"/>
+        <segue reference="Z1a-cS-acW"/>
     </inferredMetricsTieBreakers>
 </document>

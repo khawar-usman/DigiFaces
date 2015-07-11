@@ -22,6 +22,7 @@
 #import "DefaultCell.h"
 #import "DiaryThemeViewController.h"
 #import "AddResponseViewController.h"
+#import "ResponseViewController.h"
 
 @interface DailyDiaryViewController ()
 {
@@ -206,7 +207,6 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             [self performSegueWithIdentifier:@"webViewSegue" sender:self];
@@ -216,7 +216,8 @@
         }
     }
     else{
-        [self performSegueWithIdentifier:@"themeSegue" sender:self];
+        
+        [self performSegueWithIdentifier:@"diaryEntryDetailSegue" sender:self];
     }
     
 }
@@ -243,6 +244,13 @@
     else if ([segue.identifier isEqualToString:@"addResponseSegue"]){
         AddResponseViewController * responseController = (AddResponseViewController*)[(UINavigationController*)[segue destinationViewController] topViewController];
         responseController.dailyDiary = self.dailyDiary;
+    }
+    else if ([segue.identifier isEqualToString:@"diaryEntryDetailSegue"]){
+        NSIndexPath * indexPath = [self.tableView indexPathForSelectedRow];
+        Diary * diary = [self.dailyDiary.userDiaries objectAtIndex:indexPath.row];
+        ResponseViewController * responseController = [segue destinationViewController];
+        responseController.diary = diary;
+        responseController.responseType = ResponseControllerTypeDiaryResponse;
     }
 }
 
