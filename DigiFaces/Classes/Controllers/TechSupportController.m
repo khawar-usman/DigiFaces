@@ -46,7 +46,7 @@
 }
 - (IBAction)send:(id)sender {
     
-    if ([_textArea.text isEqualToString:@""] || [_textArea.text isEqualToString:@"Some Text to Post"]) {
+    if ([_textArea.text isEqualToString:@""]) {
         [self resignAllResponder];
         [alertView setSingleButton:YES];
         [alertView showAlertWithMessage:@"Subject and message are required." inView:self.navigationController.view withTag:0];
@@ -104,6 +104,16 @@
         [self dismissViewControllerAnimated:YES completion:nil];
     }
     
+}
+
+-(void)textViewDidChange:(UITextView *)textView
+{
+    if ([textView.text isEqualToString:@""]) {
+        [_lblPlaceholder setHidden:NO];
+    }
+    else{
+        [_lblPlaceholder setHidden:YES];
+    }
 }
 
 @end

@@ -16,5 +16,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtSubject;
 
 @property (weak, nonatomic) IBOutlet UITextView *textArea;
+@property (weak, nonatomic) IBOutlet UILabel *lblPlaceholder;
 
 @end

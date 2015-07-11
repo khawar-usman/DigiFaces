@@ -93,7 +93,7 @@
     //here is the scaled image which has been changed to the size specified
     UIGraphicsEndImageContext();
     return newImage;
-    
 }
+
 
 @end

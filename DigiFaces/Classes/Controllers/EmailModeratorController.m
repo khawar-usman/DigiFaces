@@ -44,7 +44,7 @@
     [_textview resignFirstResponder];
 }
 - (IBAction)sendEmail:(id)sender {
-    if ([_textview.text isEqualToString:@""] || [_textview.text isEqualToString:@"Some Text to Post"]) {
+    if ([_textview.text isEqualToString:@""]) {
         [self resignAllResponder];
         [alertView setSingleButton:YES];
         [alertView showAlertWithMessage:@"Subject and message are required." inView:self.navigationController.view withTag:0];
@@ -96,6 +96,16 @@
 {
     if (tag == kSuccessTag) {
         [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+-(void)textViewDidChange:(UITextView *)textView
+{
+    if ([textView.text isEqualToString:@""]) {
+        [_lblPlaceholder setHidden:NO];
+    }
+    else{
+        [_lblPlaceholder setHidden:YES];
     }
 }
 
