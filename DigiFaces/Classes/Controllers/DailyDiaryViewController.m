@@ -237,7 +237,7 @@
         diaryInfoController.dailyDiary = self.dailyDiary;
     }
     else if ([segue.identifier isEqualToString:@"webViewSegue"]){
-        WebViewController * webController = [segue destinationViewController];
+        WebViewController * webController = (WebViewController*)[(UINavigationController*)[segue destinationViewController] topViewController];
         webController.url = [_dailyDiary.file filePath];
     }
     else if ([segue.identifier isEqualToString:@"themeSegue"]){

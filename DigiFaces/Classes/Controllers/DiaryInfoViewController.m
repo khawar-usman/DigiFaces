@@ -156,7 +156,7 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"webViewSegue"]){
-        WebViewController * webController = [segue destinationViewController];
+        WebViewController * webController = (WebViewController*)[(UINavigationController*)[segue destinationViewController] topViewController];
         webController.url = [_dailyDiary.file filePath];
     }
     else if ([segue.identifier isEqualToString:@"addResponseSegue"]){
