@@ -1047,17 +1047,17 @@
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="videoCell" id="HbG-Dk-uCb" customClass="VideoCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="videoCell" rowHeight="128" id="HbG-Dk-uCb" customClass="VideoCell">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HbG-Dk-uCb" id="y7N-cq-FPP">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dth-xk-7i2">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="94"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="127"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5Le-1q-sAm">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="94"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="127"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -1069,7 +1069,7 @@
                                             </constraints>
                                         </view>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="playIcon" translatesAutoresizingMaskIntoConstraints="NO" id="4in-mQ-Yct">
-                                            <rect key="frame" x="135" y="22" width="50" height="50"/>
+                                            <rect key="frame" x="135" y="39" width="50" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="50" id="YxZ-al-BgD"/>
                                                 <constraint firstAttribute="height" constant="50" id="qVp-bc-2ui"/>
@@ -1078,12 +1078,24 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="Dth-xk-7i2" firstAttribute="leading" secondItem="y7N-cq-FPP" secondAttribute="leadingMargin" constant="-8" id="2di-fv-d58"/>
+                                        <constraint firstItem="Dth-xk-7i2" firstAttribute="top" secondItem="y7N-cq-FPP" secondAttribute="topMargin" constant="-8" id="Ecf-dp-v5t"/>
+                                        <constraint firstItem="Dth-xk-7i2" firstAttribute="leading" secondItem="y7N-cq-FPP" secondAttribute="leadingMargin" constant="-8" id="Gw6-A5-KFW"/>
                                         <constraint firstItem="Dth-xk-7i2" firstAttribute="top" secondItem="y7N-cq-FPP" secondAttribute="topMargin" constant="-8" id="QFZ-4a-bLc"/>
                                         <constraint firstItem="Dth-xk-7i2" firstAttribute="trailing" secondItem="y7N-cq-FPP" secondAttribute="trailingMargin" constant="8" id="bUj-8D-nrr"/>
                                         <constraint firstItem="Dth-xk-7i2" firstAttribute="bottom" secondItem="y7N-cq-FPP" secondAttribute="bottomMargin" constant="8" id="gbj-zn-7eM"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Dth-xk-7i2" secondAttribute="trailing" constant="-8" id="hBv-ML-7St"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="Dth-xk-7i2" secondAttribute="bottom" constant="-8" id="sx9-dU-IFe"/>
                                         <constraint firstAttribute="centerY" secondItem="4in-mQ-Yct" secondAttribute="centerY" id="y0B-En-tfs"/>
                                         <constraint firstAttribute="centerX" secondItem="4in-mQ-Yct" secondAttribute="centerX" id="yos-VQ-G5w"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="2di-fv-d58"/>
+                                            <exclude reference="QFZ-4a-bLc"/>
+                                            <exclude reference="bUj-8D-nrr"/>
+                                            <exclude reference="gbj-zn-7eM"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="imageView" destination="5Le-1q-sAm" id="8tA-us-AWv"/>
@@ -2254,15 +2266,15 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TLC-Mx-ylr" customClass="RTLabel">
-                                        <rect key="frame" x="8" y="0.0" width="304" height="504"/>
+                                        <rect key="frame" x="8" y="8" width="304" height="488"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="TLC-Mx-ylr" firstAttribute="leading" secondItem="3BT-Vz-qBt" secondAttribute="leading" constant="8" id="BM8-1X-RC7"/>
-                                    <constraint firstAttribute="trailing" secondItem="TLC-Mx-ylr" secondAttribute="trailing" constant="8" id="VGC-gA-RYs"/>
-                                    <constraint firstAttribute="bottom" secondItem="TLC-Mx-ylr" secondAttribute="bottom" id="XCA-7m-gi8"/>
-                                    <constraint firstItem="TLC-Mx-ylr" firstAttribute="top" secondItem="3BT-Vz-qBt" secondAttribute="top" id="y98-s3-Xkp"/>
+                                    <constraint firstAttribute="bottom" secondItem="TLC-Mx-ylr" secondAttribute="bottom" constant="8" id="1FE-eH-2O5"/>
+                                    <constraint firstAttribute="trailing" secondItem="TLC-Mx-ylr" secondAttribute="trailing" constant="8" id="4ZY-od-hbh"/>
+                                    <constraint firstItem="TLC-Mx-ylr" firstAttribute="leading" secondItem="3BT-Vz-qBt" secondAttribute="leading" constant="8" id="ASE-7e-orZ"/>
+                                    <constraint firstItem="TLC-Mx-ylr" firstAttribute="top" secondItem="3BT-Vz-qBt" secondAttribute="top" constant="8" id="LSI-d9-sNN"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -3163,6 +3175,6 @@
         <segue reference="PJM-GU-RyY"/>
         <segue reference="Taj-qP-dlL"/>
         <segue reference="Z1a-cS-acW"/>
-        <segue reference="GNd-Wo-Hrw"/>
+        <segue reference="veF-sC-LAA"/>
     </inferredMetricsTieBreakers>
 </document>

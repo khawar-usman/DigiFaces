@@ -18,7 +18,11 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [_aboutLabel setFrame:CGRectMake(0, 0, _scrollView.frame.size.width, _scrollView.frame.size.height)];
+    
     [self fetchAboutDigifacesText];
+    
 }
 
 
@@ -40,6 +44,7 @@
     [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+        [_aboutLabel setFrame:CGRectMake(10, 0, _scrollView.frame.size.width - 20, _scrollView.frame.size.height)];
         [_aboutLabel setText:[responseObject valueForKey:@"AboutText"]];
         
         [_scrollView setContentSize:_aboutLabel.optimumSize];
