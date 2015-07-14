@@ -35,7 +35,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9se-zg-qdG">
-                                    <rect key="frame" x="133" y="0.0" width="135" height="44"/>
+                                    <rect key="frame" x="132" y="0.0" width="135" height="44"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <state key="normal" title="OK" backgroundImage="ok">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -49,7 +49,7 @@
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="9se-zg-qdG" secondAttribute="bottom" id="4F4-lX-I5Q"/>
                                 <constraint firstAttribute="height" constant="44" id="DX2-Rl-5fh"/>
-                                <constraint firstAttribute="trailing" secondItem="9se-zg-qdG" secondAttribute="trailing" id="F0w-b9-Vap"/>
+                                <constraint firstAttribute="trailing" secondItem="9se-zg-qdG" secondAttribute="trailing" constant="1" id="F0w-b9-Vap"/>
                                 <constraint firstItem="Jpc-Bc-oXD" firstAttribute="leading" secondItem="DkN-9B-G4r" secondAttribute="leading" id="FGq-Ue-DRI"/>
                                 <constraint firstAttribute="bottom" secondItem="Jpc-Bc-oXD" secondAttribute="bottom" id="HfD-uS-G6X"/>
                                 <constraint firstAttribute="bottom" secondItem="9se-zg-qdG" secondAttribute="bottom" id="ICS-Mn-xbD"/>
@@ -77,7 +77,7 @@
                             <rect key="frame" x="0.0" y="81" width="268" height="44"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zXa-Ai-VsW">
-                                    <rect key="frame" x="0.0" y="0.0" width="268" height="44"/>
+                                    <rect key="frame" x="1" y="0.0" width="268" height="44"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <state key="normal" title="OK" backgroundImage="ok_bg">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -93,8 +93,8 @@
                                 <constraint firstAttribute="trailing" secondItem="zXa-Ai-VsW" secondAttribute="trailing" id="1wV-gt-QDH"/>
                                 <constraint firstAttribute="bottom" secondItem="zXa-Ai-VsW" secondAttribute="bottom" id="AY7-sU-x51"/>
                                 <constraint firstItem="zXa-Ai-VsW" firstAttribute="leading" secondItem="FSi-UM-fUn" secondAttribute="leading" id="D99-vP-X05"/>
-                                <constraint firstAttribute="trailing" secondItem="zXa-Ai-VsW" secondAttribute="trailing" id="Ker-ee-X6V"/>
-                                <constraint firstItem="zXa-Ai-VsW" firstAttribute="leading" secondItem="FSi-UM-fUn" secondAttribute="leading" id="bY3-To-DDt"/>
+                                <constraint firstAttribute="trailing" secondItem="zXa-Ai-VsW" secondAttribute="trailing" constant="-1" id="Ker-ee-X6V"/>
+                                <constraint firstItem="zXa-Ai-VsW" firstAttribute="leading" secondItem="FSi-UM-fUn" secondAttribute="leading" constant="1" id="bY3-To-DDt"/>
                                 <constraint firstItem="zXa-Ai-VsW" firstAttribute="top" secondItem="FSi-UM-fUn" secondAttribute="top" id="g5z-Kk-ggO"/>
                                 <constraint firstAttribute="bottom" secondItem="zXa-Ai-VsW" secondAttribute="bottom" id="p2P-uZ-mbD"/>
                                 <constraint firstItem="zXa-Ai-VsW" firstAttribute="top" secondItem="FSi-UM-fUn" secondAttribute="top" id="way-Bm-V3v"/>

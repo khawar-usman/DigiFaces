@@ -94,9 +94,9 @@
 
 -(void)okayButtonTappedWithTag:(NSInteger)tag
 {
-    if (tag == kSuccessTag) {
+    //if (tag == kSuccessTag) {
         [self dismissViewControllerAnimated:YES completion:nil];
-    }
+    //}
 }
 
 -(void)textViewDidChange:(UITextView *)textView
