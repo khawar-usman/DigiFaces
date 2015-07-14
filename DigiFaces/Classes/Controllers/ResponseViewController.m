@@ -23,7 +23,7 @@
 #import "CustomAertView.h"
 #import "RTCell.h"
 
-@interface ResponseViewController () <CommentCellDelegate>
+@interface ResponseViewController () <CommentCellDelegate, ImageCellDelegate>
 {
     NSInteger contentHeight;
     RTCell *infoCell;
@@ -77,7 +77,7 @@
     [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     
     NSString * url = [NSString stringWithFormat:@"%@%@", kBaseURL, kGetResponses];
-    url = [url stringByReplacingOccurrencesOfString:@"{activityId}" withString:[NSString stringWithFormat:@"%d", _currentNotification.activityID]];
+    url = [url stringByReplacingOccurrencesOfString:@"{activityId}" withString:[NSString stringWithFormat:@"%ld", (long)_currentNotification.activityID]];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -187,10 +187,10 @@
         
         return MIN(90, infoCell.titleLabel.optimumSize.height + 20);
     }
-    else if (_response.files.count>0 && indexPath.row == 2){
+    else if ((_diary.files.count >0 || _response.files.count>0) && indexPath.row == 2){
         return 85;
     }
-    else if ((_response.files.count==0 && indexPath.row == 2) || (_response.files.count>0 && indexPath.row == 3)){
+    else if (((_response.files.count==0 && indexPath.row == 2) || (_response.files.count>0 && indexPath.row == 3) || (_diary.files.count==0 && indexPath.row == 2) || (_diary.files.count>0 && indexPath.row == 3))){
         return 44;
     }
     else{
@@ -215,6 +215,7 @@
         if (_diary.files.count>0) {
             count++;
         }
+        count++;
         count+= _diary.comments.count;
     }
     // Return the number of rows in the section.
@@ -239,6 +240,8 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
     if (indexPath.row == 0) {
         UserCell * cell = [tableView dequeueReusableCellWithIdentifier:@"userCell" forIndexPath:indexPath];
         [self configureUserCell:cell];
@@ -257,11 +260,21 @@
         return infoCell;
     }
     
-    if (_response.files.count>0 && indexPath.row == 2) {
+    if ((_responseType == ResponseControllerTypeDiaryResponse && _diary.files.count>0 && indexPath.row == 2) || (_responseType == ResponseControllerTypeNotification && _response.files.count>0 && indexPath.row == 2)) {
         ImagesCell * cell = [tableView dequeueReusableCellWithIdentifier:@"imagesScrollCell"];
+        cell.delegate = self;
+        NSArray * files;
+        if (_responseType == ResponseControllerTypeNotification) {
+            files = _response.files;
+        }
+        else{
+            files = _diary.files;
+        }
+        [cell setImagesFiles:files];
+        
         return cell;
     }
-    else if (_responseType == ResponseControllerTypeNotification && ((_response.files.count==0 && indexPath.row == 2) || (_response.files.count>0 && indexPath.row == 3))){
+    else if ((_responseType == ResponseControllerTypeNotification && ((_response.files.count==0 && indexPath.row == 2) || (_response.files.count>0 && indexPath.row == 3))) || (_responseType == ResponseControllerTypeDiaryResponse && ((_diary.files.count==0 && indexPath.row == 2) || (_diary.files.count>0 && indexPath.row == 3)))){
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"noResponseHeaderCell" forIndexPath:indexPath];
         NSInteger counts = 0;
         if (_responseType == ResponseControllerTypeNotification) {
@@ -270,19 +283,19 @@
         else{
             counts = _diary.comments.count;
         }
-        [cell.textLabel setText:[NSString stringWithFormat:@"%d Responses", counts]];
+        [cell.textLabel setText:[NSString stringWithFormat:@"%ld Responses", (long)counts]];
         return cell;
     }
     else if ( indexPath.row == 2){
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"noResponseHeaderCell" forIndexPath:indexPath];
         NSInteger counts = 0;
         counts = _diary.comments.count;
-        [cell.textLabel setText:[NSString stringWithFormat:@"%d Comments", counts]];
+        [cell.textLabel setText:[NSString stringWithFormat:@"%ld Comments", (long)counts]];
         return cell;
     }
 
     
-    int count = 2;
+    int count = 3;
     if (_responseType == ResponseControllerTypeNotification && _response.files.count>0) {
         count++;
     }
@@ -312,7 +325,6 @@
 -(void)commentCell:(id)cell didSendText:(NSString *)text
 {
     [self addComment:text];
-    
 }
 
 
@@ -327,4 +339,11 @@
 - (IBAction)exitOnend:(id)sender {
     [sender resignFirstResponder];
 }
+
+#pragma mark - ImagesCellDelegate
+-(void)imageCell:(id)cell didClickOnButton:(id)button atIndex:(NSInteger)index atFile:(File *)file
+{
+    NSLog(@"Selected Index : %ld", (long)index);
+}
+
 @end

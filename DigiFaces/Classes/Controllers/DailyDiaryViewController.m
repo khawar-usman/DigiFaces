@@ -180,6 +180,9 @@
         NSString * date = [_dailyDiary.diariesDate objectAtIndex:indexPath.section - 1];
         NSArray * arrDiary = [_dailyDiary.diariesDict valueForKey:date];
         Diary * diary = [arrDiary objectAtIndex:indexPath.row];
+        if (diary.isRead) {
+            [cell setBackgroundColor:[UIColor whiteColor]];
+        }
         [cell.textLabel setText:[diary title]];
         [cell.detailTextLabel setText:[NSString stringWithFormat:@"By %@",[diary userInfo].appUserName]];
     }

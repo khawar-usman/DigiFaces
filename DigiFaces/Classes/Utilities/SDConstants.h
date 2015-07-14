@@ -32,5 +32,6 @@
 #define kGetNotifications       @"api/Account/GetNotifications/{projectId}"
 #define kGetResponses           @"api/Activity/GetResponses/{activityId}"
 #define kUpdateComments         @"api/Activity/UpdateComment"
+#define kGetAboutMe             @"api/Account/GetAboutMe/{projectId}"
 
 #endif

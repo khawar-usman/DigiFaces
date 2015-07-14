@@ -7,6 +7,14 @@
 //
 
 #import "ImagesCell.h"
+#import "File.h"
+#import "UIImageView+AFNetworking.h"
+
+@interface ImagesCell()
+
+@property (nonatomic, retain) NSArray* imagesArray;
+
+@end
 
 @implementation ImagesCell
 
@@ -18,6 +26,38 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+-(void)setImagesFiles:(NSArray*)files
+{
+    self.imagesArray = files;
+    int xOffset = 5;
+    int tagIndex = 0;
+    for (File * file in files) {
+        UIButton * btn = [[UIButton alloc] initWithFrame:CGRectMake(xOffset, 5, self.frame.size.height-10, self.frame.size.height -10)];
+        btn.tag = tagIndex++;
+        [btn setBackgroundColor:[UIColor lightGrayColor]];
+        [btn addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        if ([file.fileType isEqualToString:@"Image"]) {
+            NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL URLWithString:file.filePath]];
+            [[btn imageView] setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                [btn setImage:image forState:UIControlStateNormal];
+            } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                NSLog(@"Failed to download iamge");
+            }];
+        }
+        [self addSubview:btn];
+        xOffset += self.frame.size.height - 5;
+    }
+    
+}
+
+-(void)buttonClicked:(UIButton*)btn
+{
+    File * file = [_imagesArray objectAtIndex:btn.tag];
+    if ([_delegate respondsToSelector:@selector(imageCell:didClickOnButton:atIndex:atFile:)]) {
+        [_delegate imageCell:self didClickOnButton:btn atIndex:btn.tag atFile:file];
+    }
 }
 
 @end

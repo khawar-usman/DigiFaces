@@ -1053,7 +1053,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: KOMPPA LLC (B72U6YCA6J)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DigiFaces/Frameworks",
@@ -1064,7 +1064,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0e55fa1b-5768-408e-9c6f-16970a6688a2";
+				PROVISIONING_PROFILE = "dd30c906-dbd0-4809-8ef2-34be4d7e1a55";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1073,7 +1073,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: KOMPPA LLC (B72U6YCA6J)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DigiFaces/Frameworks",
@@ -1084,7 +1084,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0e55fa1b-5768-408e-9c6f-16970a6688a2";
+				PROVISIONING_PROFILE = "dd30c906-dbd0-4809-8ef2-34be4d7e1a55";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

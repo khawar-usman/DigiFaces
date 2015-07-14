@@ -8,8 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@class File;
+@protocol ImageCellDelegate <NSObject>
+
+-(void)imageCell:(id)cell didClickOnButton:(id)button atIndex:(NSInteger)index atFile:(File*)file;
+
+@end
+
 @interface ImagesCell : UITableViewCell
 
+@property (weak, nonatomic) id<ImageCellDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+-(void)setImagesFiles:(NSArray*)files;
 
 @end

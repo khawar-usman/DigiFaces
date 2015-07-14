@@ -1028,6 +1028,7 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.85490196080000003" green="0.91372549020000005" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="imageCell" rowHeight="105" id="J9R-wE-Goo" customClass="ImageCell">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

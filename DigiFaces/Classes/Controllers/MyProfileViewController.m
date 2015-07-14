@@ -30,15 +30,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self getAboutMeInfo];
+    
     self.profilePicView.image = [[UserManagerShared sharedManager]profilePic];
-    self.aboutMe.text = [[UserManagerShared sharedManager]aboutMeText];
+    
+    self.aboutMe.text = @"";
     self.titleName.text = [NSString stringWithFormat:@"%@ %@",[[UserManagerShared sharedManager]FirstName],[[UserManagerShared sharedManager]LastName]];
     
     self.profilePicView.layer.cornerRadius = self.profilePicView.frame.size.height /2;
     self.profilePicView.layer.masksToBounds = YES;
     self.profilePicView.layer.borderWidth = 0;
     
-    [self.aboutMe becomeFirstResponder];
+//    [self.aboutMe becomeFirstResponder];
     
     alertview = [[CustomAertView alloc]initWithNibName:@"CustomAertView" bundle:nil];
     alertview.delegate = self;
@@ -63,6 +67,42 @@
         [_aboutMe resignFirstResponder];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
+}
+
+-(void)getAboutMeInfo
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    
+    [requestSerializer setValue:[Utility getAuthToken] forHTTPHeaderField:@"Authorization"];
+    
+    [requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    manager.requestSerializer = requestSerializer;
+    
+    NSString * url = [NSString stringWithFormat:@"%@%@", kBaseURL, kGetAboutMe];
+    url = [url stringByReplacingOccurrencesOfString:@"{projectId}" withString:[NSString stringWithFormat:@"%d",[[UserManagerShared sharedManager] currentProjectID]]];
+    
+    
+    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+        
+        [self.aboutMe setText:[responseObject valueForKey:@"AboutMeText"]];
+        [self.aboutMe becomeFirstResponder];
+        
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+        [[UserManagerShared sharedManager] setAboutMeText:_aboutMe.text];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        
+        
+        [alertview showAlertWithMessage:@"An error in request, verify that your email is correct" inView:self.view withTag:0];
+        
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+        
+    }];
+    [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
 }
 
 -(IBAction)postpressed:(id)sender{
