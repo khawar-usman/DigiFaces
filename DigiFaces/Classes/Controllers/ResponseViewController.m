@@ -23,11 +23,22 @@
 #import "CustomAertView.h"
 #import "RTCell.h"
 
+typedef enum {
+    CellTypeUser,
+    CellTypeTitle,
+    CellTypeIntro,
+    CellTypeImages,
+    CellTypeHeader,
+    CellTypeComment
+}CellType;
+
 @interface ResponseViewController () <CommentCellDelegate, ImageCellDelegate>
 {
     NSInteger contentHeight;
     RTCell *infoCell;
 }
+
+@property (nonatomic, retain) NSMutableArray * cellsArray;
 
 @property (nonatomic, retain) CustomAertView * customAlert;
 @property (nonatomic, retain) NSMutableArray * arrResponses;
@@ -56,6 +67,20 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     
     contentHeight = self.contentView.frame.size.height;
+    
+    _cellsArray = [[NSMutableArray alloc] init];
+    [_cellsArray addObject:@(CellTypeUser)];
+    [_cellsArray addObject:@(CellTypeTitle)];
+    [_cellsArray addObject:@(CellTypeIntro)];
+    if (_diary.files.count>0) {
+        [_cellsArray addObject:@(CellTypeImages)];
+    }
+    [_cellsArray addObject:@(CellTypeHeader)];
+    
+    for (id obj in _diary.comments) {
+        [_cellsArray addObject:@(CellTypeComment)];
+    }
+    
 }
 - (IBAction)cancelThis:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
@@ -177,46 +202,38 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
-        return 75;
+    NSInteger height;
+    CellType type = [[_cellsArray objectAtIndex:indexPath.row] integerValue];
+    switch (type) {
+        case CellTypeUser:
+            height = 75;
+            break;
+        case CellTypeTitle:
+            height = 44;
+            break;
+        case CellTypeIntro:
+            height = MIN(90, infoCell.titleLabel.optimumSize.height + 20);;
+            break;
+        case CellTypeImages:
+            height = 85;
+            break;
+        case CellTypeHeader:
+            height = 44;
+            break;
+        case CellTypeComment:
+            height = 110;
+            break;
+            
+        default:
+            break;
     }
-    else if (indexPath.row == 1){
-        
-        return MIN(90, infoCell.titleLabel.optimumSize.height + 20);
-    }
-    else if ((_diary.files.count >0 || _response.files.count>0) && indexPath.row == 2){
-        return 85;
-    }
-    else if (((_response.files.count==0 && indexPath.row == 2) || (_response.files.count>0 && indexPath.row == 3) || (_diary.files.count==0 && indexPath.row == 2) || (_diary.files.count>0 && indexPath.row == 3))){
-        return 44;
-    }
-    else{
-        //NotificationCell * cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
-        return 110;
-    }
+    
+    return height;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    int count = 0;
-    if (_response) {
-        count += 2;
-        if (_response.files.count > 0) {
-            count++;
-        }
-        count++;
-        count+= _response.comments.count;
-    }
-    else if (_diary){
-        count+=2;
-        if (_diary.files.count>0) {
-            count++;
-        }
-        count++;
-        count+= _diary.comments.count;
-    }
-    // Return the number of rows in the section.
-    return count;
+    return _cellsArray.count;
 }
 
 -(void)configureUserCell:(UserCell*)cell
@@ -235,44 +252,29 @@
     }
 }
 
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
-    if (indexPath.row == 0) {
-        UserCell * cell = [tableView dequeueReusableCellWithIdentifier:@"userCell" forIndexPath:indexPath];
+-(UITableViewCell*)getCellForType:(CellType)type forIndexPath:(NSIndexPath*)indexPath
+{
+    if (type == CellTypeUser) {
+        UserCell * cell = [self.tableView dequeueReusableCellWithIdentifier:@"userCell" forIndexPath:indexPath];
         [self configureUserCell:cell];
         return cell;
     }
-    else if (indexPath.row == 1){
-        infoCell = [tableView dequeueReusableCellWithIdentifier:@"textCell" forIndexPath:indexPath];
+    else if (type == CellTypeIntro){
+        infoCell = [self.tableView dequeueReusableCellWithIdentifier:@"textCell" forIndexPath:indexPath];
         
-        if (_responseType == ResponseControllerTypeNotification) {
-            TextAreaResponse * t = [_response.textAreaResponse objectAtIndex:0];
-            [infoCell.titleLabel setText:t.response];
-        }
-        else{
-            [infoCell.titleLabel setText:_diary.response];
-        }
+        [infoCell.titleLabel setText:_diary.response];
         return infoCell;
     }
-    
-    if ((_responseType == ResponseControllerTypeDiaryResponse && _diary.files.count>0 && indexPath.row == 2) || (_responseType == ResponseControllerTypeNotification && _response.files.count>0 && indexPath.row == 2)) {
-        ImagesCell * cell = [tableView dequeueReusableCellWithIdentifier:@"imagesScrollCell"];
+    else if (type == CellTypeImages){
+        ImagesCell * cell = [self.tableView dequeueReusableCellWithIdentifier:@"imagesScrollCell"];
         cell.delegate = self;
-        NSArray * files;
-        if (_responseType == ResponseControllerTypeNotification) {
-            files = _response.files;
-        }
-        else{
-            files = _diary.files;
-        }
+        NSArray * files = _diary.files;
         [cell setImagesFiles:files];
         
         return cell;
     }
-    else if ((_responseType == ResponseControllerTypeNotification && ((_response.files.count==0 && indexPath.row == 2) || (_response.files.count>0 && indexPath.row == 3))) || (_responseType == ResponseControllerTypeDiaryResponse && ((_diary.files.count==0 && indexPath.row == 2) || (_diary.files.count>0 && indexPath.row == 3)))){
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"noResponseHeaderCell" forIndexPath:indexPath];
+    else if (type == CellTypeHeader){
+        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"noResponseHeaderCell" forIndexPath:indexPath];
         NSInteger counts = 0;
         if (_responseType == ResponseControllerTypeNotification) {
             counts = _response.comments.count;
@@ -283,39 +285,41 @@
         [cell.textLabel setText:[NSString stringWithFormat:@"%ld Responses", (long)counts]];
         return cell;
     }
-    else if ( indexPath.row == 2){
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"noResponseHeaderCell" forIndexPath:indexPath];
-        NSInteger counts = 0;
-        counts = _diary.comments.count;
-        [cell.textLabel setText:[NSString stringWithFormat:@"%ld Comments", (long)counts]];
+    else if (type == CellTypeTitle){
+        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"noResponseHeaderCell" forIndexPath:indexPath];
+        [cell.textLabel setTextColor:[UIColor blackColor]];
+        [cell setBackgroundColor:[UIColor whiteColor]];
+        [cell.textLabel setText:_diary.title];
+        [cell.textLabel setFont:[UIFont systemFontOfSize:14 weight:1]];
         return cell;
     }
 
-    
-    int count = 3;
-    if (_responseType == ResponseControllerTypeNotification && _response.files.count>0) {
-        count++;
+    else if (type == CellTypeComment){
+        int count = 4;
+        if(_responseType == ResponseControllerTypeDiaryResponse && _diary.files.count>0){
+            count++;
+        }
+        
+        Comment * comment = [_diary.comments objectAtIndex:indexPath.row - count];
+        
+        NotificationCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"userCommentCell" forIndexPath:indexPath];
+        [cell.lblDate setText:comment.dateCreatedFormated];
+        [cell.lblUserName setText:comment.userInfo.appUserName];
+        [cell.userImage setImageWithURL:[NSURL URLWithString:comment.userInfo.avatarFile.filePath]];
+        [cell.infoLabel setText:comment.response];
+        
+        [cell makeImageCircular];
+        return cell;
     }
-    else if(_responseType == ResponseControllerTypeDiaryResponse && _diary.files.count>0){
-        count++;
-    }
     
-    Comment * comment = nil;
-    if (_responseType == ResponseControllerTypeNotification) {
-        comment = [_response.comments objectAtIndex:indexPath.row - count];
-    }
-    else{
-        comment = [_diary.comments objectAtIndex:indexPath.row - count];
-    }
+    return nil;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NotificationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"userCommentCell" forIndexPath:indexPath];
-    [cell.lblDate setText:comment.dateCreatedFormated];
-    [cell.lblUserName setText:comment.userInfo.appUserName];
-    [cell.userImage setImageWithURL:[NSURL URLWithString:comment.userInfo.avatarFile.filePath]];
-    [cell.infoLabel setText:comment.response];
-    
-    [cell makeImageCircular];
-    return cell;
+    CellType type = [[_cellsArray objectAtIndex:indexPath.row] integerValue];
+    return [self getCellForType:type forIndexPath:indexPath];
 }
 
 #pragma mark - CommentCellDelegate
