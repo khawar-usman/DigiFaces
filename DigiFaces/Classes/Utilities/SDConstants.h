@@ -33,5 +33,6 @@
 #define kGetResponses           @"api/Activity/GetResponses/{activityId}"
 #define kUpdateComments         @"api/Activity/UpdateComment"
 #define kGetAboutMe             @"api/Account/GetAboutMe/{projectId}"
+#define kGetActivties           @"api/Project/GetActivities/{projectId}/{activityId}/{start}/{end}/{includeDailyDiary}"
 
 #endif

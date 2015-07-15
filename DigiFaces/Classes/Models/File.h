@@ -16,8 +16,10 @@
 @property (nonatomic) BOOL isViddlerFile;
 @property (nonatomic, retain) NSString * viddleKey;
 @property (nonatomic, retain) NSString * filePath;
+@property (nonatomic, retain) NSDictionary * fileDictionary;
 
 -(NSString*)getVideoThumbURL;
+-(NSDictionary*)getFileDictionary;
 
 -(instancetype)initWithDictionary:(NSDictionary*)dict;
 -(NSString*)returnFilePathFromFileObject:(NSDictionary*)fileObject;

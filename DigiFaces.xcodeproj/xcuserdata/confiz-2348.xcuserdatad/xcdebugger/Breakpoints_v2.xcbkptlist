@@ -250,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigiFaces/Classes/Controllers/MyProfileViewController.m"
-            timestampString = "458587079.962609"
+            timestampString = "458666130.907026"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "199"
-            endingLineNumber = "199"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
             landmarkName = "-setProfilePicuture:"
             landmarkType = "5">
          </BreakpointContent>
@@ -266,11 +266,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigiFaces/Classes/Controllers/MyProfileViewController.m"
-            timestampString = "458587079.962609"
+            timestampString = "458666130.907026"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "173"
-            endingLineNumber = "173"
+            startingLineNumber = "174"
+            endingLineNumber = "174"
             landmarkName = "-updateProfilePicture:"
             landmarkType = "5">
          </BreakpointContent>
@@ -282,11 +282,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigiFaces/Classes/Controllers/MyProfileViewController.m"
-            timestampString = "458587079.962609"
+            timestampString = "458666130.907026"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "178"
-            endingLineNumber = "178"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
             landmarkName = "-updateProfilePicture:"
             landmarkType = "5">
          </BreakpointContent>
@@ -314,28 +314,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigiFaces/Classes/Controllers/MyProfileViewController.m"
-            timestampString = "458586922.322831"
+            timestampString = "458665997.648197"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
-            landmarkName = "-getAboutMeInfo"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DigiFaces/Classes/Controllers/MyProfileViewController.m"
-            timestampString = "458587017.556384"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
-            landmarkName = "-getAboutMeInfo"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
+            landmarkName = "-postpressed:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

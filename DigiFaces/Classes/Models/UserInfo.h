@@ -11,12 +11,13 @@
 
 @interface UserInfo : NSObject
 
-@property (nonatomic, assign) NSInteger userID;
+@property (nonatomic, assign) NSInteger Id;
 @property (nonatomic, retain) NSString * userName;
 @property (nonatomic, retain) NSString * password;
 @property (nonatomic, retain) NSString * email;
 @property (nonatomic, retain) NSString * firstName;
 @property (nonatomic, retain) NSString * lastName;
+@property (nonatomic, retain) NSString * userId;
 @property (nonatomic, assign) BOOL isUserNameSet;
 @property (nonatomic, retain) NSString * appUserName;
 @property (nonatomic, assign) BOOL isModerator;
@@ -29,5 +30,7 @@
 @property (nonatomic, retain) File * avatarFile;
 
 -(instancetype) initWithDictioanry:(NSDictionary*)dict;
+
+-(NSDictionary*)getUserInfoDictionary;
 
 @end

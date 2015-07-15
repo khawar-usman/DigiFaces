@@ -117,11 +117,11 @@
     NSDictionary * params = @{@"CommentId" : @"0",
                               @"ThreadId" : _diary.threadId,
                               @"UserId" : _diary.useID,
-                              @"UserInfo" : _diary.userInfo,
+                              @"UserInfo" : _diary.userInfo.getUserInfoDictionary,
                               @"DateCreated" : [NSDate date],
                               @"Response" : comment,
-                              @"IsActive" : @"1",
-                              @"IsRead" : @"0"};
+                              @"IsActive" : @YES,
+                              @"IsRead" : @NO};
     
     
     [manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {

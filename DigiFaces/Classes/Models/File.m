@@ -14,6 +14,8 @@
 {
     self = [super init];
     if (self) {
+        self.fileDictionary = dict;
+        
         self.fileType = [dict valueForKey:@"FileType"];
         self.isCameraTag = [[dict valueForKey:@"IsCameraTagFile"] boolValue];
         self.isAmazonFile = [[dict valueForKey:@"IsAmazonFile"] boolValue];

@@ -23,6 +23,7 @@
     CustomAertView * alertview;
     NSDictionary * selctedProfile;
     BOOL isTextChanged;
+    NSDictionary * aboutMeDict;
 }
 @end
 
@@ -89,7 +90,7 @@
         
         [self.aboutMe setText:[responseObject valueForKey:@"AboutMeText"]];
         [self.aboutMe becomeFirstResponder];
-        
+        aboutMeDict = responseObject;
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
         [[UserManagerShared sharedManager] setAboutMeText:_aboutMe.text];
         
@@ -120,7 +121,7 @@
 
     [requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     
-    NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:@"0", @"AboutMeId", [Utility getStringForKey:kCurrentPorjectID], @"ProjectId", [[UserManagerShared sharedManager] ID], @"UserId", _aboutMe.text, @"AboutMeText", nil];
+    NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:[aboutMeDict valueForKey:@"AboutMeId"], @"AboutMeId", [Utility getStringForKey:kCurrentPorjectID], @"ProjectId", [[UserManagerShared sharedManager] ID], @"UserId", _aboutMe.text, @"AboutMeText", nil];
     
     manager.requestSerializer = requestSerializer;
     
