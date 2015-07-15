@@ -115,6 +115,20 @@
     self.constContentHeight.constant = calendarHeight;
 }
 
+-(BOOL) isEnaledDateForDay:(int)d
+{
+    NSDate * mDate = [self dateFromComponents:d month:month year:year];
+    if ([mDate timeIntervalSinceDate:_startDate] < 0) {
+        // Greater Date
+        return NO;
+    }
+    if ([mDate timeIntervalSinceDate:_endDate] > 0) {
+        return NO;
+    }
+    
+    return YES;
+}
+
 -(void)loadCalendar
 {
     [self clearCalendar];
@@ -138,6 +152,11 @@
             yOffset += kDayHeight;
             weeks++;
         }
+        
+        if (![self isEnaledDateForDay:i+1]) {
+            [btn setEnabled:NO];
+        }
+        
     }
     if (xOffset == 0) {
         weeks--;
@@ -158,11 +177,11 @@
 //    [sender setBackgroundColor:[UIColor blueColor]];
 }
 
--(UIButton*)getButtonForDay:(NSInteger)day
+-(UIButton*)getButtonForDay:(NSInteger)d
 {
     UIButton * btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, kDayWidth, kDayHeight)];
-    [btn setTitle:[NSString stringWithFormat:@"%d", day+1] forState:UIControlStateNormal];
-    btn.tag = day;
+    [btn setTitle:[NSString stringWithFormat:@"%d", d+1] forState:UIControlStateNormal];
+    btn.tag = d;
     [btn setBackgroundImage:[UIImage imageNamed:@"btnCalendar"] forState:UIControlStateSelected];
     [btn.titleLabel setFont:[UIFont systemFontOfSize:14]];
     [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];

@@ -19,6 +19,7 @@
 +(NSString*)getAuthToken;
 +(NSString *)getUniqueId;
 +(NSString*)stringFromDate:(NSDate*)date;
++(NSDate*)dateFromString:(NSString*)date;
 
 +(NSString*)getMonDayYearDateFromString:(NSString*)date;
 +(UIImage*)resizeImage:(UIImage *)image imageSize:(CGSize)size;

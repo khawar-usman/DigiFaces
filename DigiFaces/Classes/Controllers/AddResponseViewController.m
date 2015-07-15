@@ -13,6 +13,7 @@
 #import "Utility.h"
 #import "DiaryInfoViewController.h"
 #import "CalendarViewController.h"
+#import "UserManagerShared.h"
 
 @interface AddResponseViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, CalendarViewControlerDelegate, UITextViewDelegate>
 {
@@ -112,6 +113,8 @@
     
     calendarView = [self.storyboard instantiateViewControllerWithIdentifier:@"calendarController"];
     calendarView.delegate = self;
+    calendarView.endDate = [NSDate date];
+    calendarView.startDate = [Utility dateFromString:[[UserManagerShared sharedManager] currentProject].projectStartDate];
     [self.navigationController.view addSubview:calendarView.view];
     
 }

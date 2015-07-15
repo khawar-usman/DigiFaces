@@ -21,6 +21,10 @@
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constContentHeight;
 @property (weak, nonatomic) IBOutlet UILabel *lblDate;
+
+@property (nonatomic, retain) NSDate * startDate;
+@property (nonatomic, retain) NSDate * endDate;
+
 - (IBAction)applyDate:(id)sender;
 - (IBAction)gotoPreviousMonth:(id)sender;
 - (IBAction)gotoNextMonth:(id)sender;

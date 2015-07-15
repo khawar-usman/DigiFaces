@@ -72,6 +72,16 @@
     return str;
 }
 
++(NSDate *)dateFromString:(NSString *)date
+{
+    NSString * d = [[date componentsSeparatedByString:@"T"] firstObject];
+    NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
+    [inputFormatter setDateFormat:@"yyyy-MM-dd"];
+    
+    NSDate * str = [inputFormatter dateFromString:d];
+    return str;
+}
+
 +(void)addPadding:(NSInteger)padding toTextField:(UITextField*)textfield
 {
     UIView * leftView = [[UIView alloc] initWithFrame:CGRectMake(0,0, padding, textfield.frame.size.height)];
