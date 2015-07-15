@@ -14,12 +14,17 @@
 #import "DiaryInfoViewController.h"
 #import "CalendarViewController.h"
 #import "UserManagerShared.h"
+#import "MBProgressHUD.h"
+#import "SDConstants.h"
+#import "AFNetworking.h"
 
 @interface AddResponseViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, CalendarViewControlerDelegate, UITextViewDelegate>
 {
     NSInteger selectedTag;
     UIImagePickerController * imagePicker;
     CalendarViewController * calendarView;
+    NSInteger threadID;
+    NSDate * selectedDate;
 }
 
 @property (nonatomic, retain) NSMutableArray * dataArray;
@@ -36,6 +41,7 @@
     [_txtResponse becomeFirstResponder];
     _dataArray = [[NSMutableArray alloc] initWithCapacity:4];
     [_btnDate setTitle:[Utility stringFromDate:[NSDate date]] forState:UIControlStateNormal];
+    selectedDate = [NSDate date];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -64,6 +70,74 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+-(void)createThread
+{
+    [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    
+    NSString * url = [NSString stringWithFormat:@"%@%@", kBaseURL, kUpdateThread];
+    
+    NSDictionary * params = @{@"ActivityId" : @(_dailyDiary.activityId),
+                              @"ThreadId" : @0,
+                              @"IsDraft" : @YES,
+                              @"IsActive" : @YES};
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    
+    [requestSerializer setValue:[Utility getAuthToken] forHTTPHeaderField:@"Authorization"];
+    [requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    manager.requestSerializer = requestSerializer;
+    
+    
+    [manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"Response : %@", responseObject);
+        threadID = [[responseObject objectForKey:@"ThreadId"] integerValue];
+        [self addEntry];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+    }];
+}
+-(void)addEntry
+{
+    [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    
+    NSString * url = [NSString stringWithFormat:@"%@%@", kBaseURL, kUpdateDailyDiary];
+    url = [url stringByReplacingOccurrencesOfString:@"{projectId}" withString:[NSString stringWithFormat:@"%d", [[UserManagerShared sharedManager] currentProjectID]]];
+    
+    NSDictionary * params = @{@"ActivityId" : @(_dailyDiary.activityId),
+                              @"DailyDiaryResponseId" : @0,
+                              @"DailyDiaryId" : @(_dailyDiary.diaryID),
+                              @"ThreadId" : @(threadID),
+                              @"Title" : _txtTitle.text,
+                              @"Response" : _txtResponse.text,
+                              @"DiaryDate" : [Utility stringDateFromDMYDate:selectedDate]};
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    
+    [requestSerializer setValue:[Utility getAuthToken] forHTTPHeaderField:@"Authorization"];
+    [requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    manager.requestSerializer = requestSerializer;
+    
+    
+    [manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"Response : %@", responseObject);
+        [MBProgressHUD hideAllHUDsForView:self.navigationController.view animated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+    }];
+}
+
 -(void)openCamera
 {
     if (!imagePicker) {
@@ -84,7 +158,7 @@
 }
 
 - (IBAction)postData:(id)sender {
-    
+    [self createThread];
 }
 
 - (IBAction)closeThis:(id)sender {
@@ -209,6 +283,7 @@
 #pragma mark - CalendarViewDelegate
 -(void)calendarController:(id)controller didSelectDate:(NSDate *)date
 {
+    selectedDate = date;
     NSString * strDate = [Utility stringFromDate:date];
     [_btnDate setTitle:strDate forState:UIControlStateNormal];
     [calendarView.view removeFromSuperview];

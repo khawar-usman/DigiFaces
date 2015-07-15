@@ -72,6 +72,15 @@
     return str;
 }
 
++(NSString *)stringDateFromDMYDate:(NSDate *)date
+{
+    NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
+    [inputFormatter setDateFormat:@"yyyy-MM-dd"];
+    
+    NSString * str = [inputFormatter stringFromDate:date];
+    return str;
+}
+
 +(NSDate *)dateFromString:(NSString *)date
 {
     NSString * d = [[date componentsSeparatedByString:@"T"] firstObject];

@@ -23,5 +23,6 @@
 
 +(NSString*)getMonDayYearDateFromString:(NSString*)date;
 +(UIImage*)resizeImage:(UIImage *)image imageSize:(CGSize)size;
++(NSString *)stringDateFromDMYDate:(NSDate *)date;
 
 @end
