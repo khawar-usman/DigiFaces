@@ -165,8 +165,10 @@
         }
         else if (indexPath.row == 1) {
             infoCel = [tableView dequeueReusableCellWithIdentifier:@"textCell" forIndexPath:indexPath];
+            if (![_dailyDiary.diaryQuestion isEqual:[NSNull null]]) {
+                [infoCel.titleLabel setText:_dailyDiary.diaryQuestion];
+            }
             
-            [infoCel.titleLabel setText:_dailyDiary.diaryQuestion];
             cell = infoCel;
         }
         else if (indexPath.row == 2){
@@ -253,7 +255,10 @@
     }
     else if ([segue.identifier isEqualToString:@"diaryEntryDetailSegue"]){
         NSIndexPath * indexPath = [self.tableView indexPathForSelectedRow];
-        Diary * diary = [self.dailyDiary.userDiaries objectAtIndex:indexPath.row];
+        NSString * date = [_dailyDiary.diariesDate objectAtIndex:indexPath.section - 1];
+        NSArray * arrDiary = [_dailyDiary.diariesDict valueForKey:date];
+        Diary * diary = [arrDiary objectAtIndex:indexPath.row];
+        
         ResponseViewController * responseController = [segue destinationViewController];
         responseController.diary = diary;
         responseController.responseType = ResponseControllerTypeDiaryResponse;

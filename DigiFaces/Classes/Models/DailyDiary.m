@@ -17,7 +17,9 @@
     if (self) {
         self.diaryID = [[dict valueForKey:@"DiaryId"] integerValue];
         self.activityId = [[dict valueForKey:@"ActivityId"] integerValue];
-        self.diaryQuestion = [dict valueForKey:@"DiaryQuestion"];
+        if ([dict valueForKey:@"DiaryQuestion"]) {
+            self.diaryQuestion = [dict valueForKey:@"DiaryQuestion"];
+        }
         
         _file = [[File alloc] initWithDictionary:[dict valueForKey:@"File"]];
         

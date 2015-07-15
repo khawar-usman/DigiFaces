@@ -111,17 +111,14 @@
     
     [requestSerializer setValue:[Utility getAuthToken] forHTTPHeaderField:@"Authorization"];
     [requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     
     manager.requestSerializer = requestSerializer;
     
-    NSDictionary * params = @{@"CommentId" : @"0",
-                              @"ThreadId" : _diary.threadId,
-                              @"UserId" : _diary.useID,
-                              @"UserInfo" : _diary.userInfo.getUserInfoDictionary,
-                              @"DateCreated" : [NSDate date],
+    NSDictionary * params = @{@"CommentId" : @0,
+                              @"ThreadId" : @([_diary.threadId integerValue]),
                               @"Response" : comment,
-                              @"IsActive" : @YES,
-                              @"IsRead" : @NO};
+                              @"IsActive" : @YES};
     
     
     [manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {

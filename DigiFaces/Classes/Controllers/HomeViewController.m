@@ -94,6 +94,36 @@
     }];
 }
 
+-(void)fetchActivites{
+
+    
+    NSString * onlinekey = [[NSUserDefaults standardUserDefaults]objectForKey:@"access_token"];
+    
+    NSString *finalyToken = [[NSString alloc]initWithFormat:@"Bearer %@",onlinekey ];
+    
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    
+    [requestSerializer setValue:finalyToken forHTTPHeaderField:@"Authorization"];
+    [requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    NSString * url = [NSString stringWithFormat:@"%@%@", kBaseURL, kGetActivties];
+    url = [url stringByReplacingOccurrencesOfString:@"{projectId}" withString:[NSString stringWithFormat:@"%d",[[UserManagerShared sharedManager] currentProjectID]]];
+    
+    manager.requestSerializer = requestSerializer;
+    
+    [manager POST:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"User JSON: %@", responseObject);
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+        
+    }];
+}
+
 -(void)fetchUserInfo{
     
     [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
@@ -137,7 +167,7 @@
         [[UserManagerShared sharedManager] setLastName:[responseObject objectForKey:@"LastName"]];
         [[UserManagerShared sharedManager] setAboutMeText:[responseObject objectForKey:@"AboutMeText"]];
 
-
+        [self fetchActivites];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
