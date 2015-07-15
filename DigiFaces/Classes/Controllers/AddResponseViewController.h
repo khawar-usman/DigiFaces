@@ -12,6 +12,7 @@
 @interface AddResponseViewController : UIViewController
 
 @property (nonatomic, retain) DailyDiary * dailyDiary;
+@property (weak, nonatomic) IBOutlet UILabel *lblPlaceholder;
 
 @property (weak, nonatomic) IBOutlet UITextField *txtTitle;
 @property (weak, nonatomic) IBOutlet UIButton *btnCamera1;

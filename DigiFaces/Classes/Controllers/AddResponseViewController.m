@@ -14,7 +14,7 @@
 #import "DiaryInfoViewController.h"
 #import "CalendarViewController.h"
 
-@interface AddResponseViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, CalendarViewControlerDelegate>
+@interface AddResponseViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, CalendarViewControlerDelegate, UITextViewDelegate>
 {
     NSInteger selectedTag;
     UIImagePickerController * imagePicker;
@@ -192,6 +192,16 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark- UITextViewDelegate
+-(void)textViewDidChange:(UITextView *)textView
+{
+    if ([textView.text isEqualToString:@""]) {
+        [_lblPlaceholder setHidden:NO];
+    }
+    else{
+        [_lblPlaceholder setHidden:YES];
+    }
+}
 
 #pragma mark - CalendarViewDelegate
 -(void)calendarController:(id)controller didSelectDate:(NSDate *)date
