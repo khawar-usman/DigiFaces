@@ -10,9 +10,12 @@
 #import "WebViewController.h"
 #import "ImageViewController.h"
 #import "File.h"
+#import "PageViewLoadedDelegate.h"
 
-@interface CarouselViewController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
-
+@interface CarouselViewController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate, PageViewLoadedDelegate>
+{
+    NSInteger currentPageNo;
+}
 @property (nonatomic, retain) NSMutableArray * controllers;
 
 @end
@@ -27,18 +30,23 @@
         if ([file.fileType isEqualToString:@"Image"]) {
             ImageViewController * imageController = [self.storyboard instantiateViewControllerWithIdentifier:@"imageController"];
             imageController.imageFile = file;
+            imageController.delegate = self;
             [self.controllers addObject:imageController];
         }
         else
         {
             WebViewController * webController = [self.storyboard instantiateViewControllerWithIdentifier:@"webController"];
             webController.url = file.filePath;
+            webController.delegate = self;
             [self.controllers addObject:webController];
         }
     }
     
     [self setViewControllers:@[_controllers[_selectedIndex]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
     self.dataSource = self;
+    self.delegate = self;
+    [self setTitleWithIndex:_selectedIndex];
+    currentPageNo = _selectedIndex;
     // Do any additional setup after loading the view.
 }
 
@@ -57,11 +65,13 @@
 }
 */
 
+-(void)setTitleWithIndex:(NSInteger)index
+{
+    [self setTitle:[NSString stringWithFormat:@"%d of %d", index+1, _files.count]];
+}
 
 -(UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
-    NSLog(@"Controller");
-    
     for (int i=0; i<_controllers.count; i++) {
         UIViewController * controller = [_controllers objectAtIndex:i];
         if ([viewController isEqual:controller]) {
@@ -86,6 +96,17 @@
         }
     }
     return nil;
+}
+
+#pragma mark - PageViewDelegate
+-(void)pageViewDidAppear:(id)pageView
+{
+    for (int i=0; i<_controllers.count; i++) {
+        UIViewController * controller = [_controllers objectAtIndex:i];
+        if ([controller isEqual:pageView]) {
+            [self setTitleWithIndex:i];
+        }
+    }
 }
 
 @end

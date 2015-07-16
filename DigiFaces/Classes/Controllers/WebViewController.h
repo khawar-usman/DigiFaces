@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PageViewLoadedDelegate.h"
 
 @interface WebViewController : UIViewController
+
+@property (nonatomic, weak) id<PageViewLoadedDelegate> delegate;
+
 @property (weak, nonatomic) IBOutlet UIWebView *webview;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *goBack;
 

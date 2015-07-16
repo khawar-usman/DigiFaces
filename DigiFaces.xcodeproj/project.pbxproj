@@ -187,6 +187,7 @@
 		4AC8446B1B57FA3E006CDB45 /* CarouselViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarouselViewController.m; sourceTree = "<group>"; };
 		4AC8446D1B57FA75006CDB45 /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
 		4AC8446E1B57FA75006CDB45 /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
+		4AC844711B581FB6006CDB45 /* PageViewLoadedDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PageViewLoadedDelegate.h; path = Others/PageViewLoadedDelegate.h; sourceTree = "<group>"; };
 		4ACDB92A1B3E7E66009EFB91 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4ACDB92B1B3E7E66009EFB91 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		4ACDB92D1B3E7E66009EFB91 /* AboutDigifacesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutDigifacesController.h; sourceTree = "<group>"; };
@@ -440,9 +441,18 @@
 			name = RTLabels;
 			sourceTree = "<group>";
 		};
+		4AC844701B581F63006CDB45 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				4AC844711B581FB6006CDB45 /* PageViewLoadedDelegate.h */,
+			);
+			name = Others;
+			sourceTree = "<group>";
+		};
 		4ACDB9291B3E7E66009EFB91 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				4AC844701B581F63006CDB45 /* Others */,
 				4ACDB92A1B3E7E66009EFB91 /* AppDelegate.h */,
 				4ACDB92B1B3E7E66009EFB91 /* AppDelegate.m */,
 				4ACDB92C1B3E7E66009EFB91 /* Controllers */,

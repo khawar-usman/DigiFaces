@@ -38,7 +38,12 @@
 {
     [super viewWillAppear:animated];
     [_scrollView setZoomScale:1];
+    
+    if ([_delegate respondsToSelector:@selector(pageViewDidAppear:)]) {
+        [_delegate pageViewDidAppear:self];
+    }
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

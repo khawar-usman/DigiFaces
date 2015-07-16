@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "File.h"
+#import "PageViewLoadedDelegate.h"
 
 @interface ImageViewController : UIViewController
+
+@property (nonatomic, weak) id<PageViewLoadedDelegate> delegate;
 
 @property (nonatomic, retain) File * imageFile;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;

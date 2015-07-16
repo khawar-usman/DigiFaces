@@ -23,6 +23,14 @@
     
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if ([_delegate respondsToSelector:@selector(pageViewDidAppear:)]) {
+        [_delegate pageViewDidAppear:self];
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
