@@ -19,7 +19,7 @@
 #import "AFNetworking.h"
 #import "CustomAertView.h"
 
-@interface AddResponseViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, CalendarViewControlerDelegate, UITextViewDelegate>
+@interface AddResponseViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, CalendarViewControlerDelegate, UITextViewDelegate, UIActionSheetDelegate>
 {
     NSInteger selectedTag;
     UIImagePickerController * imagePicker;
@@ -143,14 +143,15 @@
     }];
 }
 
--(void)openCamera
+-(void)openCameraWithType:(UIImagePickerControllerSourceType)sourceType
 {
     if (!imagePicker) {
         imagePicker = [[UIImagePickerController alloc] init];
         imagePicker.delegate = self;
     }
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    
+    if ([UIImagePickerController isSourceTypeAvailable:sourceType]) {
+        imagePicker.sourceType = sourceType;
     }
     else{
         imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
@@ -224,7 +225,11 @@
 - (IBAction)addPicture:(UIButton*)sender {
     selectedTag = sender.tag;
     
-    [self openCamera];
+    UIActionSheet * sheet = [[UIActionSheet alloc] initWithTitle:@"Select an Option" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera", @"Photo Library", nil];
+    [sheet showInView:self.view];
+    
+    
+    //[self openCamera];
 }
 
 -(void)setImageToCameraButton:(UIImage*)image
@@ -313,6 +318,24 @@
     NSString * strDate = [Utility stringFromDate:date];
     [_btnDate setTitle:strDate forState:UIControlStateNormal];
     [calendarView.view removeFromSuperview];
+}
+
+#pragma mark - UIActionSheetDelegate
+-(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex != actionSheet.cancelButtonIndex) {
+        UIImagePickerControllerSourceType type;
+        if (buttonIndex == 0) {
+            type = UIImagePickerControllerSourceTypeCamera;
+        }
+        else if (buttonIndex == 1){
+            type = UIImagePickerControllerSourceTypePhotoLibrary;
+        }
+        
+        [self openCameraWithType:type];
+    }
+    
+    
 }
 
 @end
