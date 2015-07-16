@@ -22,7 +22,9 @@
 #import "Utility.h"
 #import "CustomAertView.h"
 #import "RTCell.h"
+#import "DailyDiary.h"
 #import "CarouselViewController.h"
+#import "UserManagerShared.h"
 
 typedef enum {
     CellTypeUser,
@@ -88,6 +90,18 @@ typedef enum {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self updateDiaryInfo];
+}
+
+-(void)updateDiaryInfo
+{
+    NSInteger diaryID = [[[[[UserManagerShared sharedManager] currentProject] dailyDiaryList] objectAtIndex:0] integerValue];
+    [self fetchDailyDiaryWithDiaryID:diaryID];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -99,6 +113,39 @@ typedef enum {
 }
 
 #pragma mark - API Methods
+-(void)fetchDailyDiaryWithDiaryID:(NSInteger)diaryID
+{
+    [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    
+    NSString * url = [NSString stringWithFormat:@"%@%@", kBaseURL, kDailyDiaryInfo];
+    url = [url stringByReplacingOccurrencesOfString:@"{diaryId}" withString:[NSString stringWithFormat:@"%d", diaryID]];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    
+    [requestSerializer setValue:[Utility getAuthToken] forHTTPHeaderField:@"Authorization"];
+    [requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    manager.requestSerializer = requestSerializer;
+    
+    
+    [manager POST:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Data : %@", responseObject);
+        DailyDiary * dailyDiary = [[DailyDiary alloc] initWithDictionary:responseObject];
+        for (Diary * d in dailyDiary.userDiaries) {
+            if (d.responseID == _diary.responseID) {
+                _diary = d;
+                break;
+            }
+        }
+        [self.tableView reloadData];
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+    }];
+}
+
 -(void)getResponses
 {
     [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
@@ -151,12 +198,9 @@ typedef enum {
     [manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
         
-        
-        [self.customAlert showAlertWithMessage:@"Comment Added Successfully" inView:self.navigationController.view withTag:0];
-        
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
         
-        [self.tableView reloadData];
+        [self updateDiaryInfo];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
