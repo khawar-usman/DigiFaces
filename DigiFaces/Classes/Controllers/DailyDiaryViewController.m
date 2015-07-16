@@ -39,9 +39,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self addEditButton];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     NSInteger diaryID = [[[[[UserManagerShared sharedManager] currentProject] dailyDiaryList] objectAtIndex:0] integerValue];
     [self fetchDailyDiaryWithDiaryID:diaryID];
-    [self addEditButton];
 }
 
 -(void)addEditButton
@@ -128,13 +133,7 @@
             return 160;
         }
         else if (indexPath.row == 1) {
-//            NSAttributedString *attributedText =
-//            [[NSAttributedString alloc] initWithString:_dailyDiary.diaryQuestion attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17.0f]}];
-//            
-//            CGRect rect = [attributedText boundingRectWithSize:(CGSize){self.view.frame.size.width, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin context:nil];
-//            
-//            CGSize size = rect.size;
-//            
+
             return infoCel.titleLabel.optimumSize.height + 20;
         }
         else if (indexPath.row == 2){

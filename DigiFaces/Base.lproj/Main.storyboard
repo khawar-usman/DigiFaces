@@ -912,6 +912,7 @@
                         <outlet property="contentView" destination="1Ce-zD-W4l" id="D11-6F-dTt"/>
                         <outlet property="tableView" destination="4Ui-Jr-adg" id="E2s-Ni-gXD"/>
                         <outlet property="txtResposne" destination="NGj-0c-Nj6" id="Bli-A6-q9h"/>
+                        <segue destination="YjW-M0-gF0" kind="push" identifier="carosulSegue" id="GFi-U1-0d9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tRg-c3-rwu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1594,7 +1595,7 @@
         <!--Web View Controller-->
         <scene sceneID="C7Q-RB-23n">
             <objects>
-                <viewController id="Re9-sw-T8y" customClass="WebViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="webController" id="Re9-sw-T8y" customClass="WebViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="A7X-s1-Dzg"/>
                         <viewControllerLayoutGuide type="bottom" id="B3t-K6-7KB"/>
@@ -1634,6 +1635,69 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nZB-DS-KNd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3790" y="1202"/>
+        </scene>
+        <!--1 of 1-->
+        <scene sceneID="QGq-08-iTy">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="YjW-M0-gF0" customClass="CarouselViewController" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" title="1 of 1" id="i5Z-h4-mzC"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wax-MU-6xF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4216" y="1197"/>
+        </scene>
+        <!--Image View Controller-->
+        <scene sceneID="PrX-kz-I9Z">
+            <objects>
+                <viewController storyboardIdentifier="imageController" id="bpe-lF-8wQ" customClass="ImageViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="JJt-f3-qQW"/>
+                        <viewControllerLayoutGuide type="bottom" id="SG8-hK-pQn"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="UKm-v9-4ej">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="5" translatesAutoresizingMaskIntoConstraints="NO" id="RAO-vY-AvO">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jz1-0E-rYN">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                        <gestureRecognizers/>
+                                    </imageView>
+                                </subviews>
+                                <connections>
+                                    <outlet property="delegate" destination="bpe-lF-8wQ" id="WK0-cE-dpJ"/>
+                                </connections>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="SG8-hK-pQn" firstAttribute="top" secondItem="RAO-vY-AvO" secondAttribute="bottom" id="51b-hO-Vf2"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="RAO-vY-AvO" secondAttribute="trailing" constant="-16" id="ExQ-Il-qok"/>
+                            <constraint firstItem="RAO-vY-AvO" firstAttribute="leading" secondItem="UKm-v9-4ej" secondAttribute="leadingMargin" constant="-16" id="PSV-WY-AoR"/>
+                            <constraint firstItem="RAO-vY-AvO" firstAttribute="top" secondItem="JJt-f3-qQW" secondAttribute="bottom" id="fFJ-DQ-F1i"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="Fzm-Nx-GIV" appends="YES" id="ufY-4z-uC6"/>
+                        </connections>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="imageView" destination="Jz1-0E-rYN" id="XCm-Zt-cw7"/>
+                        <outlet property="scrollView" destination="RAO-vY-AvO" id="gVh-xV-I8Z"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Oo-mA-D6w" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer numberOfTapsRequired="2" id="Fzm-Nx-GIV">
+                    <connections>
+                        <action selector="doubleClicked:" destination="bpe-lF-8wQ" id="93q-DD-v1Y"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="4653" y="965"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="tqr-Nb-Xy4">

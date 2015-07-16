@@ -17,6 +17,7 @@
 #import "MBProgressHUD.h"
 #import "SDConstants.h"
 #import "AFNetworking.h"
+#import "CustomAertView.h"
 
 @interface AddResponseViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, CalendarViewControlerDelegate, UITextViewDelegate>
 {
@@ -28,6 +29,7 @@
 }
 
 @property (nonatomic, retain) NSMutableArray * dataArray;
+@property (nonatomic, retain) CustomAertView * alertView;
 
 @end
 
@@ -42,6 +44,9 @@
     _dataArray = [[NSMutableArray alloc] initWithCapacity:4];
     [_btnDate setTitle:[Utility stringFromDate:[NSDate date]] forState:UIControlStateNormal];
     selectedDate = [NSDate date];
+    
+    _alertView = [[CustomAertView alloc] initWithNibName:@"CustomAertView" bundle:[NSBundle mainBundle]];
+    
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -157,11 +162,32 @@
     [self presentViewController:imagePicker animated:YES completion:nil];
 }
 
+-(void)resignAllResponders
+{
+    [_txtTitle resignFirstResponder];
+    [_txtResponse resignFirstResponder];
+}
+
 - (IBAction)postData:(id)sender {
-    [self createThread];
+    if ([_txtTitle.text isEqualToString:@""]) {
+        // Error
+        [self resignAllResponders];
+        [_alertView showAlertWithMessage:@"Title is required" inView:self.navigationController.view withTag:0];
+    }
+    else if ([_txtResponse.text isEqualToString:@""]){
+        [self resignAllResponders];
+        [_alertView showAlertWithMessage:@"Respose is required." inView:self.navigationController.view withTag:0];
+    }
+    else
+    {
+        [self resignAllResponders];
+        [self createThread];
+    }
+    
 }
 
 - (IBAction)closeThis:(id)sender {
+    [self resignAllResponders];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

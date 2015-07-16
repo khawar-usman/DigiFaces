@@ -22,6 +22,7 @@
 #import "Utility.h"
 #import "CustomAertView.h"
 #import "RTCell.h"
+#import "CarouselViewController.h"
 
 typedef enum {
     CellTypeUser,
@@ -36,6 +37,7 @@ typedef enum {
 {
     NSInteger contentHeight;
     RTCell *infoCell;
+    NSInteger selectedIndex;
 }
 
 @property (nonatomic, retain) NSMutableArray * cellsArray;
@@ -77,7 +79,7 @@ typedef enum {
     }
     [_cellsArray addObject:@(CellTypeHeader)];
     
-    for (id obj in _diary.comments) {
+    for (int i=0;i<_diary.comments.count;i++) {
         [_cellsArray addObject:@(CellTypeComment)];
     }
     
@@ -231,7 +233,6 @@ typedef enum {
     return height;
 }
 
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return _cellsArray.count;
 }
@@ -275,6 +276,7 @@ typedef enum {
     }
     else if (type == CellTypeHeader){
         UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"noResponseHeaderCell" forIndexPath:indexPath];
+        [cell setBackgroundColor:[UIColor whiteColor]];
         NSInteger counts = 0;
         if (_responseType == ResponseControllerTypeNotification) {
             counts = _response.comments.count;
@@ -315,6 +317,10 @@ typedef enum {
     return nil;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -344,7 +350,17 @@ typedef enum {
 #pragma mark - ImagesCellDelegate
 -(void)imageCell:(id)cell didClickOnButton:(id)button atIndex:(NSInteger)index atFile:(File *)file
 {
-    NSLog(@"Selected Index : %ld", (long)index);
+    selectedIndex = index;
+    [self performSegueWithIdentifier:@"carosulSegue" sender:self];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"carosulSegue"]){
+        CarouselViewController * carouselController = [segue destinationViewController];
+        carouselController.selectedIndex = selectedIndex;
+        carouselController.files = _diary.files;
+    }
 }
 
 @end
