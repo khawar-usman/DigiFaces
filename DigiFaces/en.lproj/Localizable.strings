@@ -7,8 +7,9 @@
 */
 
 
-"home cell" = "Home";
-"diary cell" = "Diary";
+
+"home" = "Home";
+"diary" = "Diary";
 "woman cell" = "Being a woman online";
 "friend cell" = "Friendship and web";
 "talking cell" = "Talking about brands";

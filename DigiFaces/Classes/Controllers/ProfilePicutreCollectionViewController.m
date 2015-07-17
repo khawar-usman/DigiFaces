@@ -131,7 +131,13 @@
     
     File * f = [[File alloc] init];
     
-    [cell.imgPicture setImageWithURL:[NSURL URLWithString:[f returnFilePathFromFileObject:file]]];
+    NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL URLWithString:[f returnFilePathFromFileObject:file]]];
+    [cell.imgPicture setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        [cell.imgPicture setImage:image];
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+        
+    }];
+//    [cell.imgPicture setImageWithURL:[NSURL URLWithString:[f returnFilePathFromFileObject:file]]];
     
     return cell;
 }

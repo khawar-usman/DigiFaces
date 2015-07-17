@@ -18,11 +18,14 @@
 #import "ProfilePicutreCollectionViewController.h"
 #import "Reachability.h"
 #import "AppDelegate.h"
+#import "DiaryTheme.h"
 
 @interface HomeViewController ()<ProfilePicCellDelegate, ProfilePictureViewControllerDelegate>
 {
     ProfilePicCell * picCell;
 }
+@property (nonatomic ,retain) NSMutableArray * dataArray;
+
 @end
 
 @implementation HomeViewController
@@ -35,8 +38,12 @@
     [self.navigationController.navigationBar
      setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithRed:38/255.0f green:218/255.0f blue:1 alpha:1]}];
    
-
+    _dataArray = [[NSMutableArray alloc] init];
+    [_dataArray addObject:@{@"Title" : @"home", @"Icon" : @"home.png"}];
+    [_dataArray addObject:@{@"Title" : @"diary", @"Icon" : @"diary.png"}];
+    
     _imageNames = [[NSArray alloc]initWithObjects:@"home.png",@"diary.png",@"chat.png",@"friedship.png",@"talking.png",@"chat.png", nil];
+    
     [self fetchUserInfo];
     // Do any additional setup after loading the view.
     
@@ -85,6 +92,7 @@
     
     
     [manager GET:@"http://digifacesservices.focusforums.com/api/Project/GetHomeAnnouncement/{projectId}" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
         NSLog(@"User JSON: %@", responseObject);
        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -115,6 +123,13 @@
     
     [manager POST:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"User JSON: %@", responseObject);
+        
+        for (NSDictionary * dict in responseObject) {
+            DiaryTheme * theme = [[DiaryTheme alloc] initWithDictionary:dict];
+            [_dataArray addObject:theme];
+        }
+        [self.tableView reloadData];
+        
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -239,69 +254,88 @@
 //    _userPicture.frame = CGRectMake(_userPicture.frame.origin.x, _userPicture.frame.origin.y, 70, 70);
 }
 
+#pragma mark - UITableViewDeleagate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
 
-    return 7;
+    return _dataArray.count;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(indexPath.row == 1){
+    if(indexPath.row == 0){
         // Project Introduction
         [self performSegueWithIdentifier:@"projectIntroSegue" sender:self];
     }
-    else if (indexPath.row == 2){
+    else if (indexPath.row == 1){
         [self performSegueWithIdentifier:@"dailyDiarySegue" sender:self];
     }
+    
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 166;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
-        return 166;
-    }
-    else{
-        return 44;
-    }
+    return 44;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    picCell = [tableView dequeueReusableCellWithIdentifier:@"picCell"];
+    [self configurePicCell];
+    return picCell;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (indexPath.row == 0) {
-        picCell = [tableView dequeueReusableCellWithIdentifier:@"picCell"];
-        [self configurePicCell];
-        return picCell;
+    if (indexPath.row == 0 || indexPath.row == 1) {
+        NSDictionary * dict = [_dataArray objectAtIndex:indexPath.row];
+        UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+        cell.textLabel.text = NSLocalizedString([dict objectForKey:@"Title"], [dict objectForKey:@"Title"]);
+        cell.imageView.image = [UIImage imageNamed:[dict valueForKey:@"Icon"]];
+        return cell;
+    }
+    else{
+        UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+        
+        DiaryTheme * theme = [_dataArray objectAtIndex:indexPath.row];
+        [cell.textLabel setText:theme.activityTitle];
+        [cell.imageView setImage:[UIImage imageNamed:@"chat.png"]];
+        return cell;
     }
     
-    UITableViewCell * cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-    //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-
-    cell.imageView.image = [UIImage imageNamed:[_imageNames objectAtIndex:indexPath.row-1]];
-    if (indexPath.row == 1) {
-         cell.textLabel.text = NSLocalizedString(@"home cell", @"Home") ;
-    }
-    else if(indexPath.row ==2){
-        cell.textLabel.text = NSLocalizedString(@"diary cell", @"Diary") ;
-
-    }
-    else if(indexPath.row ==3){
-        cell.textLabel.text =NSLocalizedString(@"woman cell", @"Being a woman online") ;
-        
-    }
-    else if(indexPath.row ==4){
-        cell.textLabel.text = NSLocalizedString(@"friend cell", @"Friendship and web") ;
-        
-    }
-    else if(indexPath.row ==5){
-        cell.textLabel.text =NSLocalizedString(@"talking cell", @"Talking about brands") ;
-        
-    }
-    else if(indexPath.row ==6){
-        cell.textLabel.text = NSLocalizedString(@"brand cell", @"Brands and social media") ;
-        
-    }
+//    UITableViewCell * cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+//    //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//
+//    cell.imageView.image = [UIImage imageNamed:[_imageNames objectAtIndex:indexPath.row-1]];
+//    if (indexPath.row == 1) {
+//         cell.textLabel.text = NSLocalizedString(@"home cell", @"Home") ;
+//    }
+//    else if(indexPath.row ==2){
+//        cell.textLabel.text = NSLocalizedString(@"diary cell", @"Diary") ;
+//
+//    }
+//    else if(indexPath.row ==3){
+//        cell.textLabel.text =NSLocalizedString(@"woman cell", @"Being a woman online") ;
+//        
+//    }
+//    else if(indexPath.row ==4){
+//        cell.textLabel.text = NSLocalizedString(@"friend cell", @"Friendship and web") ;
+//        
+//    }
+//    else if(indexPath.row ==5){
+//        cell.textLabel.text =NSLocalizedString(@"talking cell", @"Talking about brands") ;
+//        
+//    }
+//    else if(indexPath.row ==6){
+//        cell.textLabel.text = NSLocalizedString(@"brand cell", @"Brands and social media") ;
+//        
+//    }
     
-    return cell;
+    return nil;
 }
 
 

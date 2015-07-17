@@ -33,6 +33,13 @@
 		4AC7D47C1B510D0B00587045 /* RTCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC7D47B1B510D0B00587045 /* RTCell.m */; };
 		4AC8446C1B57FA3E006CDB45 /* CarouselViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC8446B1B57FA3E006CDB45 /* CarouselViewController.m */; };
 		4AC8446F1B57FA75006CDB45 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC8446E1B57FA75006CDB45 /* ImageViewController.m */; };
+		4ACB9ECD1B58E94C00E9F984 /* DiaryTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACB9ECC1B58E94C00E9F984 /* DiaryTheme.m */; };
+		4ACB9ED01B58EAB500E9F984 /* Module.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACB9ECF1B58EAB500E9F984 /* Module.m */; };
+		4ACB9ED31B58EBA400E9F984 /* DisplayText.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACB9ED21B58EBA400E9F984 /* DisplayText.m */; };
+		4ACB9ED61B58EC2900E9F984 /* DisplayFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACB9ED51B58EC2900E9F984 /* DisplayFile.m */; };
+		4ACB9ED91B58EC8900E9F984 /* TextArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACB9ED81B58EC8900E9F984 /* TextArea.m */; };
+		4ACB9EDC1B58ECA800E9F984 /* MarkUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACB9EDB1B58ECA800E9F984 /* MarkUp.m */; };
+		4ACB9EDF1B58ECCF00E9F984 /* ImageGallary.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACB9EDE1B58ECCF00E9F984 /* ImageGallary.m */; };
 		4ACDB9AC1B3E7E66009EFB91 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB92B1B3E7E66009EFB91 /* AppDelegate.m */; };
 		4ACDB9AD1B3E7E66009EFB91 /* AboutDigifacesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB92E1B3E7E66009EFB91 /* AboutDigifacesController.m */; };
 		4ACDB9AE1B3E7E66009EFB91 /* EmailModeratorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB9301B3E7E66009EFB91 /* EmailModeratorController.m */; };
@@ -188,6 +195,20 @@
 		4AC8446D1B57FA75006CDB45 /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
 		4AC8446E1B57FA75006CDB45 /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
 		4AC844711B581FB6006CDB45 /* PageViewLoadedDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PageViewLoadedDelegate.h; path = Others/PageViewLoadedDelegate.h; sourceTree = "<group>"; };
+		4ACB9ECB1B58E94C00E9F984 /* DiaryTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiaryTheme.h; sourceTree = "<group>"; };
+		4ACB9ECC1B58E94C00E9F984 /* DiaryTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiaryTheme.m; sourceTree = "<group>"; };
+		4ACB9ECE1B58EAB500E9F984 /* Module.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Module.h; sourceTree = "<group>"; };
+		4ACB9ECF1B58EAB500E9F984 /* Module.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Module.m; sourceTree = "<group>"; };
+		4ACB9ED11B58EBA400E9F984 /* DisplayText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayText.h; sourceTree = "<group>"; };
+		4ACB9ED21B58EBA400E9F984 /* DisplayText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisplayText.m; sourceTree = "<group>"; };
+		4ACB9ED41B58EC2900E9F984 /* DisplayFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayFile.h; sourceTree = "<group>"; };
+		4ACB9ED51B58EC2900E9F984 /* DisplayFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisplayFile.m; sourceTree = "<group>"; };
+		4ACB9ED71B58EC8900E9F984 /* TextArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextArea.h; sourceTree = "<group>"; };
+		4ACB9ED81B58EC8900E9F984 /* TextArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextArea.m; sourceTree = "<group>"; };
+		4ACB9EDA1B58ECA800E9F984 /* MarkUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarkUp.h; sourceTree = "<group>"; };
+		4ACB9EDB1B58ECA800E9F984 /* MarkUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarkUp.m; sourceTree = "<group>"; };
+		4ACB9EDD1B58ECCF00E9F984 /* ImageGallary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageGallary.h; sourceTree = "<group>"; };
+		4ACB9EDE1B58ECCF00E9F984 /* ImageGallary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageGallary.m; sourceTree = "<group>"; };
 		4ACDB92A1B3E7E66009EFB91 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4ACDB92B1B3E7E66009EFB91 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		4ACDB92D1B3E7E66009EFB91 /* AboutDigifacesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutDigifacesController.h; sourceTree = "<group>"; };
@@ -600,6 +621,20 @@
 				4ACDB9F51B3E9A14009EFB91 /* DailyDiary.m */,
 				4ACDB9FA1B3EB9D3009EFB91 /* Notification.h */,
 				4ACDB9FB1B3EB9D3009EFB91 /* Notification.m */,
+				4ACB9ECB1B58E94C00E9F984 /* DiaryTheme.h */,
+				4ACB9ECC1B58E94C00E9F984 /* DiaryTheme.m */,
+				4ACB9ECE1B58EAB500E9F984 /* Module.h */,
+				4ACB9ECF1B58EAB500E9F984 /* Module.m */,
+				4ACB9ED11B58EBA400E9F984 /* DisplayText.h */,
+				4ACB9ED21B58EBA400E9F984 /* DisplayText.m */,
+				4ACB9ED41B58EC2900E9F984 /* DisplayFile.h */,
+				4ACB9ED51B58EC2900E9F984 /* DisplayFile.m */,
+				4ACB9ED71B58EC8900E9F984 /* TextArea.h */,
+				4ACB9ED81B58EC8900E9F984 /* TextArea.m */,
+				4ACB9EDA1B58ECA800E9F984 /* MarkUp.h */,
+				4ACB9EDB1B58ECA800E9F984 /* MarkUp.m */,
+				4ACB9EDD1B58ECCF00E9F984 /* ImageGallary.h */,
+				4ACB9EDE1B58ECCF00E9F984 /* ImageGallary.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -840,6 +875,7 @@
 				4ACDB9CA1B3E7E66009EFB91 /* DigiFaceHTTPClient.m in Sources */,
 				4ACDB9D71B3E7E66009EFB91 /* MWFeedInfo.m in Sources */,
 				4ACDB9B21B3E7E66009EFB91 /* MyProfileViewController.m in Sources */,
+				4ACB9ED91B58EC8900E9F984 /* TextArea.m in Sources */,
 				4ACDB9DE1B3E7E66009EFB91 /* RootViewController.m in Sources */,
 				4ACDB9B41B3E7E66009EFB91 /* ProfilePicutreCollectionViewController.m in Sources */,
 				4ACDB9ED1B3E8366009EFB91 /* DiaryInfoViewController.m in Sources */,
@@ -852,6 +888,7 @@
 				4ACDB9FC1B3EB9D3009EFB91 /* Notification.m in Sources */,
 				4ACDBA021B3EC7EA009EFB91 /* ResponseViewController.m in Sources */,
 				4ACDB9D91B3E7E66009EFB91 /* MWFeedParser.m in Sources */,
+				4ACB9ED61B58EC2900E9F984 /* DisplayFile.m in Sources */,
 				4ACDB9F91B3EB6AE009EFB91 /* NotificationsViewController.m in Sources */,
 				4ACDB9D21B3E7E66009EFB91 /* AFURLResponseSerialization.m in Sources */,
 				4ACDBA0B1B3ED216009EFB91 /* TextAreaResponse.m in Sources */,
@@ -863,6 +900,8 @@
 				4ACDB9BB1B3E7E66009EFB91 /* WebViewController.m in Sources */,
 				4ACDB9CB1B3E7E66009EFB91 /* AFHTTPRequestOperation.m in Sources */,
 				4ACDB9F31B3E8816009EFB91 /* UserInfo.m in Sources */,
+				4ACB9ECD1B58E94C00E9F984 /* DiaryTheme.m in Sources */,
+				4ACB9ED31B58EBA400E9F984 /* DisplayText.m in Sources */,
 				4ACDB9D81B3E7E66009EFB91 /* MWFeedItem.m in Sources */,
 				4ACDB9F01B3E84B8009EFB91 /* DailyDiaryViewController.m in Sources */,
 				4ACDB9C01B3E7E66009EFB91 /* LoginSegue.m in Sources */,
@@ -886,6 +925,7 @@
 				4ACDB9D41B3E7E66009EFB91 /* MBProgressHUD.m in Sources */,
 				4ACDB9CC1B3E7E66009EFB91 /* AFHTTPRequestOperationManager.m in Sources */,
 				19F0BD101B1DBC6400E4B048 /* main.m in Sources */,
+				4ACB9ED01B58EAB500E9F984 /* Module.m in Sources */,
 				4AD8501B1B45AAB70059A457 /* NointernetController.m in Sources */,
 				4AC7D47C1B510D0B00587045 /* RTCell.m in Sources */,
 				4ACDB9FF1B3EC155009EFB91 /* NotificationCell.m in Sources */,
@@ -911,6 +951,7 @@
 				4ABC3D3E1B4048BF0090A619 /* ImagesScrollviewer.m in Sources */,
 				4A00E83D1B4BD060000F6A6B /* TextFieldCell.m in Sources */,
 				4A00E8431B4BF130000F6A6B /* CalendarViewController.m in Sources */,
+				4ACB9EDF1B58ECCF00E9F984 /* ImageGallary.m in Sources */,
 				4AD8501E1B45ABB40059A457 /* Reachability.m in Sources */,
 				4ACDB9E61B3E7E66009EFB91 /* UIWebView+AFNetworking.m in Sources */,
 				4ACDB9BC1B3E7E66009EFB91 /* CustomAertView.m in Sources */,
@@ -918,6 +959,7 @@
 				4ACDBA0E1B3ED814009EFB91 /* UserCell.m in Sources */,
 				4A00E8401B4BD07A000F6A6B /* TextViewCell.m in Sources */,
 				4ACDB9C61B3E7E66009EFB91 /* Diary.m in Sources */,
+				4ACB9EDC1B58ECA800E9F984 /* MarkUp.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -102,7 +102,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self performSegueWithIdentifier:@"responseSegue" sender:self];
+    //[self performSegueWithIdentifier:@"responseSegue" sender:self];
 }
 
 /*
