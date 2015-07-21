@@ -7,11 +7,30 @@
 //
 
 #import "ResponseViewCell.h"
+#import "File.h"
 
 @implementation ResponseViewCell
 
 - (void)awakeFromNib {
     // Initialization code
+}
+
+-(void)setFiles:(NSArray *)files
+{
+    _files = files;
+    [self reloadFiles];
+}
+
+-(void)reloadFiles
+{
+    NSInteger xOffset= 0;
+    for (File * file in _files) {
+        UIButton * btn = [[UIButton alloc] initWithFrame:CGRectMake(xOffset, 0, _scrollView.frame.size.height, _scrollView.frame.size.height)];
+        [btn setBackgroundColor:[UIColor redColor]];
+        [_scrollView addSubview:btn];
+        xOffset += _scrollView.frame.size.height;
+    }
+    [_scrollView setContentSize:CGSizeMake(xOffset, _scrollView.frame.size.height)];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

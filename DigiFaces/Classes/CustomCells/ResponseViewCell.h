@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblResponse;
 @property (weak, nonatomic) IBOutlet ImagesScrollviewer *scrollView;
 @property (weak, nonatomic) IBOutlet UIButton *btnComments;
+@property (nonatomic, retain) NSArray * files;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *responseHeightConst;
 - (IBAction)commentClicked:(id)sender;
 

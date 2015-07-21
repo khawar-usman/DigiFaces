@@ -203,19 +203,25 @@
         }];
         [responseCell.lblName setText:response.userInfo.appUserName];
         [responseCell.lblTime setText:response.dateCreatedFormated];
+        [responseCell.btnComments setTitle:[NSString stringWithFormat:@"%d Comments", response.comments.count] forState:UIControlStateNormal];
         CGSize size;
         if (response.textAreaResponse.count>0) {
             TextAreaResponse * textResponse = [response.textAreaResponse objectAtIndex:0];
             [responseCell.lblResponse setText:textResponse.response];
-            size = [textResponse.response sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]}];
             
+            CGRect rect = [textResponse.response boundingRectWithSize:CGSizeMake(self.view.frame.size.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil];
+            size = rect.size;
+            responseCell.responseHeightConst.constant = MIN(size.height + 5, 50);
         }
         
-        NSInteger height = 105 + MIN(size.height, 50);
+        [responseCell setFiles:response.files];
+        
+        NSInteger height = 105 + MIN(size.height + 5, 50);
         
         if (response.files.count>0) {
             height += 55;
         }
+        [_heightArray replaceObjectAtIndex:indexPath.row withObject:@(height)];
         
         cell = responseCell;
     }
