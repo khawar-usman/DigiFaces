@@ -55,6 +55,7 @@
         DiaryInfoViewController * diaryInfoController = (DiaryInfoViewController*)[(UINavigationController*)segue.destinationViewController topViewController];
         diaryInfoController.isViewOnly = YES;
         diaryInfoController.dailyDiary = self.dailyDiary;
+        diaryInfoController.diaryTheme = self.diaryTheme;
     }
 }
 
@@ -76,13 +77,13 @@
 }
 
 
--(void)createThread
+-(void)createThreadWithActivityID:(NSInteger)activityId
 {
     [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     
     NSString * url = [NSString stringWithFormat:@"%@%@", kBaseURL, kUpdateThread];
     
-    NSDictionary * params = @{@"ActivityId" : @(_dailyDiary.activityId),
+    NSDictionary * params = @{@"ActivityId" : @(activityId),
                               @"ThreadId" : @0,
                               @"IsDraft" : @YES,
                               @"IsActive" : @YES};
@@ -100,21 +101,22 @@
         
         NSLog(@"Response : %@", responseObject);
         threadID = [[responseObject objectForKey:@"ThreadId"] integerValue];
-        [self addEntry];
+        [self addEntryWithActivityId:activityId];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
     }];
 }
--(void)addEntry
+
+-(void)addEntryWithActivityId:(NSInteger)activityId
 {
     [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     
     NSString * url = [NSString stringWithFormat:@"%@%@", kBaseURL, kUpdateDailyDiary];
     url = [url stringByReplacingOccurrencesOfString:@"{projectId}" withString:[NSString stringWithFormat:@"%d", [[UserManagerShared sharedManager] currentProjectID]]];
     
-    NSDictionary * params = @{@"ActivityId" : @(_dailyDiary.activityId),
+    NSDictionary * params = @{@"ActivityId" : @(activityId),
                               @"DailyDiaryResponseId" : @0,
                               @"DailyDiaryId" : @(_dailyDiary.diaryID),
                               @"ThreadId" : @(threadID),
@@ -182,7 +184,7 @@
     else
     {
         [self resignAllResponders];
-        [self createThread];
+        [self createThreadWithActivityID:_dailyDiary.activityId];
     }
     
 }

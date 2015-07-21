@@ -26,9 +26,12 @@
 #import "Utility.h"
 #import "ResponseViewCell.h"
 #import "TextAreaResponse.h"
+#import "AddResponseViewController.h"
 
 @interface DiaryThemeViewController ()
-
+{
+    UIButton * btnEdit;
+}
 @property (nonatomic, retain) NSMutableArray * cellsArray;
 @property (nonatomic, retain) NSMutableArray * heightArray;
 @end
@@ -39,6 +42,8 @@
     [super viewDidLoad];
     _cellsArray = [[NSMutableArray alloc] init];
     _heightArray = [[NSMutableArray alloc] init];
+    
+    [self addEditButton];
     
     Module * markup = [self getModuleWithThemeType:ThemeTypeMarkup];
     if (markup) {
@@ -66,6 +71,21 @@
         }
         [self getResponses];
     }
+}
+
+-(void)addEditButton
+{
+    btnEdit = [[UIButton alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 100, 50, 50)];
+    [btnEdit setBackgroundImage:[UIImage imageNamed:@"pencil"] forState:UIControlStateNormal];
+    [btnEdit addTarget:self action:@selector(editClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:btnEdit];
+}
+
+-(void)editClicked:(id)sender
+{
+    NSLog(@"Edit clicked");
+    [self performSegueWithIdentifier:@"addThemeEntrySegue" sender:self];
 }
 
 -(Module*)getModuleWithThemeType:(ThemeType)type
@@ -280,6 +300,20 @@
         responseController.responseType = ResponseControllerTypeDiaryTheme;
         responseController.response = response;
     }
+    else if ([segue.identifier isEqualToString:@"addThemeEntrySegue"]){
+        AddResponseViewController * addResponseController = (AddResponseViewController*)[(UINavigationController*)[segue destinationViewController] topViewController];
+        addResponseController.diaryTheme = _diaryTheme;
+    }
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGRect frame = btnEdit.frame;
+    frame.origin.y = scrollView.contentOffset.y + self.tableView.frame.size.height - btnEdit.frame.size.height - 10;
+    frame.origin.x = self.view.frame.size.width - frame.size.width - 10;
+    btnEdit.frame = frame;
+    
+    [self.view bringSubviewToFront:btnEdit];
 }
 
 @end

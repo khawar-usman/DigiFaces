@@ -2994,6 +2994,7 @@
                         <segue destination="THO-t6-uQc" kind="presentation" identifier="diaryInfoSegue" id="3r5-SJ-zjd"/>
                         <segue destination="nD2-6u-Vh5" kind="presentation" identifier="webViewSegue" id="XNZ-ng-ebc"/>
                         <segue destination="Llw-KH-PDU" kind="push" identifier="responseSegue" id="kgY-B9-zM2"/>
+                        <segue destination="Mvx-4s-GvE" kind="presentation" identifier="addThemeEntrySegue" id="f8n-jW-t9J"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RVS-Nq-qXv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3317,9 +3318,9 @@
         <image name="top_bar_back_arrow" width="13" height="23"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Z1a-cS-acW"/>
-        <segue reference="veF-sC-LAA"/>
-        <segue reference="PJM-GU-RyY"/>
-        <segue reference="Taj-qP-dlL"/>
+        <segue reference="kgY-B9-zM2"/>
+        <segue reference="XNZ-ng-ebc"/>
+        <segue reference="f8n-jW-t9J"/>
+        <segue reference="3r5-SJ-zjd"/>
     </inferredMetricsTieBreakers>
 </document>
