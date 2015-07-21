@@ -19,6 +19,7 @@
 #import "Reachability.h"
 #import "AppDelegate.h"
 #import "DiaryTheme.h"
+#import "DiaryThemeViewController.h"
 
 @interface HomeViewController ()<ProfilePicCellDelegate, ProfilePictureViewControllerDelegate>
 {
@@ -97,23 +98,17 @@
        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
-        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
-        
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES]; 
     }];
 }
 
 -(void)fetchActivites{
-
     
-    NSString * onlinekey = [[NSUserDefaults standardUserDefaults]objectForKey:@"access_token"];
-    
-    NSString *finalyToken = [[NSString alloc]initWithFormat:@"Bearer %@",onlinekey ];
-    
-    
+    [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
     
-    [requestSerializer setValue:finalyToken forHTTPHeaderField:@"Authorization"];
+    [requestSerializer setValue:[Utility getAuthToken] forHTTPHeaderField:@"Authorization"];
     [requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     
     NSString * url = [NSString stringWithFormat:@"%@%@", kBaseURL, kGetActivties];
@@ -143,18 +138,11 @@
     
     [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     
-    NSString * onlinekey = [[NSUserDefaults standardUserDefaults]objectForKey:@"access_token"];
-    
-    NSString *finalyToken = [[NSString alloc]initWithFormat:@"Bearer %@",onlinekey ];
-    
-    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
     
-    [requestSerializer setValue:finalyToken forHTTPHeaderField:@"Authorization"];
+    [requestSerializer setValue:[Utility getAuthToken] forHTTPHeaderField:@"Authorization"];
     [requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    
-    
     
     manager.requestSerializer = requestSerializer;
     
@@ -212,7 +200,6 @@
     
     [requestSerializer setValue:[Utility getAuthToken] forHTTPHeaderField:@"Authorization"];
     
-//    [requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     
@@ -250,8 +237,6 @@
     if ([[UserManagerShared sharedManager] profilePic]) {
         [picCell.profileImage setImage:[[UserManagerShared sharedManager] profilePic]];
     }
-    
-//    _userPicture.frame = CGRectMake(_userPicture.frame.origin.x, _userPicture.frame.origin.y, 70, 70);
 }
 
 #pragma mark - UITableViewDeleagate
@@ -269,7 +254,10 @@
     else if (indexPath.row == 1){
         [self performSegueWithIdentifier:@"dailyDiarySegue" sender:self];
     }
-    
+    else
+    {
+        [self performSegueWithIdentifier:@"diaryTheme" sender:self];
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -307,34 +295,6 @@
         return cell;
     }
     
-//    UITableViewCell * cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-//    //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-//
-//    cell.imageView.image = [UIImage imageNamed:[_imageNames objectAtIndex:indexPath.row-1]];
-//    if (indexPath.row == 1) {
-//         cell.textLabel.text = NSLocalizedString(@"home cell", @"Home") ;
-//    }
-//    else if(indexPath.row ==2){
-//        cell.textLabel.text = NSLocalizedString(@"diary cell", @"Diary") ;
-//
-//    }
-//    else if(indexPath.row ==3){
-//        cell.textLabel.text =NSLocalizedString(@"woman cell", @"Being a woman online") ;
-//        
-//    }
-//    else if(indexPath.row ==4){
-//        cell.textLabel.text = NSLocalizedString(@"friend cell", @"Friendship and web") ;
-//        
-//    }
-//    else if(indexPath.row ==5){
-//        cell.textLabel.text =NSLocalizedString(@"talking cell", @"Talking about brands") ;
-//        
-//    }
-//    else if(indexPath.row ==6){
-//        cell.textLabel.text = NSLocalizedString(@"brand cell", @"Brands and social media") ;
-//        
-//    }
-    
     return nil;
 }
 
@@ -349,6 +309,12 @@
         UINavigationController * navController = [segue destinationViewController];
         ProfilePicutreCollectionViewController * profileController = (ProfilePicutreCollectionViewController*)[navController topViewController];
         profileController.delegate = self;
+    }
+    else if ([segue.identifier isEqualToString:@"diaryTheme"]){
+        DiaryThemeViewController * themeController = [segue destinationViewController];
+        NSIndexPath * indexPath = [self.tableView indexPathForSelectedRow];
+        DiaryTheme * theme = [_dataArray objectAtIndex:indexPath.row];
+        themeController.diaryTheme = theme;
     }
 }
 

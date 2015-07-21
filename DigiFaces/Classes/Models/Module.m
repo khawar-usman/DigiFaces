@@ -44,4 +44,21 @@
     return self;
 }
 
+-(ThemeType)themeType
+{
+    if ([self.activityType isEqualToString:@"ImageGallery"]) {
+        return ThemeTypeImageGallery;
+    }
+    else if ([self.activityType isEqualToString:@"DisplayImage"]){
+        return ThemeTypeDisplayImage;
+    }
+    else if ([self.activityType isEqualToString:@"DisplayText"]){
+        return ThemeTypeDisplayText;
+    }
+    else if ([self.activityType isEqualToString:@"Markup"]){
+        return ThemeTypeMarkup;
+    }
+    return ThemeTypeNone;
+}
+
 @end

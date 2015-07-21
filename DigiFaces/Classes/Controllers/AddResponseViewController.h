@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "DailyDiary.h"
+#import "DiaryTheme.h"
 
 @interface AddResponseViewController : UIViewController
 
 @property (nonatomic, retain) DailyDiary * dailyDiary;
+@property (nonatomic, retain) DiaryTheme * diaryTheme;
+
 @property (weak, nonatomic) IBOutlet UILabel *lblPlaceholder;
 
 @property (weak, nonatomic) IBOutlet UITextField *txtTitle;

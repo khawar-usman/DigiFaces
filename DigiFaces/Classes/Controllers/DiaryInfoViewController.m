@@ -13,21 +13,77 @@
 #import "VideoCell.h"
 #import "AddResponseViewController.h"
 #import "RTCell.h"
+#import "Module.h"
+#import "GalleryCell.h"
+
+typedef enum {
+    CellsTypeImage,
+    CellsTypeVideo,
+    CellsTypeGalary,
+    CellsTypeText
+}CellsType;
 
 @interface DiaryInfoViewController ()
 {
     UIButton * btnEdit;
     RTCell * infoCell;
 }
+
+@property (nonatomic, retain) NSMutableArray * cellsArray;
 @end
 
 @implementation DiaryInfoViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _cellsArray = [[NSMutableArray alloc] init];
+    
+    if (_dailyDiary) {
+        if ([_dailyDiary.file.fileType isEqualToString:@"Image"]) {
+            [_cellsArray addObject:@(CellsTypeImage)];
+        }
+        else{
+            [_cellsArray addObject:@(CellsTypeVideo)];
+        }
+        
+        [_cellsArray addObject:@(CellsTypeText)];
+    }
+    else if (_diaryTheme){
+        Module * m = [self getModuleForThemeType:ThemeTypeDisplayImage];
+        if (m) {
+            if ([m.displayFile.file.fileType isEqualToString:@"Image"]) {
+                [_cellsArray addObject:@(CellsTypeImage)];
+            }
+            else{
+                [_cellsArray addObject:@(CellsTypeVideo)];
+            }
+        }
+        else{
+            Module * gal = [self getModuleForThemeType:ThemeTypeImageGallery];
+            if (gal) {
+                [_cellsArray addObject:@(CellsTypeGalary)];
+            }
+        }
+        
+        Module * mText = [self getModuleForThemeType:ThemeTypeDisplayText];
+        if (mText) {
+            [_cellsArray addObject:@(CellsTypeText)];
+        }
+    }
+    
     if (!_isViewOnly) {
         [self addEditButton];
     }
+}
+
+-(Module*)getModuleForThemeType:(ThemeType)type
+{
+    for (Module * m in _diaryTheme.modules) {
+        if ([m themeType] == type) {
+            return m;
+        }
+    }
+    return nil;
 }
 
 -(void)addEditButton
@@ -69,13 +125,6 @@
         return 160;
     }
     if (indexPath.row == 1) {
-//        NSAttributedString *attributedText =
-//        [[NSAttributedString alloc] initWithString:_dailyDiary.diaryQuestion attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17.0f]}];
-//        
-//        CGRect rect = [attributedText boundingRectWithSize:(CGSize){self.view.frame.size.width, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin context:nil];
-//        
-//        CGSize size = rect.size;
-        
         return infoCell.titleLabel.optimumSize.height + 20;
     }
     return 0;
@@ -86,69 +135,77 @@
     
     UITableViewCell *cell;
     
-    if (indexPath.row == 0) {
-        if (_dailyDiary.file && [_dailyDiary.file.fileType isEqualToString:@"Image"]) {
+    CellsType type = [[_cellsArray objectAtIndex:indexPath.row] integerValue];
+    
+    switch (type) {
+        case CellsTypeImage:
+        {
+            File * file;
+            if (_dailyDiary) {
+                file = _dailyDiary.file;
+            }
+            else{
+                Module * module = [self getModuleForThemeType:ThemeTypeDisplayImage];
+                file = module.displayFile.file;
+            }
+            
             ImageCell * imgCell = [tableView dequeueReusableCellWithIdentifier:@"imageCell"];
-            [imgCell.image setImageWithURL:[NSURL URLWithString:_dailyDiary.file.filePath]];
+            [imgCell.image setImageWithURL:[NSURL URLWithString:file.filePath]];
             cell = imgCell;
         }
-        else{
+            break;
+        case CellsTypeVideo:
+        {
+            File * file;
+            if (_dailyDiary) {
+                file = _dailyDiary.file;
+            }
+            else{
+                Module * module = [self getModuleForThemeType:ThemeTypeDisplayImage];
+                file = module.displayFile.file;
+            }
+            
             VideoCell * vidCell = [tableView dequeueReusableCellWithIdentifier:@"videoCell"];
-            [vidCell.imageView setImageWithURL:[NSURL URLWithString:_dailyDiary.file.getVideoThumbURL]];
+            [vidCell.imageView setImageWithURL:[NSURL URLWithString:file.getVideoThumbURL]];
             cell = vidCell;
         }
+            break;
+        case CellsTypeText:
+        {
+            infoCell = [tableView dequeueReusableCellWithIdentifier:@"textCell" forIndexPath:indexPath];
+            if (_dailyDiary) {
+                [infoCell.titleLabel setText:_dailyDiary.diaryQuestion];
+            }
+            else{
+                Module * module = [self getModuleForThemeType:ThemeTypeDisplayText];
+                [infoCell.titleLabel setText:module.displayText.text];
+            }
+            cell = infoCell;
+        }
+            break;
+        case CellsTypeGalary:
+        {
+            Module * module = [self getModuleForThemeType:ThemeTypeDisplayText];
+            GalleryCell * galleryCell = [tableView dequeueReusableCellWithIdentifier:@"galleryCell"];
+            galleryCell.files = module.imageGallary.files;
+            [galleryCell reloadGallery];
+            cell = galleryCell;
+            
+        }
+            break;
+        default:
+            break;
     }
-    else if (indexPath.row == 1) {
-        infoCell = [tableView dequeueReusableCellWithIdentifier:@"textCell" forIndexPath:indexPath];
-        
-        [infoCell.titleLabel setText:_dailyDiary.diaryQuestion];
-        cell = infoCell;
-    }
-    
     
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0 && _dailyDiary.file) {
+    if (indexPath.row == 0) {
         [self performSegueWithIdentifier:@"webViewSegue" sender:self];
     }
 }
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 
 #pragma mark - Navigation
@@ -157,11 +214,24 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"webViewSegue"]){
         WebViewController * webController = (WebViewController*)[(UINavigationController*)[segue destinationViewController] topViewController];
-        webController.url = [_dailyDiary.file filePath];
+        File * file;
+        if (_dailyDiary) {
+            file = _dailyDiary.file;
+        }
+        else{
+            Module * module = [self getModuleForThemeType:ThemeTypeDisplayImage];
+            file = module.displayFile.file;
+        }
+        webController.url = [file filePath];
     }
     else if ([segue.identifier isEqualToString:@"addResponseSegue"]){
         AddResponseViewController * responseController = (AddResponseViewController*)[(UINavigationController*)[segue destinationViewController] topViewController];
-        responseController.dailyDiary = self.dailyDiary;
+        if (_dailyDiary) {
+            responseController.dailyDiary = self.dailyDiary;
+        }
+        else{
+            responseController.diaryTheme = self.diaryTheme;
+        }
     }
 }
 

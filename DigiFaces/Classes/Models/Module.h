@@ -13,6 +13,14 @@
 #import "MarkUp.h"
 #import "ImageGallary.h"
 
+typedef enum {
+    ThemeTypeDisplayImage,
+    ThemeTypeDisplayText,
+    ThemeTypeMarkup,
+    ThemeTypeImageGallery,
+    ThemeTypeNone
+}ThemeType;
+
 @interface Module : NSObject
 
 @property (nonatomic, assign) NSInteger activityModuleId;
@@ -28,5 +36,7 @@
 @property (nonatomic, retain) ImageGallary * imageGallary;
 
 -(instancetype) initWithDictionary:(NSDictionary*)dict;
+
+-(ThemeType)themeType;
 
 @end

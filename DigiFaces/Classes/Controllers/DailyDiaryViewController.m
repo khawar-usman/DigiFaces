@@ -197,6 +197,7 @@
         DefaultCell * headerCell = [tableView dequeueReusableCellWithIdentifier:@"dateHeaderCell"];
         NSString * date = [_dailyDiary.diariesDate objectAtIndex:section-1];
         [headerCell.label setText:[Utility getMonDayYearDateFromString:date]];
+        [headerCell setBackgroundColor:[UIColor whiteColor]];
         return headerCell;
     }
     else{

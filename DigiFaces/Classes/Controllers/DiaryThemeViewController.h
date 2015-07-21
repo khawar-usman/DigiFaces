@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "DailyDiary.h"
+#import "DiaryTheme.h"
 
 @interface DiaryThemeViewController : UITableViewController
 
 @property (nonatomic, retain) DailyDiary * dailyDiary;
+@property (nonatomic, retain) DiaryTheme * diaryTheme;
 
 @end

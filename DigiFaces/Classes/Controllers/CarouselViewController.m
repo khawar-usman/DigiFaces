@@ -47,7 +47,17 @@
     self.delegate = self;
     [self setTitleWithIndex:_selectedIndex];
     currentPageNo = _selectedIndex;
+    
+    if (self.view) {
+        UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
+        [self.view addGestureRecognizer:tapGesture];
+    }
     // Do any additional setup after loading the view.
+}
+
+-(void)viewTapped:(id)sender
+{
+    [self.navigationController setNavigationBarHidden:!self.navigationController.navigationBarHidden animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

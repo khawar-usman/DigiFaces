@@ -16,22 +16,61 @@
 #import "VideoCell.h"
 #import "WebViewController.h"
 #import "ResponseViewController.h"
+#import "Module.h"
+#import "RTCell.h"
+#import "GalleryCell.h"
 
 @interface DiaryThemeViewController ()
 
+@property (nonatomic, retain) NSMutableArray * cellsArray;
+@property (nonatomic, retain) NSMutableArray * heightArray;
 @end
 
 @implementation DiaryThemeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _cellsArray = [[NSMutableArray alloc] init];
+    _heightArray = [[NSMutableArray alloc] init];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    Module * markup = [self getModuleWithThemeType:ThemeTypeMarkup];
+    if (markup) {
+        [_cellsArray addObject:markup];
+        [_heightArray addObject:@44];
+    }
+    else{
+        Module * image = [self getModuleWithThemeType:ThemeTypeDisplayImage];
+        if (image) {
+            [_cellsArray addObject:image];
+            [_heightArray addObject:@160];
+        }
+        else{
+            Module * gallary = [self getModuleWithThemeType:ThemeTypeImageGallery];
+            if (gallary) {
+                [_cellsArray addObject:gallary];
+                [_heightArray addObject:@160];
+            }
+        }
+        
+        Module * text = [self getModuleWithThemeType:ThemeTypeDisplayText];
+        if (text) {
+            [_cellsArray addObject:text];
+            [_heightArray addObject:@44];
+        }
+    }
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+
+-(Module*)getModuleWithThemeType:(ThemeType)type
+{
+    for (Module * m in _diaryTheme.modules) {
+        if ([m themeType] == type){
+            return m;
+        }
+    }
+    return nil;
+}
+
 - (IBAction)closeThis:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -49,97 +88,67 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    if (_dailyDiary.userDiaries.count==0) {
-        return 2;
-    }
-    return 3 + _dailyDiary.userDiaries.count;
+    
+    return _cellsArray.count;
 }
 
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     UITableViewCell *cell;
     
-    if (indexPath.row == 0) {
-        if (_dailyDiary.file && [_dailyDiary.file.fileType isEqualToString:@"Image"]) {
-            ImageCell * imgCell = [tableView dequeueReusableCellWithIdentifier:@"imageCell"];
-            [imgCell.image setImageWithURL:[NSURL URLWithString:_dailyDiary.file.filePath]];
-            cell = imgCell;
+    if ([[_cellsArray objectAtIndex:indexPath.row] isKindOfClass:[Module class]]) {
+        Module * module = [_cellsArray objectAtIndex:indexPath.row];
+        if ([module themeType] == ThemeTypeDisplayImage) {
+            if (module.displayFile.file && [module.displayFile.file.fileType isEqualToString:@"Image"]) {
+                ImageCell * imgCell = [tableView dequeueReusableCellWithIdentifier:@"imageCell"];
+                NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL URLWithString:module.displayFile.file.filePath]];
+                [imgCell.image setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                    [imgCell.image setImage:image];
+                } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                    NSLog(@"Error");
+                }];
+                //[imgCell.image setImageWithURL:[NSURL URLWithString:module.displayFile.file.filePath]];
+                cell = imgCell;
+            }
+            else{
+                VideoCell * vidCell = [tableView dequeueReusableCellWithIdentifier:@"videoCell"];
+                [vidCell.imageView setImageWithURL:[NSURL URLWithString:module.displayFile.file.getVideoThumbURL]];
+                cell = vidCell;
+            }
         }
-        else{
-            VideoCell * vidCell = [tableView dequeueReusableCellWithIdentifier:@"videoCell"];
-            [vidCell.imageView setImageWithURL:[NSURL URLWithString:_dailyDiary.file.getVideoThumbURL]];
-            cell = vidCell;
+        else if ([module themeType] == ThemeTypeDisplayText){
+        
+            RTCell * textCell = [tableView dequeueReusableCellWithIdentifier:@"textCell" forIndexPath:indexPath];
+            
+            [textCell.titleLabel setText:module.displayText.text];
+            if (_heightArray.count>2) {
+                [_heightArray replaceObjectAtIndex:indexPath.row withObject:@(MIN(textCell.titleLabel.optimumSize.height, 90))];
+            }
+            else{
+                [_heightArray replaceObjectAtIndex:indexPath.row withObject:@(textCell.titleLabel.optimumSize.height + 20)];
+            }
+            cell = textCell;
+        }
+        else if ([module themeType] == ThemeTypeImageGallery){
+            GalleryCell * galleryCell =  [tableView dequeueReusableCellWithIdentifier:@"galleryCell" forIndexPath:indexPath];
+            galleryCell.files = module.imageGallary.files;
+            [galleryCell reloadGallery];
+            cell = galleryCell;
+        }
+        else if ([module themeType] == ThemeTypeMarkup){
+            cell = [tableView dequeueReusableCellWithIdentifier:@"textCell" forIndexPath:indexPath];
+            
+            [cell.textLabel setText:@"You must use your computer to complete this theme"];
         }
     }
-    else if (indexPath.row == 1) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"textCell" forIndexPath:indexPath];
-        
-        [cell.textLabel setText:_dailyDiary.diaryQuestion];
-    }
-    else if (indexPath.row == 2){
-        DefaultCell * headerCell = [tableView dequeueReusableCellWithIdentifier:@"noResponseHeaderCell" forIndexPath:indexPath];
-        [headerCell.label setText:[NSString stringWithFormat:@"%lu Entries", (unsigned long)[_dailyDiary.userDiaries count]]];
-        cell = headerCell;
-    }
-    else{
-        Diary * diary = [_dailyDiary.userDiaries objectAtIndex:indexPath.row - 3];
-        ResponseViewCell * responseCell = [tableView dequeueReusableCellWithIdentifier:@"responseCell"];
-        [responseCell.lblName setText:diary.userInfo.appUserName];
-        [responseCell.lblResponse setText:diary.response];
-        [responseCell.lblTime setText:diary.dateCreatedFormatted];
-        [responseCell.userImage setImageWithURL:[NSURL URLWithString:diary.userInfo.avatarFile.filePath]];
-        [responseCell.btnComments setTitle:[NSString stringWithFormat:@"%d Comments", diary.comments.count] forState:UIControlStateNormal];
-        
-        responseCell.responseHeightConst.constant = [self heightForComment:diary.response];
-        
-        
-        [responseCell.scrollView setFilesArray:diary.files];
-        [responseCell.scrollView setItemSize:CGSizeMake(58, 58)];
-        [responseCell.scrollView setPadding:UIEdgeInsetsMake(2, 2, 2, 0)];
-        [responseCell.scrollView reloadData];
-        
-        cell = responseCell;
-    }
-    
-    // Configure the cell...
     
     return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
-        return 160;
-    }
-    else if (indexPath.row == 1){
-        NSAttributedString *attributedText =
-        [[NSAttributedString alloc] initWithString:_dailyDiary.diaryQuestion attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17.0f]}];
-        
-        CGRect rect = [attributedText boundingRectWithSize:(CGSize){self.view.frame.size.width, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin context:nil];
-        
-        CGSize size = rect.size;
-        
-        size.height = size.height + 20;
-        if (_dailyDiary.userDiaries.count == 0) {
-            return size.height;
-        }
-        else
-            return MIN(size.height, 90);
-    }
-    else if (indexPath.row == 2){
-        return 40;
-    }
-    else{
-        
-        Diary * diary = [_dailyDiary.userDiaries objectAtIndex:indexPath.row - 3];
-        int count = 92;
-        count+= [self heightForComment:diary.response];
-        
-        if (diary.comments.count>0) {
-            count+= 58;
-        }
-        return count;
-    }
+    return [[_heightArray objectAtIndex:indexPath.row] integerValue];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -171,7 +180,8 @@
 {
     if ([segue.identifier isEqualToString:@"diaryInfoSegue"]) {
         DiaryInfoViewController * diaryInfoController = (DiaryInfoViewController*)[(UINavigationController*)[segue destinationViewController] topViewController];
-        diaryInfoController.dailyDiary = _dailyDiary;
+        
+        diaryInfoController.diaryTheme = _diaryTheme;
     }
     else if ([segue.identifier isEqualToString:@"webViewSegue"]){
         WebViewController * webController = (WebViewController*)[(UINavigationController*)[segue destinationViewController] topViewController];
@@ -186,49 +196,5 @@
         responseController.diary = diary;
     }
 }
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

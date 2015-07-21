@@ -213,7 +213,7 @@ typedef enum {
 -(void)keyboardWillShow:(NSNotification*)notification
 {
     NSDictionary* keyboardInfo = [notification userInfo];
-    NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardBoundsUserInfoKey];
+    NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameEndUserInfoKey];
     CGSize keyboardSize = [keyboardFrameBegin CGRectValue].size;
     
     float duration = [[keyboardInfo valueForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];

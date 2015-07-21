@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "DailyDiary.h"
+#import "DiaryTheme.h"
 
 @interface DiaryInfoViewController : UITableViewController
 
 @property (nonatomic, retain) DailyDiary * dailyDiary;
 @property (nonatomic, assign) BOOL isViewOnly;
+@property (nonatomic, retain) DiaryTheme * diaryTheme;
 
 - (IBAction)closeThis:(id)sender;
 
