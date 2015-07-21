@@ -19,6 +19,13 @@
 #import "Module.h"
 #import "RTCell.h"
 #import "GalleryCell.h"
+#import "MBProgressHUD.h"
+#import "SDConstants.h"
+#import "AFNetworking.h"
+#import "Response.h"
+#import "Utility.h"
+#import "ResponseViewCell.h"
+#import "TextAreaResponse.h"
 
 @interface DiaryThemeViewController ()
 
@@ -57,8 +64,8 @@
             [_cellsArray addObject:text];
             [_heightArray addObject:@44];
         }
+        [self getResponses];
     }
-    
 }
 
 -(Module*)getModuleWithThemeType:(ThemeType)type
@@ -69,6 +76,42 @@
         }
     }
     return nil;
+}
+
+-(void)getResponses
+{
+    [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    
+    NSString * url = [NSString stringWithFormat:@"%@%@", kBaseURL, kGetResponses];
+    url = [url stringByReplacingOccurrencesOfString:@"{activityId}" withString:[NSString stringWithFormat:@"%ld", (long)_diaryTheme.activityId]];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    
+    [requestSerializer setValue:[Utility getAuthToken] forHTTPHeaderField:@"Authorization"];
+    [requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    manager.requestSerializer = requestSerializer;
+    
+    
+    [manager POST:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"Response : %@", responseObject);
+        if ([responseObject count]>0) {
+            [_cellsArray addObject:[NSString stringWithFormat:@"%d Responses", [responseObject count]]];
+            [_heightArray addObject:@40];
+        }
+        for (NSDictionary * dict in responseObject) {
+            Response * response = [[Response alloc] initWithDictionary:dict];
+            [_cellsArray addObject:response];
+            [_heightArray addObject:@160];
+        }
+        [self.tableView reloadData];
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+    }];
 }
 
 - (IBAction)closeThis:(id)sender {
@@ -137,10 +180,44 @@
             cell = galleryCell;
         }
         else if ([module themeType] == ThemeTypeMarkup){
+            
             cell = [tableView dequeueReusableCellWithIdentifier:@"textCell" forIndexPath:indexPath];
             
             [cell.textLabel setText:@"You must use your computer to complete this theme"];
         }
+    }
+    else if ([[_cellsArray objectAtIndex:indexPath.row] isKindOfClass:[NSString class]]){
+        DefaultCell * defaultCell = [tableView dequeueReusableCellWithIdentifier:@"noResponseHeaderCell"];
+        [defaultCell.label setText:[_cellsArray objectAtIndex:indexPath.row]];
+        cell = defaultCell;
+    }
+    else{
+        Response * response = [_cellsArray objectAtIndex:indexPath.row];
+        
+        ResponseViewCell * responseCell = [tableView dequeueReusableCellWithIdentifier:@"responseCell" forIndexPath:indexPath];
+        NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL URLWithString:response.userInfo.avatarFile.filePath]];
+        [responseCell.userImage setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+            [responseCell.userImage setImage:image];
+        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+            NSLog(@"Image download error");
+        }];
+        [responseCell.lblName setText:response.userInfo.appUserName];
+        [responseCell.lblTime setText:response.dateCreatedFormated];
+        CGSize size;
+        if (response.textAreaResponse.count>0) {
+            TextAreaResponse * textResponse = [response.textAreaResponse objectAtIndex:0];
+            [responseCell.lblResponse setText:textResponse.response];
+            size = [textResponse.response sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]}];
+            
+        }
+        
+        NSInteger height = 105 + MIN(size.height, 50);
+        
+        if (response.files.count>0) {
+            height += 55;
+        }
+        
+        cell = responseCell;
     }
     
     return cell;
