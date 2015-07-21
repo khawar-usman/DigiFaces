@@ -970,14 +970,24 @@
                                                 <constraint firstAttribute="height" constant="1" id="HBx-Ob-aBj"/>
                                             </constraints>
                                         </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ovz-J5-zS0">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                                            <color key="backgroundColor" red="0.89411764709999997" green="0.89411764709999997" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="1" id="yE4-Wy-Lym"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="ovz-J5-zS0" secondAttribute="trailing" constant="-8" id="6nM-uk-h37"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="Znl-BX-pBk" secondAttribute="bottom" constant="-8" id="ACT-Vp-17A"/>
                                         <constraint firstItem="LiJ-fq-Xek" firstAttribute="top" secondItem="BwD-ay-Bu5" secondAttribute="topMargin" constant="-8" id="NxJ-lE-2XM"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="LiJ-fq-Xek" secondAttribute="bottom" constant="-8" id="TrS-xb-Zuy"/>
                                         <constraint firstItem="LiJ-fq-Xek" firstAttribute="trailing" secondItem="BwD-ay-Bu5" secondAttribute="trailingMargin" id="b52-ut-RSQ"/>
                                         <constraint firstItem="LiJ-fq-Xek" firstAttribute="leading" secondItem="BwD-ay-Bu5" secondAttribute="leadingMargin" id="glB-Sd-lqM"/>
                                         <constraint firstItem="Znl-BX-pBk" firstAttribute="leading" secondItem="BwD-ay-Bu5" secondAttribute="leadingMargin" constant="-8" id="p07-Tg-hQ2"/>
+                                        <constraint firstItem="ovz-J5-zS0" firstAttribute="leading" secondItem="BwD-ay-Bu5" secondAttribute="leadingMargin" constant="-8" id="s70-gY-WPD"/>
+                                        <constraint firstItem="ovz-J5-zS0" firstAttribute="top" secondItem="BwD-ay-Bu5" secondAttribute="topMargin" constant="-8" id="tEO-Qo-oxO"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="Znl-BX-pBk" secondAttribute="bottom" constant="12" id="uQe-5K-dgb"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="Znl-BX-pBk" secondAttribute="trailing" constant="-8" id="veY-mf-a1r"/>
                                     </constraints>
@@ -3307,9 +3317,9 @@
         <image name="top_bar_back_arrow" width="13" height="23"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="kgY-B9-zM2"/>
-        <segue reference="3r5-SJ-zjd"/>
-        <segue reference="XNZ-ng-ebc"/>
-        <segue reference="GNd-Wo-Hrw"/>
+        <segue reference="Z1a-cS-acW"/>
+        <segue reference="veF-sC-LAA"/>
+        <segue reference="PJM-GU-RyY"/>
+        <segue reference="Taj-qP-dlL"/>
     </inferredMetricsTieBreakers>
 </document>

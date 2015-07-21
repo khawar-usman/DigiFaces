@@ -10,10 +10,12 @@
 #import "Notification.h"
 #import "DailyDiary.h"
 #import "Diary.h"
+#import "Response.h"
 
 typedef enum {
     ResponseControllerTypeNotification,
-    ResponseControllerTypeDiaryResponse
+    ResponseControllerTypeDiaryResponse,
+    ResponseControllerTypeDiaryTheme
 }ResponseControllerType;
 
 @interface ResponseViewController : UIViewController
@@ -23,6 +25,7 @@ typedef enum {
 @property (nonatomic ,retain) Notification * currentNotification;
 @property (nonatomic, assign) ResponseControllerType responseType;
 @property (nonatomic, retain) Diary * diary;
+@property (nonatomic, retain) Response * response;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constBottomSpace;
 - (IBAction)sendComment:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *txtResposne;

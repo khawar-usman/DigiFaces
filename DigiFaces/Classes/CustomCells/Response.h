@@ -12,6 +12,7 @@
 @interface Response : NSObject
 
 @property (nonatomic, assign) NSInteger activityID;
+@property (nonatomic, assign) NSInteger threadId;
 @property (nonatomic, retain) NSString * dateCreated;
 @property (nonatomic, retain) NSString * dateCreatedFormated;
 @property (nonatomic, assign) BOOL hasImageGalleryResponse;

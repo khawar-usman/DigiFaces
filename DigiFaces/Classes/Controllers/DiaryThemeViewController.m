@@ -265,20 +265,20 @@
 {
     if ([segue.identifier isEqualToString:@"diaryInfoSegue"]) {
         DiaryInfoViewController * diaryInfoController = (DiaryInfoViewController*)[(UINavigationController*)[segue destinationViewController] topViewController];
-        
         diaryInfoController.diaryTheme = _diaryTheme;
     }
     else if ([segue.identifier isEqualToString:@"webViewSegue"]){
+        Module * module = [_cellsArray objectAtIndex:0];
         WebViewController * webController = (WebViewController*)[(UINavigationController*)[segue destinationViewController] topViewController];
-        webController.url = [_dailyDiary.file filePath];
+        webController.url = [module.displayFile.file filePath];
 
     }
     else if ([segue.identifier isEqualToString:@"responseSegue"]){
         NSInteger index = [self.tableView indexPathForSelectedRow].row;
-        Diary * diary = [_dailyDiary.userDiaries objectAtIndex:index - 3];
+        Response * response = [_cellsArray objectAtIndex:index];
         ResponseViewController * responseController = [segue destinationViewController];
-        responseController.responseType = ResponseControllerTypeDiaryResponse;
-        responseController.diary = diary;
+        responseController.responseType = ResponseControllerTypeDiaryTheme;
+        responseController.response = response;
     }
 }
 

@@ -18,6 +18,7 @@
     if (self) {
         
         self.activityID = [[dict valueForKey:@"ActivityId"] integerValue];
+        self.threadId = [[dict valueForKey:@"ThreadId"] integerValue];
         self.dateCreated = [dict valueForKey:@"DateCreated"];
         self.dateCreatedFormated = [dict valueForKey:@"DateCreatedFormatted"];
         self.hasImageGalleryResponse = [[dict valueForKey:@"HasImageGalleryResponses"] boolValue];
