@@ -19,5 +19,6 @@
 @property (nonatomic, retain) NSArray * files;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *responseHeightConst;
 - (IBAction)commentClicked:(id)sender;
+-(void)setImageCircular;
 
 @end

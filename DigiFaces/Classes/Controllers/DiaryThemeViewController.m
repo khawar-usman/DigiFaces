@@ -195,6 +195,7 @@
         Response * response = [_cellsArray objectAtIndex:indexPath.row];
         
         ResponseViewCell * responseCell = [tableView dequeueReusableCellWithIdentifier:@"responseCell" forIndexPath:indexPath];
+        
         NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL URLWithString:response.userInfo.avatarFile.filePath]];
         [responseCell.userImage setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
             [responseCell.userImage setImage:image];
@@ -203,6 +204,7 @@
         }];
         [responseCell.lblName setText:response.userInfo.appUserName];
         [responseCell.lblTime setText:response.dateCreatedFormated];
+        [responseCell setImageCircular];
         [responseCell.btnComments setTitle:[NSString stringWithFormat:@"%d Comments", response.comments.count] forState:UIControlStateNormal];
         CGSize size;
         if (response.textAreaResponse.count>0) {

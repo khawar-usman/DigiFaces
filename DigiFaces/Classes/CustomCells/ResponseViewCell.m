@@ -21,6 +21,11 @@
     [self reloadFiles];
 }
 
+-(void)setImageCircular
+{
+    [_userImage.layer setCornerRadius:_userImage.frame.size.height/2];
+}
+
 -(void)reloadFiles
 {
     NSInteger xOffset= 0;
