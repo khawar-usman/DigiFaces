@@ -38,7 +38,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [_txtResponse becomeFirstResponder];
     _dataArray = [[NSMutableArray alloc] initWithCapacity:4];
@@ -46,6 +45,11 @@
     selectedDate = [NSDate date];
     
     _alertView = [[CustomAertView alloc] initWithNibName:@"CustomAertView" bundle:[NSBundle mainBundle]];
+    
+    if (_diaryTheme) {
+        _constDateHeight.constant = 0;
+        _constTitleHeight.constant = 0;
+    }
     
 }
 
@@ -101,8 +105,57 @@
         
         NSLog(@"Response : %@", responseObject);
         threadID = [[responseObject objectForKey:@"ThreadId"] integerValue];
-        [self addEntryWithActivityId:activityId];
+        if (_dailyDiary) {
+            [self addEntryWithActivityId:activityId];
+        }
+        else if(_diaryTheme){
+            if ([_diaryTheme getModuleWithThemeType:ThemeTypeImageGallery]) {
+                
+            }
+            else
+            {
+                [self addTextAreaResponseWithActivityId:activityId];
+            }
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+    }];
+}
+
+-(void)addTextAreaResponseWithActivityId:(NSInteger)activityId
+{
+    [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    
+    NSString * url = [NSString stringWithFormat:@"%@%@", kBaseURL, kUpdateTextAreaResponse];
+    
+    Module * textAreaModule = [_diaryTheme getModuleWithThemeType:ThemeTypeDisplayText];
+    
+    NSDictionary * params = @{@"TextareaResponseId" : @(0),
+                              @"ThreadId" : @(threadID),
+                              @"TextareaId" : @YES,
+                              @"IsActive" : @YES,
+                              @"Response" : _txtResponse.text};
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    
+    [requestSerializer setValue:[Utility getAuthToken] forHTTPHeaderField:@"Authorization"];
+    [requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    manager.requestSerializer = requestSerializer;
+    
+    
+    [manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
+        NSLog(@"Response : %@", responseObject);
+        threadID = [[responseObject objectForKey:@"ThreadId"] integerValue];
+        if (_dailyDiary) {
+            [self addEntryWithActivityId:activityId];
+        }
+        else if(_diaryTheme){
+            
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];

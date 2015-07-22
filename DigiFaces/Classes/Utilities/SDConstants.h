@@ -10,6 +10,15 @@
 #define DigiFaces_SDConstants_h
 
 
+typedef enum {
+    ThemeTypeDisplayImage,
+    ThemeTypeDisplayText,
+    ThemeTypeMarkup,
+    ThemeTypeImageGallery,
+    ThemeTypeNone
+}ThemeType;
+
+
 #define kS3AccessKey            @"AKIAIG2CIAZWZIA6L7YA"
 #define kS3AccessSecret         @"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"
 #define kS3Bucket               @"media.digifaces.com"
@@ -36,5 +45,6 @@
 #define kGetActivties           @"api/Project/GetActivities/{projectId}"
 #define kUpdateThread           @"api/Activity/UpdateThread"
 #define kUpdateDailyDiary       @"api/Project/UpdateDailyDiary/{projectId}"
+#define kUpdateTextAreaResponse @"api/Activity/UpdateTextareaResponse"
 
 #endif

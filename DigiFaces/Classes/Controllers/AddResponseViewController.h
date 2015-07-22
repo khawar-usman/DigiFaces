@@ -15,6 +15,8 @@
 @property (nonatomic, retain) DailyDiary * dailyDiary;
 @property (nonatomic, retain) DiaryTheme * diaryTheme;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constTitleHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constDateHeight;
 @property (weak, nonatomic) IBOutlet UILabel *lblPlaceholder;
 
 @property (weak, nonatomic) IBOutlet UITextField *txtTitle;
@@ -25,8 +27,6 @@
 
 @property (weak, nonatomic) IBOutlet UITextView *txtResponse;
 @property (weak, nonatomic) IBOutlet UIButton *btnDate;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constDateHeight;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constTitleHeight;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constBottomViewHeight;
 @property (weak, nonatomic) IBOutlet UIButton *btnViewQuestion;

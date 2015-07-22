@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Module.h"
+#import "SDConstants.h"
 
 @interface DiaryTheme : NSObject
 
@@ -22,5 +24,6 @@
 @property (nonatomic, retain) NSMutableArray * modules;
 
 -(instancetype) initWithDictionary:(NSDictionary*)dict;
+-(Module*)getModuleWithThemeType:(ThemeType)type;
 
 @end

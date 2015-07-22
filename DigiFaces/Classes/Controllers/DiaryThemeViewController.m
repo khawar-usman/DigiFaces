@@ -45,12 +45,11 @@
     _cellsArray = [[NSMutableArray alloc] init];
     _heightArray = [[NSMutableArray alloc] init];
     
-    [self addEditButton];
-    
     Module * markup = [self getModuleWithThemeType:ThemeTypeMarkup];
     if (markup) {
         [_cellsArray addObject:markup];
-        [_heightArray addObject:@44];
+        [_heightArray addObject:@150];
+        
     }
     else{
         Module * image = [self getModuleWithThemeType:ThemeTypeDisplayImage];
@@ -71,6 +70,7 @@
             [_cellsArray addObject:text];
             [_heightArray addObject:@44];
         }
+        [self addEditButton];
         [self getResponses];
     }
 }
@@ -207,6 +207,8 @@
             cell = [tableView dequeueReusableCellWithIdentifier:@"textCell" forIndexPath:indexPath];
             
             [cell.textLabel setText:@"You must use your computer to complete this theme"];
+            [cell.textLabel setTextAlignment:NSTextAlignmentCenter];
+            [cell.textLabel setNumberOfLines:0];
         }
     }
     else if ([[_cellsArray objectAtIndex:indexPath.row] isKindOfClass:[NSString class]]){
@@ -261,13 +263,17 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
-        [self performSegueWithIdentifier:@"webViewSegue" sender:self];
+    id object = [_cellsArray objectAtIndex:indexPath.row];
+    if ([object isKindOfClass:[Module class]]) {
+        Module * module = (Module*)object;
+        if ([module themeType] == ThemeTypeDisplayImage) {
+            [self performSegueWithIdentifier:@"webViewSegue" sender:self];
+        }
+        else if ([module themeType] == ThemeTypeDisplayText){
+            [self performSegueWithIdentifier:@"diaryInfoSegue" sender:self];
+        }
     }
-    else if (indexPath.row == 1) {
-        [self performSegueWithIdentifier:@"diaryInfoSegue" sender:self];
-    }
-    else if (indexPath.row > 2){
+    else if ([object isKindOfClass:[Response class]]){
         [self performSegueWithIdentifier:@"responseSegue" sender:self];
     }
 }

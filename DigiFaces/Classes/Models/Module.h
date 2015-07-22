@@ -12,14 +12,8 @@
 #import "TextArea.h"
 #import "MarkUp.h"
 #import "ImageGallary.h"
+#import "SDConstants.h"
 
-typedef enum {
-    ThemeTypeDisplayImage,
-    ThemeTypeDisplayText,
-    ThemeTypeMarkup,
-    ThemeTypeImageGallery,
-    ThemeTypeNone
-}ThemeType;
 
 @interface Module : NSObject
 

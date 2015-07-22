@@ -36,4 +36,14 @@
     return self;
 }
 
+-(Module*)getModuleWithThemeType:(ThemeType)type
+{
+    for (Module * m in self.modules) {
+        if ([m themeType] == type){
+            return m;
+        }
+    }
+    return nil;
+}
+
 @end
