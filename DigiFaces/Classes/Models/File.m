@@ -17,6 +17,7 @@
         self.fileDictionary = dict;
         
         self.fileType = [dict valueForKey:@"FileType"];
+        self.fileId = [[dict valueForKey:@"FileId"] integerValue];
         self.isCameraTag = [[dict valueForKey:@"IsCameraTagFile"] boolValue];
         self.isAmazonFile = [[dict valueForKey:@"IsAmazonFile"] boolValue];
         self.isViddlerFile = [[dict valueForKey:@"IsViddlerFile"] boolValue];

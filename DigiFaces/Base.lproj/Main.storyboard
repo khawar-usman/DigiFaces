@@ -2131,7 +2131,7 @@
         <scene sceneID="G5l-qg-sC0">
             <objects>
                 <collectionViewController id="8gN-81-gu8" customClass="ProfilePicutreCollectionViewController" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="scE-ZI-lWg">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" id="scE-ZI-lWg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -3268,6 +3268,7 @@
                         <outlet property="txtResponse" destination="ZIM-Oe-csp" id="uFU-l1-xPw"/>
                         <outlet property="txtTitle" destination="yct-hD-MPN" id="Uxb-zH-sUf"/>
                         <segue destination="THO-t6-uQc" kind="presentation" identifier="diaryInfoSegue" id="EYx-dI-yCG"/>
+                        <segue destination="nyh-Nl-Kz1" kind="presentation" identifier="gallerySegue" id="CE9-GG-Yoe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ASF-8Y-tEY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3320,10 +3321,11 @@
         <image name="top_bar_back_arrow" width="13" height="23"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="f8n-jW-t9J"/>
         <segue reference="Sh4-6s-X9J"/>
-        <segue reference="3r5-SJ-zjd"/>
         <segue reference="kgY-B9-zM2"/>
         <segue reference="XNZ-ng-ebc"/>
-        <segue reference="f8n-jW-t9J"/>
+        <segue reference="CE9-GG-Yoe"/>
+        <segue reference="EYx-dI-yCG"/>
     </inferredMetricsTieBreakers>
 </document>

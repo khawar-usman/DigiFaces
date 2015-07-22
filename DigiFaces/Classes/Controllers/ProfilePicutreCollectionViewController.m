@@ -36,9 +36,15 @@
 {
     [super viewDidLoad];
     _avatarsArray = [[NSMutableArray alloc] init];
-    [_avatarsArray addObject:@""];
     alertView = [[CustomAertView alloc] init];
-    [self fetchAvatarFiles];
+    if (_type == ProfilePicutreTypeDefault) {
+        [_avatarsArray addObject:@""];
+        [self fetchAvatarFiles];
+    }
+    else if(_type == ProfilePicutreTypeGallery){
+        self.title = @"GALLERY";
+        [_avatarsArray addObjectsFromArray:_files];
+    }
 }
 
 - (void)fetchAvatarFiles{
@@ -120,24 +126,29 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
+    if (_type == ProfilePicutreTypeDefault && indexPath.row == 0) {
         UICollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cameraCell" forIndexPath:indexPath];
         return cell;
     }
 
     ImageCollectionCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"collectionCell" forIndexPath:indexPath];
     
-    NSDictionary * file = [_avatarsArray objectAtIndex:indexPath.row];
+    File * file = nil;
+    if (_type == ProfilePicutreTypeDefault) {
+        NSDictionary * f = [_avatarsArray objectAtIndex:indexPath.row];
+        file = [[File alloc] initWithDictionary:f];
+    }
+    else if(_type == ProfilePicutreTypeGallery){
+        file = [_avatarsArray objectAtIndex:indexPath.row];
+    }
     
-    File * f = [[File alloc] init];
     
-    NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL URLWithString:[f returnFilePathFromFileObject:file]]];
+    NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL URLWithString:[file filePath]]];
     [cell.imgPicture setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
         [cell.imgPicture setImage:image];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
         
     }];
-//    [cell.imgPicture setImageWithURL:[NSURL URLWithString:[f returnFilePathFromFileObject:file]]];
     
     return cell;
 }
@@ -155,7 +166,7 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
+    if (_type == ProfilePicutreTypeDefault && indexPath.row == 0) {
         UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:@"Select Image" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera",@"Photo Library", nil];
         [actionSheet showInView:self.view];
     }

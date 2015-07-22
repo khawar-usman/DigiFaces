@@ -9,14 +9,21 @@
 #import <UIKit/UIKit.h>
 #import "File.h"
 
+typedef enum {
+    ProfilePicutreTypeDefault,
+    ProfilePicutreTypeGallery
+}ProfilePicutreType;
+
 @protocol ProfilePictureViewControllerDelegate <NSObject>
 
--(void)profilePicutreDidSelect:(NSDictionary*)selectedProfile;
+-(void)profilePicutreDidSelect:(id)selectedProfile;
 
 @end
 
 @interface ProfilePicutreCollectionViewController : UICollectionViewController
 
 @property (nonatomic, assign) id<ProfilePictureViewControllerDelegate> delegate;
+@property (nonatomic, assign) ProfilePicutreType type;
+@property (nonatomic, retain) NSArray * files;
 
 @end

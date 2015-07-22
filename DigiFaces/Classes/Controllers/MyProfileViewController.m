@@ -202,7 +202,7 @@
     
     NSURLRequest * requestN = [NSURLRequest requestWithURL:[NSURL URLWithString:imageUrl]];
     [self.profilePicView setImageWithURLRequest:requestN placeholderImage:[UIImage imageNamed:@"dummy_avatar.png"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-        [self.profilePicView setImage:image];
+        [weakSelf.profilePicView setImage:image];
         [[UserManagerShared sharedManager] setProfilePic:[Utility resizeImage:image imageSize:CGSizeMake(100, 120)]];
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {

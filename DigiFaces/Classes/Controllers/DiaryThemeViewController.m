@@ -46,6 +46,20 @@
     _heightArray = [[NSMutableArray alloc] init];
     
     Module * markup = [self getModuleWithThemeType:ThemeTypeMarkup];
+    if (!markup) {
+        [self addEditButton];
+    }
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [_cellsArray removeAllObjects];
+    [_heightArray removeAllObjects];
+    
+    Module * markup = [self getModuleWithThemeType:ThemeTypeMarkup];
     if (markup) {
         [_cellsArray addObject:markup];
         [_heightArray addObject:@150];
@@ -70,7 +84,6 @@
             [_cellsArray addObject:text];
             [_heightArray addObject:@44];
         }
-        [self addEditButton];
         [self getResponses];
     }
 }

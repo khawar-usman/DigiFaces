@@ -46,5 +46,6 @@ typedef enum {
 #define kUpdateThread           @"api/Activity/UpdateThread"
 #define kUpdateDailyDiary       @"api/Project/UpdateDailyDiary/{projectId}"
 #define kUpdateTextAreaResponse @"api/Activity/UpdateTextareaResponse"
+#define kUpdateGalleryResponse  @"api/Activity/UpdateImageGalleryResponse"
 
 #endif

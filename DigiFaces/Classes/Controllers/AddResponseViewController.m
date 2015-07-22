@@ -17,9 +17,11 @@
 #import "MBProgressHUD.h"
 #import "SDConstants.h"
 #import "AFNetworking.h"
+#import "UIImageView+AFNetworking.h"
 #import "CustomAertView.h"
+#import "ProfilePicutreCollectionViewController.h"
 
-@interface AddResponseViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, CalendarViewControlerDelegate, UITextViewDelegate, UIActionSheetDelegate>
+@interface AddResponseViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, CalendarViewControlerDelegate, UITextViewDelegate, UIActionSheetDelegate, ProfilePictureViewControllerDelegate>
 {
     NSInteger selectedTag;
     UIImagePickerController * imagePicker;
@@ -61,6 +63,14 @@
         diaryInfoController.dailyDiary = self.dailyDiary;
         diaryInfoController.diaryTheme = self.diaryTheme;
     }
+    else if ([segue.identifier isEqualToString:@"gallerySegue"]){
+        ProfilePicutreCollectionViewController * profileController = (ProfilePicutreCollectionViewController*)[(UINavigationController*)[segue destinationViewController] topViewController];
+        profileController.type = ProfilePicutreTypeGallery;
+        profileController.delegate = self;
+        Module * module = [_diaryTheme getModuleWithThemeType:ThemeTypeImageGallery];
+        
+        profileController.files = [module.imageGallary files];
+    }
 }
 
 -(void)keyboardWillShow:(NSNotification*)notification
@@ -79,7 +89,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 -(void)createThreadWithActivityID:(NSInteger)activityId
 {
@@ -110,13 +119,62 @@
         }
         else if(_diaryTheme){
             if ([_diaryTheme getModuleWithThemeType:ThemeTypeImageGallery]) {
-                
+                [self addImageGalleryResponse];
             }
             else
             {
                 [self addTextAreaResponseWithActivityId:activityId];
             }
         }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+    }];
+}
+
+-(NSString*)getSelectedGalleryIds
+{
+    NSString * galleryIds = @"";
+    for (NSDictionary * m in _dataArray) {
+        File * file = [m objectForKey:@"path"];
+        galleryIds = [galleryIds stringByAppendingFormat:@"%d,", file.fileId];
+    }
+    if (_dataArray.count>0) {
+        galleryIds = [galleryIds substringToIndex:galleryIds.length-2];
+    }
+    return galleryIds;
+}
+
+-(void)addImageGalleryResponse
+{
+    [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    
+    NSString * url = [NSString stringWithFormat:@"%@%@", kBaseURL, kUpdateGalleryResponse];
+    
+    Module * imageGalleryModule = [_diaryTheme getModuleWithThemeType:ThemeTypeImageGallery];
+    NSDictionary * params = @{@"ImageGalleryResponseId" : @0,
+                              @"ThreadId" : @(threadID),
+                              @"ImageGalleryId" : @(imageGalleryModule.imageGallary.imageGalleryId),
+                              @"GalleryIds" : [self getSelectedGalleryIds],
+                              @"UserId" : [[UserManagerShared sharedManager] ID],
+                              @"IsActive" : @YES,
+                              @"Response" : _txtResponse.text};
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    
+    [requestSerializer setValue:[Utility getAuthToken] forHTTPHeaderField:@"Authorization"];
+    [requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    manager.requestSerializer = requestSerializer;
+    
+    
+    [manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"Response : %@", responseObject);
+        [MBProgressHUD hideAllHUDsForView:self.navigationController.view animated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
@@ -225,7 +283,7 @@
 }
 
 - (IBAction)postData:(id)sender {
-    if ([_txtTitle.text isEqualToString:@""]) {
+    if (_dailyDiary && [_txtTitle.text isEqualToString:@""]) {
         // Error
         [self resignAllResponders];
         [_alertView showAlertWithMessage:@"Title is required" inView:self.navigationController.view withTag:0];
@@ -237,7 +295,7 @@
     else
     {
         [self resignAllResponders];
-        [self createThreadWithActivityID:_dailyDiary.activityId];
+        [self createThreadWithActivityID:_diaryTheme.activityId];
     }
     
 }
@@ -279,12 +337,14 @@
 
 - (IBAction)addPicture:(UIButton*)sender {
     selectedTag = sender.tag;
-    
-    UIActionSheet * sheet = [[UIActionSheet alloc] initWithTitle:@"Select an Option" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera", @"Photo Library", nil];
-    [sheet showInView:self.view];
-    
-    
-    //[self openCamera];
+    if (_diaryTheme && [_diaryTheme getModuleWithThemeType:ThemeTypeImageGallery])   {
+        [self performSegueWithIdentifier:@"gallerySegue" sender:self];
+    }
+    else{
+        
+        UIActionSheet * sheet = [[UIActionSheet alloc] initWithTitle:@"Select an Option" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera", @"Photo Library", nil];
+        [sheet showInView:self.view];
+    }
 }
 
 -(void)setImageToCameraButton:(UIImage*)image
@@ -308,6 +368,34 @@
     }
     
     [btn setImage:image forState:UIControlStateNormal];
+}
+
+-(void)setImageURL:(NSString*)url
+{
+    UIButton * btn = nil;
+    switch (selectedTag) {
+        case 1:
+            btn = _btnCamera1;
+            break;
+        case 2:
+            btn = _btnCamera2;
+            break;
+        case 3:
+            btn = _btnCamera3;
+            break;
+        case 4:
+            btn = _btnCamera4;
+            break;
+        default:
+            break;
+    }
+    NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL URLWithString:url
+                                                           ]];
+    [btn.imageView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        [btn setImage:image forState:UIControlStateNormal];
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+        NSLog(@"Image Loading Error");
+    }];
 }
 
 
@@ -390,7 +478,14 @@
         [self openCameraWithType:type];
     }
     
-    
+}
+
+#pragma mark - ProfilePictureDelegate
+-(void)profilePicutreDidSelect:(File *)selectedProfile
+{
+    [self removeItemForTag:selectedTag];
+    [_dataArray addObject:@{@"path" : selectedProfile, @"tag" : @(selectedTag)}];
+    [self setImageURL:[selectedProfile filePath]];
 }
 
 @end

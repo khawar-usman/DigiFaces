@@ -11,6 +11,7 @@
 @interface File : NSObject
 
 @property (nonatomic, retain) NSString * fileType;
+@property (nonatomic, assign) NSInteger fileId;
 @property (nonatomic) BOOL isAmazonFile;
 @property (nonatomic) BOOL isCameraTag;
 @property (nonatomic) BOOL isViddlerFile;
