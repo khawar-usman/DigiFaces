@@ -15,6 +15,7 @@
 #import "RTCell.h"
 #import "Module.h"
 #import "GalleryCell.h"
+#import "CarouselViewController.h"
 
 typedef enum {
     CellsTypeImage,
@@ -27,6 +28,7 @@ typedef enum {
 {
     UIButton * btnEdit;
     RTCell * infoCell;
+    NSInteger galleryItemIndex;
 }
 
 @property (nonatomic, retain) NSMutableArray * cellsArray;
@@ -185,8 +187,9 @@ typedef enum {
             break;
         case CellsTypeGalary:
         {
-            Module * module = [self getModuleForThemeType:ThemeTypeDisplayText];
-            GalleryCell * galleryCell = [tableView dequeueReusableCellWithIdentifier:@"galleryCell"];
+            Module * module = [self getModuleForThemeType:ThemeTypeImageGallery];
+            GalleryCell * galleryCell = [tableView dequeueReusableCellWithIdentifier:@"galleryCell" forIndexPath:indexPath];
+            
             galleryCell.files = module.imageGallary.files;
             [galleryCell reloadGallery];
             cell = galleryCell;
@@ -233,6 +236,12 @@ typedef enum {
             responseController.diaryTheme = self.diaryTheme;
         }
     }
+    else if ([segue.identifier isEqualToString:@"gallerySegue"]){
+        Module * module = [self getModuleForThemeType:ThemeTypeImageGallery];
+        CarouselViewController * carouselController = [segue destinationViewController];
+        carouselController.files = module.imageGallary.files;
+        carouselController.selectedIndex = galleryItemIndex;
+    }
 }
 
 
@@ -248,6 +257,13 @@ typedef enum {
     btnEdit.frame = frame;
     
     [self.view bringSubviewToFront:btnEdit];
+}
+
+#pragma mark - GalleryCellDelegate
+-(void)galleryCell:(id)cel didClickOnIndex:(NSInteger)index
+{
+    galleryItemIndex = index;
+    [self performSegueWithIdentifier:@"gallerySegue" sender:self];
 }
 
 @end

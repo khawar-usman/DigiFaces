@@ -8,8 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol GalleryCellDelegate <NSObject>
+
+-(void)galleryCell:(id)cel didClickOnIndex:(NSInteger)index;
+
+@end
+
 @interface GalleryCell : UITableViewCell
 
+@property (nonatomic, assign) IBOutlet id<GalleryCellDelegate> delegate;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) NSMutableArray * files;
 

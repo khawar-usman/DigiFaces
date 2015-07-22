@@ -16,8 +16,11 @@
 {
     [self removeEverything];
     NSInteger xOffset = 0;
+    NSInteger tag = 0;
     for (File * file in _files) {
         UIButton * imageView = [self getImageWithFile:file];
+        imageView.tag = tag++;
+        [imageView addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
         
         CGRect rect = imageView.frame;
         rect.origin.x = xOffset;
@@ -26,13 +29,19 @@
         
         [self.scrollView addSubview:imageView];
     }
-    [self.scrollView setContentSize:CGSizeMake(xOffset, 160)];
+    [self.scrollView setContentSize:CGSizeMake(xOffset, self.scrollView.frame.size.height)];
+}
+
+-(void) buttonClicked:(UIButton*)sender
+{
+    if ([_delegate respondsToSelector:@selector(galleryCell:didClickOnIndex:)]) {
+        [_delegate galleryCell:self didClickOnIndex:sender.tag];
+    }
 }
 
 -(UIButton*)getImageWithFile:(File*)file
 {
-    UIButton * imageView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 200, 160)];
-    [imageView setBackgroundColor:[UIColor redColor]];
+    UIButton * imageView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     NSString * url;
     if ([file.fileType isEqualToString:@"Image"]) {
         url = file.filePath;
@@ -54,7 +63,10 @@
 -(void)removeEverything
 {
     for (UIView * vu in self.subviews) {
-        [vu removeFromSuperview];
+        if ([vu isKindOfClass:[UIButton class]]) {
+            [vu removeFromSuperview];
+        }
+        
     }
 }
 

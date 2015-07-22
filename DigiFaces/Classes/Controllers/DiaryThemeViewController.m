@@ -27,10 +27,12 @@
 #import "ResponseViewCell.h"
 #import "TextAreaResponse.h"
 #import "AddResponseViewController.h"
+#import "CarouselViewController.h"
 
-@interface DiaryThemeViewController ()
+@interface DiaryThemeViewController () <GalleryCellDelegate>
 {
     UIButton * btnEdit;
+    NSInteger galleryItemIndex;
 }
 @property (nonatomic, retain) NSMutableArray * cellsArray;
 @property (nonatomic, retain) NSMutableArray * heightArray;
@@ -194,7 +196,8 @@
             cell = textCell;
         }
         else if ([module themeType] == ThemeTypeImageGallery){
-            GalleryCell * galleryCell =  [tableView dequeueReusableCellWithIdentifier:@"galleryCell" forIndexPath:indexPath];
+            
+            GalleryCell * galleryCell = [tableView dequeueReusableCellWithIdentifier:@"galleryCell" forIndexPath:indexPath];
             galleryCell.files = module.imageGallary.files;
             [galleryCell reloadGallery];
             cell = galleryCell;
@@ -291,7 +294,6 @@
         Module * module = [_cellsArray objectAtIndex:0];
         WebViewController * webController = (WebViewController*)[(UINavigationController*)[segue destinationViewController] topViewController];
         webController.url = [module.displayFile.file filePath];
-
     }
     else if ([segue.identifier isEqualToString:@"responseSegue"]){
         NSInteger index = [self.tableView indexPathForSelectedRow].row;
@@ -304,6 +306,12 @@
         AddResponseViewController * addResponseController = (AddResponseViewController*)[(UINavigationController*)[segue destinationViewController] topViewController];
         addResponseController.diaryTheme = _diaryTheme;
     }
+    else if ([segue.identifier isEqualToString:@"gallerySegue"]){
+        Module * module = [self getModuleWithThemeType:ThemeTypeImageGallery];
+        CarouselViewController * carouselController = [segue destinationViewController];
+        carouselController.files = module.imageGallary.files;
+        carouselController.selectedIndex = galleryItemIndex;
+    }
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -314,6 +322,13 @@
     btnEdit.frame = frame;
     
     [self.view bringSubviewToFront:btnEdit];
+}
+
+#pragma mark - GalleryCellDelegate
+-(void)galleryCell:(id)cel didClickOnIndex:(NSInteger)index
+{
+    galleryItemIndex = index;
+    [self performSegueWithIdentifier:@"gallerySegue" sender:self];
 }
 
 @end
