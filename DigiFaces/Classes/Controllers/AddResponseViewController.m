@@ -102,6 +102,8 @@
                               @"IsDraft" : @YES,
                               @"IsActive" : @YES};
     
+    NSLog(@"POSTing to %@ with params:\n %@", url, params);
+    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
     
