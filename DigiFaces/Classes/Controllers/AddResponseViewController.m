@@ -356,7 +356,7 @@
     else
     {
         [self resignAllResponders];
-        [self createThreadWithActivityID:_diaryTheme.activityId];
+        [self createThreadWithActivityID:_dailyDiary.activityId];
     }
     
 }

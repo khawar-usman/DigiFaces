@@ -115,11 +115,11 @@
 		4AD850181B45A12B0059A457 /* VideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD850171B45A12B0059A457 /* VideoCell.m */; };
 		4AD8501B1B45AAB70059A457 /* NointernetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD8501A1B45AAB70059A457 /* NointernetController.m */; };
 		4AD8501E1B45ABB40059A457 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD8501D1B45ABB40059A457 /* Reachability.m */; };
-		F420FB671B61625A007092CB /* AWSCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F420FB651B61625A007092CB /* AWSCore.framework */; };
-		F420FB681B61625B007092CB /* AWSS3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F420FB661B61625A007092CB /* AWSS3.framework */; };
 		F420FB6A1B616270007092CB /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F420FB691B616270007092CB /* libz.dylib */; };
 		F420FB6C1B616279007092CB /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F420FB6B1B616279007092CB /* libsqlite3.dylib */; };
 		F4595A011B6177D500D4BA38 /* DFMediaUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4595A001B6177D500D4BA38 /* DFMediaUploadManager.m */; };
+		F4595A031B61861700D4BA38 /* AWSCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4595A021B61861700D4BA38 /* AWSCore.framework */; };
+		F4595A051B61864200D4BA38 /* AWSS3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4595A041B61864200D4BA38 /* AWSS3.framework */; };
 		F4C3FD4B1B617616009EE6F9 /* ProfilePicutreCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C3FD4A1B617616009EE6F9 /* ProfilePicutreCollectionViewController.m */; };
 		F4E670E01B61669B00871FA9 /* DFMediaUploadView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4E670DC1B61669B00871FA9 /* DFMediaUploadView.m */; };
 		F4E670E11B61669B00871FA9 /* DFMediaUploadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4E670DD1B61669B00871FA9 /* DFMediaUploadView.xib */; };
@@ -368,12 +368,12 @@
 		4AD8501A1B45AAB70059A457 /* NointernetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NointernetController.m; sourceTree = "<group>"; };
 		4AD8501C1B45ABB40059A457 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		4AD8501D1B45ABB40059A457 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
-		F420FB651B61625A007092CB /* AWSCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSCore.framework; sourceTree = "<group>"; };
-		F420FB661B61625A007092CB /* AWSS3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSS3.framework; sourceTree = "<group>"; };
 		F420FB691B616270007092CB /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		F420FB6B1B616279007092CB /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		F45959FF1B6177D500D4BA38 /* DFMediaUploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFMediaUploadManager.h; sourceTree = "<group>"; };
 		F4595A001B6177D500D4BA38 /* DFMediaUploadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFMediaUploadManager.m; sourceTree = "<group>"; };
+		F4595A021B61861700D4BA38 /* AWSCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSCore.framework; sourceTree = "<group>"; };
+		F4595A041B61864200D4BA38 /* AWSS3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSS3.framework; sourceTree = "<group>"; };
 		F4C3FD491B617616009EE6F9 /* ProfilePicutreCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfilePicutreCollectionViewController.h; sourceTree = "<group>"; };
 		F4C3FD4A1B617616009EE6F9 /* ProfilePicutreCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfilePicutreCollectionViewController.m; sourceTree = "<group>"; };
 		F4E670DA1B61669B00871FA9 /* DFMediaUploadManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DFMediaUploadManagerDelegate.h; path = "../../../../../../../../ios/oDesk iOS/Shamsu Bhaidani/DigiFaces/DigiFaces/Classes/Utilities/DFMediaUploadManager/DFMediaUploadManagerDelegate.h"; sourceTree = "<group>"; };
@@ -395,13 +395,13 @@
 				19F0BD361B1F12CA00E4B048 /* Foundation.framework in Frameworks */,
 				19F0BE2D1B28519B00E4B048 /* QuartzCore.framework in Frameworks */,
 				19F0BD441B1F14DF00E4B048 /* SystemConfiguration.framework in Frameworks */,
+				F4595A031B61861700D4BA38 /* AWSCore.framework in Frameworks */,
 				19F0BD421B1F14D800E4B048 /* UIKit.framework in Frameworks */,
-				F420FB681B61625B007092CB /* AWSS3.framework in Frameworks */,
 				19F0BD401B1F14CC00E4B048 /* Security.framework in Frameworks */,
+				F4595A051B61864200D4BA38 /* AWSS3.framework in Frameworks */,
 				19F0BD3E1B1F14C700E4B048 /* MobileCoreServices.framework in Frameworks */,
 				19F0BD3C1B1F14BC00E4B048 /* CoreLocation.framework in Frameworks */,
 				19F0BD3A1B1F14B600E4B048 /* CoreGraphics.framework in Frameworks */,
-				F420FB671B61625A007092CB /* AWSCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -611,8 +611,8 @@
 		4ACDB9591B3E7E66009EFB91 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F420FB651B61625A007092CB /* AWSCore.framework */,
-				F420FB661B61625A007092CB /* AWSS3.framework */,
+				F4595A041B61864200D4BA38 /* AWSS3.framework */,
+				F4595A021B61861700D4BA38 /* AWSCore.framework */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
