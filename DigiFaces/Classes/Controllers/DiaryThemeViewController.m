@@ -55,7 +55,6 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
     [_cellsArray removeAllObjects];
     [_heightArray removeAllObjects];
     
@@ -86,6 +85,7 @@
         }
         [self getResponses];
     }
+    [self.tableView reloadData];
 }
 
 -(void)addEditButton

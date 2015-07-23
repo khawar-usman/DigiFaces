@@ -15,6 +15,7 @@ typedef enum {
     ThemeTypeDisplayText,
     ThemeTypeMarkup,
     ThemeTypeImageGallery,
+    ThemeTypeTextArea,
     ThemeTypeNone
 }ThemeType;
 

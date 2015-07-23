@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigiFaces/Classes/Controllers/AddResponseViewController.m"
-            timestampString = "459279379.789523"
+            timestampString = "459363718.175109"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "286"
-            endingLineNumber = "286"
+            startingLineNumber = "282"
+            endingLineNumber = "282"
             landmarkName = "-postData:"
             landmarkType = "5">
          </BreakpointContent>
@@ -106,6 +106,38 @@
             startingLineNumber = "163"
             endingLineNumber = "163"
             landmarkName = "-addImageGalleryResponse"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DigiFaces/Classes/Controllers/AddResponseViewController.m"
+            timestampString = "459363718.175109"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "210"
+            endingLineNumber = "210"
+            landmarkName = "-addTextAreaResponseWithActivityId:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DigiFaces/Classes/Controllers/AddResponseViewController.m"
+            timestampString = "459363985.287144"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "186"
+            endingLineNumber = "186"
+            landmarkName = "-addTextAreaResponseWithActivityId:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -58,6 +58,9 @@
     else if ([self.activityType isEqualToString:@"Markup"]){
         return ThemeTypeMarkup;
     }
+    else if ([self.activityType isEqualToString:@"Textarea"]){
+        return ThemeTypeTextArea;
+    }
     return ThemeTypeNone;
 }
 

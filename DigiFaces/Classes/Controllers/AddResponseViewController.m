@@ -187,11 +187,11 @@
     
     NSString * url = [NSString stringWithFormat:@"%@%@", kBaseURL, kUpdateTextAreaResponse];
     
-    Module * textAreaModule = [_diaryTheme getModuleWithThemeType:ThemeTypeDisplayText];
+    Module * textAreaModule = [_diaryTheme getModuleWithThemeType:ThemeTypeTextArea];
     
     NSDictionary * params = @{@"TextareaResponseId" : @(0),
                               @"ThreadId" : @(threadID),
-                              @"TextareaId" : @YES,
+                              @"TextareaId" : @(textAreaModule.textArea.textareaId),
                               @"IsActive" : @YES,
                               @"Response" : _txtResponse.text};
     
@@ -207,13 +207,9 @@
     [manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"Response : %@", responseObject);
-        threadID = [[responseObject objectForKey:@"ThreadId"] integerValue];
-        if (_dailyDiary) {
-            [self addEntryWithActivityId:activityId];
-        }
-        else if(_diaryTheme){
-            
-        }
+        [MBProgressHUD hideAllHUDsForView:self.navigationController.view animated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
