@@ -49,7 +49,6 @@
 		4ACDB9B11B3E7E66009EFB91 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB9361B3E7E66009EFB91 /* LoginViewController.m */; };
 		4ACDB9B21B3E7E66009EFB91 /* MyProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB9381B3E7E66009EFB91 /* MyProfileViewController.m */; };
 		4ACDB9B31B3E7E66009EFB91 /* PhotoGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB93A1B3E7E66009EFB91 /* PhotoGalleryViewController.m */; };
-		4ACDB9B41B3E7E66009EFB91 /* ProfilePicutreCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB93C1B3E7E66009EFB91 /* ProfilePicutreCollectionViewController.m */; };
 		4ACDB9B51B3E7E66009EFB91 /* ProjectIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB93E1B3E7E66009EFB91 /* ProjectIntroViewController.m */; };
 		4ACDB9B61B3E7E66009EFB91 /* ProjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB9401B3E7E66009EFB91 /* ProjectViewController.m */; };
 		4ACDB9B71B3E7E66009EFB91 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB9421B3E7E66009EFB91 /* SettingsViewController.m */; };
@@ -64,8 +63,6 @@
 		4ACDB9C01B3E7E66009EFB91 /* LoginSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB9541B3E7E66009EFB91 /* LoginSegue.m */; };
 		4ACDB9C11B3E7E66009EFB91 /* LogoutSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB9561B3E7E66009EFB91 /* LogoutSegue.m */; };
 		4ACDB9C21B3E7E66009EFB91 /* ProfilePicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB9581B3E7E66009EFB91 /* ProfilePicCell.m */; };
-		4ACDB9C31B3E7E66009EFB91 /* AWSRuntime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ACDB95A1B3E7E66009EFB91 /* AWSRuntime.framework */; };
-		4ACDB9C41B3E7E66009EFB91 /* AWSS3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ACDB95B1B3E7E66009EFB91 /* AWSS3.framework */; };
 		4ACDB9C51B3E7E66009EFB91 /* Company.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB95E1B3E7E66009EFB91 /* Company.m */; };
 		4ACDB9C61B3E7E66009EFB91 /* Diary.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB9601B3E7E66009EFB91 /* Diary.m */; };
 		4ACDB9C71B3E7E66009EFB91 /* File.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDB9621B3E7E66009EFB91 /* File.m */; };
@@ -114,11 +111,19 @@
 		4ACDBA0B1B3ED216009EFB91 /* TextAreaResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDBA0A1B3ED216009EFB91 /* TextAreaResponse.m */; };
 		4ACDBA0E1B3ED814009EFB91 /* UserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDBA0D1B3ED814009EFB91 /* UserCell.m */; };
 		4ACDBA111B3EDF75009EFB91 /* ImagesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDBA101B3EDF75009EFB91 /* ImagesCell.m */; };
-		4ACDBA141B3EF9DC009EFB91 /* AddResponseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACDBA131B3EF9DC009EFB91 /* AddResponseViewController.m */; };
 		4AD850151B4584CD0059A457 /* LoginTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD850141B4584CD0059A457 /* LoginTableController.m */; };
 		4AD850181B45A12B0059A457 /* VideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD850171B45A12B0059A457 /* VideoCell.m */; };
 		4AD8501B1B45AAB70059A457 /* NointernetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD8501A1B45AAB70059A457 /* NointernetController.m */; };
 		4AD8501E1B45ABB40059A457 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD8501D1B45ABB40059A457 /* Reachability.m */; };
+		F420FB6A1B616270007092CB /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F420FB691B616270007092CB /* libz.dylib */; };
+		F420FB6C1B616279007092CB /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F420FB6B1B616279007092CB /* libsqlite3.dylib */; };
+		F4595A011B6177D500D4BA38 /* DFMediaUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4595A001B6177D500D4BA38 /* DFMediaUploadManager.m */; };
+		F4595A031B61861700D4BA38 /* AWSCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4595A021B61861700D4BA38 /* AWSCore.framework */; };
+		F4595A051B61864200D4BA38 /* AWSS3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4595A041B61864200D4BA38 /* AWSS3.framework */; };
+		F4C3FD4B1B617616009EE6F9 /* ProfilePicutreCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C3FD4A1B617616009EE6F9 /* ProfilePicutreCollectionViewController.m */; };
+		F4E670E01B61669B00871FA9 /* DFMediaUploadView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4E670DC1B61669B00871FA9 /* DFMediaUploadView.m */; };
+		F4E670E11B61669B00871FA9 /* DFMediaUploadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4E670DD1B61669B00871FA9 /* DFMediaUploadView.xib */; };
+		F4E670E41B61720E00871FA9 /* AddResponseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4E670E31B61720E00871FA9 /* AddResponseViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -228,8 +233,6 @@
 		4ACDB9381B3E7E66009EFB91 /* MyProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyProfileViewController.m; sourceTree = "<group>"; };
 		4ACDB9391B3E7E66009EFB91 /* PhotoGalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoGalleryViewController.h; sourceTree = "<group>"; };
 		4ACDB93A1B3E7E66009EFB91 /* PhotoGalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoGalleryViewController.m; sourceTree = "<group>"; };
-		4ACDB93B1B3E7E66009EFB91 /* ProfilePicutreCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfilePicutreCollectionViewController.h; sourceTree = "<group>"; };
-		4ACDB93C1B3E7E66009EFB91 /* ProfilePicutreCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfilePicutreCollectionViewController.m; sourceTree = "<group>"; };
 		4ACDB93D1B3E7E66009EFB91 /* ProjectIntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectIntroViewController.h; sourceTree = "<group>"; };
 		4ACDB93E1B3E7E66009EFB91 /* ProjectIntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectIntroViewController.m; sourceTree = "<group>"; };
 		4ACDB93F1B3E7E66009EFB91 /* ProjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectViewController.h; sourceTree = "<group>"; };
@@ -257,8 +260,6 @@
 		4ACDB9561B3E7E66009EFB91 /* LogoutSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogoutSegue.m; sourceTree = "<group>"; };
 		4ACDB9571B3E7E66009EFB91 /* ProfilePicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfilePicCell.h; sourceTree = "<group>"; };
 		4ACDB9581B3E7E66009EFB91 /* ProfilePicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfilePicCell.m; sourceTree = "<group>"; };
-		4ACDB95A1B3E7E66009EFB91 /* AWSRuntime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSRuntime.framework; sourceTree = "<group>"; };
-		4ACDB95B1B3E7E66009EFB91 /* AWSS3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSS3.framework; sourceTree = "<group>"; };
 		4ACDB95D1B3E7E66009EFB91 /* Company.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Company.h; sourceTree = "<group>"; };
 		4ACDB95E1B3E7E66009EFB91 /* Company.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Company.m; sourceTree = "<group>"; };
 		4ACDB95F1B3E7E66009EFB91 /* Diary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Diary.h; sourceTree = "<group>"; };
@@ -359,8 +360,6 @@
 		4ACDBA0D1B3ED814009EFB91 /* UserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCell.m; sourceTree = "<group>"; };
 		4ACDBA0F1B3EDF75009EFB91 /* ImagesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagesCell.h; sourceTree = "<group>"; };
 		4ACDBA101B3EDF75009EFB91 /* ImagesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagesCell.m; sourceTree = "<group>"; };
-		4ACDBA121B3EF9DC009EFB91 /* AddResponseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddResponseViewController.h; sourceTree = "<group>"; };
-		4ACDBA131B3EF9DC009EFB91 /* AddResponseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddResponseViewController.m; sourceTree = "<group>"; };
 		4AD850131B4584CD0059A457 /* LoginTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginTableController.h; sourceTree = "<group>"; };
 		4AD850141B4584CD0059A457 /* LoginTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginTableController.m; sourceTree = "<group>"; };
 		4AD850161B45A12B0059A457 /* VideoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoCell.h; sourceTree = "<group>"; };
@@ -369,6 +368,21 @@
 		4AD8501A1B45AAB70059A457 /* NointernetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NointernetController.m; sourceTree = "<group>"; };
 		4AD8501C1B45ABB40059A457 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		4AD8501D1B45ABB40059A457 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		F420FB691B616270007092CB /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		F420FB6B1B616279007092CB /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		F45959FF1B6177D500D4BA38 /* DFMediaUploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFMediaUploadManager.h; sourceTree = "<group>"; };
+		F4595A001B6177D500D4BA38 /* DFMediaUploadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFMediaUploadManager.m; sourceTree = "<group>"; };
+		F4595A021B61861700D4BA38 /* AWSCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSCore.framework; sourceTree = "<group>"; };
+		F4595A041B61864200D4BA38 /* AWSS3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSS3.framework; sourceTree = "<group>"; };
+		F4C3FD491B617616009EE6F9 /* ProfilePicutreCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfilePicutreCollectionViewController.h; sourceTree = "<group>"; };
+		F4C3FD4A1B617616009EE6F9 /* ProfilePicutreCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfilePicutreCollectionViewController.m; sourceTree = "<group>"; };
+		F4E670DA1B61669B00871FA9 /* DFMediaUploadManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DFMediaUploadManagerDelegate.h; path = "../../../../../../../../ios/oDesk iOS/Shamsu Bhaidani/DigiFaces/DigiFaces/Classes/Utilities/DFMediaUploadManager/DFMediaUploadManagerDelegate.h"; sourceTree = "<group>"; };
+		F4E670DB1B61669B00871FA9 /* DFMediaUploadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DFMediaUploadView.h; path = "../../../../../../../../ios/oDesk iOS/Shamsu Bhaidani/DigiFaces/DigiFaces/Classes/Utilities/DFMediaUploadManager/DFMediaUploadView.h"; sourceTree = "<group>"; };
+		F4E670DC1B61669B00871FA9 /* DFMediaUploadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DFMediaUploadView.m; path = "../../../../../../../../ios/oDesk iOS/Shamsu Bhaidani/DigiFaces/DigiFaces/Classes/Utilities/DFMediaUploadManager/DFMediaUploadView.m"; sourceTree = "<group>"; };
+		F4E670DD1B61669B00871FA9 /* DFMediaUploadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DFMediaUploadView.xib; path = "../../../../../../../../ios/oDesk iOS/Shamsu Bhaidani/DigiFaces/DigiFaces/Classes/Utilities/DFMediaUploadManager/DFMediaUploadView.xib"; sourceTree = "<group>"; };
+		F4E670DE1B61669B00871FA9 /* DFMediaUploadViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DFMediaUploadViewDelegate.h; path = "../../../../../../../../ios/oDesk iOS/Shamsu Bhaidani/DigiFaces/DigiFaces/Classes/Utilities/DFMediaUploadManager/DFMediaUploadViewDelegate.h"; sourceTree = "<group>"; };
+		F4E670E21B61720E00871FA9 /* AddResponseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddResponseViewController.h; path = "../../../../../../../ios/oDesk iOS/Shamsu Bhaidani/DigiFaces/DigiFaces/Classes/Controllers/AddResponseViewController.h"; sourceTree = "<group>"; };
+		F4E670E31B61720E00871FA9 /* AddResponseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddResponseViewController.m; path = "../../../../../../../ios/oDesk iOS/Shamsu Bhaidani/DigiFaces/DigiFaces/Classes/Controllers/AddResponseViewController.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -376,13 +390,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F420FB6C1B616279007092CB /* libsqlite3.dylib in Frameworks */,
+				F420FB6A1B616270007092CB /* libz.dylib in Frameworks */,
 				19F0BD361B1F12CA00E4B048 /* Foundation.framework in Frameworks */,
 				19F0BE2D1B28519B00E4B048 /* QuartzCore.framework in Frameworks */,
 				19F0BD441B1F14DF00E4B048 /* SystemConfiguration.framework in Frameworks */,
-				4ACDB9C31B3E7E66009EFB91 /* AWSRuntime.framework in Frameworks */,
-				4ACDB9C41B3E7E66009EFB91 /* AWSS3.framework in Frameworks */,
+				F4595A031B61861700D4BA38 /* AWSCore.framework in Frameworks */,
 				19F0BD421B1F14D800E4B048 /* UIKit.framework in Frameworks */,
 				19F0BD401B1F14CC00E4B048 /* Security.framework in Frameworks */,
+				F4595A051B61864200D4BA38 /* AWSS3.framework in Frameworks */,
 				19F0BD3E1B1F14C700E4B048 /* MobileCoreServices.framework in Frameworks */,
 				19F0BD3C1B1F14BC00E4B048 /* CoreLocation.framework in Frameworks */,
 				19F0BD3A1B1F14B600E4B048 /* CoreGraphics.framework in Frameworks */,
@@ -506,8 +522,6 @@
 				4ACDB9381B3E7E66009EFB91 /* MyProfileViewController.m */,
 				4ACDB9391B3E7E66009EFB91 /* PhotoGalleryViewController.h */,
 				4ACDB93A1B3E7E66009EFB91 /* PhotoGalleryViewController.m */,
-				4ACDB93B1B3E7E66009EFB91 /* ProfilePicutreCollectionViewController.h */,
-				4ACDB93C1B3E7E66009EFB91 /* ProfilePicutreCollectionViewController.m */,
 				4ACDB93D1B3E7E66009EFB91 /* ProjectIntroViewController.h */,
 				4ACDB93E1B3E7E66009EFB91 /* ProjectIntroViewController.m */,
 				4ACDB93F1B3E7E66009EFB91 /* ProjectViewController.h */,
@@ -530,10 +544,10 @@
 				4ACDB9F81B3EB6AE009EFB91 /* NotificationsViewController.m */,
 				4ACDBA001B3EC7EA009EFB91 /* ResponseViewController.h */,
 				4ACDBA011B3EC7EA009EFB91 /* ResponseViewController.m */,
-				4ACDBA121B3EF9DC009EFB91 /* AddResponseViewController.h */,
-				4ACDBA131B3EF9DC009EFB91 /* AddResponseViewController.m */,
 				4ABC3D361B3FF8E30090A619 /* DiaryThemeViewController.h */,
 				4ABC3D371B3FF8E30090A619 /* DiaryThemeViewController.m */,
+				F4E670E21B61720E00871FA9 /* AddResponseViewController.h */,
+				F4E670E31B61720E00871FA9 /* AddResponseViewController.m */,
 				4AD850131B4584CD0059A457 /* LoginTableController.h */,
 				4AD850141B4584CD0059A457 /* LoginTableController.m */,
 				4AD850191B45AAB70059A457 /* NointernetController.h */,
@@ -544,6 +558,8 @@
 				4AC8446B1B57FA3E006CDB45 /* CarouselViewController.m */,
 				4AC8446D1B57FA75006CDB45 /* ImageViewController.h */,
 				4AC8446E1B57FA75006CDB45 /* ImageViewController.m */,
+				F4C3FD491B617616009EE6F9 /* ProfilePicutreCollectionViewController.h */,
+				F4C3FD4A1B617616009EE6F9 /* ProfilePicutreCollectionViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -595,8 +611,8 @@
 		4ACDB9591B3E7E66009EFB91 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4ACDB95A1B3E7E66009EFB91 /* AWSRuntime.framework */,
-				4ACDB95B1B3E7E66009EFB91 /* AWSS3.framework */,
+				F4595A041B61864200D4BA38 /* AWSS3.framework */,
+				F4595A021B61861700D4BA38 /* AWSCore.framework */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -656,6 +672,7 @@
 		4ACDB96A1B3E7E66009EFB91 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				F420FB6D1B6162EE007092CB /* DFMediaUploadManager */,
 				4AC7D4761B510C5600587045 /* RTLabels */,
 				4AD8501C1B45ABB40059A457 /* Reachability.h */,
 				4AD8501D1B45ABB40059A457 /* Reachability.m */,
@@ -760,8 +777,24 @@
 				19F0BD3B1B1F14BC00E4B048 /* CoreLocation.framework */,
 				19F0BD391B1F14B600E4B048 /* CoreGraphics.framework */,
 				19F0BD351B1F12C900E4B048 /* Foundation.framework */,
+				F420FB6B1B616279007092CB /* libsqlite3.dylib */,
+				F420FB691B616270007092CB /* libz.dylib */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F420FB6D1B6162EE007092CB /* DFMediaUploadManager */ = {
+			isa = PBXGroup;
+			children = (
+				F45959FF1B6177D500D4BA38 /* DFMediaUploadManager.h */,
+				F4595A001B6177D500D4BA38 /* DFMediaUploadManager.m */,
+				F4E670DA1B61669B00871FA9 /* DFMediaUploadManagerDelegate.h */,
+				F4E670DB1B61669B00871FA9 /* DFMediaUploadView.h */,
+				F4E670DC1B61669B00871FA9 /* DFMediaUploadView.m */,
+				F4E670DD1B61669B00871FA9 /* DFMediaUploadView.xib */,
+				F4E670DE1B61669B00871FA9 /* DFMediaUploadViewDelegate.h */,
+			);
+			path = DFMediaUploadManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -813,6 +846,7 @@
 				TargetAttributes = {
 					19F0BD091B1DBC6400E4B048 = {
 						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = 6NK34BJQZ4;
 					};
 					19F0BD221B1DBC6400E4B048 = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -848,6 +882,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4E670E11B61669B00871FA9 /* DFMediaUploadView.xib in Resources */,
 				19F0BE331B28BBE500E4B048 /* LaunchScreen.xib in Resources */,
 				19F0BD191B1DBC6400E4B048 /* Main.storyboard in Resources */,
 				19F0BD1B1B1DBC6400E4B048 /* Images.xcassets in Resources */,
@@ -871,6 +906,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4ACDB9DB1B3E7E66009EFB91 /* NSDate+InternetDateTime.m in Sources */,
+				F4595A011B6177D500D4BA38 /* DFMediaUploadManager.m in Sources */,
 				4ACDB9D51B3E7E66009EFB91 /* DetailTableViewController.m in Sources */,
 				4ACDB9BE1B3E7E66009EFB91 /* ImageCell.m in Sources */,
 				4AD850151B4584CD0059A457 /* LoginTableController.m in Sources */,
@@ -882,7 +918,6 @@
 				4ACDB9B21B3E7E66009EFB91 /* MyProfileViewController.m in Sources */,
 				4ACB9ED91B58EC8900E9F984 /* TextArea.m in Sources */,
 				4ACDB9DE1B3E7E66009EFB91 /* RootViewController.m in Sources */,
-				4ACDB9B41B3E7E66009EFB91 /* ProfilePicutreCollectionViewController.m in Sources */,
 				4ACDB9ED1B3E8366009EFB91 /* DiaryInfoViewController.m in Sources */,
 				4AD850181B45A12B0059A457 /* VideoCell.m in Sources */,
 				4ACDBA111B3EDF75009EFB91 /* ImagesCell.m in Sources */,
@@ -902,6 +937,7 @@
 				4ABC3D381B3FF8E30090A619 /* DiaryThemeViewController.m in Sources */,
 				4ACDB9B91B3E7E66009EFB91 /* UserViewController.m in Sources */,
 				4ACDB9BA1B3E7E66009EFB91 /* VersionViewContrller.m in Sources */,
+				F4E670E01B61669B00871FA9 /* DFMediaUploadView.m in Sources */,
 				4ACDB9BB1B3E7E66009EFB91 /* WebViewController.m in Sources */,
 				4ACDB9CB1B3E7E66009EFB91 /* AFHTTPRequestOperation.m in Sources */,
 				4ACDB9F31B3E8816009EFB91 /* UserInfo.m in Sources */,
@@ -922,9 +958,9 @@
 				4ACDB9E11B3E7E66009EFB91 /* UIAlertView+AFNetworking.m in Sources */,
 				4ACDB9C71B3E7E66009EFB91 /* File.m in Sources */,
 				4ACDB9DA1B3E7E66009EFB91 /* MWFeedParserAppDelegate.m in Sources */,
+				F4E670E41B61720E00871FA9 /* AddResponseViewController.m in Sources */,
 				4ACDB9F61B3E9A14009EFB91 /* DailyDiary.m in Sources */,
 				4ACDB9DC1B3E7E66009EFB91 /* NSString+HTML.m in Sources */,
-				4ACDBA141B3EF9DC009EFB91 /* AddResponseViewController.m in Sources */,
 				4ACDB9C11B3E7E66009EFB91 /* LogoutSegue.m in Sources */,
 				4ACDB9B11B3E7E66009EFB91 /* LoginViewController.m in Sources */,
 				4ACDB9D41B3E7E66009EFB91 /* MBProgressHUD.m in Sources */,
@@ -957,6 +993,7 @@
 				4A00E83D1B4BD060000F6A6B /* TextFieldCell.m in Sources */,
 				4A00E8431B4BF130000F6A6B /* CalendarViewController.m in Sources */,
 				4ACB9EDF1B58ECCF00E9F984 /* ImageGallary.m in Sources */,
+				F4C3FD4B1B617616009EE6F9 /* ProfilePicutreCollectionViewController.m in Sources */,
 				4AD8501E1B45ABB40059A457 /* Reachability.m in Sources */,
 				4AA275981B5E64C200367E92 /* GalleryCell.m in Sources */,
 				4ACDB9E61B3E7E66009EFB91 /* UIWebView+AFNetworking.m in Sources */,
@@ -1124,6 +1161,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DigiFaces/Frameworks",
@@ -1134,7 +1172,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "dd30c906-dbd0-4809-8ef2-34be4d7e1a55";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1144,6 +1182,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DigiFaces/Frameworks",
@@ -1154,7 +1193,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "dd30c906-dbd0-4809-8ef2-34be4d7e1a55";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

@@ -9,21 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "DailyDiary.h"
 #import "DiaryTheme.h"
-
+#import "DFMediaUploadManager.h"
 @interface AddResponseViewController : UIViewController
 
 @property (nonatomic, retain) DailyDiary * dailyDiary;
 @property (nonatomic, retain) DiaryTheme * diaryTheme;
 
+@property (nonatomic, retain) IBOutlet DFMediaUploadManager * mediaUploadManager;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constTitleHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constDateHeight;
 @property (weak, nonatomic) IBOutlet UILabel *lblPlaceholder;
 
 @property (weak, nonatomic) IBOutlet UITextField *txtTitle;
-@property (weak, nonatomic) IBOutlet UIButton *btnCamera1;
-@property (weak, nonatomic) IBOutlet UIButton *btnCamera2;
-@property (weak, nonatomic) IBOutlet UIButton *btnCamera3;
-@property (weak, nonatomic) IBOutlet UIButton *btnCamera4;
 
 @property (weak, nonatomic) IBOutlet UITextView *txtResponse;
 @property (weak, nonatomic) IBOutlet UIButton *btnDate;
@@ -34,5 +31,4 @@
 - (IBAction)viewQuestion:(id)sender;
 - (IBAction)cameraSwitched:(id)sender;
 - (IBAction)selectDate:(id)sender;
-- (IBAction)addPicture:(id)sender;
 @end

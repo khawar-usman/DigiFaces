@@ -19,15 +19,25 @@ typedef enum {
     ThemeTypeNone
 }ThemeType;
 
-
+/*
 #define kS3AccessKey            @"AKIAIG2CIAZWZIA6L7YA"
 #define kS3AccessSecret         @"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"
 #define kS3Bucket               @"media.digifaces.com"
+*/
+
+#define kCognitoRegionType AWSRegionUSEast1
+#define kS3DefaultServiceRegionType AWSRegionUSWest2
+#define kCognitoIdentityPoolId @"us-east-1:5e6119ff-7f36-4c36-be82-8b8eb5ff0ae9"
+#define kS3BucketName @"kar8g944" // TESTING ONLY
+#define kS3URLSubdomain @"s3-us-west-2"
+
 
 #define kCurrentPorjectID       @"CurrentProjectId"
 #define kAboutMeText            @"AboutMeText"
 #define kEmail                  @"Email"
 #define kImageURL               @"ImageURL"
+
+#define kViddlerAPIURL @"https://api.viddler.com/api/v2"
 
 #define kBaseURL @"http://digifacesservices.focusforums.com/"
 
@@ -48,5 +58,8 @@ typedef enum {
 #define kUpdateDailyDiary       @"api/Project/UpdateDailyDiary/{projectId}"
 #define kUpdateTextAreaResponse @"api/Activity/UpdateTextareaResponse"
 #define kUpdateGalleryResponse  @"api/Activity/UpdateImageGalleryResponse"
+#define kInsertThreadFile       @"api/Activity/InsertThreadFile/{projectId}"
+
+#define kFFGetViddlerCredentialsURL @"https://app.focusforums.com/viddler/uploadvariables.aspx"
 
 #endif
