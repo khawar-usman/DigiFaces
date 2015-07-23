@@ -20,10 +20,13 @@ typedef enum {
 
 @end
 
+@class DFMediaUploadView, DFMediaUploadManager;
+
 @interface ProfilePicutreCollectionViewController : UICollectionViewController
 
 @property (nonatomic, assign) id<ProfilePictureViewControllerDelegate> delegate;
 @property (nonatomic, assign) ProfilePicutreType type;
 @property (nonatomic, retain) NSArray * files;
+@property (nonatomic, retain) IBOutlet DFMediaUploadManager *mediaUploadManager;
 
 @end

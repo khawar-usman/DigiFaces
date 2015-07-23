@@ -20,8 +20,9 @@
 #import "UIImageView+AFNetworking.h"
 #import "CustomAertView.h"
 #import "ProfilePicutreCollectionViewController.h"
+#import "DFMediaUploadManager.h"
 
-@interface AddResponseViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, CalendarViewControlerDelegate, UITextViewDelegate, UIActionSheetDelegate, ProfilePictureViewControllerDelegate>
+@interface AddResponseViewController () < CalendarViewControlerDelegate, UITextViewDelegate, ProfilePictureViewControllerDelegate, DFMediaUploadManagerDelegate>
 {
     NSInteger selectedTag;
     UIImagePickerController * imagePicker;
@@ -101,6 +102,8 @@
                               @"IsDraft" : @YES,
                               @"IsActive" : @YES};
     
+    NSLog(@"POSTing to %@ with params:\n %@", url, params);
+    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
     
@@ -137,7 +140,7 @@
     NSString * galleryIds = @"";
     for (NSDictionary * m in _dataArray) {
         File * file = [m objectForKey:@"path"];
-        galleryIds = [galleryIds stringByAppendingFormat:@"%d,", file.fileId];
+        galleryIds = [galleryIds stringByAppendingFormat:@"%d,", (int)file.fileId];
     }
     if (_dataArray.count>0) {
         galleryIds = [galleryIds substringToIndex:galleryIds.length-2];
@@ -221,7 +224,7 @@
     [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     
     NSString * url = [NSString stringWithFormat:@"%@%@", kBaseURL, kUpdateDailyDiary];
-    url = [url stringByReplacingOccurrencesOfString:@"{projectId}" withString:[NSString stringWithFormat:@"%d", [[UserManagerShared sharedManager] currentProjectID]]];
+    url = [url stringByReplacingOccurrencesOfString:@"{projectId}" withString:[NSString stringWithFormat:@"%d", (int)[[UserManagerShared sharedManager] currentProjectID]]];
     
     NSDictionary * params = @{@"ActivityId" : @(activityId),
                               @"DailyDiaryResponseId" : @0,
@@ -239,38 +242,100 @@
     
     manager.requestSerializer = requestSerializer;
     
+    __weak __typeof(self) wself = self;
+    [manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        
+        NSLog(@"Response : %@", responseObject);
+        
+        NSLog(@"Uploading images (if any)");
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            __typeof(wself) sself = wself;
+            [sself.mediaUploadManager uploadMediaFiles];
+        });
+
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        __typeof(wself) sself = wself;
+        [MBProgressHUD hideHUDForView:sself.navigationController.view animated:YES];
+    }];
+}
+
+-(void)insertThreadFileWithMediaView:(DFMediaUploadView*)mediaUploadView {
+    NSString * url = [NSString stringWithFormat:@"%@%@", kBaseURL, kInsertThreadFile];
+    url = [url stringByReplacingOccurrencesOfString:@"{projectId}" withString:[NSString stringWithFormat:@"%ld", (long)threadID]];
+    NSLog(@"POSTing to %@", url);
     
+    
+    NSURL *publicFileURL = [NSURL URLWithString:mediaUploadView.mediaFilePath];
+    NSString *fileName = [publicFileURL lastPathComponent];
+    NSString *fileExtension = [fileName pathExtension];
+    // adapted from http://stackoverflow.com/a/5998683/892990
+    // Borrowed from http://stackoverflow.com/questions/5996797/determine-mime-type-of-nsdata-loaded-from-a-file
+    // itself, derived from  http://stackoverflow.com/questions/2439020/wheres-the-iphone-mime-type-database
+    /*CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, (__bridge CFStringRef)fileExtension, NULL);
+     CFStringRef mimeType = UTTypeCopyPreferredTagWithClass (UTI, kUTTagClassMIMEType);
+     CFRelease(UTI);
+     */
+    NSMutableDictionary * params = @{@"FileName" : fileName,//fileType: (__bridge NSString*)mimeType,
+                                     @"Extension" : fileExtension
+                                     }.mutableCopy;
+    
+    if (mediaUploadView.uploadType == DFMediaUploadTypeVideo) {
+        params[@"IsViddlerFile"] = @YES;
+        params[@"ViddlerKey"] = mediaUploadView.publicURLString;
+        params[@"FileTypeId"] = @2;
+        params[@"FileType"] = @"Video";
+    } else if (mediaUploadView.uploadType == DFMediaUploadTypeImage) {
+        params[@"IsAmazonFile"] = @YES;
+        params[@"AmazonKey"] = mediaUploadView.publicURLString;
+        params[@"FileTypeId"] = @1;
+        params[@"FileType"] = @"Image";
+    }
+    
+    /*
+     {
+     >"FileId": 1,
+     "FileName": "sample string 2",
+     >"FileTypeId": 3,
+     "FileType": "sample string 4",
+     "Extension": "sample string 5",
+     "IsAmazonFile": true,
+     "AmazonKey": "sample string 7",
+     "IsViddlerFile": true,
+     "ViddlerKey": "sample string 9",
+     >"IsCameraTagFile": true,
+     >"CameraTagKey": "sample string 11",
+     >"PositionId": 12,
+     >"Position": "sample string 13",
+     "PublicFileUrl": "sample string 14"
+     }
+     */
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFJSONRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+    
+    [requestSerializer setValue:[Utility getAuthToken] forHTTPHeaderField:@"Authorization"];
+    [requestSerializer setValue:@"text/json" forHTTPHeaderField:@"Content-Type"];
+    
+    manager.requestSerializer = requestSerializer;
+    
+    __weak __typeof(self) wself = self;
     [manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"Response : %@", responseObject);
-        [MBProgressHUD hideAllHUDsForView:self.navigationController.view animated:YES];
-        [self dismissViewControllerAnimated:YES completion:nil];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
     }];
+    
+    
+    // CFRelease(mimeType);
+    
 }
 
--(void)openCameraWithType:(UIImagePickerControllerSourceType)sourceType
-{
-    if (!imagePicker) {
-        imagePicker = [[UIImagePickerController alloc] init];
-        imagePicker.delegate = self;
-    }
-    
-    if ([UIImagePickerController isSourceTypeAvailable:sourceType]) {
-        imagePicker.sourceType = sourceType;
-    }
-    else{
-        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    }
-    imagePicker.allowsEditing = YES;
-    
-    imagePicker.mediaTypes = [NSArray arrayWithObjects:(NSString*)kUTTypeImage, (NSString*)kUTTypeMovie, nil];
-    
-    [self presentViewController:imagePicker animated:YES completion:nil];
-}
 
 -(void)resignAllResponders
 {
@@ -298,6 +363,7 @@
 
 - (IBAction)closeThis:(id)sender {
     [self resignAllResponders];
+    [MBProgressHUD hideAllHUDsForView:self.navigationController.view animated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -330,114 +396,22 @@
 }
 
 
-
-- (IBAction)addPicture:(UIButton*)sender {
-    selectedTag = sender.tag;
-    if (_diaryTheme && [_diaryTheme getModuleWithThemeType:ThemeTypeImageGallery])   {
-        [self performSegueWithIdentifier:@"gallerySegue" sender:self];
-    }
-    else{
-        
-        UIActionSheet * sheet = [[UIActionSheet alloc] initWithTitle:@"Select an Option" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera", @"Photo Library", nil];
-        [sheet showInView:self.view];
-    }
-}
-
--(void)setImageToCameraButton:(UIImage*)image
-{
-    UIButton * btn;
-    switch (selectedTag) {
-        case 1:
-            btn = _btnCamera1;
-            break;
-        case 2:
-            btn = _btnCamera2;
-            break;
-        case 3:
-            btn = _btnCamera3;
-            break;
-        case 4:
-            btn = _btnCamera4;
-            break;
-        default:
-            break;
-    }
-    
-    [btn setImage:image forState:UIControlStateNormal];
-}
-
 -(void)setImageURL:(NSString*)url
 {
-    UIButton * btn = nil;
-    switch (selectedTag) {
-        case 1:
-            btn = _btnCamera1;
-            break;
-        case 2:
-            btn = _btnCamera2;
-            break;
-        case 3:
-            btn = _btnCamera3;
-            break;
-        case 4:
-            btn = _btnCamera4;
-            break;
-        default:
-            break;
-    }
+    DFMediaUploadView *view = self.mediaUploadManager.currentView;
+    view.uploadType = DFMediaUploadTypeImage;
     NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL URLWithString:url
                                                            ]];
-    [btn.imageView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-        [btn setImage:image forState:UIControlStateNormal];
+    [view.imageView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        view.image = image;
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
         NSLog(@"Image Loading Error");
     }];
 }
 
 
-#pragma mark - UIImagePickerControllerDelegate
--(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-    [picker dismissViewControllerAnimated:YES completion:nil];
-    
-    if ([[info valueForKey:UIImagePickerControllerMediaType] isEqualToString:(NSString*)kUTTypeImage]) {
-        // Image
-        UIImage * image = [info valueForKey:UIImagePickerControllerEditedImage];
-        
-        NSData * data = UIImagePNGRepresentation(image);
-        NSString * filePath = [self getTempPath];
-        filePath = [filePath stringByAppendingPathComponent:[Utility getUniqueId]];
-        filePath = [filePath stringByAppendingPathExtension:@"png"];
-        if ([data writeToFile:filePath atomically:YES]) {
-            [self removeItemForTag:selectedTag];
-            [_dataArray addObject:@{@"path" : filePath, @"tag" : @(selectedTag)}];
-        }
-        [self setImageToCameraButton:image];
-    }
-    
-}
 
--(void)removeItemForTag:(NSInteger)tag
-{
-    for (NSDictionary * dict in _dataArray) {
-        if ([[dict valueForKey:@"tag"] integerValue] == selectedTag) {
-            [_dataArray removeObject:dict];
-            break;
-        }
-    }
-}
 
--(NSString*)getTempPath
-{
-    NSString * docPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    return docPath;
-    
-}
-
--(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-    [picker dismissViewControllerAnimated:YES completion:nil];
-}
 
 #pragma mark- UITextViewDelegate
 -(void)textViewDidChange:(UITextView *)textView
@@ -459,29 +433,38 @@
     [calendarView.view removeFromSuperview];
 }
 
-#pragma mark - UIActionSheetDelegate
--(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex != actionSheet.cancelButtonIndex) {
-        UIImagePickerControllerSourceType type;
-        if (buttonIndex == 0) {
-            type = UIImagePickerControllerSourceTypeCamera;
-        }
-        else if (buttonIndex == 1){
-            type = UIImagePickerControllerSourceTypePhotoLibrary;
-        }
-        
-        [self openCameraWithType:type];
-    }
-    
-}
-
 #pragma mark - ProfilePictureDelegate
 -(void)profilePicutreDidSelect:(File *)selectedProfile
 {
-    [self removeItemForTag:selectedTag];
-    [_dataArray addObject:@{@"path" : selectedProfile, @"tag" : @(selectedTag)}];
     [self setImageURL:[selectedProfile filePath]];
 }
+
+
+#pragma DFMediaUploadManagerDelegate
+
+
+-(void)mediaUploadManager:(DFMediaUploadManager *)mediaUploadManager didFinishUploadingForView:(DFMediaUploadView *)mediaUploadView {
+    [self insertThreadFileWithMediaView:mediaUploadView];
+}
+
+-(void)mediaUploadManager:(DFMediaUploadManager *)mediaUploadManager didFailToUploadForView:(DFMediaUploadView *)mediaUploadView {
+    [MBProgressHUD hideAllHUDsForView:self.navigationController.view animated:YES];
+}
+
+-(void)mediaUploadManagerDidFinishAllUploads:(DFMediaUploadManager *)mediaUploadManager {
+    [self closeThis:self];
+}
+
+
+- (BOOL)mediaUploadManager:(DFMediaUploadManager*)mediaUploadManager shouldHandleTapForMediaUploadView:(DFMediaUploadView*)mediaUploadView {
+    if (_diaryTheme && [_diaryTheme getModuleWithThemeType:ThemeTypeImageGallery])   {
+        [self performSegueWithIdentifier:@"gallerySegue" sender:self];
+        return false;
+    }
+    else{
+        return true;
+    }
+}
+
 
 @end
