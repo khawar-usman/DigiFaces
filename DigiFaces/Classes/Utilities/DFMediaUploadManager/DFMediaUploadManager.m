@@ -49,9 +49,10 @@
 
 #pragma mark - DFMediaUploadViewDelegate
 - (void)didTapMediaUploadView:(DFMediaUploadView *)view {
-    
     if ([self.delegate respondsToSelector:@selector(mediaUploadManager:shouldHandleTapForMediaUploadView:)]) {
+      
         if (![self.delegate mediaUploadManager:self shouldHandleTapForMediaUploadView:view]) {
+            
             return;
         }
     }

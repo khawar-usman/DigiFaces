@@ -351,12 +351,16 @@
     }
     else if ([_txtResponse.text isEqualToString:@""]){
         [self resignAllResponders];
-        [_alertView showAlertWithMessage:@"Respose is required." inView:self.navigationController.view withTag:0];
+        [_alertView showAlertWithMessage:@"Response is required." inView:self.navigationController.view withTag:0];
     }
     else
     {
         [self resignAllResponders];
-        [self createThreadWithActivityID:_dailyDiary.activityId];
+        if (_diaryTheme.activityId) {
+            [self createThreadWithActivityID:_diaryTheme.activityId];
+        } else {
+            [self createThreadWithActivityID:_dailyDiary.activityId];
+        }
     }
     
 }
@@ -440,7 +444,7 @@
 }
 
 
-#pragma DFMediaUploadManagerDelegate
+#pragma mark - DFMediaUploadManagerDelegate
 
 
 -(void)mediaUploadManager:(DFMediaUploadManager *)mediaUploadManager didFinishUploadingForView:(DFMediaUploadView *)mediaUploadView {
@@ -459,6 +463,7 @@
 - (BOOL)mediaUploadManager:(DFMediaUploadManager*)mediaUploadManager shouldHandleTapForMediaUploadView:(DFMediaUploadView*)mediaUploadView {
     if (_diaryTheme && [_diaryTheme getModuleWithThemeType:ThemeTypeImageGallery])   {
         [self performSegueWithIdentifier:@"gallerySegue" sender:self];
+        mediaUploadManager.currentView = mediaUploadView;
         return false;
     }
     else{
