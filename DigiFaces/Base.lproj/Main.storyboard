@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="k8K-Xn-cg1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="k8K-Xn-cg1">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -2195,20 +2195,25 @@
                                     <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera" translatesAutoresizingMaskIntoConstraints="NO" id="nyM-Ld-SNA">
-                                            <rect key="frame" x="23" y="28" width="45" height="34"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="34" id="kC9-B4-JlH"/>
-                                                <constraint firstAttribute="width" constant="45" id="nzg-aj-kXV"/>
-                                            </constraints>
-                                        </imageView>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wUf-RX-Tgj" customClass="DFMediaUploadView">
+                                            <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="allowsVideo" value="NO"/>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <outlet property="delegate" destination="XuY-7p-f5d" id="GUz-wU-wbq"/>
+                                            </connections>
+                                        </view>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="centerX" secondItem="nyM-Ld-SNA" secondAttribute="centerX" id="fbr-ci-UrS"/>
-                                    <constraint firstAttribute="centerY" secondItem="nyM-Ld-SNA" secondAttribute="centerY" id="ogB-Tq-hYd"/>
+                                    <constraint firstItem="wUf-RX-Tgj" firstAttribute="leading" secondItem="WVs-qs-t8C" secondAttribute="leadingMargin" constant="-8" id="S0f-Ha-ntD"/>
+                                    <constraint firstItem="wUf-RX-Tgj" firstAttribute="top" secondItem="WVs-qs-t8C" secondAttribute="topMargin" constant="-8" id="XvG-KV-au4"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="wUf-RX-Tgj" secondAttribute="trailing" constant="-8" id="pOL-sZ-YuC"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="wUf-RX-Tgj" secondAttribute="bottom" constant="-8" id="vPF-rS-cZe"/>
                                 </constraints>
                             </collectionViewCell>
                         </cells>
@@ -2232,8 +2237,18 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="collectionView" destination="scE-ZI-lWg" id="BU0-LK-g2V"/>
+                        <outlet property="mediaUploadManager" destination="XuY-7p-f5d" id="1VN-5Z-IxE"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="icz-o1-01s" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="XuY-7p-f5d" customClass="DFMediaUploadManager">
+                    <connections>
+                        <outlet property="delegate" destination="8gN-81-gu8" id="XRU-iL-gJH"/>
+                        <outlet property="viewController" destination="8gN-81-gu8" id="eFm-hU-UkW"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="2658" y="2456"/>
         </scene>
@@ -3070,62 +3085,72 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mkc-9F-wH3">
                                 <rect key="frame" x="0.0" y="375" width="320" height="129"/>
                                 <subviews>
-                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jFe-bV-1Bv">
-                                        <rect key="frame" x="0.0" y="0.0" width="158" height="62"/>
-                                        <state key="normal" image="camera">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="addPicture:" destination="dbf-JA-2kM" eventType="touchUpInside" id="DhI-xM-T6L"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6zl-Lm-11j">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pr6-1Z-Ssl" customClass="DFMediaUploadView">
                                         <rect key="frame" x="163" y="0.0" width="157" height="62"/>
-                                        <state key="normal" image="camera">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="allowsVideo" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="addPicture:" destination="dbf-JA-2kM" eventType="touchUpInside" id="daA-AC-PgY"/>
+                                            <outlet property="delegate" destination="ZQK-hJ-Bia" id="WAc-kK-BkO"/>
                                         </connections>
-                                    </button>
-                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bFW-Au-miX">
-                                        <rect key="frame" x="163" y="67" width="157" height="62"/>
-                                        <state key="normal" image="camera">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="addPicture:" destination="dbf-JA-2kM" eventType="touchUpInside" id="WVt-Ep-6W0"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KON-7b-D5U">
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FSS-OJ-5eL" customClass="DFMediaUploadView">
                                         <rect key="frame" x="0.0" y="67" width="158" height="62"/>
-                                        <state key="normal" image="camera">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="allowsVideo" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="addPicture:" destination="dbf-JA-2kM" eventType="touchUpInside" id="azG-5J-v51"/>
+                                            <outlet property="delegate" destination="ZQK-hJ-Bia" id="3je-9i-PCc"/>
                                         </connections>
-                                    </button>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vPT-7B-t3s" customClass="DFMediaUploadView">
+                                        <rect key="frame" x="163" y="67" width="157" height="62"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="allowsVideo" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="delegate" destination="ZQK-hJ-Bia" id="rAT-JP-fMi"/>
+                                        </connections>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ASc-FZ-t7q" customClass="DFMediaUploadView">
+                                        <rect key="frame" x="0.0" y="0.0" width="158" height="62"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="allowsVideo" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="delegate" destination="ZQK-hJ-Bia" id="ewc-od-CiE"/>
+                                        </connections>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="bFW-Au-miX" secondAttribute="bottom" id="3Ej-JY-flf"/>
-                                    <constraint firstItem="6zl-Lm-11j" firstAttribute="width" secondItem="jFe-bV-1Bv" secondAttribute="width" id="5Jp-4f-qxd"/>
-                                    <constraint firstAttribute="trailing" secondItem="6zl-Lm-11j" secondAttribute="trailing" id="DBv-RW-iJy"/>
-                                    <constraint firstAttribute="trailing" secondItem="bFW-Au-miX" secondAttribute="trailing" id="F5M-Dj-Gfm"/>
-                                    <constraint firstItem="bFW-Au-miX" firstAttribute="width" secondItem="KON-7b-D5U" secondAttribute="width" id="LcM-vL-zLB"/>
-                                    <constraint firstItem="KON-7b-D5U" firstAttribute="height" secondItem="jFe-bV-1Bv" secondAttribute="height" id="O5E-pt-JlP"/>
-                                    <constraint firstItem="6zl-Lm-11j" firstAttribute="leading" secondItem="jFe-bV-1Bv" secondAttribute="trailing" constant="5" id="Oau-w2-VZi"/>
-                                    <constraint firstItem="bFW-Au-miX" firstAttribute="leading" secondItem="KON-7b-D5U" secondAttribute="trailing" constant="5" id="Pvj-EI-Jzg"/>
-                                    <constraint firstItem="KON-7b-D5U" firstAttribute="leading" secondItem="mkc-9F-wH3" secondAttribute="leading" id="ThE-sU-UDN"/>
-                                    <constraint firstAttribute="bottom" secondItem="KON-7b-D5U" secondAttribute="bottom" id="YUf-AA-f0V"/>
-                                    <constraint firstItem="KON-7b-D5U" firstAttribute="top" secondItem="jFe-bV-1Bv" secondAttribute="bottom" constant="5" id="Z6c-GH-8Em"/>
-                                    <constraint firstItem="jFe-bV-1Bv" firstAttribute="leading" secondItem="mkc-9F-wH3" secondAttribute="leading" id="ZSo-IC-Pad"/>
+                                    <constraint firstAttribute="bottom" secondItem="vPT-7B-t3s" secondAttribute="bottom" id="3In-m2-R8z"/>
+                                    <constraint firstItem="ASc-FZ-t7q" firstAttribute="width" secondItem="FSS-OJ-5eL" secondAttribute="width" id="8mt-eM-imo"/>
+                                    <constraint firstItem="ASc-FZ-t7q" firstAttribute="height" secondItem="FSS-OJ-5eL" secondAttribute="height" id="9Hd-v9-lfZ"/>
+                                    <constraint firstItem="FSS-OJ-5eL" firstAttribute="top" secondItem="ASc-FZ-t7q" secondAttribute="bottom" constant="5" id="FZy-Pl-D68"/>
+                                    <constraint firstItem="vPT-7B-t3s" firstAttribute="top" secondItem="pr6-1Z-Ssl" secondAttribute="bottom" constant="5" id="Ffa-Un-Qpy"/>
+                                    <constraint firstItem="FSS-OJ-5eL" firstAttribute="leading" secondItem="mkc-9F-wH3" secondAttribute="leading" id="OUf-Jd-uk7"/>
+                                    <constraint firstItem="ASc-FZ-t7q" firstAttribute="width" secondItem="vPT-7B-t3s" secondAttribute="width" id="OzI-kL-wKq"/>
+                                    <constraint firstAttribute="bottom" secondItem="FSS-OJ-5eL" secondAttribute="bottom" id="RRk-J5-gdl"/>
+                                    <constraint firstItem="pr6-1Z-Ssl" firstAttribute="leading" secondItem="ASc-FZ-t7q" secondAttribute="trailing" constant="5" id="Sep-Ub-P6f"/>
+                                    <constraint firstItem="ASc-FZ-t7q" firstAttribute="top" secondItem="mkc-9F-wH3" secondAttribute="top" id="Vz5-MD-EmF"/>
+                                    <constraint firstItem="ASc-FZ-t7q" firstAttribute="height" secondItem="vPT-7B-t3s" secondAttribute="height" id="WiO-uY-hKX"/>
+                                    <constraint firstItem="ASc-FZ-t7q" firstAttribute="height" secondItem="pr6-1Z-Ssl" secondAttribute="height" id="YsH-yq-uOO"/>
+                                    <constraint firstAttribute="trailing" secondItem="pr6-1Z-Ssl" secondAttribute="trailing" id="aDu-FF-Fok"/>
                                     <constraint firstAttribute="height" constant="129" id="aHc-HH-Jg4"/>
-                                    <constraint firstItem="bFW-Au-miX" firstAttribute="height" secondItem="6zl-Lm-11j" secondAttribute="height" id="ax5-EN-EQk"/>
-                                    <constraint firstItem="bFW-Au-miX" firstAttribute="top" secondItem="6zl-Lm-11j" secondAttribute="bottom" constant="5" id="hKE-wT-Fq7"/>
-                                    <constraint firstItem="jFe-bV-1Bv" firstAttribute="top" secondItem="mkc-9F-wH3" secondAttribute="top" id="q6I-Um-Vud"/>
-                                    <constraint firstItem="6zl-Lm-11j" firstAttribute="top" secondItem="mkc-9F-wH3" secondAttribute="top" id="zWV-3T-FDa"/>
+                                    <constraint firstItem="FSS-OJ-5eL" firstAttribute="top" secondItem="ASc-FZ-t7q" secondAttribute="bottom" constant="5" id="au5-ZD-tMl"/>
+                                    <constraint firstItem="vPT-7B-t3s" firstAttribute="leading" secondItem="FSS-OJ-5eL" secondAttribute="trailing" constant="5" id="dIK-rn-tNg"/>
+                                    <constraint firstItem="ASc-FZ-t7q" firstAttribute="width" secondItem="pr6-1Z-Ssl" secondAttribute="width" id="gut-9O-EdX"/>
+                                    <constraint firstItem="pr6-1Z-Ssl" firstAttribute="top" secondItem="mkc-9F-wH3" secondAttribute="top" id="hMB-Rd-lET"/>
+                                    <constraint firstAttribute="trailing" secondItem="vPT-7B-t3s" secondAttribute="trailing" id="mdn-Tb-uva"/>
+                                    <constraint firstItem="vPT-7B-t3s" firstAttribute="top" secondItem="pr6-1Z-Ssl" secondAttribute="bottom" constant="5" id="n7v-1b-jrd"/>
+                                    <constraint firstItem="pr6-1Z-Ssl" firstAttribute="leading" secondItem="ASc-FZ-t7q" secondAttribute="trailing" constant="5" id="u2d-vj-ubY"/>
+                                    <constraint firstItem="ASc-FZ-t7q" firstAttribute="leading" secondItem="mkc-9F-wH3" secondAttribute="leading" id="uhh-Kw-pkh"/>
+                                    <constraint firstItem="vPT-7B-t3s" firstAttribute="leading" secondItem="FSS-OJ-5eL" secondAttribute="trailing" constant="5" id="we9-C8-lzk"/>
                                 </constraints>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZIM-Oe-csp">
@@ -3255,16 +3280,13 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="btnCamera1" destination="jFe-bV-1Bv" id="UXp-M9-PCt"/>
-                        <outlet property="btnCamera2" destination="6zl-Lm-11j" id="OYZ-mI-dMv"/>
-                        <outlet property="btnCamera3" destination="KON-7b-D5U" id="NG5-h0-SdI"/>
-                        <outlet property="btnCamera4" destination="bFW-Au-miX" id="SYY-ap-nli"/>
                         <outlet property="btnDate" destination="BRb-oL-Hin" id="3zz-8b-bNG"/>
                         <outlet property="btnViewQuestion" destination="FNU-bO-FPJ" id="2Bc-GB-eRo"/>
                         <outlet property="constBottomViewHeight" destination="aHc-HH-Jg4" id="lhp-9t-N87"/>
                         <outlet property="constDateHeight" destination="MEL-hn-92m" id="tin-fr-g0b"/>
                         <outlet property="constTitleHeight" destination="2oo-kZ-PZ0" id="8GI-Cc-CIr"/>
                         <outlet property="lblPlaceholder" destination="zNX-iw-FA3" id="tpE-yJ-rfg"/>
+                        <outlet property="mediaUploadManager" destination="ZQK-hJ-Bia" id="uLr-yB-EGy"/>
                         <outlet property="txtResponse" destination="ZIM-Oe-csp" id="uFU-l1-xPw"/>
                         <outlet property="txtTitle" destination="yct-hD-MPN" id="Uxb-zH-sUf"/>
                         <segue destination="THO-t6-uQc" kind="presentation" identifier="diaryInfoSegue" id="EYx-dI-yCG"/>
@@ -3272,6 +3294,16 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ASF-8Y-tEY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="ZQK-hJ-Bia" customClass="DFMediaUploadManager">
+                    <connections>
+                        <outlet property="delegate" destination="dbf-JA-2kM" id="g2M-lW-aiL"/>
+                        <outlet property="viewController" destination="dbf-JA-2kM" id="Fl2-NF-xep"/>
+                        <outletCollection property="mediaUploadViews" destination="ASc-FZ-t7q" id="hxa-y6-IrK"/>
+                        <outletCollection property="mediaUploadViews" destination="pr6-1Z-Ssl" id="PiB-dG-tq5"/>
+                        <outletCollection property="mediaUploadViews" destination="FSS-OJ-5eL" id="RqU-eH-JzS"/>
+                        <outletCollection property="mediaUploadViews" destination="vPT-7B-t3s" id="xcy-NQ-AmO"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="5322" y="-1226"/>
         </scene>
@@ -3321,10 +3353,10 @@
         <image name="top_bar_back_arrow" width="13" height="23"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="f8n-jW-t9J"/>
         <segue reference="Sh4-6s-X9J"/>
         <segue reference="kgY-B9-zM2"/>
         <segue reference="XNZ-ng-ebc"/>
+        <segue reference="f8n-jW-t9J"/>
         <segue reference="CE9-GG-Yoe"/>
         <segue reference="EYx-dI-yCG"/>
     </inferredMetricsTieBreakers>

@@ -13,12 +13,11 @@
 #import "UIImageView+AFNetworking.h"
 #import "ImageCollectionCell.h"
 #import "CustomAertView.h"
-#import <AWSRuntime/AWSRuntime.h>
-#import <AWSS3/AWSS3.h>
 #import "SDConstants.h"
 #import "Utility.h"
+#import "DFMediaUploadManager.h"
 
-@interface ProfilePicutreCollectionViewController() <UIImagePickerControllerDelegate,  UINavigationControllerDelegate, UIActionSheetDelegate, AmazonServiceRequestDelegate>
+@interface ProfilePicutreCollectionViewController() <DFMediaUploadManagerDelegate>
 {
     CustomAertView * alertView;
     UIImagePickerController * imagePicker;
@@ -85,39 +84,6 @@
     
 }
 
--(void)uploadImage:(UIImage*)image
-{
-    NSString * imageKey = [NSString stringWithFormat:@"Avatars/%@-%@.png", [Utility getStringForKey:kEmail], [Utility getUniqueId]];
-    NSData * imageData = UIImagePNGRepresentation(image);
-    AmazonS3Client *s3 = [[AmazonS3Client alloc] initWithAccessKey:kS3AccessKey
-                                                     withSecretKey:kS3AccessSecret];
-    
-    S3PutObjectRequest *por = [[S3PutObjectRequest alloc] initWithKey:imageKey inBucket:kS3Bucket];
-    por.contentType = @"image/png";
-    por.cannedACL   = [S3CannedACL publicRead];
-    por.data        = imageData;
-    
-    self.amazonFileURL = [NSString stringWithFormat:@"http://s3.amazonaws.com/media.digifaces.com/%@", imageKey];
-    
-    S3TransferManager *transferManager = [S3TransferManager new];
-    transferManager.s3 = s3;
-    transferManager.delegate = self;
-    
-    [transferManager upload:por];
-    
-    [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-}
-
--(void)initializeImagePickerWithSourceType:(UIImagePickerControllerSourceType)type
-{
-    imagePicker = [[UIImagePickerController alloc] init];
-    imagePicker.delegate = self;
-    imagePicker.sourceType = type;
-    imagePicker.allowsEditing = YES;
-    
-    [self presentViewController:imagePicker animated:YES completion:nil];
-}
-
 #pragma mark - UICollectionViewDataSource
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -130,7 +96,7 @@
         UICollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cameraCell" forIndexPath:indexPath];
         return cell;
     }
-
+    
     ImageCollectionCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"collectionCell" forIndexPath:indexPath];
     
     File * file = nil;
@@ -167,8 +133,7 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (_type == ProfilePicutreTypeDefault && indexPath.row == 0) {
-        UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:@"Select Image" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera",@"Photo Library", nil];
-        [actionSheet showInView:self.view];
+        // Let DFMediaUploadManager deal with the Tap gesture on the DFMediaUploadView
     }
     else{
         self.selectedImage = [_avatarsArray objectAtIndex:indexPath.row];
@@ -181,6 +146,7 @@
 - (IBAction)doneClicked:(id)sender {
     if (self.selectedImage == nil) {
         [alertView showAlertWithMessage:@"Please select an image to set as profile picture" inView:self.navigationController.view withTag:0];
+        
     }
     else{
         if ([_delegate respondsToSelector:@selector(profilePicutreDidSelect:)]) {
@@ -190,41 +156,24 @@
     }
 }
 
-#pragma mark - UIImagePickerControllerDelegate
--(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-    [picker dismissViewControllerAnimated:YES completion:nil];
-    UIImage * image = [info valueForKey:UIImagePickerControllerEditedImage];
-    [self uploadImage:image];
+#pragma mark - DFMediaUploadManagerDelegate
+
+-(NSString*)resourceKeyForMediaUploadView:(DFMediaUploadView *)mediaUploadView inMediaUploadManager:(DFMediaUploadManager *)mediaUploadManager {
+    NSString * imageKey = [NSString stringWithFormat:@"Avatars/%@-%@.png", [Utility getStringForKey:kEmail], [Utility getUniqueId]];
+    return imageKey;
+}
+
+-(void)mediaUploadManager:(DFMediaUploadManager *)mediaUploadManager didFailToUploadForView:(DFMediaUploadView *)mediaUploadView {
     
+    [MBProgressHUD hideAllHUDsForView:self.navigationController.view animated:YES];
 }
 
--(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-    [picker dismissViewControllerAnimated:YES completion:nil];
+-(void)mediaUploadManager:(DFMediaUploadManager *)mediaUploadManager didSelectMediaForView:(DFMediaUploadView *)mediaUploadView {
+    [self.mediaUploadManager uploadMediaFileForView:mediaUploadView];
+    [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
 }
 
-#pragma mark - UIActionSheetDelegate
--(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    UIImagePickerControllerSourceType type;
-    if (buttonIndex == 0) {
-        // Camera
-        type = UIImagePickerControllerSourceTypeCamera;
-    }
-    else if (buttonIndex == 1){
-        // Library
-        type = UIImagePickerControllerSourceTypePhotoLibrary;
-    }
-    else{
-        return;
-    }
-    [self initializeImagePickerWithSourceType:type];
-}
-
-#pragma mark - S3Delegate
--(void)request:(AmazonServiceRequest *)request didCompleteWithResponse:(AmazonServiceResponse *)response
-{
+-(void)mediaUploadManager:(DFMediaUploadManager *)mediaUploadManager didFinishUploadingForView:(DFMediaUploadView *)mediaUploadView {
     [MBProgressHUD hideAllHUDsForView:self.navigationController.view animated:YES];
     if (requestFailed) {
         [alertView showAlertWithMessage:@"Error uploading image. Please try again." inView:self.navigationController.view withTag:0];
@@ -236,7 +185,7 @@
                                       @"FileType" : @"Image",
                                       @"Extension" : @"png",
                                       @"IsAmazonFile" : @YES,
-                                      @"AmazonKey" : self.amazonFileURL,
+                                      @"AmazonKey" : mediaUploadView.publicURLString,
                                       @"IsViddlerFile" : @"0",
                                       @"ViddlerKey" : @"",
                                       @"IsCameraTagFile" : @"0",
@@ -253,10 +202,5 @@
     }
 }
 
-
--(void)request:(AmazonServiceRequest *)request didFailWithError:(NSError *)error
-{
-    requestFailed = YES;
-}
 
 @end
