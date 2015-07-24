@@ -105,11 +105,10 @@
     NSLog(@"POSTing to %@ with params:\n %@", url, params);
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    AFJSONRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
     
     [requestSerializer setValue:[Utility getAuthToken] forHTTPHeaderField:@"Authorization"];
-    [requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    
+   
     manager.requestSerializer = requestSerializer;
     
     
@@ -163,11 +162,13 @@
                               @"IsActive" : @YES,
                               @"Response" : _txtResponse.text};
     
+    NSLog(@"POSTing to %@\nParams:%@", url, params);
+    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    AFJSONRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
     
     [requestSerializer setValue:[Utility getAuthToken] forHTTPHeaderField:@"Authorization"];
-    [requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
     manager.requestSerializer = requestSerializer;
     
@@ -192,17 +193,16 @@
     
     Module * textAreaModule = [_diaryTheme getModuleWithThemeType:ThemeTypeTextArea];
     
-    NSDictionary * params = @{@"TextareaResponseId" : @(0),
+    NSDictionary * params = @{@"TextareaResponseId" : @(1),
                               @"ThreadId" : @(threadID),
                               @"TextareaId" : @(textAreaModule.textArea.textareaId),
                               @"IsActive" : @YES,
                               @"Response" : _txtResponse.text};
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    AFJSONRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
     
     [requestSerializer setValue:[Utility getAuthToken] forHTTPHeaderField:@"Authorization"];
-    [requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     
     manager.requestSerializer = requestSerializer;
     
@@ -215,8 +215,11 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
-        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
-    }];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+
+        });
+     }];
 }
 
 -(void)addEntryWithActivityId:(NSInteger)activityId
@@ -231,14 +234,16 @@
                               @"DailyDiaryId" : @(_dailyDiary.diaryID),
                               @"ThreadId" : @(threadID),
                               @"Title" : _txtTitle.text,
+                              @"IsActive" : @YES,
                               @"Response" : _txtResponse.text,
                               @"DiaryDate" : [Utility stringDateFromDMYDate:selectedDate]};
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    AFJSONRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
     
     [requestSerializer setValue:[Utility getAuthToken] forHTTPHeaderField:@"Authorization"];
-    [requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    NSLog(@"POSTing to %@\nParams: %@", url, params);
     
     manager.requestSerializer = requestSerializer;
     

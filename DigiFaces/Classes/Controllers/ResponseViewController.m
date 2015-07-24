@@ -204,10 +204,10 @@ typedef enum {
     NSString * url = [NSString stringWithFormat:@"%@%@", kBaseURL, kUpdateComments];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    AFJSONRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
     
     [requestSerializer setValue:[Utility getAuthToken] forHTTPHeaderField:@"Authorization"];
-    [requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [requestSerializer setValue:@"text/json" forHTTPHeaderField:@"Content-Type"];
     [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     
     manager.requestSerializer = requestSerializer;
@@ -218,6 +218,7 @@ typedef enum {
                               @"IsActive" : @YES};
     
     
+    NSLog(@"POSTing to %@:\nAuthorization: %@\nParams:\n%@", url, [Utility getAuthToken], params);
     [manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
         
